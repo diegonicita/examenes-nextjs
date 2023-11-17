@@ -11,16 +11,20 @@ import {
   selectCount,
   incrementAsync,
   incrementIfOddAsync,
+  messageSlice,
+  selectMessage
 } from '@/lib/redux'
 import styles from './counter.module.css'
 
 export const Counter = () => {
   const dispatch = useDispatch()
   const count = useSelector(selectCount)
+  const msg = useSelector(selectMessage)
   const [incrementAmount, setIncrementAmount] = useState(2)
 
   return (
     <div>
+      <div className={styles.row}>Message: {msg}</div>
       <div className={styles.row}>
         <button
           className={styles.button}
@@ -64,6 +68,18 @@ export const Counter = () => {
           onClick={() => dispatch(incrementIfOddAsync(incrementAmount))}
         >
           Add If Odd
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => dispatch(messageSlice.actions.changeMessage("Chau"))}
+        >
+          Msg = Chau
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => dispatch(messageSlice.actions.changeMessage("Hola"))}
+        >
+          Msg = Hola
         </button>
       </div>
     </div>

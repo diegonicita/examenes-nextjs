@@ -1,11 +1,22 @@
+'use client'
+
+import {
+  messageSlice,
+  useSelector,
+  useDispatch,
+  selectMessage,
+} from '@/lib/redux'
+
 export default function VerifyPage() {
+  const dispatch = useDispatch()
+  const message = useSelector(selectMessage)
+
   return (
     <>
-      <h1>Verify page</h1>
+      <h1>Message page</h1>
       <p>
-        This page is intended to verify that Redux state is persisted across
-        page navigations.
-      </p>
+        {message}
+      </p>      
     </>
   )
 }
