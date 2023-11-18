@@ -1,6 +1,7 @@
 /* Core */
 import { createLogger } from 'redux-logger'
 import { pokemonApi } from '../services/pokemon'
+import { choiceApi } from '../services/choice'
 
 const middleware = [
   createLogger({
@@ -17,6 +18,7 @@ const middleware = [
     predicate: () => typeof window !== 'undefined',
   }),
   pokemonApi.middleware,
+  choiceApi.middleware,
 ]
 
 export { middleware }

@@ -106,3 +106,25 @@ export type PokemonPageResult = {
   previous: string | null
   results: { name: string; url: string }[]
 }
+
+export type Question = {
+  id: number
+  numero: number
+  opciones: number
+  correcta: number
+  tema: number
+  examen: number
+  ano: number
+  clasifica1: number
+  clasifica2: number
+  clasifica3: number
+  clasifica4: number
+  clasifica5: number
+  texto: string
+  opcion1: string
+  opcion2: string
+  opcion3: string
+  opcion4: string
+  opcion5: string
+  comentario: string
+}

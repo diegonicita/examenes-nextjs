@@ -1,13 +1,8 @@
 'use client'
 
-import {
-  useSelector,
-  useDispatch,
-  selectMessage,
-  selectCount,
-} from '@/lib/redux'
+import { useSelector, selectMessage, selectCount } from '@/lib/redux'
 
-export default function VerifyPage() {
+export default function Verify() {
   const message = useSelector(selectMessage)
   const count = useSelector(selectCount)
 

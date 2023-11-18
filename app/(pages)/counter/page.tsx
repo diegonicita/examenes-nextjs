@@ -1,9 +1,9 @@
 /* Components */
-import { Counter } from '../components/Counter'
+import { Counter } from '../../components/Counter'
 
 export default function counterPage() {
   return (
-    <>      
+    <>
       <Counter />
     </>
   )

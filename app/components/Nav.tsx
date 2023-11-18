@@ -38,6 +38,13 @@ export const Nav = () => {
         >
           Pokemon
         </Link>
+        <Link
+          role="tab"
+          className={`tab ${pathname === '/question' ? 'tab-active' : ''}`}
+          href="/question"
+        >
+          Question
+        </Link>
       </div>
     </nav>
   )

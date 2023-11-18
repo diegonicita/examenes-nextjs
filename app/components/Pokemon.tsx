@@ -2,7 +2,7 @@
 
 import { useGetPokemonByNameQuery } from '@/lib/services/pokemon'
 
-export default function VerifyPage() {
+export default function Pokemon() {
   // Using a query hook automatically fetches data and returns query values
   const { data, error, isLoading } = useGetPokemonByNameQuery('pikachu')
   return (
