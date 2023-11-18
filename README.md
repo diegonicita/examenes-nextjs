@@ -1,8 +1,8 @@
 # Multiple Choice Questions Project. 
-# Made with Nextjs 14. 
-# Created using Redux Toolkit TypeScript Template.
+## Made with Nextjs 14. 
+## Created using Redux Toolkit TypeScript Template.
 
-## Tareas realizadas y pendientes:
+### Tareas realizadas y pendientes:
 
 ### Instalar Redux Toolkit ✔️
 ### Crear un nuevo Slice ✔️
