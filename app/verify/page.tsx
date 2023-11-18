@@ -10,7 +10,6 @@ import {
 export default function VerifyPage() {
   const message = useSelector(selectMessage)
   const count = useSelector(selectCount)
-  const pokemon = useSelector((state) => state.pokemon)
 
   return (
     <div className="h-[13rem]">
