@@ -2,10 +2,7 @@
 import { Providers } from '@/lib/providers'
 import { Nav } from './components/Nav'
 import { Footer } from './components/Footer'
-
-/* Instruments */
-import styles from './styles/layout.module.css'
-import './styles/globals.css'
+import './globals.css'
 
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
@@ -13,16 +10,23 @@ export default function RootLayout(props: React.PropsWithChildren) {
       <html lang="en">
         <body>
           <section className="block max-w-2xl mx-auto">
-            <div className="flex justify-center gap-4"><Nav />
+            <div className="flex justify-center gap-4">
+              <Nav />
             </div>
-
-            <header className={styles.header}>
-              <img src="/logo.svg" className={styles.logo} alt="logo" />
+            <header>
+              <img
+                src="/logo.svg"
+                alt="logo"
+                width={0}
+                height={0}
+                sizes={'100vw'}
+                className="w-20 h-20 mx-auto"
+              />
             </header>
 
-            <main className={styles.main}>{props.children}</main>
+            <main>{props.children}</main>
 
-            <Footer />           
+            <Footer />
           </section>
         </body>
       </html>

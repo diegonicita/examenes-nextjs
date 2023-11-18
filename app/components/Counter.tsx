@@ -14,7 +14,6 @@ import {
   messageSlice,
   selectMessage,
 } from '@/lib/redux'
-import styles from './counter.module.css'
 
 export const Counter = () => {
   const dispatch = useDispatch()
@@ -27,20 +26,18 @@ export const Counter = () => {
       <div className="bg-red-50">Data from Message Slice: {msg}</div>
       <div className="flex gap-4 m-4">
         <button
-          className={styles.button}
           onClick={() => dispatch(messageSlice.actions.changeMessage('Chau'))}
         >
           Chau
         </button>
         <button
-          className={styles.button}
           onClick={() => dispatch(messageSlice.actions.changeMessage('Hola'))}
         >
           Hola
         </button>
       </div>
       <div className="bg-blue-50 mt-4">Data from Counter Slice: </div>
-      <div className={styles.row}>
+      <div>
         <button
           aria-label="Decrement value"
           onClick={() => dispatch(counterSlice.actions.decrement())}
@@ -56,28 +53,24 @@ export const Counter = () => {
         </button>
       </div>
       <div>
-        <input
-          className={styles.textbox}
+        <input          
           aria-label="Set increment amount"
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(Number(e.target.value ?? 0))}
         />
-        <button
-          className={styles.button}
+        <button          
           onClick={() =>
             dispatch(counterSlice.actions.incrementByAmount(incrementAmount))
           }
         >
           Add Amount
         </button>
-        <button
-          className={styles.asyncButton}
+        <button          
           onClick={() => dispatch(incrementAsync(incrementAmount))}
         >
           Add Async
         </button>
-        <button
-          className={styles.button}
+        <button          
           onClick={() => dispatch(incrementIfOddAsync(incrementAmount))}
         >
           Add If Odd

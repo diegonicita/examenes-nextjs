@@ -1,6 +1,6 @@
 /* Instruments */
 import { counterSlice, messageSlice } from './slices'
-import { pokemonApi } from '../../services/pokemon'
+import { pokemonApi } from '../services/pokemon'
 
 export const reducer = {
   [pokemonApi.reducerPath]: pokemonApi.reducer,

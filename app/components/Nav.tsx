@@ -4,40 +4,31 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-/* Instruments */
-import styles from '../styles/layout.module.css'
-
 export const Nav = () => {
   const pathname = usePathname()
 
   return (
     <nav className="bg-red-100 p-4 flex gap-4 w-full">
       <Link
-        className={`${styles.link} ${pathname === '/' ? styles.active : ''}`}
+        className={`bg-red-100 ${pathname === '/' ? 'bg-red-200' : ''}`}
         href="/"
       >
         Home
       </Link>
       <Link
-        className={`${styles.link} ${
-          pathname === '/counter' ? styles.active : ''
-        }`}
+        className={`bg-red-100 ${pathname === '/' ? 'bg-red-200' : ''}`}
         href="/counter"
       >
         Counter
       </Link>
       <Link
-        className={`${styles.link} ${
-          pathname === '/verify' ? styles.active : ''
-        }`}
+        className={`bg-red-100 ${pathname === '/' ? 'bg-red-200' : ''}`}
         href="/verify"
       >
         Verify
       </Link>
       <Link
-        className={`${styles.link} ${
-          pathname === '/pokemon' ? styles.active : ''
-        }`}
+        className={`bg-red-100 ${pathname === '/' ? 'bg-red-200' : ''}`}
         href="/pokemon"
       >
         Pokemon RTK Query

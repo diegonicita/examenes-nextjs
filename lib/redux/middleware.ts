@@ -1,6 +1,6 @@
 /* Core */
 import { createLogger } from 'redux-logger'
-import { pokemonApi } from '../../services/pokemon'
+import { pokemonApi } from '../services/pokemon'
 
 const middleware = [
   createLogger({
