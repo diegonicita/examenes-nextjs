@@ -5,6 +5,7 @@ import {
   useDispatch as useReduxDispatch,
   type TypedUseSelectorHook,
 } from 'react-redux'
+import { setupListeners } from '@reduxjs/toolkit/query'
 
 /* Instruments */
 import { reducer } from './rootReducer'

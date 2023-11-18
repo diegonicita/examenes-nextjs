@@ -20,11 +20,27 @@ export const Nav = () => {
       </Link>
       <Link
         className={`${styles.link} ${
+          pathname === '/counter' ? styles.active : ''
+        }`}
+        href="/counter"
+      >
+        Counter
+      </Link>
+      <Link
+        className={`${styles.link} ${
           pathname === '/verify' ? styles.active : ''
         }`}
         href="/verify"
       >
         Verify
+      </Link>
+      <Link
+        className={`${styles.link} ${
+          pathname === '/pokemon' ? styles.active : ''
+        }`}
+        href="/pokemon"
+      >
+        Pokemon RTK Query
       </Link>
     </nav>
   )
