@@ -1,4 +1,6 @@
-# Multiple Choice Questions. Made with Nextjs. Using Redux Toolkit TypeScript Example.
+# Multiple Choice Questions Project. 
+# Made with Nextjs 14. 
+# Created using Redux Toolkit TypeScript Template.
 
 ## Tareas realizadas y pendientes:
 
