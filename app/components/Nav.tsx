@@ -8,31 +8,37 @@ export const Nav = () => {
   const pathname = usePathname()
 
   return (
-    <nav className="bg-red-100 p-4 flex gap-4 w-full">
-      <Link
-        className={`bg-red-100 ${pathname === '/' ? 'bg-red-200' : ''}`}
-        href="/"
-      >
-        Home
-      </Link>
-      <Link
-        className={`bg-red-100 ${pathname === '/' ? 'bg-red-200' : ''}`}
-        href="/counter"
-      >
-        Counter
-      </Link>
-      <Link
-        className={`bg-red-100 ${pathname === '/' ? 'bg-red-200' : ''}`}
-        href="/verify"
-      >
-        Verify
-      </Link>
-      <Link
-        className={`bg-red-100 ${pathname === '/' ? 'bg-red-200' : ''}`}
-        href="/pokemon"
-      >
-        Pokemon RTK Query
-      </Link>
+    <nav className="bg-base-200 text-base-content px-4 pt-4 flex gap-4 w-full">
+      <div role="tablist" className="tabs tabs-lifted tabs-lg">
+        <Link
+          role="tab"
+          className={`tab ${pathname === '/' ? 'tab-active' : ''}`}
+          href="/"
+        >
+          Home
+        </Link>
+        <Link
+          role="tab"
+          className={`tab ${pathname === '/counter' ? 'tab-active' : ''}`}
+          href="/counter"
+        >
+          Counter
+        </Link>
+        <Link
+          role="tab"
+          className={`tab ${pathname === '/verify' ? 'tab-active' : ''}`}
+          href="/verify"
+        >
+          Verify
+        </Link>
+        <Link
+          role="tab"
+          className={`tab ${pathname === '/pokemon' ? 'tab-active' : ''}`}
+          href="/pokemon"
+        >
+          Pokemon
+        </Link>
+      </div>
     </nav>
   )
 }

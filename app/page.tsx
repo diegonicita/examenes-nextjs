@@ -11,6 +11,8 @@ export default function IndexPage() {
           <li>Instalar Tailwind CSS ✔️</li>
           <li>Cambiar el PORT del build de nextjs ✔️</li>          
           <li>Agregar RTK Query ✔️</li>
+          <li>Agregar Daisy UI ✔️</li>
+          <li>Agregar Button para Cambiar Theme</li>
           <li>Agregar metadata a las paginas </li>
           <li>Dejar solo tailwind css para estilos </li>
           <li>

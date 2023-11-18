@@ -23,56 +23,61 @@ export const Counter = () => {
 
   return (
     <div>
-      <div className="bg-red-50">Data from Message Slice: {msg}</div>
+      <div className="p-2 bg-base-300 text-primary-base">
+        Data from Message Slice: {msg}
+      </div>
       <div className="flex gap-4 m-4">
         <button
+          className="btn btn-accent"
           onClick={() => dispatch(messageSlice.actions.changeMessage('Chau'))}
         >
           Chau
         </button>
         <button
+          className="btn btn-accent"
           onClick={() => dispatch(messageSlice.actions.changeMessage('Hola'))}
         >
           Hola
         </button>
       </div>
-      <div className="bg-blue-50 mt-4">Data from Counter Slice: </div>
-      <div>
+      <div className="p-2 bg-base-300 text-primary-base">
+        Data from Counter Slice:{' '}
+      </div>
+      <div className="flex gap-2 m-4">
         <button
+          className="btn btn-accent btn-sm"
           aria-label="Decrement value"
           onClick={() => dispatch(counterSlice.actions.decrement())}
         >
           ➖
         </button>
-        <span>{count}</span>
+        <span className="text-2xl">{count}</span>
         <button
+          className="btn btn-accent btn-sm"
           aria-label="Increment value"
           onClick={() => dispatch(counterSlice.actions.increment())}
         >
           ➕
-        </button>
-      </div>
-      <div>
-        <input          
+        </button>      
+        <input
+        className="input input-bordered w-full max-w-xs h-auto"
           aria-label="Set increment amount"
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(Number(e.target.value ?? 0))}
         />
-        <button          
+        <button className="btn btn-accent btn-sm"
           onClick={() =>
             dispatch(counterSlice.actions.incrementByAmount(incrementAmount))
           }
         >
           Add Amount
         </button>
-        <button          
-          onClick={() => dispatch(incrementAsync(incrementAmount))}
-        >
+        <button className="btn btn-accent btn-sm"
+        onClick={() => dispatch(incrementAsync(incrementAmount))}>
           Add Async
         </button>
-        <button          
-          onClick={() => dispatch(incrementIfOddAsync(incrementAmount))}
-        >
+        <button className="btn btn-accent btn-sm"
+        onClick={() => dispatch(incrementIfOddAsync(incrementAmount))}>
           Add If Odd
         </button>
       </div>

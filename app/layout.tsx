@@ -8,26 +8,12 @@ export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <Providers>
       <html lang="en">
-        <body>
-          <section className="block max-w-2xl mx-auto">
-            <div className="flex justify-center gap-4">
-              <Nav />
-            </div>
-            <header>
-              <img
-                src="/logo.svg"
-                alt="logo"
-                width={0}
-                height={0}
-                sizes={'100vw'}
-                className="w-20 h-20 mx-auto"
-              />
-            </header>
-
+        <body className="block max-w-2xl mx-auto">
+          <Nav />
+          <section className="min-h-screen bg-base-100 text-base-content border border-gray-200 p-2">
             <main>{props.children}</main>
-
-            <Footer />
           </section>
+          <Footer />
         </body>
       </html>
     </Providers>
