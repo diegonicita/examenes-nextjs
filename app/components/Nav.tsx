@@ -11,7 +11,7 @@ export const Nav = () => {
   const pathname = usePathname()
 
   return (
-    <nav className={styles.nav}>
+    <nav className="bg-red-100 p-4 flex gap-4 w-full">
       <Link
         className={`${styles.link} ${pathname === '/' ? styles.active : ''}`}
         href="/"

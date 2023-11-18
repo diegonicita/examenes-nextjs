@@ -11,9 +11,24 @@ export default function RootLayout(props: React.PropsWithChildren) {
     <Providers>
       <html lang="en">
         <body>
-          <section className={styles.container}>
-            <Nav />
-
+          <section className="block max-w-2xl mx-auto">
+            <div className="flex justify-center gap-4"><Nav />
+            </div>
+            <div className="flex flex-col items-center">
+              <p className="font-semibold p-2 text-xl">Tareas realizadas y pendientes:</p>
+              <ul>
+                <li>Instalar Redux Toolkit ✔️</li>
+                <li>Crear un nuevo Slice ✔️ </li>
+                <li>Instalar Tailwind CSS ✔️</li>
+                <li>Cambiar el PORT del build de nextjs ✔️</li>
+                <li>RTK Query para buscar una pregunta, varias preguntas, buscar preguntas por palabra clave</li>
+                <li>RTK Query para buscar varias preguntas con paginado</li>
+                <li>RTk Query para buscar una o varias preguntas por palabra clave</li>
+                <li>Login con Google usando Nextjs Auth</li>
+                <li>Login y Register usando el servidor de Webapp</li>
+                <li>Crear un proyecto paralelo usando React Native</li>
+              </ul>
+            </div>
             <header className={styles.header}>
               <img src="/logo.svg" className={styles.logo} alt="logo" />
             </header>

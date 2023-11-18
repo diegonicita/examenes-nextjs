@@ -23,7 +23,7 @@ export const Counter = () => {
   const [incrementAmount, setIncrementAmount] = useState(2)
 
   return (
-    <div>
+    <div className="flex flex-col bg-blue-400">
       <div className={styles.row}>Message: {msg}</div>
       <div className={styles.row}>
         <button
@@ -42,7 +42,7 @@ export const Counter = () => {
           +
         </button>
       </div>
-      <div className={styles.row}>
+      <div className="flex gap-2 flex-col bg-red-300">
         <input
           className={styles.textbox}
           aria-label="Set increment amount"
