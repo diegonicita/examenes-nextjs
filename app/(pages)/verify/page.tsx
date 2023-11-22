@@ -1,7 +1,12 @@
-import Verify from '../../components/Verify'
+import Verify from '@/app/components/Verify'
+import Counter from '@/app/components/Counter'
 
 export default function VerifyPage() {
-  return <Verify />
+  return (
+    <>
+      <Counter /> <Verify />
+    </>
+  )
 }
 
 export const metadata = {

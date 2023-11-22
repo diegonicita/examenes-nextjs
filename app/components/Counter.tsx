@@ -15,15 +15,15 @@ import {
   selectMessage,
 } from '@/lib/redux'
 
-export const Counter = () => {
+export default function Counter() {
   const dispatch = useDispatch()
   const count = useSelector(selectCount)
   const msg = useSelector(selectMessage)
   const [incrementAmount, setIncrementAmount] = useState(2)
 
   return (
-    <div>
-      <div className="p-2 bg-base-300 text-primary-base">
+    <div className="bg-base-300 text-primary-base p-2 max-w-[60rem] mx-auto mt-8">
+      <div>
         Data from Message Slice: {msg}
       </div>
       <div className="flex gap-4 m-4">
@@ -58,26 +58,31 @@ export const Counter = () => {
           onClick={() => dispatch(counterSlice.actions.increment())}
         >
           ➕
-        </button>      
+        </button>
         <input
-        className="input input-bordered w-full max-w-xs h-auto"
+          className="input input-bordered w-full max-w-xs h-auto"
           aria-label="Set increment amount"
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(Number(e.target.value ?? 0))}
         />
-        <button className="btn btn-accent btn-sm"
+        <button
+          className="btn btn-accent btn-sm"
           onClick={() =>
             dispatch(counterSlice.actions.incrementByAmount(incrementAmount))
           }
         >
           Add Amount
         </button>
-        <button className="btn btn-accent btn-sm"
-        onClick={() => dispatch(incrementAsync(incrementAmount))}>
+        <button
+          className="btn btn-accent btn-sm"
+          onClick={() => dispatch(incrementAsync(incrementAmount))}
+        >
           Add Async
         </button>
-        <button className="btn btn-accent btn-sm"
-        onClick={() => dispatch(incrementIfOddAsync(incrementAmount))}>
+        <button
+          className="btn btn-accent btn-sm"
+          onClick={() => dispatch(incrementIfOddAsync(incrementAmount))}
+        >
           Add If Odd
         </button>
       </div>

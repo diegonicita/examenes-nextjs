@@ -1,9 +1,13 @@
 import Pokemon from '../../components/Pokemon'
 
 export default function PokemonPage() {
-  return <Pokemon />
+  return (
+    <div className="flex flex-col items-center px-8 max-w-[60rem] mx-auto mt-8">
+      <Pokemon />
+    </div>
+  )
 }
 
 export const metadata = {
-  title: 'Redux Toolkit',
+  title: 'Pokemon',
 }

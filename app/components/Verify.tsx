@@ -7,11 +7,11 @@ export default function Verify() {
   const count = useSelector(selectCount)
 
   return (
-    <div className="h-[13rem]">
+    <div className="bg-base-200 text-primary-base max-w-[60rem] mx-auto mt-8 p-4 pb-8">
       <h1 className="font-semibold text-xl">Slice Message:</h1>
-      <p>Message: {message}</p>
+      <p className="text-4xl mx-auto text-center">{message}</p>
       <h1 className="font-semibold text-xl mt-2">Slice Counter:</h1>
-      <p>Count: {count}</p>
+      <p className="text-4xl mx-auto text-center">{count}</p>
     </div>
   )
 }

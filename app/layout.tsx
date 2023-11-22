@@ -8,9 +8,9 @@ export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <Providers>
       <html lang="en">
-        <body className="block max-w-2xl mx-auto">
+        <body className="block">
           <Nav />
-          <section className="min-h-screen bg-base-100 text-base-content border border-gray-200 p-2">
+          <section className="min-h-screen bg-base-100 text-base-content">
             <main>{props.children}</main>
           </section>
           <Footer />
