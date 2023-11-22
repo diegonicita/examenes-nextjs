@@ -22,7 +22,7 @@ const TokenPage = () => {
   }, [token, router])
 
   // Esta página no tiene contenido visible para el usuario
-  return null
+  return <div> Token Page </div>
 }
 
 export default TokenPage
