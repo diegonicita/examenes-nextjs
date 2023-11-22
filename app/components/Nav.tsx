@@ -57,7 +57,7 @@ export const Nav = () => {
           className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li>
-            {/* <a href="http://localhost:8126/auth/google-examenes">Ingresar con Google</a> */}
+            <a href="http://localhost:8126/auth/google-examenes">Ingresar en Localhost con Google</a>
             <a href="https://mercado.webapp.ar/auth/google-examenes">Ingresar con Google</a>
           </li>
           <li>
