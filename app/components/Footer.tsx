@@ -7,8 +7,8 @@ export const Footer = () => {
   const pathname = usePathname()
 
   return (
-    <div className="bg-base-200 text-base-content">
-      <footer className="footer items-center pb-4 pt-4 max-w-[60rem] mx-auto">
+    <div className="bg-base-200 text-base-content py-2 px-4">
+      <footer className="footer items-center pb-4 pt-4 max-w-[60rem] mx-auto justify-center lg:justify-stretch">
         <aside className="items-center grid-flow-col">
           <svg
             width="36"

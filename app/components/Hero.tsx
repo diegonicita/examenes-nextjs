@@ -44,7 +44,7 @@ export default function Hero() {
       <div className="w-full max-w-[75rem]">
         <section
           className="relative flex flex-col 
-      items-center justify-center px-[21px]  pb-8 md:items-start md:pl-28 md:h-[550px]"
+      items-center justify-center px-[21px]  pb-8 lg:items-start lg:pl-28 md:h-[550px]"
         >
           {/* <span className="absolute left-[50%] top-[8rem]">
             {<FingerPrint />}
@@ -64,7 +64,7 @@ export default function Hero() {
             width={0}
             height={0}
             sizes="100vw"
-            className="w-[10rem] sm:w-[20rem] md:w-[25rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[45rem] h-auto md:absolute md:bottom-[-8px] md:right-[70px] bg-cover"
+            className="w-[20rem] pt-8 sm:w-[20rem] md:w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[45rem] h-auto lg:absolute md:bottom-[-8px] md:right-[70px] bg-cover"
           />
           {/* <h1
             className="text-wrap-balance text-[20px] leading-[26px] 
@@ -74,7 +74,7 @@ export default function Hero() {
           </h1> */}
           <h1
             className="text-wrap-balance text-[20px] leading-[26px] 
-        font-normal text-center md:text-5xl md:text-left max-w-sm"
+        font-normal text-center sm:text-3xl lg:text-5xl lg:text-left max-w-lg lg:max-w-sm"
           >
             Exámenes de Residencias Médicas
           </h1>

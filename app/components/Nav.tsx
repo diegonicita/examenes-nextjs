@@ -8,8 +8,8 @@ export const Nav = () => {
   const pathname = usePathname()
 
   return (
-    <div className="bg-base-200 text-base-content ">
-      <nav className="px-4 pt-4 flex gap-4 sm:w-full max-w-[60rem] mx-auto text-sm">
+    <div className="bg-base-200 text-base-content">
+      <nav className="px-4 pt-4 flex gap-4 sm:w-full max-w-[60rem] mx-auto text-sm items-center justify-center">
         <div role="tablist" className="block sm:flex tabs tabs-lifted tabs-lg">
           <Link
             role="tab"
@@ -47,7 +47,7 @@ export const Nav = () => {
             API Question
           </Link>
         </div>
-        <div className="w-full text-end dropdown dropdown-end">
+        <div className="w-auto lg:w-full text-end dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-14 rounded-full">
               <img alt="Icono del usuario" src="/login-icon.png" />
