@@ -46,6 +46,13 @@ export const Nav = () => {
           >
             API Question
           </Link>
+          <Link
+            role="tab"
+            className={`text-sm tab ${pathname === '/question-server' ? 'text-sm tab-active' : ''}`}
+            href="/question-server"
+          >
+            Server Question
+          </Link>
         </div>
         <div className="w-auto lg:w-full text-end dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
