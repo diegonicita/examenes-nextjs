@@ -48,10 +48,10 @@ export const Nav = () => {
           </Link>
           <Link
             role="tab"
-            className={`text-sm tab ${pathname === '/question-server' ? 'text-sm tab-active' : ''}`}
-            href="/question-server"
+            className={`text-sm tab ${pathname === '/products-server' ? 'text-sm tab-active' : ''}`}
+            href="/products-server"
           >
-            Server Question
+            Products
           </Link>
         </div>
         <div className="w-auto lg:w-full text-end dropdown dropdown-end">

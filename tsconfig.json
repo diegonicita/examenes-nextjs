@@ -19,6 +19,6 @@
     "incremental": true,
     "plugins": [{ "name": "next" }]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server-actions/mysqldb.js", "app/(pages)/question-server/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server-actions/mysqldb.js", "app/(pages)/products-server/page.jsx"],
   "exclude": ["node_modules"]
 }
