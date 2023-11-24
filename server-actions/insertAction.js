@@ -10,7 +10,7 @@ export const insertAction = async (prevState, formData) => {
   const buttonName = formData.get('submit')
 
   const result = await executeQuery(
-    "insert into productos values (5,'Cafetera Moulinex','1900-01-01 00:00:00',NULL,NULL,1,1000,10,'img-cafetera-moulinex.jpg',1)",
+    "insert into productos values (NULL,'Cafetera Moulinex','1900-01-01 00:00:00',NULL,NULL,1,1000,10,'img-cafetera-moulinex.jpg',1)",
   )
 
   if (result.affectedRows) {

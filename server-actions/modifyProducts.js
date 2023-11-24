@@ -12,28 +12,27 @@ export default function modifyProducts() {
   const [state, formAction] = useFormState(insertAction, initialState)
 
   return (
-    <div className="container bg-red-100 text-center mx-auto py-4">
-      <h1>Create Product</h1>
-      <form name="productf" method="post" action={formAction}>
-        <div className="mb-3">
-          <label htmlFor="title">
-            Title
-          </label>
-          <input type="text" id="title" name="title" />
+    <div className="container mx-auto my-8 p-4 w-[40rem] rounded-md">
+      <h1 className="font-bold text-lg mb-2">Crear un Producto</h1>
+      <form
+        className="w-full bg-blue-200 rounded-md shadow-xl"
+        name="productf"
+        method="post"
+        action={formAction}
+      >
+        <div className="flex flex-col mx-8">
+          <label className="mt-4 font-bold mb-2" htmlFor="title">Titulo:</label>
+          <input className="p-2 rounded-md" type="text" id="title" name="title" />
         </div>
-        <div className="mb-3">
-          <label htmlFor="price">
-            Price
-          </label>
-          <input type="text" id="price" name="price" />
+        <div className="flex flex-col mx-8">
+          <label className="mt-2 font-bold mb-2" htmlFor="price">Precio:</label>
+          <input className="p-2 rounded-md" type="text" id="price" name="price" />
         </div>
-        <div className="mb-3">
-          <label htmlFor="description">
-            Description
-          </label>
-          <input type="text" id="description" name="description" />
+        <div className="flex flex-col mx-8">
+          <label className="mt-2 font-bold mb-2" htmlFor="description">Descripcion:</label>
+          <input className="p-2 rounded-md" type="text" id="description" name="description" />
         </div>
-        <button name="insert" type="submit" className="btn btn-primary">
+        <button name="insert" type="submit" className="btn btn-primary my-4 mx-8">
           Submit
         </button>
       </form>
