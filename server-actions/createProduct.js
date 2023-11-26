@@ -22,8 +22,7 @@ export default function createProduct() {
       <h1 className="font-bold text-lg mb-2">Crear un Producto</h1>
       <form
         className="w-full bg-blue-200 rounded-md shadow-xl"
-        name="productf"
-        method="post"
+        name="productf"        
         action={formAction}
       >
         <div className="flex flex-col mx-8">

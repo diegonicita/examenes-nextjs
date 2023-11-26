@@ -14,8 +14,7 @@ export default function deleteProduct({ id }) {
   return (
     <form
       className="flex justify-end absolute right-1 top-1"
-      name="productf"
-      method="post"
+      name="productf"      
       action={formAction}
     >
       <input type="hidden" name="id" id="id" defaultValue={id} />
