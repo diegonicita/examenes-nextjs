@@ -8,6 +8,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "1.9.5",
     "jwt-decode": "^4.0.0",
+    "mysql2": "^3.6.5",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
