@@ -1,7 +1,7 @@
 /* Components */
 import { Providers } from '@/lib/providers'
-import { Nav } from './components/Nav'
-import { Footer } from './components/Footer'
+import { Nav } from './components/navbar'
+import { Footer } from './components/footer'
 import './globals.css'
 
 export default function RootLayout(props: React.PropsWithChildren) {

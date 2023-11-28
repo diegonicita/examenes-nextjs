@@ -1,4 +1,4 @@
-import Pokemon from '../../components/Pokemon'
+import Pokemon from '../../components/pokemon'
 
 export default function PokemonPage() {
   return (

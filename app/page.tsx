@@ -1,5 +1,5 @@
-import Hero from './components/Hero'
-import Consultas from './components/consultasHome/consultas'
+import Hero from './components/hero'
+import Consultas from './components/consultas-home/consultas'
 import Review from './components/reviews/reviews'
 
 export default function IndexPage() {

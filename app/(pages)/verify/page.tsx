@@ -1,5 +1,5 @@
-import Verify from '@/app/components/Verify'
-import Counter from '@/app/components/Counter'
+import Verify from '@/app/components/verify'
+import Counter from '@/app/components/counter'
 
 export default function VerifyPage() {
   return (
