@@ -1,4 +1,4 @@
-import SubmitButton from "./submitButton";
+import SubmitButton from "./submit";
 
 export default function Consultas(){
     return (
