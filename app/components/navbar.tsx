@@ -3,6 +3,8 @@
 /* Core */
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import user from '@/app/assets/login-icon.png'
+import Image from 'next/image'
 
 export const Nav = () => {
   const pathname = usePathname()
@@ -57,7 +59,7 @@ export const Nav = () => {
         <div className="w-auto lg:w-full text-end dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-14 rounded-full">
-              <img alt="Icono del usuario" src="/login-icon.png" />
+              <Image alt="Icono del usuario" src={user} />
             </div>
           </label>
           <ul

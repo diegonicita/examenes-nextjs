@@ -1,5 +1,6 @@
 // Este componente usa una clase llamada text-wrap-balance definida en global.css
-import Image from "next/image"
+import Image from 'next/image'
+import heroImage from '@/app/assets/OIG-1.png'
 
 function FingerPrint() {
   return (
@@ -58,8 +59,8 @@ export default function Hero() {
           <span className="absolute top-[8rem] right-[0rem]">
             {<BiggerFingerprint />}
           </span> */}
-          <img
-            src={'/OIG-1.png'}
+          <Image
+            src={heroImage}
             alt="Pets Home"
             width={0}
             height={0}
@@ -82,7 +83,9 @@ export default function Hero() {
             className="text-wrap-balance max-w-[20rem] text-center text-gray-500 
         text-sm font-normal font-inter leading-relaxed mt-5 mb-[25px] md:text-left"
           >
-            Practica con nuestros examenes de residencias medicas. Mas de 5000 preguntas disponibles de examenes de Argentina, España, México y Perú
+            Practica con nuestros examenes de residencias medicas. Mas de 5000
+            preguntas disponibles de examenes de Argentina, España, México y
+            Perú
           </p>
           <div
             className="btn btn-accent text-accent-content w-[188px] h-[62px] flex-col justify-center 
