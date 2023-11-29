@@ -13,7 +13,7 @@ import {
   incrementIfOddAsync,
   messageSlice,
   selectMessage,
-} from '@/lib/redux'
+} from '@/app/lib/redux'
 
 export default function Counter() {
   const dispatch = useDispatch()

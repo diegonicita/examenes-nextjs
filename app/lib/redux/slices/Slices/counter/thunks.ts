@@ -1,9 +1,9 @@
 /* Instruments */
-import { createAppAsyncThunk } from '@/lib/redux/createAppAsyncThunk'
+import { createAppAsyncThunk } from '@/app/lib/redux/createAppAsyncThunk'
 import { counterSlice } from './counterSlice'
 import { fetchIdentityCount } from './fetchIdentityCount'
 import { selectCount } from '../selectors'
-import type { ReduxThunkAction } from '@/lib/redux'
+import type { ReduxThunkAction } from '@/app/lib/redux'
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -17,7 +17,7 @@ export const incrementAsync = createAppAsyncThunk(
 
     // The value we return becomes the `fulfilled` action payload
     return response.data
-  }
+  },
 )
 
 // We can also write thunks by hand, which may contain both sync and async logic.

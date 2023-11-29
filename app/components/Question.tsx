@@ -1,6 +1,6 @@
 'use client'
 
-import { useGetQuestionByIdQuery } from '@/lib/services/choice'
+import { useGetQuestionByIdQuery } from '@/app/lib/services/choice'
 
 export default function QuestionPage() {
   // Using a query hook automatically fetches data and returns query values

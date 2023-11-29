@@ -1,6 +1,6 @@
 'use server'
 import React from 'react'
-import executeQuery from '@/server-actions/helpers/mysqldb'
+import executeQuery from '@/app/server-actions/helpers/mysqldb'
 
 export default async function DisplayQuestionsStatistics() {
   const result1 = await executeQuery(

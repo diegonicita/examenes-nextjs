@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import React from 'react'
 import DeleteProduct from './deleteProduct'
-import executeQuery from '@/server-actions/helpers/mysqldb'
+import executeQuery from '@/app/server-actions/helpers/mysqldb'
 
 export default async function DisplayProducts() {
   const result = await executeQuery('select * from productos', [])

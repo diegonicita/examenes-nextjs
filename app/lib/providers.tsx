@@ -4,7 +4,7 @@
 import { Provider } from 'react-redux'
 
 /* Instruments */
-import { reduxStore } from '@/lib/redux'
+import { reduxStore } from '@/app/lib/redux'
 
 export const Providers = (props: React.PropsWithChildren) => {
   return <Provider store={reduxStore}>{props.children}</Provider>
