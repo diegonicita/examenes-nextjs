@@ -1,7 +1,7 @@
 'use client'
 
-import { useSelector, selectMessage, selectCount } from '@/lib/redux'
-import { useGetQuestionByIdQuery } from '@/lib/services/choice'
+import { useSelector, selectMessage, selectCount } from '@/app/lib/redux'
+import { useGetQuestionByIdQuery } from '@/app/lib/services/choice'
 
 export default function Verify() {
   const message = useSelector(selectMessage)

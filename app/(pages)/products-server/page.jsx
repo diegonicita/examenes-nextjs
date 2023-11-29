@@ -1,6 +1,6 @@
-import DisplayProducts from '@/server-actions/products/displayProducts'
-import CreateProduct from '@/server-actions/products/createProduct'
-import DisplayQuestionsStatistics from '@/server-actions/questions/displayQuestionsStatistics'
+import DisplayProducts from '@/app/server-actions/products/displayProducts'
+import CreateProduct from '@/app/server-actions/products/createProduct'
+import DisplayQuestionsStatistics from '@/app/server-actions/questions/displayQuestionsStatistics'
 
 const Page = async () => {
   return (

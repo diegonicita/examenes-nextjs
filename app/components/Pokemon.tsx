@@ -1,6 +1,6 @@
 'use client'
 
-import { useGetPokemonByNameQuery } from '@/lib/services/pokemon'
+import { useGetPokemonByNameQuery } from '@/app/lib/services/pokemon'
 
 export default function Pokemon() {
   // Using a query hook automatically fetches data and returns query values
