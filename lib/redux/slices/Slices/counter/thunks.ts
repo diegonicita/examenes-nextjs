@@ -1,8 +1,8 @@
 /* Instruments */
 import { createAppAsyncThunk } from '@/lib/redux/createAppAsyncThunk'
-import { fetchIdentityCount } from './fetchIdentityCount'
-import { selectCount } from './selectors'
 import { counterSlice } from './counterSlice'
+import { fetchIdentityCount } from './fetchIdentityCount'
+import { selectCount } from '../selectors'
 import type { ReduxThunkAction } from '@/lib/redux'
 
 // The function below is called a thunk and allows us to perform async logic. It

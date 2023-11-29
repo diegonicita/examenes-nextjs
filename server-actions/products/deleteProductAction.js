@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import executeQuery from './mysqldb'
+import executeQuery from '../helpers/mysqldb'
 
 export const deleteAction = async (prevState, formData) => {
   const id = formData.get('id')

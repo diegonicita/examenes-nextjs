@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect } from 'react'
 import { useFormStatus, useFormState } from 'react-dom'
-import { insertAction } from './insertAction'
+import { insertAction } from './insertProductAction'
 
 const initialState = {
   message: '',

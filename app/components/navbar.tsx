@@ -20,8 +20,8 @@ export const Nav = () => {
           </Link>
           <Link
             role="tab"
-            className={`tab text-sm ${pathname === '/counter' ? 'tab-active text-sm' : ''}`}
-            href="/counter"
+            className={`tab text-sm ${pathname === '/tasks' ? 'tab-active text-sm' : ''}`}
+            href="/tasks"
           >
             Tareas
           </Link>

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useFormStatus, useFormState } from 'react-dom'
-import { deleteAction } from './deleteAction'
+import { deleteAction } from './deleteProductAction'
 
 const initialState = {
   message: 'Producto Borrado Exitosamente...',

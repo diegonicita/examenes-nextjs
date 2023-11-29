@@ -1,4 +1,4 @@
-export * from './counterSlice'
-export * from './messageSlice'
-export * from './thunks'
+export * from './counter/counterSlice'
+export * from './message/messageSlice'
+export * from './counter/thunks'
 export * from './selectors'

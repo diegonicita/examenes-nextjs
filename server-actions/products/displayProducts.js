@@ -2,8 +2,11 @@
 import Image from 'next/image'
 import React from 'react'
 import DeleteProduct from './deleteProduct'
+import executeQuery from '@/server-actions/helpers/mysqldb'
 
-export default async function DisplayProducts({ result }) {
+export default async function DisplayProducts() {
+  const result = await executeQuery('select * from productos', [])
+
   return (
     <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
       {result &&
@@ -39,6 +42,14 @@ export default async function DisplayProducts({ result }) {
             </div>
           </div>
         ))}
+      {result && result.length === 0 && <p>No hay productos</p>}
+      {!result && (
+        <div className="w-full p-4 text-center">
+          <p className="badge badge-lg p-4 badge-error text-error-content">
+            No se pudo establecer una conexion
+          </p>
+        </div>
+      )}
     </div>
   )
 }
