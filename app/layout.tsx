@@ -1,6 +1,6 @@
 /* Components */
 import { Providers } from '@/app/lib/providers'
-import { Nav } from './components/navbar'
+import { Nav } from './components/navbar/navbar'
 import { Footer } from './components/footer'
 import './styles/globals.css'
 
