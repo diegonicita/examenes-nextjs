@@ -1,4 +1,9 @@
-import { selectToken, useSelector, useDispatch, userSlice } from '@/app/lib/redux'
+import {
+  selectToken,
+  useSelector,
+  useDispatch,
+  userSlice,
+} from '@/app/lib/redux'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 
@@ -11,6 +16,7 @@ export const useLogged = (action: 'redirect' | undefined) => {
   const logout = () => {
     dispatch(userSlice.actions.logout())
     setIsLogged(false)
+    router.refresh()
     return
   }
 
@@ -23,5 +29,5 @@ export const useLogged = (action: 'redirect' | undefined) => {
     }
   }, [token, router])
 
-  return {isLogged, logout}
+  return { isLogged, logout }
 }

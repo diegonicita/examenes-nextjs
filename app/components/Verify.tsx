@@ -1,7 +1,7 @@
 'use client'
 
 import { useSelector, selectMessage, selectCount } from '@/app/lib/redux'
-import { selectUser, selectToken, selectEmail  } from '@/app/lib/redux'
+import { selectUser, selectToken, selectEmail } from '@/app/lib/redux'
 import { useGetQuestionByIdQuery } from '@/app/lib/services/choice'
 
 export default function Verify() {
@@ -15,14 +15,22 @@ export default function Verify() {
   return (
     <>
       <div className="bg-base-200 text-primary-base max-w-[60rem] mx-auto mt-8 p-4 pb-8">
-        <h1 className="font-semibold text-xl">Slice Message:</h1>
-        <p className="text-4xl mx-auto text-center">{message}</p>
-        <h1 className="font-semibold text-xl mt-2">Slice Counter:</h1>
-        <p className="text-4xl mx-auto text-center">{count}</p>
-        <h1 className="font-semibold text-xl mt-2">Slice User:</h1>
-        <p className="text-sm mx-auto text-center">token: {token}</p>
-        <p className="text-sm mx-auto text-center">username: {username}</p>
-        <p className="text-sm mx-auto text-center">email: {email}</p>
+        <h1 className="font-bold mb-4"> Slices: </h1>
+        <p>Slice Message: {message}</p>
+        <p>Slice Counter: {count}</p>
+        <p>Slice User (perfil):</p>
+        <p>
+          <p>
+            <span className="font-bold">username: </span>
+            {username}
+          </p>
+          <p>
+            <span className="font-bold">email: </span>
+            {email}
+          </p>
+          <span className="font-bold">token: </span>
+          {token?.substring(0, 30) + '...'}
+        </p>
       </div>
       {!isLoading && (
         <div className="bg-base-200 text-primary-base max-w-[60rem] mx-auto mt-8 p-4 pb-8">

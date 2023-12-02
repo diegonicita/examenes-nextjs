@@ -2,15 +2,12 @@ export const pending = [
   'Home: Agregar un componente Carousel',  
   'RTK Query para buscar varias preguntas',
   'RTK Query para buscar preguntas por palabra clave',
-  'Login y Register usando el servidor de Webapp',  
   'Register con Google',  
-  'Agregar el token en un estado global',
   'Agregar Button para Cambiar Theme',
   'Agregar react-persist al proyecto',
   'Crear un proyecto paralelo usando React Native',
   'Agregar Componentes creados en Webapp ',
   'Mejorar la metadata de las paginas',
-  'Crear un CRUD de prueba usando Server Actions',
   'Crear una solapa de Temas de preguntas',
   'CRUD de Temas',
   'Crear una Solapa de Datos de Examenes',
@@ -18,6 +15,11 @@ export const pending = [
 ]
 
 export const done = [
+  'Crear un CRUD de prueba usando Server Actions',
+  'Agregar el token en un estado global',
+  'Login y Register usando el servidor de Webapp',  
+  'Icono del navbar cambia segun Login/Logout',
+  'Crear Logout',
   'Change app PORT',
   'Install RTK Query',
   'Install Daisy UI',

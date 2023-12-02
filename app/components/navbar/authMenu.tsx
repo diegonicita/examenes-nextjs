@@ -16,7 +16,10 @@ export default function AuthMenu() {
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-14 rounded-full">
-            <Image alt="Icono del usuario" src={isLogged?userLogged:userNotLogged} />
+            <Image
+              alt="Icono del usuario"
+              src={isLogged ? userLogged : userNotLogged}
+            />
           </div>
         </label>
         <ul
@@ -39,18 +42,24 @@ export default function AuthMenu() {
               <Link href="register">Registrarte</Link>
             </li>
           )}
-          <li>
-            <div className="justify-between">
-              Ver tu perfil
-              <span className="badge">New</span>
-            </div>
-          </li>
-          <li>
-            <div>Preferencias</div>
-          </li>
-          {isLogged &&<li>
-            <div onClick={logout}>Salir (Logout)</div>
-          </li>}
+          {isLogged && (
+            <li>
+              <div className="justify-between">
+                Ver tu perfil
+                <span className="badge">New</span>
+              </div>
+            </li>
+          )}
+          {isLogged && (
+            <li>
+              <div>Preferencias</div>
+            </li>
+          )}
+          {isLogged && (
+            <li>
+              <div onClick={logout}>Salir (Logout)</div>
+            </li>
+          )}
         </ul>
       </div>
     </div>
