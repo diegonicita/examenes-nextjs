@@ -1,9 +1,14 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
 import user from '@/app/assets/icon-not-logged.png'
 import Link from 'next/link'
+import { useLogged } from '@/app/hooks/useLogged'
 
 export default function AuthMenu() {
+  const isLogged = useLogged(undefined)
+
   return (
     <div>
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">
@@ -16,18 +21,22 @@ export default function AuthMenu() {
           tabIndex={0}
           className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
         >
-          <li>
-            <Link href="login">Ingresar</Link>
-            {/* <Link href="http://localhost:8126/auth/google-examenes">
+          {!isLogged && (
+            <li>
+              <Link href="login">Ingresar</Link>
+              {/* <Link href="http://localhost:8126/auth/google-examenes">
               Ingresar
             </a> */}
-            {/* <Link href="https://mercado.webapp.ar/auth/google-examenes">
+              {/* <Link href="https://mercado.webapp.ar/auth/google-examenes">
               Ingresar con Google
             </a> */}
-          </li>
-          <li>
-            <Link href="register">Registrarte</Link>
-          </li>
+            </li>
+          )}
+          {!isLogged && (
+            <li>
+              <Link href="register">Registrarte</Link>
+            </li>
+          )}
           <li>
             <div className="justify-between">
               Ver tu perfil
