@@ -6,3 +6,6 @@ import type { ReduxState } from '@/app/lib/redux'
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectCount = (state: ReduxState) => state.counter.value
 export const selectMessage = (state: ReduxState) => state.message.value
+export const selectUser = (state: ReduxState) => state.user.username
+export const selectEmail = (state: ReduxState) => state.user.email
+export const selectToken = (state: ReduxState) => state.user.token
