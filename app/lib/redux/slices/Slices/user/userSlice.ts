@@ -4,7 +4,7 @@ import { type User } from '@/app/models/user.type'
 const initialState: User = {
   username: null,
   email: null,
-  token: null,  
+  token: null,
 }
 
 export const userSlice = createSlice({
@@ -14,7 +14,12 @@ export const userSlice = createSlice({
     changeUser: (state, action: PayloadAction<User>) => {
       state.username = action.payload.username
       state.email = action.payload.email
-      state.token = action.payload.token      
+      state.token = action.payload.token
+    },
+    logout: (state) => {
+      state.username = null
+      state.email = null
+      state.token = null
     },
   },
 })

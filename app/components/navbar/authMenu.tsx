@@ -2,19 +2,21 @@
 
 import React from 'react'
 import Image from 'next/image'
-import user from '@/app/assets/icon-not-logged.png'
+import userNotLogged from '@/app/assets/icon-not-logged.png'
+import userLogged from '@/app/assets/icon-logged.png'
 import Link from 'next/link'
 import { useLogged } from '@/app/hooks/useLogged'
+import { userSlice, useDispatch } from '@/app/lib/redux'
 
 export default function AuthMenu() {
-  const isLogged = useLogged(undefined)
+  const { isLogged, logout } = useLogged(undefined)
 
   return (
     <div>
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-14 rounded-full">
-            <Image alt="Icono del usuario" src={user} />
+            <Image alt="Icono del usuario" src={isLogged?userLogged:userNotLogged} />
           </div>
         </label>
         <ul
@@ -46,9 +48,9 @@ export default function AuthMenu() {
           <li>
             <div>Preferencias</div>
           </li>
-          <li>
-            <div>Salir (Logout)</div>
-          </li>
+          {isLogged &&<li>
+            <div onClick={logout}>Salir (Logout)</div>
+          </li>}
         </ul>
       </div>
     </div>
