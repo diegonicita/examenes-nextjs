@@ -1,10 +1,10 @@
-// const url = 'http://127.0.0.1:8126/users/login'
-const url = 'https://mercado.webapp.ar/users/register'
-
 export const registerService = async (data: any) => {
   try {
+    if (!process.env.URL_REGISTER) {
+      throw new Error('URL_REGISTER no definida')
+    }
     // Enviar la solicitud POST
-    const resp = await fetch(url, {
+    const resp = await fetch(process.env.URL_REGISTER, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

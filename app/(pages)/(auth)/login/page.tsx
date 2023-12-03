@@ -6,8 +6,8 @@ import { Modal } from './modal'
 import { useLogged } from '@/app/hooks/useLogged'
 
 export default function Login() {
-  const [email, setEmail] = useState('diego1@gmail.com')
-  const [password, setPassword] = useState('12345678')
+  const [email, setEmail] = useState(process.env.USER_EMAIL)
+  const [password, setPassword] = useState(process.env.USER_PASSWORD)
   const { handleSubmitLogin, loginResponse } = useLogin()
   const [showModal, setShowModal] = useState(false)
 

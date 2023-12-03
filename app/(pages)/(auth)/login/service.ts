@@ -1,10 +1,9 @@
-// const url = 'http://127.0.0.1:8126/users/login'
-const url = 'https://mercado.webapp.ar/users/login'
-
 export const loginService = async (data: any) => {
   try {
-    // Enviar la solicitud POST
-    const resp = await fetch(url, {
+    if (!process.env.URL_LOGIN) {
+      throw new Error('URL_LOGIN no definida')
+    }	
+    const resp = await fetch(process.env.URL_LOGIN, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
