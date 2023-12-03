@@ -17,7 +17,7 @@ export default function Review() {
         rounded-md btn btn-accent text-accent-content text-center"
         onClick={handleModal}
       >
-        open modal
+        Calificanos
       </button>
       </div>
       <dialog id="my_modal_3" className="modal">

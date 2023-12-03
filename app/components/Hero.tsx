@@ -42,37 +42,27 @@ function BiggerFingerprint() {
 export default function Hero() {
   return (
     <div className="relative flex items-center justify-center px-10 text-accent-content">
-      <div className="w-full max-w-[75rem]">
+      <div className="w-full max-w-[55rem] mx-auto">
         <section
           className="relative flex flex-col 
-      items-center justify-center px-[21px]  pb-8 lg:items-start lg:pl-28 md:h-[550px]"
-        >
-          {/* <span className="absolute left-[50%] top-[8rem]">
-            {<FingerPrint />}
-          </span>
-          <span className="absolute left-[50%] bottom-[-2rem]">
-            {<FingerPrint />}
-          </span>
-          <span className="absolute left-[20%] top-[4rem]">
-            {<FingerPrint />}
-          </span>
-          <span className="absolute top-[8rem] right-[0rem]">
-            {<BiggerFingerprint />}
-          </span> */}
+      items-center justify-center px-[21px]  pb-8 lg:items-start md:h-[550px]"
+        >         
+           {/* <Image
+            src={heroImage}
+            alt="Pets Home"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-[20rem] pt-8 sm:w-[20rem] md:w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[45rem] h-auto lg:absolute md:bottom-[-8px] md:right-[200px] xl:right-[0px] bg-cover"
+          />           */}
           <Image
             src={heroImage}
             alt="Pets Home"
             width={0}
             height={0}
             sizes="100vw"
-            className="w-[20rem] pt-8 sm:w-[20rem] md:w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[45rem] h-auto lg:absolute md:bottom-[-8px] md:right-[70px] bg-cover"
-          />
-          {/* <h1
-            className="text-wrap-balance text-[20px] leading-[26px] 
-        font-normal text-center mt-5 md:text-6xl md:text-left max-w-lg"
-          >
-            R.M.
-          </h1> */}
+            className="w-[20rem] pt-8 lg:absolute lg:right-16 lg:w-[30rem] xl:right-0"
+          />           
           <h1
             className="text-wrap-balance text-[20px] leading-[26px] 
         font-normal text-center sm:text-3xl lg:text-5xl lg:text-left max-w-lg lg:max-w-sm"

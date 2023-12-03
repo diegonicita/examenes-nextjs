@@ -1,13 +1,13 @@
 import Hero from './components/hero'
-import Consultas from './components/home/consultas'
+import Consultas from './components/consultas/consultas'
 import Review from './components/reviews/reviews'
 
 export default function IndexPage() {
   return (
     <>
       <Hero />
-      <Consultas /> 
       <Review />     
+      <Consultas /> 
     </>
   )
 }

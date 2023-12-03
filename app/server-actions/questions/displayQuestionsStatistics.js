@@ -14,13 +14,13 @@ export default async function DisplayQuestionsStatistics() {
       'select count(*) as total from preguntas where examen = ?',
       [i],
     )
-    result2.push(r[0].total)
+    r != undefined ? result2.push(r[0].total) : undefined // Si no hay preguntas en el examen, se agrega 0. Si hay, se agrega el número de preguntas.
   }
 
   return (
     <>
       <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto my-8">
-        Preguntas en la Base de Datos: {result1[0].total} preguntas
+        Preguntas en la Base de Datos: {result1 && result1[0]?.total} preguntas
       </div>
       {result2.map((r, i) => (
         <div
