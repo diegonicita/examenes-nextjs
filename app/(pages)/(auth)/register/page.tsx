@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { useRegister } from './useRegister'
-import { Modal } from './modal'
+import { useRegister } from './components/useRegister'
+import { Modal } from './components/modal'
 
 export default function Register() {
   const [username, setUsername] = useState('')

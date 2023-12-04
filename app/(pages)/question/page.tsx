@@ -1,4 +1,4 @@
-import Question from '@/app/components/question'
+import Question from '@/app/(pages)/question/components/question'
 
 export default function QuestionPage() {
   return (

@@ -1,15 +1,7 @@
-import Hero from './components/hero'
-import Consultas from './components/consultas/consultas'
-import Review from './components/reviews/reviews'
+import Home from './(pages)/home/page'
 
 export default function IndexPage() {
-  return (
-    <>
-      <Hero />
-      <Review />     
-      <Consultas /> 
-    </>
-  )
+  return <Home />
 }
 
 export const metadata = {

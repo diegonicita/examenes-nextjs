@@ -3,9 +3,7 @@ import SubmitButton from './submit'
 export default function Consultas() {
   return (
     <div className="mx-auto max-w-[55rem] mb-8 px-8">
-      <form        
-        className="flex flex-col"
-      >
+      <form className="flex flex-col">
         <h1 className="text-left md: text-slate-700 text-xl md:text-3xl pb-4">
           Consultas
         </h1>
@@ -45,13 +43,13 @@ export default function Consultas() {
             Mensaje
           </label>
           <textarea
-           className="h-36 px-4 py-4 bg-base rounded-md border border-base-300"
+            className="h-36 px-4 py-4 bg-base rounded-md border border-base-300"
             name="message"
           />
           {/* <label className="text-error">{state?.message}</label> */}
-        <div className="mx-auto px-4 pt-8">
-        <SubmitButton text="Enviar" />
-        </div>
+          <div className="mx-auto px-4 pt-8">
+            <SubmitButton text="Enviar" />
+          </div>
         </div>
       </form>
     </div>
