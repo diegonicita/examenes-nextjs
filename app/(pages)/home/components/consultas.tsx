@@ -4,7 +4,8 @@ import { useFormState } from 'react-dom'
 import { insertAction } from '@/app/(pages)/consults-server/actions/insert'
 import SubmitButton from './submit'
 import { useEffect, useState, useRef } from 'react'
-import { type StateType } from '@/app/models/consult.type'
+import { type ConsultType } from '@/app/models/Consult'
+import ConsultaLeftColumn from './consultaLeftColumn'
 
 const initialState = {
   fullname: '',
@@ -12,7 +13,7 @@ const initialState = {
   consult: '',
   message: '',
   clickNumber: 10,
-} as StateType
+} as ConsultType
 
 export default function Consultas() {
   const [state, formAction] = useFormState(insertAction, initialState)
@@ -53,35 +54,11 @@ export default function Consultas() {
   return (
     <div className="mx-auto max-w-[55rem] mb-8">
       <div className="flex">
-        <div className="hidden sm:block sm:w-80 px-4">
-          <h1 className="text-left md: text-slate-700 text-xl md:text-3xl pb-4">
-            Tenemos un Comprimiso con la Excelencia
-          </h1>
-          <p>
-            Desde RM Residencias Médicas queremos escuchar todo sobre tu
-            experiencia visitando nuestro sitio web
-          </p>
-          <h2 className="text-left md: text-slate-700 text-md md:text-xl py-4">
-            ¿Preguntas con errores?
-          </h2>
-          <p>
-            Si alguna respuesta u opcion no te parece correcta envianos un
-            mensaje
-          </p>
-          <h2 className="text-left md: text-slate-700 text-md md:text-xl py-4">
-            ¿Categoria incorrecta?
-          </h2>
-          <p>
-            Si alguna pregunta esta mal categorizada estamos para escucharte.
-          </p>
-          <h2 className="text-left md: text-slate-700 text-md md:text-xl py-4">
-            Gracias por tu visita
-          </h2>
-        </div>
+        <ConsultaLeftColumn />
         <form
           action={formAction}
           name="consultaf"
-          className="flex flex-col w-full px-8"          
+          className="flex flex-col w-full px-8"
         >
           <h1 className="text-left md: text-slate-700 text-xl md:text-3xl pb-4">
             Envianos tu Consulta
@@ -133,7 +110,7 @@ export default function Consultas() {
               id="consult"
               ref={consultRef}
               autoComplete="false"
-              placeholder='Ingresa tu consulta'
+              placeholder="Ingresa tu consulta"
               disabled={disableForm}
             />
             <div className="relative text-center">
@@ -143,7 +120,7 @@ export default function Consultas() {
               <div className="absolute text-error font-bold text-center top-0 left-0.5 right-0.5">
                 {message}
               </div>
-            </div>            
+            </div>
           </div>
         </form>
       </div>

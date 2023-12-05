@@ -1,4 +1,5 @@
-export type StateType = {
+export type ConsultType = {
+  id: number
   fullname: string
   email: string
   consult: string

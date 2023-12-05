@@ -2,11 +2,11 @@
 
 import { revalidatePath } from 'next/cache'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import { StateType } from '@/app/models/consult.type'
+import { ConsultType } from '@/app/models/Consult'
 import { RowDataPacket } from 'mysql2'
 
 export const insertAction = async (
-  prevState: StateType,
+  prevState: ConsultType,
   formData: FormData,
 ) => {
   const fullname = formData.get('fullname')

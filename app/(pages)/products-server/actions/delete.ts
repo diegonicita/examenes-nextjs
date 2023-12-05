@@ -3,10 +3,10 @@
 import { revalidatePath } from 'next/cache'
 import executeQuery from '../../../server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
-import { StateType } from '@/app/models/consult.type'
+import { ProductType } from '@/app/models/Product'
 
 export const deleteAction = async (
-  prevState: StateType,
+  prevState: ProductType,
   formData: FormData,
 ) => {
   const id = formData.get('id')
