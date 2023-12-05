@@ -35,7 +35,7 @@ export default function Consultas() {
   useEffect(() => {
     setDisableForm(true)
     let timer = setTimeout(() => {
-      if (message === 'Nueva consulta creada exitosamente!') {
+      if (message === 'Tu consulta fue enviada exitosamente!') {
         if (fullnameRef && fullnameRef.current) fullnameRef.current.value = ''
         if (emailRef && emailRef.current) emailRef.current.value = ''
         if (consultRef && consultRef.current) consultRef.current.value = ''
@@ -44,7 +44,7 @@ export default function Consultas() {
       }
       setMessage('')
       setDisableForm(false)
-    }, 1000)
+    }, 1500)
     return () => {
       clearTimeout(timer)
     }
@@ -112,7 +112,7 @@ export default function Consultas() {
             </label>
             <input
               type="text"
-              placeholder="vetcarefamily@gmail.com"
+              placeholder="Ingresa tu correo electronico"
               className="h-16 px-4 py-4 bg-base rounded-md border border-base-300"
               name="email"
               id="email"
@@ -133,6 +133,7 @@ export default function Consultas() {
               id="consult"
               ref={consultRef}
               autoComplete="false"
+              placeholder='Ingresa tu consulta'
               disabled={disableForm}
             />
             <div className="relative text-center">

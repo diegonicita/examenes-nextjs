@@ -25,7 +25,7 @@ export const insertAction = async (
         email,
         fullname,
         clickNumber: prevState.clickNumber + 1,
-        message: 'Nueva consulta creada exitosamente!',
+        message: 'Tu consulta fue enviada exitosamente!',
       }
     } else {
       revalidatePath('/')
@@ -38,11 +38,18 @@ export const insertAction = async (
     }
   } else {
     revalidatePath('/')
+    const errors = []
+    if (email === '') errors.push('Correo')
+    if (fullname === '') errors.push('Nombre')
+    if (consult === '') errors.push('Mensaje')
+
     return {
       email,
       fullname,
       clickNumber: prevState.clickNumber + 1,
-      message: 'Los campos no pueden estar vacios!',
+      message:
+        `${errors.join(' y ')}` +
+        `${errors.length > 1 ? ' estan vacios!' : ' esta vacio!'}`,
     }
   }
 }
