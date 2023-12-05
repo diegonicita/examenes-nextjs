@@ -19,6 +19,6 @@
     "incremental": true,
     "plugins": [{ "name": "next" }]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server-actions/helpers/mysqldb.js", "app/(pages)/products-server/page.jsx", "server-actions/products/insertProductAction.js", "server-actions/products/createProduct.js", "server-actions/products/displayProducts.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server-actions/helpers/mysqldb.js", "app/(pages)/products-server/page.jsx", "server-actions/products/insertProductAction.js", "server-actions/products/createProduct.js", "server-actions/products/displayProducts.js", "app/(pages)/home/components/consultas.tsx", "app/(pages)/home/components/submit.tsx"],
   "exclude": ["node_modules"]
 }
