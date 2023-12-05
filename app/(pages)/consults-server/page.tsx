@@ -1,4 +1,4 @@
-import DisplayConsults from '@/app/server-actions/consults/displayConsults'
+import DisplayConsults from '@/app/(pages)/consults-server/components/displayConsults'
 
 const Page = async () => {
   return (

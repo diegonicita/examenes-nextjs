@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import executeQuery from '../helpers/mysqldb'
+import executeQuery from '../../../server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
 import { StateType } from '@/app/models/consult.type'
 
@@ -12,13 +12,13 @@ export const deleteAction = async (
   const id = formData.get('id')
   console.log(id)
   if (id) {
-    const result = (await executeQuery('delete from consultas where id=?', [
+    const result = (await executeQuery('delete from productos where id=?', [
       id,
     ])) as RowDataPacket
 
     if (result?.affectedRows) {
-      revalidatePath('/consults-server')
-      return { message: 'Consulta Borrada...' }
+      revalidatePath('/products-server')
+      return { message: 'Nuevo Producto Creado Exitosamente...' }
     }
   }
 }

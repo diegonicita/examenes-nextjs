@@ -1,7 +1,7 @@
 'use client'
 //@ts-ignore
 import { useFormState } from 'react-dom'
-import { insertAction } from '@/app/server-actions/consults/insertAction'
+import { insertAction } from '@/app/(pages)/consults-server/actions/insert'
 import SubmitButton from './submit'
 import { useEffect, useState, useRef } from 'react'
 import { type StateType } from '@/app/models/consult.type'

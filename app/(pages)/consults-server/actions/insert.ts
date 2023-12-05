@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import executeQuery from '../helpers/mysqldb'
+import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { StateType } from '@/app/models/consult.type'
 import { RowDataPacket } from 'mysql2'
 

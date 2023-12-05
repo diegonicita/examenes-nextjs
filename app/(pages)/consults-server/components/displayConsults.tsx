@@ -1,7 +1,7 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
+import DeleteButton from '@/app/(pages)/consults-server/components/deleteButton'
 import { RowDataPacket } from 'mysql2'
-import DeleteButton from './deleteButton'
 
 export default async function DisplayConsults() {
   const result = (await executeQuery(

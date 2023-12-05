@@ -1,14 +1,14 @@
 'use client'
 import React, { useEffect } from 'react'
+//@ts-ignore
 import { useFormStatus, useFormState } from 'react-dom'
-import { insertAction } from './insertProductAction'
+import { insertAction } from '@/app/(pages)/products-server/actions/insert'
 
 const initialState = {
   message: '',
 }
 
-export default function createProduct() {
-  const { pending } = useFormStatus()
+export default function createForm() {
   const [state, formAction] = useFormState(insertAction, initialState)
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function createProduct() {
       <h1 className="font-bold text-lg mb-2">Crear un Producto</h1>
       <form
         className="w-full bg-blue-200 rounded-md shadow-xl"
-        name="productf"        
+        name="productf"
         action={formAction}
       >
         <div className="flex flex-col mx-8">
