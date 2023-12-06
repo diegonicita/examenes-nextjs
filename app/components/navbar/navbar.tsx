@@ -14,8 +14,9 @@ export const Nav = () => {
       <nav className="px-4 pt-4 flex gap-4 sm:w-full max-w-[55rem] mx-auto text-sm items-center justify-between">
         <AuthBurger />
         <div role="tablist" className="hidden sm:flex tabs tabs-lifted tabs-lg">
-          {tabs.map((tab) => (
+          {tabs.map((tab, index) => (
             <Link
+              key={index}
               role="tab"
               className={`tab text-sm ${
                 pathname === tab.path ? 'tab-active text-sm' : ''

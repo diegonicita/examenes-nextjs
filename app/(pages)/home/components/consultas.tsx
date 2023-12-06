@@ -19,29 +19,52 @@ export default function Consultas() {
   const [state, formAction] = useFormState(insertAction, initialState)
   const [counter, setCounter] = useState(0)
   const [message, setMessage] = useState('')
-  const [fullname, setFullname] = useState('')
-  const [consult, setConsult] = useState('')
   const [disableForm, setDisableForm] = useState(false)
   const fullnameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const consultRef = useRef<HTMLTextAreaElement>(null)
+  const [errors, setErrors] = useState({
+    fullname: 'test error message',
+    email: 'test error message',
+    consult: 'test error message',
+  })
 
   useEffect(() => {
     setCounter(state.clickNumber)
     setMessage(state.message)
-    setFullname(state.fullname)
-    setConsult(state.consult)
   }, [state.clickNumber])
 
   useEffect(() => {
     setDisableForm(true)
+    let objMessage: { success: any; error: any } | null = null
+    if (message && message !== '') {
+      try {
+        objMessage = JSON.parse(message)
+        // Iterar sobre los problemas
+        const newObj = { fullname: '', email: '', consult: '' }
+        objMessage?.error?.issues.forEach(
+          (issue: { path: string | string[]; message: any }) => {
+            // Verificar el path y asignar el mensaje al estado correspondiente
+
+            if (issue.path.includes('fullname')) newObj.fullname = issue.message
+            if (issue.path.includes('email')) newObj.email = issue.message
+            if (issue.path.includes('consult')) newObj.consult = issue.message
+          },
+        )
+        setErrors({ ...errors, ...newObj })
+      } catch (error) {
+        console.error('Error parsing JSON:', error)
+      }
+    } else {
+      console.log('no errors')
+      setErrors({ ...errors, fullname: '', email: '', consult: '' })
+    }
     let timer = setTimeout(() => {
-      if (message === 'Tu consulta fue enviada exitosamente!') {
+      if (objMessage?.success) {
         if (fullnameRef && fullnameRef.current) fullnameRef.current.value = ''
         if (emailRef && emailRef.current) emailRef.current.value = ''
         if (consultRef && consultRef.current) consultRef.current.value = ''
         setMessage('')
-        setFullname('')
       }
       setMessage('')
       setDisableForm(false)
@@ -80,6 +103,9 @@ export default function Consultas() {
               autoComplete="false"
               disabled={disableForm}
             />
+            <div className="h-2 text-error font-bold text-start px-2">
+              {errors?.fullname && errors.fullname}
+            </div>
             <label
               htmlFor=""
               className="text-slate-800 text-base font-medium 
@@ -97,6 +123,9 @@ export default function Consultas() {
               autoComplete="false"
               disabled={disableForm}
             />
+            <div className="h-2 text-error font-bold text-start px-2">
+              {errors?.email && errors.email}
+            </div>
             <label
               htmlFor=""
               className="text-slate-800 text-base font-medium 
@@ -113,6 +142,9 @@ export default function Consultas() {
               placeholder="Ingresa tu consulta"
               disabled={disableForm}
             />
+            <div className="h-2 text-error font-bold text-start px-2">
+              {errors?.consult && errors.consult}
+            </div>
             <div className="relative text-center">
               <div className="mx-auto px-4 pt-8">
                 <SubmitButton text="Enviar" textOnClick="...Espere..." />

@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { ConsultType } from '@/app/models/Consult'
 import { RowDataPacket } from 'mysql2'
+import { z } from 'zod'
 
 export const insertAction = async (
   prevState: ConsultType,
@@ -13,7 +14,17 @@ export const insertAction = async (
   const email = formData.get('email')
   const consult = formData.get('consult')
 
-  if (fullname !== '' && email !== '' && consult !== '') {
+  const validationResult = z.object({
+    fullname: z.string().min(3, { message: 'Debes ingresar al menos 3 caracteres' }),
+    email: z.string().email({ message: 'Correo Electronico Invalido' }),
+    consult: z.string().min(5, { message: 'Debes ingresar al menos 5 caracteres' }),
+  }).safeParse({
+    fullname,
+    email,
+    consult,
+  }) 
+
+  if (validationResult.success) {
     const result = (await executeQuery(
       'insert into consultas values (NULL, ?, ?, ?)',
       [fullname, email, consult],
@@ -25,7 +36,7 @@ export const insertAction = async (
         email,
         fullname,
         clickNumber: prevState.clickNumber + 1,
-        message: 'Tu consulta fue enviada exitosamente!',
+        message: JSON.stringify(validationResult),
       }
     } else {
       revalidatePath('/')
@@ -33,7 +44,7 @@ export const insertAction = async (
         email,
         fullname,
         clickNumber: prevState.clickNumber + 1,
-        message: 'Houston, tenemos un problema...',
+        message: JSON.stringify(validationResult),
       }
     }
   } else {
@@ -48,8 +59,7 @@ export const insertAction = async (
       fullname,
       clickNumber: prevState.clickNumber + 1,
       message:
-        `${errors.join(' y ')}` +
-        `${errors.length > 1 ? ' estan vacios!' : ' esta vacio!'}`,
+        JSON.stringify(validationResult),
     }
   }
 }

@@ -18,7 +18,7 @@ export default async function DisplayConsults() {
             index: number,
           ) => (
             <div
-              key={index}
+              key={p.id}
               className="card max-w-[40rem] bg-base-100 shadow-xl m-2 border border-black px-4"
             >
               <div className="card-body gap-0 px-1 text-start">
