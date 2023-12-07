@@ -19,7 +19,7 @@ export default function Verify() {
         <p>Slice Message: {message}</p>
         <p>Slice Counter: {count}</p>
         <p>Slice User (perfil):</p>
-        <p>
+        <div>
           <p>
             <span className="font-bold">username: </span>
             {username}
@@ -30,7 +30,7 @@ export default function Verify() {
           </p>
           <span className="font-bold">token: </span>
           {token?.substring(0, 30) + '...'}
-        </p>
+        </div>
       </div>
       {!isLoading && (
         <div className="bg-base-200 text-primary-base max-w-[60rem] mx-auto mt-8 p-4 pb-8">

@@ -14,15 +14,21 @@ export const insertAction = async (
   const email = formData.get('email')
   const consult = formData.get('consult')
 
-  const validationResult = z.object({
-    fullname: z.string().min(3, { message: 'Debes ingresar al menos 3 caracteres' }),
-    email: z.string().email({ message: 'Correo Electronico Invalido' }),
-    consult: z.string().min(5, { message: 'Debes ingresar al menos 5 caracteres' }),
-  }).safeParse({
-    fullname,
-    email,
-    consult,
-  }) 
+  const validationResult = z
+    .object({
+      fullname: z
+        .string()
+        .min(3, { message: 'Debes ingresar al menos 3 caracteres' }),
+      email: z.string().email({ message: 'Correo Electronico Invalido' }),
+      consult: z
+        .string()
+        .min(5, { message: 'Debes ingresar al menos 5 caracteres' }),
+    })
+    .safeParse({
+      fullname,
+      email,
+      consult,
+    })
 
   if (validationResult.success) {
     const result = (await executeQuery(
@@ -32,34 +38,19 @@ export const insertAction = async (
 
     if (result && result?.affectedRows) {
       revalidatePath('/')
-      return {
-        email,
-        fullname,
-        clickNumber: prevState.clickNumber + 1,
+      return {        
         message: JSON.stringify(validationResult),
       }
     } else {
       revalidatePath('/')
-      return {
-        email,
-        fullname,
-        clickNumber: prevState.clickNumber + 1,
+      return {        
         message: JSON.stringify(validationResult),
       }
     }
   } else {
     revalidatePath('/')
-    const errors = []
-    if (email === '') errors.push('Correo')
-    if (fullname === '') errors.push('Nombre')
-    if (consult === '') errors.push('Mensaje')
-
-    return {
-      email,
-      fullname,
-      clickNumber: prevState.clickNumber + 1,
-      message:
-        JSON.stringify(validationResult),
+    return {            
+      message: JSON.stringify(validationResult),
     }
   }
 }

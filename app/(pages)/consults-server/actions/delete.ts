@@ -9,8 +9,7 @@ export const deleteAction = async (
   prevState: ConsultType,
   formData: FormData,
 ) => {
-  const id = formData.get('id')
-  console.log(id)
+  const id = formData.get('id')  
   if (id) {
     const result = (await executeQuery('delete from consultas where id=?', [
       id,

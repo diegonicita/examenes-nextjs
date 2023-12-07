@@ -4,5 +4,4 @@ export type ConsultType = {
   email: string
   consult: string
   message: string
-  clickNumber: number
 }

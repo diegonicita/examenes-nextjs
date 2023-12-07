@@ -1,0 +1,9 @@
+{
+	"success":false,
+	"error":	{"issues":
+	[
+	 {"code":"too_small","minimum":3,"type":"string","inclusive":true,"exact":false,"message":"String must contain at least 3 character(s)","path":["fullname"]},
+	 {"validation":"email","code":"invalid_string","message":"Invalid email","path":["email"]},
+	 {"code":"too_small","minimum":5,"type":"string","inclusive":true,"exact":false,"message":"String must contain at least 5 character(s)","path":["consult"]}
+	 ]
+	 ,"name":"ZodError"}}
