@@ -1,30 +1,21 @@
 'use client'
-import SubmitButton from '../submit'
+import SubmitButton from './submit'
 import ConsultaLeftColumn from './leftColumn'
 import { useForm } from './useForm'
-import Modal from './modal'
+import Modal, { ModalHayErrores, ModalNoHayErrores } from './modal'
 
 export default function Consultas() {
-  const { formAction, isFormDisabled, errors, ref, status } = useForm()
+  const { formAction, isFormDisabled, errors, setErrors, ref, status } =
+    useForm()
 
-  const ModalHayErrores = () => {
-    if (typeof document !== 'undefined') {
-      const modal = document.getElementById(
-        'my_modal_errors',
-      ) as HTMLDialogElement
-      modal?.showModal()
-    }
-    return null
-  }
-
-  const ModalNoHayErrores = () => {
-    if (typeof document !== 'undefined') {
-      const modal = document.getElementById(
-        'my_modal_success',
-      ) as HTMLDialogElement
-      modal?.showModal()
-    }
-    return null
+  // Función que se ejecutará cuando el input tome el foco
+  const handleInputFocus = (
+    event:
+      | React.FocusEvent<HTMLInputElement>
+      | React.FocusEvent<HTMLTextAreaElement>,
+  ) => {
+    const id = event.target.id
+    setErrors({ ...errors, [id]: '' })
   }
 
   return (
@@ -65,6 +56,7 @@ export default function Consultas() {
               ref={ref.fullname}
               autoComplete="false"
               disabled={isFormDisabled}
+              onFocus={handleInputFocus}
             />
             <div className="h-2 text-error font-bold text-start px-2">
               {errors?.fullname && errors.fullname}
@@ -85,6 +77,7 @@ export default function Consultas() {
               ref={ref.email}
               autoComplete="false"
               disabled={isFormDisabled}
+              onFocus={handleInputFocus}
             />
             <div className="h-2 text-error font-bold text-start px-2">
               {errors?.email && errors.email}
@@ -104,6 +97,7 @@ export default function Consultas() {
               autoComplete="false"
               placeholder="Ingresa tu consulta"
               disabled={isFormDisabled}
+              onFocus={handleInputFocus}
             />
             <div className="h-2 text-error font-bold text-start px-2">
               {errors?.consult && errors.consult}
@@ -120,7 +114,11 @@ export default function Consultas() {
               </div> */}
               {status === 'success' && <ModalNoHayErrores />}
               {status === 'error' && <ModalHayErrores />}
-              {status === 'idle' && <div className="absolute"> Esperando </div>}
+              {status === 'idle' && (
+                <div className="absolute text-sm bg-base-100 text-base-content px-2">
+                  Form en espera
+                </div>
+              )}
 
               {/* <div className="h-2 font-bold text-lg">
                 {ref.message && ref.message?.current !== null && !pending && (

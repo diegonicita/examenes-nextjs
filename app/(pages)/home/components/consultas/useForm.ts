@@ -39,31 +39,31 @@ export const useForm = () => {
       try {
         objMessage = JSON.parse(messageRef.current)
         // Iterar sobre los problemas
-        const newObj = { fullname: '', email: '', consult: '' }
+        const newErrors = { fullname: '', email: '', consult: '' }
         let status = 'success'
         objMessage?.error?.issues.forEach(
           (issue: { path: string | string[]; message: any }) => {
             if (issue.path.includes('fullname')) {
-              newObj.fullname = issue.message
+              newErrors.fullname = issue.message
               status = 'error'
             }
             if (issue.path.includes('email')) {
-              newObj.email = issue.message
+              newErrors.email = issue.message
               status = 'error'
             }
             if (issue.path.includes('consult')) {
-              newObj.consult = issue.message
+              newErrors.consult = issue.message
               status = 'error'
             }
           },
         )
-        setErrors({ ...errors, ...newObj })
+        setErrors({ ...errors, ...newErrors })
         setStatus(status)
       } catch (error) {
         console.error('Error parsing JSON:', error)
       }
     } else {
-      setErrors({ ...errors, fullname: '', email: '', consult: '' })
+      setErrors({ fullname: '', email: '', consult: '' })
     }
     let timer = setTimeout(() => {
       if (objMessage?.success) {
@@ -75,7 +75,7 @@ export const useForm = () => {
       messageRef.current = null
       setDisableForm(false)
       setStatus("idle")
-    }, 1500)
+    }, 1000)
     return () => {
       clearTimeout(timer)
     }
@@ -85,6 +85,7 @@ export const useForm = () => {
     formAction,
     isFormDisabled: disableForm,
     errors,
+    setErrors,
     ref: {
       fullname: fullnameRef,
       email: emailRef,

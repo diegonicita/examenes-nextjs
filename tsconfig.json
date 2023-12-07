@@ -42,7 +42,7 @@
     "server-actions/products/createProduct.js",
     "server-actions/products/displayProducts.js",
     "app/(pages)/home/components/consultas/consultas.tsx",
-    "app/(pages)/home/components/submit.tsx"
+    "app/(pages)/home/components/consultas/submit.tsx"
   ],
   "exclude": [
     "node_modules"

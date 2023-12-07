@@ -27,3 +27,23 @@ export default function Modal({
     </section>
   )
 }
+
+export const ModalHayErrores = () => {
+  if (typeof document !== 'undefined') {
+    const modal = document.getElementById(
+      'my_modal_errors',
+    ) as HTMLDialogElement
+    modal?.showModal()
+  }
+  return null
+}
+
+export const ModalNoHayErrores = () => {
+  if (typeof document !== 'undefined') {
+    const modal = document.getElementById(
+      'my_modal_success',
+    ) as HTMLDialogElement
+    modal?.showModal()
+  }
+  return null
+}
