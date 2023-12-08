@@ -1,6 +1,6 @@
 // Este componente usa una clase llamada text-wrap-balance definida en global.css
 import Image from 'next/image'
-import heroImage from '@/app/assets/OIG-1.png'
+import heroImage from '@/app/assets/OIG-1.webp'
 
 function FingerPrint() {
   return (

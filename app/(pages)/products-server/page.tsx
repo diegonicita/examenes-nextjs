@@ -1,13 +1,9 @@
-import DisplayProducts from '@/app/(pages)/products-server/components/displayProducts'
-import CreateForm from '@/app/(pages)/products-server/components/createForm'
-import DisplayQuestionsStatistics from '@/app/server-actions/questions/displayQuestionsStatistics'
+import DisplayProducts from '@/app/(pages)/products-server/components/clasificaciones'
 
 const Page = async () => {
   return (
     <>
-      <DisplayProducts />
-      <CreateForm />
-      <DisplayQuestionsStatistics />
+      <DisplayProducts />      
     </>
   )
 }
