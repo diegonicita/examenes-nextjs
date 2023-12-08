@@ -1,7 +1,7 @@
 //@ts-ignore
 import { useFormState } from 'react-dom'
 import { insertAction } from '@/app/(pages)/consults-server/actions/insert'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, RefObject } from 'react'
 import { type ConsultType } from '@/app/models/Consult'
 
 const initialState = {
@@ -11,14 +11,14 @@ const initialState = {
   message: '',
 } as ConsultType
 
-export const useForm = () => {
+type Status = 'idle' | 'success' | 'error'
+
+type ObjMessage = { success: any; error: any } | null
+
+export const useForm = (formRef: RefObject<HTMLFormElement>) => {
   const [state, formAction] = useFormState(insertAction, initialState)
   const [counter, setCounter] = useState(0)
-  const [disableForm, setDisableForm] = useState(false)
-  const [status, setStatus] = useState('idle')
-  const fullnameRef = useRef<HTMLInputElement>(null)
-  const emailRef = useRef<HTMLInputElement>(null)
-  const consultRef = useRef<HTMLTextAreaElement>(null)
+  const [status, setStatus] = useState<Status>('idle')
   const messageRef = useRef<string | null>()
 
   const [errors, setErrors] = useState({
@@ -33,32 +33,31 @@ export const useForm = () => {
   }, [state])
 
   useEffect(() => {
-    setDisableForm(true)
-    let objMessage: { success: any; error: any } | null = null
+    let objMessage : ObjMessage = null
     if (messageRef.current && messageRef.current !== null) {
       try {
         objMessage = JSON.parse(messageRef.current)
         // Iterar sobre los problemas
         const newErrors = { fullname: '', email: '', consult: '' }
-        let status = 'success'
+        let msg: Status = 'success'
         objMessage?.error?.issues.forEach(
           (issue: { path: string | string[]; message: any }) => {
             if (issue.path.includes('fullname')) {
               newErrors.fullname = issue.message
-              status = 'error'
+              msg = 'error'
             }
             if (issue.path.includes('email')) {
               newErrors.email = issue.message
-              status = 'error'
+              msg = 'error'
             }
             if (issue.path.includes('consult')) {
               newErrors.consult = issue.message
-              status = 'error'
+              msg = 'error'
             }
           },
         )
         setErrors({ ...errors, ...newErrors })
-        setStatus(status)
+        setStatus(msg)
       } catch (error) {
         console.error('Error parsing JSON:', error)
       }
@@ -67,14 +66,10 @@ export const useForm = () => {
     }
     let timer = setTimeout(() => {
       if (objMessage?.success) {
-        if (fullnameRef && fullnameRef.current) fullnameRef.current.value = ''
-        if (emailRef && emailRef.current) emailRef.current.value = ''
-        if (consultRef && consultRef.current) consultRef.current.value = ''
-        messageRef.current = null
+        formRef.current?.reset()
       }
       messageRef.current = null
-      setDisableForm(false)
-      setStatus("idle")
+      setStatus('idle')
     }, 1000)
     return () => {
       clearTimeout(timer)
@@ -83,13 +78,9 @@ export const useForm = () => {
 
   return {
     formAction,
-    isFormDisabled: disableForm,
     errors,
     setErrors,
     ref: {
-      fullname: fullnameRef,
-      email: emailRef,
-      consult: consultRef,
       message: messageRef,
     },
     status,

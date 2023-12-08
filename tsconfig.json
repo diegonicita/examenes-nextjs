@@ -41,8 +41,8 @@
     "server-actions/products/insertProductAction.js",
     "server-actions/products/createProduct.js",
     "server-actions/products/displayProducts.js",
-    "app/(pages)/home/components/consultas/consultas.tsx",
-    "app/(pages)/home/components/consultas/submit.tsx"
+    "app/(pages)/home/components/consults/consults.tsx",
+    "app/(pages)/home/components/consults/submit.tsx"
   ],
   "exclude": [
     "node_modules"
