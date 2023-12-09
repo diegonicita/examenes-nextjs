@@ -1,9 +1,9 @@
-import DisplayProducts from '@/app/(pages)/products-server/components/clasificaciones'
+import Clasificaciones from '@/app/(pages)/products-server/components/clasificaciones'
 
 const Page = async () => {
   return (
     <>
-      <DisplayProducts />      
+      <Clasificaciones />      
     </>
   )
 }
