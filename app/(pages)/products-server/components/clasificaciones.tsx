@@ -1,18 +1,16 @@
+'use client'
+
 import Image from 'next/image'
 import React from 'react'
 import defaultImage from '@/app/assets/OIG-4.jpg'
 
-export default async function Clasificaciones() {
-  const result = await fetch(
-    'https://www.examenes.com.ar/api/get-questions-statistics',
-    { cache: 'no-store' },
-  )
-  const res = await result.json()
-
+export default function Clasificaciones({ data }: { data: any }) {
+  console.log(data)
   return (
     <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
-      {res &&
-        res.examenes.map(
+      <h1> TEST </h1>
+      {data &&
+        data.examenes.map(
           (
             p: {
               id: number
@@ -63,8 +61,8 @@ export default async function Clasificaciones() {
             </div>
           ),
         )}
-      {res &&
-        res.temas.map(
+      {data &&
+        data.temas.map(
           (
             p: {
               id: number
