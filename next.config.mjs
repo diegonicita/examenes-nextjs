@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverActions: { allowedOrigins: ["www.examenes.com.ar", "localhost:5000"], },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['www.examenes.com.ar', 'localhost:5000'],
+    },
+  },
   reactStrictMode: true,
   images: {
     remotePatterns: [
