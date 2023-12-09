@@ -1,10 +1,9 @@
-'use server'
 import Image from 'next/image'
 import React from 'react'
 import defaultImage from '@/app/assets/OIG-4.jpg'
 
 async function getData() {
-  const res = await fetch('http://localhost:5000/api/get-questions-statistics', { cache: 'no-store' })
+  const res = await fetch('http://localhost:5000/api/get-questions-statistics')
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
