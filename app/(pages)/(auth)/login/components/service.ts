@@ -6,7 +6,8 @@ export const loginService = async (data: any, url: string | undefined) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data), 
+        credentials: 'include',       
       })
       const responseData = await resp.json()
       return responseData
