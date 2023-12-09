@@ -2,21 +2,17 @@ import Image from 'next/image'
 import React from 'react'
 import defaultImage from '@/app/assets/OIG-4.jpg'
 
-async function getData() {
-  const res = await fetch('https://examenes.com.ar/api/get-questions-statistics')
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-  return res.json()
-}
-
 export default async function Clasificaciones() {
-  const result = await getData()
+  const result = await fetch(
+    'https://www.examenes.com.ar/api/get-questions-statistics',
+    { cache: 'no-store' },
+  )
+  const res = await result.json()
 
   return (
     <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
-      {result &&
-        result.examenes.map(
+      {res &&
+        res.examenes.map(
           (
             p: {
               id: number
@@ -67,8 +63,8 @@ export default async function Clasificaciones() {
             </div>
           ),
         )}
-        {result &&
-        result.temas.map(
+      {res &&
+        res.temas.map(
           (
             p: {
               id: number

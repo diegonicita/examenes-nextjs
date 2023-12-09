@@ -1,10 +1,9 @@
-// import DisplayProducts from '@/app/(pages)/products-server/components/clasificaciones'
+import DisplayProducts from '@/app/(pages)/products-server/components/clasificaciones'
 
 const Page = async () => {
   return (
     <div>
-      <h1> Test </h1>
-      {/* <DisplayProducts />       */}
+      <DisplayProducts />
     </div>
   )
 }
