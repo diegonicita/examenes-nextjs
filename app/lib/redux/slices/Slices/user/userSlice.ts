@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { type User } from '@/app/models/User'
+import { type UserType } from '@/app/models/User'
 
-const initialState: User = {
+const initialState: UserType = {
   username: null,
   email: null,
   token: null,
@@ -11,7 +11,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    changeUser: (state, action: PayloadAction<User>) => {
+    changeUser: (state, action: PayloadAction<UserType>) => {
       state.username = action.payload.username
       state.email = action.payload.email
       state.token = action.payload.token
