@@ -2,6 +2,8 @@
 import Image from 'next/image'
 import defaultImage from '@/app/assets/OIG-4.jpg'
 
+const dynamic = 'force-dynamic'
+
 async function getData() {
   try {
     const res = await fetch('https://www.examenes.com.ar/api/get-questions-statistics', {
@@ -19,8 +21,7 @@ export default async function ClasificacionesPage() {
   const data = await getData()
 
   return (
-    <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
-      <h1> Title</h1>
+    <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">      
       {data &&
         data.examenes.map(
           (

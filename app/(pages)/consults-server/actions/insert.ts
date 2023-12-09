@@ -38,6 +38,7 @@ export const insertAction = async (
 
     if (result && result?.affectedRows) {
       revalidatePath('/')
+      revalidatePath('/consults-server')
       return {        
         message: JSON.stringify(validationResult),
       }

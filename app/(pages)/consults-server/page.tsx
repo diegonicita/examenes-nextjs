@@ -1,5 +1,7 @@
 import DisplayConsults from '@/app/(pages)/consults-server/components/displayConsults'
 
+const dynamic = 'force-dynamic'
+
 const Page = async () => {
   return (
     <>

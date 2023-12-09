@@ -1,6 +1,8 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 
+const dynamic = 'force-dynamic'
+
 export default async function getQuestionsStatistics() {
   const respuesta = {
     total: 0,

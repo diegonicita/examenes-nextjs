@@ -3,6 +3,8 @@ import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import DeleteButton from '@/app/(pages)/consults-server/components/deleteButton'
 import { RowDataPacket } from 'mysql2'
 
+const dynamic = 'force-dynamic'
+
 export default async function DisplayConsults() {
   const result = (await executeQuery(
     'select * from consultas',
