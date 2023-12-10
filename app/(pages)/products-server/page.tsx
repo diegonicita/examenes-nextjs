@@ -1,12 +1,16 @@
 // import Clasificaciones from '@/app/(pages)/products-server/components/clasificaciones'
 import Image from 'next/image'
 import defaultImage from '@/app/assets/OIG-4.jpg'
+import { unstable_noStore as noStore } from 'next/cache'
 
 const dynamic = 'force-dynamic'
+const revalidate = 0
 
 async function getData() {
+  noStore()
+  const url = process.env.URL_API
   try {
-    const res = await fetch('https://www.examenes.com.ar/api/get-questions-statistics', {
+    const res = await fetch(url + '/api/get-questions-statistics', {
       cache: 'no-store',
     })
     return res.json()
@@ -21,7 +25,7 @@ export default async function ClasificacionesPage() {
   const data = await getData()
 
   return (
-    <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">      
+    <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
       {data &&
         data.examenes.map(
           (

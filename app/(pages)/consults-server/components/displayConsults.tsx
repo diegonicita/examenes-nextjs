@@ -2,10 +2,12 @@
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import DeleteButton from '@/app/(pages)/consults-server/components/deleteButton'
 import { RowDataPacket } from 'mysql2'
+import { unstable_noStore as noStore } from 'next/cache'
 
 const dynamic = 'force-dynamic'
 
 export default async function DisplayConsults() {
+  noStore()
   const result = (await executeQuery(
     'select * from consultas',
     [],
@@ -16,7 +18,7 @@ export default async function DisplayConsults() {
       {result &&
         result.map(
           (
-            p: { id: number; fullname: string; consult: string, email: string },
+            p: { id: number; fullname: string; consult: string; email: string },
             index: number,
           ) => (
             <div
@@ -29,11 +31,13 @@ export default async function DisplayConsults() {
                   Consulta Id: <span>{p.id}</span>
                 </h1>
                 <div>
-                <span className="font-bold">De: </span>{p.fullname ? p.fullname : 'Sin título'}
+                  <span className="font-bold">De: </span>
+                  {p.fullname ? p.fullname : 'Sin título'}
                 </div>
                 <div>
-                <span className="font-bold">Email: </span> {p.email ? p.email : 'Sin título'}
-                </div>                
+                  <span className="font-bold">Email: </span>{' '}
+                  {p.email ? p.email : 'Sin título'}
+                </div>
                 <div>
                   <span className="font-bold">{'Descripcion: '}</span>
                   {p.consult ? p.consult : 'sin consulta'}

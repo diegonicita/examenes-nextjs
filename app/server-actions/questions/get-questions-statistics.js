@@ -2,6 +2,7 @@
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 
 const dynamic = 'force-dynamic'
+const revalidate = 0
 
 export default async function getQuestionsStatistics() {
   const respuesta = {

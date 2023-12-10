@@ -37,8 +37,7 @@ export const insertAction = async (
     )) as RowDataPacket
 
     if (result && result?.affectedRows) {
-      revalidatePath('/')
-      revalidatePath('/consults-server')
+      revalidatePath('/')      
       return {        
         message: JSON.stringify(validationResult),
       }
