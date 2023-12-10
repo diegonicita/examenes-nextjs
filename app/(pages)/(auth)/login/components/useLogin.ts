@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { loginService } from './service'
 import { userSlice, useDispatch } from '@/app/lib/redux'
 
-export const useLogin = (url: string | undefined) => {
+export const useLogin = (url: string | undefined, urlAPI: string | undefined) => {
   const [loginResponse, setLoginResponse] = useState(null)
   const dispatch = useDispatch()
 
   const handleSubmitLogin = async (data: any) => {
-    const resp = await loginService(data, url)
+    const resp = await loginService(data, url, urlAPI)
     setLoginResponse(resp)
     dispatch(
       userSlice.actions.changeUser({

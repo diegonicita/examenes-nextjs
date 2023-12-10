@@ -7,14 +7,15 @@ import { useLogged } from '@/app/hooks/useLogged'
 
 type Props = {
   url: string | undefined
+  urlAPI: string | undefined
   initialEmail: string | undefined
   initialPassword: string | undefined
 }
 
-export default function Login({ url, initialEmail, initialPassword }: Props) {
+export default function Login({ url, urlAPI, initialEmail, initialPassword }: Props) {
   const [email, setEmail] = useState(initialEmail)
   const [password, setPassword] = useState(initialPassword)
-  const { handleSubmitLogin, loginResponse } = useLogin(url)
+  const { handleSubmitLogin, loginResponse } = useLogin(url, urlAPI)
   const [showModal, setShowModal] = useState(false)
 
   useLogged('redirect')
