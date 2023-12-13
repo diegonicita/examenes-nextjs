@@ -1,5 +1,6 @@
 import Question from '@/app/(pages)/question/components/question'
 import { cookies } from 'next/headers'
+import CheckCookie from '@/app/components/checkCookie/checkCookie'
 
 export default function QuestionPage() {
   const cookieStore = cookies()
@@ -7,6 +8,7 @@ export default function QuestionPage() {
 
   return (
     <>
+      <CheckCookie />
       {authCookieServer && (
         <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
           <Question />
