@@ -12,7 +12,7 @@ export const useLogin = (url: string | undefined, urlAPI: string | undefined) =>
     dispatch(
       userSlice.actions.changeUser({
         username: resp?.username ?? null,
-        token: resp?.token ?? null,
+        token: null,
         email: resp?.userResponse.email ?? null,
       }),
     )

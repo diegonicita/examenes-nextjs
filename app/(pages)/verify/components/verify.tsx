@@ -1,14 +1,13 @@
 'use client'
 
 import { useSelector, selectMessage, selectCount } from '@/app/lib/redux'
-import { selectUser, selectToken, selectEmail } from '@/app/lib/redux'
+import { selectUser, selectEmail } from '@/app/lib/redux'
 import { useGetQuestionByIdQuery } from '@/app/lib/services/choice'
 
 export default function Verify() {
   const message = useSelector(selectMessage)
   const count = useSelector(selectCount)
-  const username = useSelector(selectUser)
-  const token = useSelector(selectToken)
+  const username = useSelector(selectUser)  
   const email = useSelector(selectEmail)
   const { data, error, isLoading } = useGetQuestionByIdQuery(6)
 
@@ -28,8 +27,7 @@ export default function Verify() {
             <span className="font-bold">email: </span>
             {email}
           </p>
-          <span className="font-bold">token: </span>
-          {token?.substring(0, 30) + '...'}
+          <span className="font-bold">token: </span>          
         </div>
       </div>
       {!isLoading && (

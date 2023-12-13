@@ -8,7 +8,7 @@ import { cookies } from 'next/headers'
 export default async function DisplayConsults() {
       
   const cookieStore = cookies()
-  const authCookie = cookieStore.get('auth')?.value
+  const authCookieServer = cookieStore.get('auth')?.value
 
   const result = (await executeQuery(
     'select * from consultas',
@@ -18,7 +18,7 @@ export default async function DisplayConsults() {
   return (
     <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
       <CheckCookie />
-      {authCookie && result &&
+      {authCookieServer && result &&
         result.map(
           (
             p: {
@@ -54,7 +54,7 @@ export default async function DisplayConsults() {
             </div>
           ),
         )}
-        { !authCookie && 
+        { !authCookieServer && 
           <div className="card max-w-[40rem] bg-base-100 shadow-xl m-2 border border-black px-4">
             <div className="card-body gap-0 px-1 text-start">
               <h1 className="font-bold">

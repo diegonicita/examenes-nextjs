@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRegister } from './components/useRegister'
 import { Modal } from './components/modal'
+import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
 
 export default function Register() {
   const [username, setUsername] = useState('')
@@ -11,6 +12,8 @@ export default function Register() {
   const [password2, setPassword2] = useState('')
   const { handleSubmitRegister, registerResponse } = useRegister()
   const [showModal, setShowModal] = useState(false)
+
+  useLogged('redirect')  
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()

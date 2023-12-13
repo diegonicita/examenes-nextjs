@@ -1,16 +1,18 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 
 export const useCookieInterval = (cookieName: string, intervalTime: number) => {
   const cookieValue = useRef(Cookies.get(cookieName))
+  const [changeCookie, setChangeCookie] = useState<boolean>(false)
 
   useEffect(() => {
     // Función para verificar y actualizar el valor de la cookie
     const checkCookie = () => {
-      console.log("tick")
+      //   console.log("tick")
       const currentValue = Cookies.get(cookieName)
       if (currentValue !== cookieValue.current) {
         console.log('change cookie state')
+        setChangeCookie(!changeCookie)
         cookieValue.current = currentValue
       }
     }
@@ -24,5 +26,5 @@ export const useCookieInterval = (cookieName: string, intervalTime: number) => {
     // Dependencia vacía para que solo se ejecute al montar y desmontar
   }, [])
 
-  return { cookie: cookieValue.current }
+  return { cookie: cookieValue.current, changeCookie }
 }

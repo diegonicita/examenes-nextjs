@@ -16,7 +16,7 @@ export const pending = [
 
 export const done = [
   'Crear un CRUD de prueba usando Server Actions',
-  'Agregar el token en un estado global',
+  'quitar token del token en un estado global',
   'Login y Register usando el servidor de Webapp',  
   'Icono del navbar cambia segun Login/Logout',
   'Crear Logout',

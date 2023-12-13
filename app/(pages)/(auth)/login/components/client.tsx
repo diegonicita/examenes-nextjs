@@ -23,7 +23,7 @@ export default function Login({
   const { handleSubmitLogin, loginResponse } = useLogin(url, urlAPI)
   const [showModal, setShowModal] = useState(false)
 
-  useLogged('redirect')
+  useLogged('redirect')  
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()

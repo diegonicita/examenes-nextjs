@@ -47,11 +47,7 @@ export const Modal = ({ showModal, handleShowModal, respObject }: Props) => {
               <div>
                 <span className="font-bold">userResponse: </span>
                 {JSON.stringify(respObject?.userResponse)}
-              </div>
-              <div>
-                <span className="font-bold">token: </span>
-                {respObject?.token ? respObject?.token : 'null'}
-              </div>
+              </div>              
             </div>
             <button
               className="absolute btn btn-sm top-1 right-1"

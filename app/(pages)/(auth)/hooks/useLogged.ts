@@ -1,6 +1,4 @@
-import {
-  selectToken,
-  useSelector,
+import {  
   useDispatch,
   userSlice,
 } from '@/app/lib/redux'
@@ -11,29 +9,27 @@ import { useCookieInterval } from './useCookieInterval'
 
 export const useLogged = (action: 'redirect' | undefined) => {
   const [isLogged, setIsLogged] = useState(false)
-  const { cookie } = useCookieInterval('auth', 1000)
-  const token = useSelector(selectToken)
+  const { cookie } = useCookieInterval('auth', 1000)  
   const router = useRouter()
   const dispatch = useDispatch()
 
   const logout = async () => {
     dispatch(userSlice.actions.logout())
-    setIsLogged(false)
-    Cookies.remove('token')
+    setIsLogged(false)    
     Cookies.remove('auth')
     router.refresh()
     return
   }
 
   useEffect(() => {
-    if (token && action === 'redirect') {
+    if (cookie && action === 'redirect') {
       router.refresh()
       router.push('/')
     }
-    if (token) {
+    if (cookie) {
       setIsLogged(true)
     }
-  }, [token, router])
+  }, [cookie, router])
 
-  return { isLogged, logout, authCookie: cookie }
+  return { isLogged, logout }
 }
