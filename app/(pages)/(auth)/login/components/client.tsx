@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useLogin } from './useLogin'
 import { Modal } from './modal'
-import { useLogged } from '@/app/hooks/useLogged'
+import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
 
 type Props = {
   url: string | undefined
@@ -12,7 +12,12 @@ type Props = {
   initialPassword: string | undefined
 }
 
-export default function Login({ url, urlAPI, initialEmail, initialPassword }: Props) {
+export default function Login({
+  url,
+  urlAPI,
+  initialEmail,
+  initialPassword,
+}: Props) {
   const [email, setEmail] = useState(initialEmail)
   const [password, setPassword] = useState(initialPassword)
   const { handleSubmitLogin, loginResponse } = useLogin(url, urlAPI)

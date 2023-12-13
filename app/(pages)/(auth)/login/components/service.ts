@@ -1,4 +1,7 @@
+import { useRouter } from 'next/navigation'
+
 export const loginService = async (data: any, url: string | undefined, urlAPI: string | undefined) => {
+ 
   try {
     if (url && urlAPI) {
       const resp = await fetch(url, {
@@ -9,8 +12,7 @@ export const loginService = async (data: any, url: string | undefined, urlAPI: s
         body: JSON.stringify(data),
         credentials: 'include',
       })
-      const responseData = await resp.json()
-      console.log(responseData?.token)
+      const responseData = await resp.json()      
       const authorization = await fetch(urlAPI + '/api/authorization', {
         method: 'POST',
         headers: {
@@ -20,6 +22,13 @@ export const loginService = async (data: any, url: string | undefined, urlAPI: s
         credentials: 'include',
         body: null, // o el cuerpo de la solicitud si es necesario
       })
+      // const revalidate = await fetch(urlAPI + '/api/revalidate?path=consults-server', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',      
+      //   },        
+      //   body: null, // o el cuerpo de la solicitud si es necesario
+      // })      
       return responseData
     }
   } catch (error) {

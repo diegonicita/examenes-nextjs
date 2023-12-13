@@ -2,12 +2,14 @@
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import DeleteButton from '@/app/(pages)/consults-server/components/deleteButton'
 import { RowDataPacket } from 'mysql2'
-import { unstable_noStore as noStore } from 'next/cache'
-
-const dynamic = 'force-dynamic'
+import CheckCookie from './checkCookie'
+import { cookies } from 'next/headers'
 
 export default async function DisplayConsults() {
-  noStore()
+      
+  const cookieStore = cookies()
+  const authCookie = cookieStore.get('auth')?.value
+
   const result = (await executeQuery(
     'select * from consultas',
     [],
@@ -15,16 +17,22 @@ export default async function DisplayConsults() {
 
   return (
     <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
-      {result &&
+      <CheckCookie />
+      {authCookie && result &&
         result.map(
           (
-            p: { id: number; fullname: string; consult: string; email: string },
+            p: {
+              id: number
+              fullname: string
+              consult: string
+              email: string
+            },
             index: number,
           ) => (
             <div
               key={p.id}
               className="card max-w-[40rem] bg-base-100 shadow-xl m-2 border border-black px-4"
-            >
+            >              
               <div className="card-body gap-0 px-1 text-start">
                 <DeleteButton id={p.id} />
                 <h1 className="font-bold mb-4">
@@ -46,6 +54,15 @@ export default async function DisplayConsults() {
             </div>
           ),
         )}
+        { !authCookie && 
+          <div className="card max-w-[40rem] bg-base-100 shadow-xl m-2 border border-black px-4">
+            <div className="card-body gap-0 px-1 text-start">
+              <h1 className="font-bold">
+                No tienes permiso para ver esta sección
+              </h1>
+            </div>
+          </div>
+        }
     </div>
   )
 }

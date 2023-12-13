@@ -1,15 +1,21 @@
 'use client'
 
-import React from 'react'
+// import Cookies from 'js-cookie'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import userNotLogged from '@/app/assets/icon-not-logged.png'
 import userLogged from '@/app/assets/icon-logged.png'
 import Link from 'next/link'
-import { useLogged } from '@/app/hooks/useLogged'
-import { userSlice, useDispatch } from '@/app/lib/redux'
+import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
 
 export default function AuthMenu() {
   const { isLogged, logout } = useLogged(undefined)
+  // const [cookieState, setCookieState] = useState<undefined | string>(undefined)
+
+  // useEffect(() => {
+  //   const name = Cookies.get('auth')
+  //   setCookieState(name)
+  // }, [isLogged])
 
   return (
     <div>
@@ -57,7 +63,7 @@ export default function AuthMenu() {
           )}
           {isLogged && (
             <li>
-              <div onClick={logout}>Salir (Logout)</div>
+              <div onClick={() => logout()}>Salir (Logout)</div>
             </li>
           )}
         </ul>

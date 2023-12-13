@@ -1,12 +1,14 @@
 import DisplayConsults from '@/app/(pages)/consults-server/components/displayConsults'
-
-const dynamic = 'force-dynamic'
+import { unstable_noStore as noStore } from 'next/cache'
+import CheckCookie from './components/checkCookie'
+export const dynamic = 'force-dynamic'
 
 const Page = async () => {
+  noStore()
   return (
-    <>
+    <div>      
       <DisplayConsults />
-    </>
+    </div>
   )
 }
 
