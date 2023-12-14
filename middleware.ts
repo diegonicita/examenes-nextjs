@@ -3,20 +3,33 @@ import type { NextRequest } from 'next/server'
 import { headers } from 'next/headers'
 import { jwtVerify } from 'jose'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const authCookieServer = request.cookies.get('auth')
-  // if (authCookieServer && process.env.JWT_SECRET) {
-  //   const secretKey = createSecretKey(process.env.JWT_SECRET, 'utf-8')
-  //   const decoded = jwtVerify(authCookieServer?.value, secretKey)
-  //   console.log(decoded)
-  // }
-  // if (request.nextUrl.pathname.startsWith('/consults-server') && !cookieServer) {
-  //   return NextResponse.redirect(new URL('/not-authorized', request.url))
-  // }
+  let authPayload = null
 
-  // if (request.nextUrl.pathname.startsWith('/question') && !cookieServer) {
-  //   return NextResponse.redirect(new URL('/not-authorized', request.url))
-  // }
+  if (authCookieServer) {
+    try {
+      const { payload } = await jwtVerify(
+        authCookieServer?.value,
+        new TextEncoder().encode(process.env.JWT_SECRET),
+      )
+      authPayload = payload
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  if (request.nextUrl.pathname.includes('/consults-server')) {
+    let response = NextResponse.next()
+    response.cookies.set('cs', authPayload ? 'true' : 'false')
+    return response
+  }
+
+  if (request.nextUrl.pathname.includes('/question')) {
+    let response = NextResponse.next()
+    response.cookies.set('q', authPayload ? 'true' : 'false')
+    return response
+  }
 
   if (
     request.nextUrl.pathname.startsWith('/api/authorization') &&
