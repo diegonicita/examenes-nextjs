@@ -5,6 +5,7 @@ export default function Login() {
   const urlAPI = process.env.URL_API
   const email = process.env.USER_EMAIL
   const password = process.env.USER_PASSWORD
+  const showLoginErrors = process.env.SHOW_LOGIN_ERRORS === "true" ? true : false
 
   return (
     <div className="mt-8 hero-content mx-auto max-w-sm">
@@ -15,6 +16,7 @@ export default function Login() {
             urlAPI={urlAPI}
             initialEmail={email}
             initialPassword={password}
+            showLoginErrors={showLoginErrors}
           />
         </div>
       </div>

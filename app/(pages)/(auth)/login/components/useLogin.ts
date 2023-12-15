@@ -9,6 +9,7 @@ export const useLogin = (url: string | undefined, urlAPI: string | undefined) =>
   const handleSubmitLogin = async (data: any) => {
     const resp = await loginService(data, url, urlAPI)
     setLoginResponse(resp)
+    console.log(resp)
     dispatch(
       userSlice.actions.changeUser({
         username: resp?.username ?? null,

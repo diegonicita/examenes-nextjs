@@ -5,11 +5,9 @@ import {
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { useCookieInterval } from './useCookieInterval'
 
 export const useLogged = (action: 'redirect' | undefined) => {
-  const [isLogged, setIsLogged] = useState(false)
-  const { cookie } = useCookieInterval('auth', 1000)  
+  const [isLogged, setIsLogged] = useState(false) 
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -22,14 +20,14 @@ export const useLogged = (action: 'redirect' | undefined) => {
   }
 
   useEffect(() => {
-    if (cookie && action === 'redirect') {
+    if (Cookies.get('auth') && action === 'redirect') {
       router.refresh()
       router.push('/')
     }
-    if (cookie) {
+    if (Cookies.get('auth')) {
       setIsLogged(true)
     }
-  }, [cookie, router])
+  }, [Cookies.get('auth'), router])
 
   return { isLogged, logout }
 }

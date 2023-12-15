@@ -6,6 +6,8 @@ import AuthMenu from './authMenu'
 import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 
+export const dynamic = 'force-dynamic'
+
 export const Nav = () => {
   const pathname = usePathname()
 
