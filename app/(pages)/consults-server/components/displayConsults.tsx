@@ -2,7 +2,7 @@
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import DeleteButton from '@/app/(pages)/consults-server/components/deleteButton'
 import { RowDataPacket } from 'mysql2'
-import CheckCookie from '@/app/components/checkCookie/checkCookie'
+// import CheckCookie from '@/app/components/checkCookie/checkCookie'
 import { cookies } from 'next/headers'
 
 export default async function DisplayConsults() {
@@ -16,7 +16,7 @@ export default async function DisplayConsults() {
 
   return (
     <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
-      <CheckCookie />
+      {/* <CheckCookie /> */}
       {authCookieServer &&
         result &&
         result.map(

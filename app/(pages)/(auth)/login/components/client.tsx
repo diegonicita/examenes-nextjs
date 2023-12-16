@@ -60,7 +60,7 @@ export default function Login({
       <form
         action={formAction}
         name="formLogin"
-        className="card w-full bg-base-300"
+        className="card w-full bg-base-300 mb-2"
       >
         <div className="card-body">
           <div className="form-control">

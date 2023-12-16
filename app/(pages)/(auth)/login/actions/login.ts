@@ -22,7 +22,7 @@ export const loginAction = async (prevState: State, formData: FormData) => {
         email,
         password,
       }),
-      credentials: 'include', // incluir la cookie en las solicitudes
+      // credentials: 'include', // incluir la cookie en las solicitudes
     })
     const result = await response.json()
     console.log(result)
