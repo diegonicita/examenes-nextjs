@@ -3,13 +3,15 @@
 import { cookies } from 'next/headers'
 
 type State = {
+  username: string
   email: string
   password: string
   message: string
 }
 
-export const loginAction = async (prevState: State, formData: FormData) => {
-  const url = process.env.URL_LOGIN
+export const registerAction = async (prevState: State, formData: FormData) => {
+  const url = process.env.URL_REGISTER
+  const username = formData.get('username')
   const email = formData.get('email')
   const password = formData.get('password')
   if (url) {
@@ -19,6 +21,7 @@ export const loginAction = async (prevState: State, formData: FormData) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        username,
         email,
         password,
       }),
@@ -29,13 +32,13 @@ export const loginAction = async (prevState: State, formData: FormData) => {
     if (result.isError === false) {
       cookies().set('auth', result.token)
       return {
-        response: 'login exitoso',
+        response: 'register exitoso',
         message: result.message,
       }
     }
     if (result.isError === true) {
       return {
-        response: 'login fallido',
+        response: 'register fallido',
         message: result.message,
       }
     }

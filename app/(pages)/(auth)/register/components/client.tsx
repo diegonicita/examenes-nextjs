@@ -1,39 +1,46 @@
 'use client'
 
-import { useState } from 'react'
-import { Modal } from './modal'
+import { useState, useEffect } from 'react'
 import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
 //@ts-ignore
 import { useFormState } from 'react-dom'
-import { loginAction } from '../actions/login'
-
-type Props = {
-  initialEmail: string | undefined
-  initialPassword: string | undefined
-}
+import { registerAction } from '../actions/register'
+import { Modal } from './modal'
 
 const initialState = {
+  usarname: '',
   email: '',
   password: '',
   response: '',
   message: '',
 }
 
-export default function Login({ initialEmail, initialPassword }: Props) {
-  const [email, setEmail] = useState(initialEmail)
-  const [password, setPassword] = useState(initialPassword)
-  const [state, formAction] = useFormState(loginAction, initialState)
+export default function Register() {
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [password2, setPassword2] = useState('')
+  const [state, formAction] = useFormState(registerAction, initialState)
 
   useLogged('redirect')
 
   return (
     <div className="relative">
-      <form
-        action={formAction}
-        name="formLogin"
-        className="card w-full bg-base-300 mb-2"
-      >
+      <form action={formAction} name="formRegister" className="card w-full bg-base-300">
         <div className="card-body">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Usuario</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Crea tu nombre de usuario"
+              className="input input-bordered"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
@@ -43,7 +50,6 @@ export default function Login({ initialEmail, initialPassword }: Props) {
               placeholder="Ingresa tu email"
               className="input input-bordered"
               name="email"
-              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -57,19 +63,26 @@ export default function Login({ initialEmail, initialPassword }: Props) {
               placeholder="Ingresa tu contraseña"
               className="input input-bordered"
               name="password"
-              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+          </div>
+          <div className="form-control">
             <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
-                ¿Olvidaste tu contraseña?
-              </a>
+              <span className="label-text">Repite tu Password</span>
             </label>
+            <input
+              type="password"
+              placeholder="Repite tu contraseña"
+              className="input input-bordered"
+              name="password2"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
+            />
           </div>
           <div className="form-control mt-6">
             <button type="submit" className="btn btn-primary">
-              Ingresar
+              Registrarse
             </button>
           </div>
         </div>

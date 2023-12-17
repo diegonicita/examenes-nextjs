@@ -9,7 +9,7 @@ export default function AuthBurger() {
 
   return (
     <>
-      <div className="w-auto sm:hidden text-end dropdown dropdown-start">
+      <div className="w-auto md:hidden text-end dropdown dropdown-start">
         <label tabIndex={0} className="btn btn-ghost">
           <div className="w-8 rounded-full">
             <Image alt="Icono del usuario" src={burger} />
