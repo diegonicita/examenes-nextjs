@@ -8,8 +8,6 @@ import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 import { useCookieInterval } from '@/app/(pages)/(auth)/hooks/useCookieInterval'
 
-export const dynamic = 'force-dynamic'
-
 export const Nav = () => {
   const pathname = usePathname()
   const { cookie } = useCookieInterval('auth', 1000)
@@ -22,6 +20,7 @@ export const Nav = () => {
   return (
     <div className="bg-base-200 text-base-content">
       <nav className="px-4 pt-4 flex gap-4 sm:w-full max-w-[55rem] mx-auto text-sm items-center justify-between">
+        
         <AuthBurger />
         <div role="tablist" className="hidden sm:flex tabs tabs-lifted tabs-lg">
           {tabs.map((tab, index) => (
