@@ -2,15 +2,10 @@
 
 import React from 'react'
 import Image from 'next/image'
-import userNotLogged from '@/app/assets/icon-not-logged.png'
-import userLogged from '@/app/assets/icon-logged.png'
 import burger from '@/app/assets/burger.svg'
 import Link from 'next/link'
-import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
-import { userSlice, useDispatch } from '@/app/lib/redux'
 
 export default function AuthBurger() {
-  // const { isLogged, logout } = useLogged(undefined)
 
   return (
     <>

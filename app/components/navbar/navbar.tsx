@@ -1,15 +1,23 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import AuthMenu from './authMenu'
 import AuthBurger from './authBurger'
 import { tabs } from './tabs'
+import { useCookieInterval } from '@/app/(pages)/(auth)/hooks/useCookieInterval'
 
 export const dynamic = 'force-dynamic'
 
 export const Nav = () => {
   const pathname = usePathname()
+  const { cookie } = useCookieInterval('auth', 1000)
+
+  // useEffect(() => {
+  //   console.log('cookie change en NAV')
+  //   console.log(cookie)
+  // }, [cookie])
 
   return (
     <div className="bg-base-200 text-base-content">
@@ -29,7 +37,7 @@ export const Nav = () => {
             </Link>
           ))}
         </div>
-        <AuthMenu />
+        <AuthMenu auth={cookie} />
       </nav>
     </div>
   )

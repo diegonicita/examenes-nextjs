@@ -7,7 +7,7 @@ import userLogged from '@/app/assets/icon-logged.png'
 import Link from 'next/link'
 import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
 
-export default function AuthMenu() {
+export default function AuthMenu({ auth }: { auth: string | undefined }) {
   const { isLogged, logout } = useLogged(undefined)
 
   return (
@@ -17,7 +17,7 @@ export default function AuthMenu() {
           <div className="w-14 rounded-full">
             <Image
               alt="Icono del usuario"
-              src={isLogged ? userLogged : userNotLogged}
+              src={auth ? userLogged : userNotLogged}
             />
           </div>
         </label>
@@ -25,39 +25,37 @@ export default function AuthMenu() {
           tabIndex={0}
           className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
         >
-          {!isLogged && (
-            <li>
-              <Link href="login">Ingresar</Link>
-              {/* <Link href="http://localhost:8126/auth/google-examenes">
+          {!auth && (
+            <>
+              <li>
+                <Link href="login">Ingresar</Link>
+                {/* <Link href="http://localhost:8126/auth/google-examenes">
               Ingresar
             </a> */}
-              {/* <Link href="https://mercado.webapp.ar/auth/google-examenes">
+                {/* <Link href="https://mercado.webapp.ar/auth/google-examenes">
               Ingresar con Google
             </a> */}
-            </li>
+              </li>
+              <li>
+                <Link href="register">Registrarte</Link>
+              </li>
+            </>
           )}
-          {!isLogged && (
-            <li>
-              <Link href="register">Registrarte</Link>
-            </li>
-          )}
-          {isLogged && (
-            <li>
-              <div className="justify-between">
-                Ver tu perfil
-                <span className="badge">New</span>
-              </div>
-            </li>
-          )}
-          {isLogged && (
-            <li>
-              <div>Preferencias</div>
-            </li>
-          )}
-          {isLogged && (
-            <li>
-              <div onClick={() => logout()}>Salir (Logout)</div>
-            </li>
+          {auth && (
+            <>
+              <li>
+                <div className="justify-between">
+                  Ver tu perfil
+                  <span className="badge">New</span>
+                </div>
+              </li>
+              <li>
+                <div>Preferencias</div>
+              </li>
+              <li>
+                <div onClick={() => logout()}>Salir (Logout)</div>
+              </li>
+            </>
           )}
         </ul>
       </div>

@@ -8,11 +8,13 @@ export const useCookieInterval = (cookieName: string, intervalTime: number) => {
   useEffect(() => {
     // Función para verificar y actualizar el valor de la cookie
     const checkCookie = () => {
-      //   console.log("tick")
+      console.log("tick")
       const currentValue = Cookies.get(cookieName)
+      // console.log(cookieName)
+      // console.log(currentValue)
       if (currentValue !== cookieValue.current) {
-        console.log('change cookie state')
-        setChangeCookie(!changeCookie)
+        // console.log('change cookie state')
+        setChangeCookie(prevChangeCookie => !prevChangeCookie)
         cookieValue.current = currentValue
       }
     }

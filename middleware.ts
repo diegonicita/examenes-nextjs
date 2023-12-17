@@ -13,24 +13,29 @@ export async function middleware(request: NextRequest) {
         authCookieServer?.value,
         new TextEncoder().encode(secret),
       )
-      authPayload = payload      
-      const currentTime = Date.now()      
-      const currentTimeInSeconds = Math.floor(currentTime /1000)
-      console.log(currentTimeInSeconds)
-      console.log(authPayload.exp)
-      
+      authPayload = payload
+      const currentTime = Date.now()
+      const currentTimeInSeconds = Math.floor(currentTime / 1000)
+      // console.log(currentTimeInSeconds)
+      // console.log(authPayload.exp)
+
       if (authPayload.exp && currentTimeInSeconds >= authPayload?.exp) {
         console.log('El token ha caducado.')
         authPayload = null
-        authCookieServer = undefined        
+        authCookieServer = undefined
+        let response = NextResponse.next()
+        response.cookies.delete('auth')
+        return response
       } else {
         console.log('El token está vigente.')
       }
     } catch (error) {
       authCookieServer = undefined
-      authPayload = null      
+      authPayload = null
       console.log('Error al verificar el token:', error)
-      return
+      let response = NextResponse.next()
+      response.cookies.delete('auth')
+      return response
     }
   }
 
@@ -39,7 +44,7 @@ export async function middleware(request: NextRequest) {
     if (!authPayload) {
       response.cookies.delete('auth')
     }
-    response.cookies.set('cs', authPayload ? 'true' : 'false')    
+    response.cookies.set('cs', authPayload ? 'true' : 'false')
     return response
   }
 
@@ -48,7 +53,7 @@ export async function middleware(request: NextRequest) {
     if (!authPayload) {
       response.cookies.delete('auth')
     }
-    response.cookies.set('q', authPayload ? 'true' : 'false')    
+    response.cookies.set('q', authPayload ? 'true' : 'false')
     return response
   }
 
