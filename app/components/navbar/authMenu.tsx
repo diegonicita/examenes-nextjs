@@ -28,13 +28,7 @@ export default function AuthMenu({ auth }: { auth: string | undefined }) {
           {!auth && (
             <>
               <li>
-                <Link href="login">Ingresar</Link>
-                {/* <Link href="http://localhost:8126/auth/google-examenes">
-              Ingresar
-            </a> */}
-                {/* <Link href="https://mercado.webapp.ar/auth/google-examenes">
-              Ingresar con Google
-            </a> */}
+                <Link href="login">Ingresar</Link>                
               </li>
               <li>
                 <Link href="register">Registrarte</Link>

@@ -1,6 +1,6 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import DeleteButton from '@/app/(pages)/consults-server/components/deleteButton'
+import DeleteButton from '@/app/(pages)/consults/components/deleteButton'
 import { RowDataPacket } from 'mysql2'
 
 export default async function DisplayConsults() {

@@ -1,4 +1,4 @@
-import DisplayConsults from '@/app/(pages)/consults-server/components/displayConsults'
+import DisplayConsults from '@/app/(pages)/consults/components/displayConsults'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 import CheckClientCookie from '@/app/components/checkCookie/checkClientCookie'
 import { cookies } from 'next/headers'

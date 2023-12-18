@@ -1,6 +1,6 @@
 //@ts-ignore
 import { useFormState } from 'react-dom'
-import { insertAction } from '@/app/(pages)/consults-server/actions/insert'
+import { insertAction } from '@/app/(pages)/consults/actions/insert'
 import { useEffect, useState, useRef, RefObject } from 'react'
 import { type ConsultType } from '@/app/models/Consult'
 
@@ -33,7 +33,7 @@ export const useForm = (formRef: RefObject<HTMLFormElement>) => {
   }, [state])
 
   useEffect(() => {
-    let objMessage : ObjMessage = null
+    let objMessage: ObjMessage = null
     if (messageRef.current && messageRef.current !== null) {
       try {
         objMessage = JSON.parse(messageRef.current)

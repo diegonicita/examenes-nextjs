@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { unstable_noStore as noStore } from 'next/cache'
 import Card from './components/card'
 import type { ProductType } from '@/app/models/Product'
@@ -36,5 +35,5 @@ export default async function ClasificacionesPage() {
 }
 
 export const metadata = {
-  title: 'Productos Server',
+  title: 'Examenes y Temas',
 }

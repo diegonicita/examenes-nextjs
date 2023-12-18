@@ -2,7 +2,7 @@
 import React from 'react'
 //@ts-ignore
 import { useFormStatus, useFormState } from 'react-dom'
-import { deleteAction } from '@/app/(pages)/consults-server/actions/delete'
+import { deleteAction } from '@/app/(pages)/consults/actions/delete'
 
 const initialState = {
   message: 'Consulta Borrada Exitosamente...',

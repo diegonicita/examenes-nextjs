@@ -1,24 +1,23 @@
-import { refreshAction } from '@/app/(pages)/consults-server/actions/refresh'
+import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import { ReactNode } from 'react'
-import NotAllowed from '@/app/components/notAllowed/notAllowed'
 
 const CheckServerCookie = ({
   auth,
-  children, 
+  children,
 }: {
   auth: RequestCookie | undefined
-  children: ReactNode, 
+  children: ReactNode
 }) => {
   if (!auth) {
     const formData = new FormData()
     formData.append('auth', 'false')
-    refreshAction(formData)    
+    refreshAction(formData)
   }
   return (
     <div>
       {auth && auth?.value && <>{children}</>}
-      {!auth && <NotAllowed />}
+      {!auth && <div> Not Allowed </div>}
     </div>
   )
 }

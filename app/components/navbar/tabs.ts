@@ -1,37 +1,27 @@
 export const tabs = [
   {
-    name: 'Home',
+    name: 'Inicio',
     path: '/',
     active: true,
   },
   {
-    name: 'Tareas',
-    path: '/tasks',
+    name: 'Examenes',
+    path: '/exams',
     active: true,
   },
   {
-    name: 'Estados',
-    path: '/verify',
+    name: 'Temas',
+    path: '/subjets',
     active: true,
   },
   {
-    name: 'Api Pokemon',
-    path: '/pokemon',
+    name: 'Buscador de Preguntas',
+    path: '/questions',
     active: true,
   },
   {
-    name: 'Api Question',
-    path: '/question',
-    active: true,
-  },
-  {
-    name: 'Products',
-    path: '/products-server',
-    active: true,
-  },
-  {
-    name: 'Consultas',
-    path: '/consults-server',
+    name: 'Tus Consultas',
+    path: '/consults',
     active: true,
   },
 ]

@@ -9,14 +9,14 @@ export const deleteAction = async (
   prevState: ConsultType,
   formData: FormData,
 ) => {
-  const id = formData.get('id')  
+  const id = formData.get('id')
   if (id) {
     const result = (await executeQuery('delete from consultas where id=?', [
       id,
     ])) as RowDataPacket
 
     if (result?.affectedRows) {
-      revalidatePath('/consults-server')
+      revalidatePath('/consults')
       return { message: 'Consulta Borrada...' }
     }
   }

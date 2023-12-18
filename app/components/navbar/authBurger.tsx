@@ -21,21 +21,12 @@ export default function AuthBurger() {
         >
           <li>
             <Link href="/">Home</Link>
+          </li>         
+          <li>
+            <Link href="/question">Preguntas</Link>
           </li>
           <li>
-            <Link href="/tasks">Tareas</Link>
-          </li>
-          <li>
-            <Link href="/verify">Estados</Link>
-          </li>
-          <li>
-            <Link href="/pokemon">Api Pokemon</Link>
-          </li>
-          <li>
-            <Link href="/question">Api Question</Link>
-          </li>
-          <li>
-            <Link href="/products-server">Products</Link>
+            <Link href="/exams">Examenes</Link>
           </li>
         </ul>
       </div>

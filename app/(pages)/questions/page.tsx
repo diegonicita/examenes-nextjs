@@ -1,4 +1,4 @@
-import Question from '@/app/(pages)/question/components/question'
+import Question from '@/app/(pages)/questions/components/question'
 import { cookies } from 'next/headers'
 import CheckClientCookie from '@/app/components/checkCookie/checkClientCookie'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
