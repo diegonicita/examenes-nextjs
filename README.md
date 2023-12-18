@@ -1,10 +1,10 @@
 # Proyecto: Examenes
-## usamos:
+## Usamos:
 * ##### Nextjs 14
 * ##### Typescript
 * ##### Redux Toolkit
 * ##### Tailwind
-* ##### daisy UI
+* ##### Daisy UI
 * ##### Server Actions
 * ##### Mysql2 (MySQL)
 * ##### Jose
