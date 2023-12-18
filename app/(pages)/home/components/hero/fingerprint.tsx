@@ -1,8 +1,6 @@
-// Este componente usa una clase llamada text-wrap-balance definida en global.css
-import Image from 'next/image'
-import heroImage from '@/app/assets/OIG-1.webp'
+import React from 'react'
 
-function FingerPrint() {
+export function FingerPrint() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +18,7 @@ function FingerPrint() {
     </svg>
   )
 }
-function BiggerFingerprint() {
+export function BiggerFingerprint() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -36,55 +34,5 @@ function BiggerFingerprint() {
         />
       </g>
     </svg>
-  )
-}
-
-export default function Hero() {
-  return (
-    <div className="relative flex items-center justify-center px-10 text-accent-content">
-      <div className="w-full max-w-[55rem] mx-auto">
-        <section
-          className="relative flex flex-col 
-      items-center justify-center px-[21px]  pb-8 lg:items-start md:h-[550px]"
-        >         
-           {/* <Image
-            src={heroImage}
-            alt="Pets Home"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-[20rem] pt-8 sm:w-[20rem] md:w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[45rem] h-auto lg:absolute md:bottom-[-8px] md:right-[200px] xl:right-[0px] bg-cover"
-          />           */}
-          <Image
-            src={heroImage}
-            alt="Pets Home"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-[20rem] pt-8 lg:absolute lg:right-16 lg:w-[30rem] xl:right-0"
-          />           
-          <h1
-            className="text-wrap-balance text-[20px] leading-[26px] 
-        font-normal text-center sm:text-3xl lg:text-5xl lg:text-left max-w-lg lg:max-w-sm"
-          >
-            Exámenes de Residencias Médicas
-          </h1>
-          <p
-            className="text-wrap-balance max-w-[20rem] text-center text-gray-500 
-        text-sm font-normal font-inter leading-relaxed mt-5 mb-[25px] md:text-left"
-          >
-            Practica con nuestros examenes de residencias medicas. Mas de 5000
-            preguntas disponibles de examenes de Argentina, España, México y
-            Perú
-          </p>
-          <div
-            className="btn btn-accent text-accent-content w-[188px] h-[62px] flex-col justify-center 
-        items-center inline-flex px-[31px] py-[17px] text-md"
-          >
-            Ingresa a tu cuenta
-          </div>
-        </section>
-      </div>
-    </div>
   )
 }

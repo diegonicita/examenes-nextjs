@@ -1,6 +1,7 @@
 'use server'
 
 import { cookies } from 'next/headers'
+import { unstable_noStore as noStore } from 'next/cache'
 
 type State = {
   username: string
@@ -10,6 +11,7 @@ type State = {
 }
 
 export const registerAction = async (prevState: State, formData: FormData) => {
+  noStore()
   const url = process.env.URL_REGISTER
   const username = formData.get('username')
   const email = formData.get('email')
