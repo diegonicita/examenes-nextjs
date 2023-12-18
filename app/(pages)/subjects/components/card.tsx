@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import defaultImage from '@/app/assets/OIG-4.jpg'
-import type { ExamType } from '@/app/models/Exam'
+import type { SubjectType } from '@/app/models/Subject'
 
-export default function Card({ item }: { item: ExamType }) {
+export default function Card({ item }: { item: SubjectType }) {
   return (
     <div className="card bg-base-100 shadow-xl m-2 border border-black rounded-none">
       <figure className="pt-0 rounded-none">
@@ -34,7 +34,7 @@ export default function Card({ item }: { item: ExamType }) {
         <div className="h-full flex items-center p-1">
           {/* <span className="font-bold">Título: </span> */}
           <div className="max-w-[10rem] mx-auto">
-          {item.titulo ? item.titulo : 'Sin título'}
+          {item.tema ? item.tema : 'Sin título'}
           </div>
         </div>
         <div className="h-auto">

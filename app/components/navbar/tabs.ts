@@ -11,7 +11,7 @@ export const tabs = [
   },
   {
     name: 'Temas',
-    path: '/subjets',
+    path: '/subjects',
     active: true,
   },
   {
