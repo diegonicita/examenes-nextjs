@@ -1,11 +1,13 @@
-# Proyecto Examenes Multiple Choice.
-
-### Stack que usamos:
-###
-### Nextjs 14
-### Redux Toolkit
-### Tailwind
-### Daisy UI
-### Server Actions
-### MySQL
+# Proyecto: Examenes
+## usamos:
+* ##### Nextjs 14
+* ##### Typescript
+* ##### Redux Toolkit
+* ##### Tailwind
+* ##### daisy UI
+* ##### Server Actions
+* ##### Mysql2 (MySQL)
+* ##### Jose
+* ##### JS-Cookie
+* ##### JWT-Decode
 
