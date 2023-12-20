@@ -15,7 +15,7 @@ const ButtonLogin = () => {
 
   return (
     <>
-      {!auth && isClient && (
+      {!auth && (
         <Link
           href="/login"
           className="btn btn-accent text-accent-content w-[188px] h-[62px] flex-col justify-center 

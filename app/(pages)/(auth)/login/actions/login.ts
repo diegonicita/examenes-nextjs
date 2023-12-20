@@ -1,7 +1,6 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { unstable_noStore as noStore } from 'next/cache'
 
 type State = {
   email: string
@@ -10,7 +9,6 @@ type State = {
 }
 
 export const loginAction = async (prevState: State, formData: FormData) => {
-  noStore()
   const url = process.env.URL_LOGIN
   const email = formData.get('email')
   const password = formData.get('password')
@@ -24,7 +22,8 @@ export const loginAction = async (prevState: State, formData: FormData) => {
         email,
         password,
       }),
-       credentials: 'include', // incluir la cookie en las solicitudes
+      credentials: 'include', // incluir la cookie en las solicitudes
+      cache: 'no-store',
     })
     const result = await response.json()
     console.log(result)

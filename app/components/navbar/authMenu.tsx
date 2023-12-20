@@ -14,7 +14,7 @@ export default function AuthMenu({ auth }: { auth: string | undefined }) {
     <div>
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-          <div className="w-14 rounded-full">
+          <div className="w-8 rounded-full">
             <Image
               alt="Icono del usuario"
               src={auth ? userLogged : userNotLogged}

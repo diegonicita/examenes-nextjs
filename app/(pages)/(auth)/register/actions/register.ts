@@ -1,7 +1,6 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { unstable_noStore as noStore } from 'next/cache'
 
 type State = {
   username: string
@@ -11,7 +10,6 @@ type State = {
 }
 
 export const registerAction = async (prevState: State, formData: FormData) => {
-  noStore()
   const url = process.env.URL_REGISTER
   const username = formData.get('username')
   const email = formData.get('email')
@@ -27,7 +25,8 @@ export const registerAction = async (prevState: State, formData: FormData) => {
         email,
         password,
       }),
-       credentials: 'include', // incluir la cookie en las solicitudes
+      credentials: 'include', // incluir la cookie en las solicitudes
+      cache: 'no-store',
     })
     const result = await response.json()
     console.log(result)
