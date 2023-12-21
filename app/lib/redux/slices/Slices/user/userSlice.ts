@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { type UserType } from '@/app/models/User'
+import type { ReduxState } from '@/app/lib/redux'
 
 const initialState: UserType = {
   username: null,
@@ -23,3 +24,8 @@ export const userSlice = createSlice({
     },
   },
 })
+
+export const selectUser = (state: ReduxState) => state.user.username
+export const selectEmail = (state: ReduxState) => state.user.email
+export const selectToken = (state: ReduxState) => state.user.token
+

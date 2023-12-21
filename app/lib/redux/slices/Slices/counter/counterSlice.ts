@@ -1,8 +1,11 @@
-/* Core */
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-
-/* Instruments */
 import { incrementAsync } from './thunks'
+import type { ReduxState } from '@/app/lib/redux'
+
+export interface CounterSliceState {
+  value: number
+  status: 'idle' | 'loading' | 'failed'
+}
 
 const initialState: CounterSliceState = {
   value: 0,
@@ -43,8 +46,4 @@ export const counterSlice = createSlice({
   },
 })
 
-/* Types */
-export interface CounterSliceState {
-  value: number
-  status: 'idle' | 'loading' | 'failed'
-}
+export const selectCount = (state: ReduxState) => state.counter.value
