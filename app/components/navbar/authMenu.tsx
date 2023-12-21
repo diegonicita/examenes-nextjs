@@ -38,10 +38,10 @@ export default function AuthMenu({ auth }: { auth: string | undefined }) {
           {auth && (
             <>
               <li>
-                <div className="justify-between">
+                <Link href="profile" className="justify-between">
                   Ver tu perfil
                   <span className="badge">New</span>
-                </div>
+                </Link>
               </li>
               <li>
                 <div>Preferencias</div>

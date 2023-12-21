@@ -26,7 +26,7 @@ const CheckServerCookie = ({
         <div className="flex items-center justify-center h-screen">
           <div>
             <div className="text-xl pb-4">
-              No estas autorizado para ver esta pagina, por favor{' '}
+              No iniciaste sesion todavia, por favor, {' '}
               <Link href="/login" className="underline">
                 inicia sesion
               </Link>

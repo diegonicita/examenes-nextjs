@@ -11,7 +11,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
         <body className="block">
           <Nav />
           <section className="min-h-screen bg-base-100 text-base-content">
-            <main>{props.children}</main>
+          <main>{props.children}</main>
           </section>
           <Footer />
         </body>

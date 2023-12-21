@@ -13,6 +13,7 @@
     "mysql2": "^3.6.5",
     "next": "latest",
     "react": "18.2.0",
+    "react-content-loader": "^6.2.1",
     "react-dom": "18.2.0",
     "react-redux": "8.1.0",
     "zod": "^3.22.4"
