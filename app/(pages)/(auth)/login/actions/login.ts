@@ -28,7 +28,13 @@ export const loginAction = async (prevState: State, formData: FormData) => {
     const result = await response.json()
     console.log(result)
     if (result.isError === false) {
-      cookies().set('auth', result.token)
+      cookies().set('auth', result.token, {
+        httpOnly: true,
+        path: '/',
+        maxAge: 60 * 60 * 2,
+        sameSite: 'strict',
+        secure: process.env.NODE_ENV === 'production', // solo se enviará en HTTPS en producción
+      })
       return {
         response: 'login exitoso',
         message: result.message,

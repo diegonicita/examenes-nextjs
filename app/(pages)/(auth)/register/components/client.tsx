@@ -22,7 +22,7 @@ export default function Register() {
   const [password2, setPassword2] = useState('')
   const [state, formAction] = useFormState(registerAction, initialState)
 
-  useLogged('redirect')
+  // useLogged('redirect')
 
   return (
     <div className="relative">

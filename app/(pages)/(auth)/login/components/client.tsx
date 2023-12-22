@@ -6,6 +6,8 @@ import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
 //@ts-ignore
 import { useFormState } from 'react-dom'
 import { loginAction } from '../actions/login'
+import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
+import { redirect } from 'next/navigation'
 
 type Props = {
   initialEmail: string | undefined
@@ -23,8 +25,15 @@ export default function Login({ initialEmail, initialPassword }: Props) {
   const [email, setEmail] = useState(initialEmail)
   const [password, setPassword] = useState(initialPassword)
   const [state, formAction] = useFormState(loginAction, initialState)
+  const [state2, formAction2] = useFormState(refreshAction, initialState)
 
-  useLogged('redirect')
+  // const handleSubmit = () => {
+  //   formAction()
+  //   // formAction2()
+  //   // redirect('/')
+  // }
+
+  // useLogged('redirect')
 
   return (
     <div className="relative">

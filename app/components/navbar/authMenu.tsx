@@ -6,9 +6,27 @@ import userNotLogged from '@/app/assets/icon-not-logged.png'
 import userLogged from '@/app/assets/icon-logged.png'
 import Link from 'next/link'
 import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
+//@ts-ignore
+import { useFormState } from 'react-dom'
+import { logoutAction } from '@/app/(pages)/(auth)/login/actions/logout'
+import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 
-export default function AuthMenu({ auth }: { auth: string | undefined }) {
-  const { isLogged, logout } = useLogged(undefined)
+const initialState = {
+  email: '',
+  password: '',
+  message: '',
+}
+
+export default function AuthMenu() {
+  // const { isLogged, logout } = useLogged(undefined)
+
+  const [state, formAction] = useFormState(logoutAction, initialState)
+  const [state2, formAction2] = useFormState(refreshAction, initialState)
+
+  const handleLogout = () => {
+    formAction()
+    formAction2()
+  }
 
   return (
     <div>
@@ -17,7 +35,7 @@ export default function AuthMenu({ auth }: { auth: string | undefined }) {
           <div className="w-8 rounded-full">
             <Image
               alt="Icono del usuario"
-              src={auth ? userLogged : userNotLogged}
+              src={userLogged}
             />
           </div>
         </label>
@@ -25,17 +43,15 @@ export default function AuthMenu({ auth }: { auth: string | undefined }) {
           tabIndex={0}
           className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
         >
-          {!auth && (
+          
             <>
               <li>
-                <Link href="login">Ingresar</Link>                
+                <Link href="login">Ingresar</Link>
               </li>
               <li>
                 <Link href="register">Registrarte</Link>
               </li>
             </>
-          )}
-          {auth && (
             <>
               <li>
                 <Link href="profile" className="justify-between">
@@ -47,10 +63,9 @@ export default function AuthMenu({ auth }: { auth: string | undefined }) {
                 <div>Preferencias</div>
               </li>
               <li>
-                <div onClick={() => logout()}>Salir (Logout)</div>
+                <div onClick={() => handleLogout()}>Salir (Logout)</div>
               </li>
-            </>
-          )}
+            </>          
         </ul>
       </div>
     </div>
