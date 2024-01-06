@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import getData from './getData'
 import Counter from './components/counter'
 import Message from './components/message'
-import Link from 'next/link'
+import MessageNotLogged from '@/app/components/checkCookie/messageNotLogged'
 
 type Response = {
   username: string
@@ -11,7 +11,7 @@ type Response = {
   role: string
 }
 
-const Home = async () => {
+const Profile = async () => {
   const auth = cookies().get('auth')
   if (auth) {
     try {
@@ -29,30 +29,13 @@ const Home = async () => {
         </div>
       )
     } catch (error) {
-      console.log("Error en Profile")
+      console.log('Error en Profile')
     }
   }
-  return (
-    <div className="flex items-center justify-center h-screen">
-      <div>
-        <div className="text-xl pb-4">
-          No iniciaste sesion todavia, por favor,{' '}
-          <Link href="/login" className="underline">
-            inicia sesion
-          </Link>
-        </div>
-        <div className="text-xl pb-40">
-          Si aun no estas registrado,{' '}
-          <Link href="/register" className="underline">
-            crea una cuenta
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
+  return <MessageNotLogged />
 }
 
-export default Home
+export default Profile
 
 export const metadata = {
   title: 'Perfil del Usuario',

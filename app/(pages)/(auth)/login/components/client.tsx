@@ -14,6 +14,7 @@ const notifyLoginFail = (message: string) => toast.error(message)
 type Props = {
   initialEmail: string | undefined
   initialPassword: string | undefined
+  disabled: boolean
 }
 
 const initialState = {
@@ -23,11 +24,11 @@ const initialState = {
   message: '',
 }
 
-export default function Login({ initialEmail, initialPassword }: Props) {
+export default function Login({ initialEmail, initialPassword, disabled }: Props) {
   const [email, setEmail] = useState(initialEmail)
   const [password, setPassword] = useState(initialPassword)
   const [state, formAction] = useFormState(loginAction, initialState)
-  const [isPending, startTransition] = useTransition()
+  const [, startTransition] = useTransition()
 
   useEffect(() => {
     let timeOut: any = undefined
@@ -52,8 +53,9 @@ export default function Login({ initialEmail, initialPassword }: Props) {
       <form
         action={formAction}
         name="formLogin"
-        className="card w-full bg-base-300 mb-2"
+        className="card w-full bg-base-300 mb-2"        
       >
+        <fieldset disabled={disabled}>
         <div className="card-body">
           <div className="form-control">
             <label className="label">
@@ -82,11 +84,11 @@ export default function Login({ initialEmail, initialPassword }: Props) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label className="label">
+            {!disabled && <label className="label">
               <a href="#" className="label-text-alt link link-hover">
                 ¿Olvidaste tu contraseña?
               </a>
-            </label>
+            </label>}
           </div>
           <div className="form-control mt-6">
             <button type="submit" className="btn btn-primary">
@@ -94,6 +96,7 @@ export default function Login({ initialEmail, initialPassword }: Props) {
             </button>
           </div>
         </div>
+      </fieldset>
       </form>
       {/* <Modal message={state.message} /> */}
     </div>

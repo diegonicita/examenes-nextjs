@@ -1,7 +1,7 @@
 import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
-import Link from 'next/link'
 import { ReactNode } from 'react'
+import MessageNotLogged from './messageNotLogged'
 
 const CheckServerCookie = ({
   auth,
@@ -17,29 +17,8 @@ const CheckServerCookie = ({
   }
   return (
     <>
-      {auth && auth?.value && (
-        <div>
-          {children}
-        </div>
-      )}
-      {!auth && (
-        <div className="flex items-center justify-center h-screen">
-          <div>
-            <div className="text-xl pb-4">
-              No iniciaste sesion todavia, por favor, {' '}
-              <Link href="/login" className="underline">
-                inicia sesion
-              </Link>
-            </div>
-            <div className="text-xl pb-40">
-              Si aun no estas registrado,{' '}
-              <Link href="/register" className="underline">
-                crea una cuenta
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
+      {auth && auth?.value && <div>{children}</div>}
+      {!auth && <MessageNotLogged />}
     </>
   )
 }
