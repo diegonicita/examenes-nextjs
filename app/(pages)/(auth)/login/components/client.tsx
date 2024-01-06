@@ -1,13 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import { Modal } from './modal'
-import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
+import { useState, useEffect, useTransition } from 'react'
+// import { Modal } from './modal'
 //@ts-ignore
 import { useFormState } from 'react-dom'
 import { loginAction } from '../actions/login'
-import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 import { redirect } from 'next/navigation'
+import toast from 'react-hot-toast'
+
+const notifyLoginSuccess = () => toast.success('Login Exitoso')
+const notifyLoginFail = (message: string) => toast.error(message)
 
 type Props = {
   initialEmail: string | undefined
@@ -25,15 +27,25 @@ export default function Login({ initialEmail, initialPassword }: Props) {
   const [email, setEmail] = useState(initialEmail)
   const [password, setPassword] = useState(initialPassword)
   const [state, formAction] = useFormState(loginAction, initialState)
-  const [state2, formAction2] = useFormState(refreshAction, initialState)
+  const [isPending, startTransition] = useTransition()
 
-  // const handleSubmit = () => {
-  //   formAction()
-  //   // formAction2()
-  //   // redirect('/')
-  // }
-
-  // useLogged('redirect')
+  useEffect(() => {
+    let timeOut: any = undefined
+    if (state.message != '' && state.message == 'Login exitoso') {
+      notifyLoginSuccess()
+      timeOut = setTimeout(() => {
+        startTransition(() => {
+          redirect('/')
+        })
+      }, 500)
+    }
+    else {
+      if (state.message != '') notifyLoginFail(state.message)
+    }
+    return () => {
+      clearTimeout(timeOut)
+    }
+  }, [state])
 
   return (
     <div className="relative">
@@ -83,7 +95,7 @@ export default function Login({ initialEmail, initialPassword }: Props) {
           </div>
         </div>
       </form>
-      <Modal message={state.message} />
+      {/* <Modal message={state.message} /> */}
     </div>
   )
 }

@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
       const { payload } = await jwtVerify(
         authCookieServer?.value,
         new TextEncoder().encode(secret),
-      )
+      )      
       authPayload = payload
       const currentTime = Date.now()
       const currentTimeInSeconds = Math.floor(currentTime / 1000)
@@ -28,7 +28,7 @@ export async function middleware(request: NextRequest) {
         response.cookies.delete('auth')
         return response
       } else {
-        console.log('El token está vigente.')
+        // console.log('El token está vigente.')
       }
     } catch (error) {
       authCookieServer = undefined

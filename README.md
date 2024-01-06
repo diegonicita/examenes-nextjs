@@ -8,6 +8,5 @@
 * ##### Server Actions
 * ##### Mysql2 (MySQL)
 * ##### Jose
-* ##### JS-Cookie
 * ##### JWT-Decode
 

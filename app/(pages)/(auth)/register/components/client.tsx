@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useLogged } from '@/app/(pages)/(auth)/hooks/useLogged'
 //@ts-ignore
 import { useFormState } from 'react-dom'
 import { registerAction } from '../actions/register'
@@ -21,8 +20,7 @@ export default function Register() {
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
   const [state, formAction] = useFormState(registerAction, initialState)
-
-  // useLogged('redirect')
+  
 
   return (
     <div className="relative">
