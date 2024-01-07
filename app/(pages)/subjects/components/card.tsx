@@ -5,7 +5,7 @@ import type { SubjectType } from '@/app/models/Subject'
 
 export default function Card({ item }: { item: SubjectType }) {
   return (
-    <div className="card bg-base-100 shadow-xl m-2 border border-black rounded-none">
+    <div className="card w-80 sm:w-60 md:w-48 bg-base-100 shadow-xl m-2 border border-black rounded-none">
       <figure className="pt-0 rounded-none">
         {item.imagen ? (
           <Image
@@ -23,7 +23,7 @@ export default function Card({ item }: { item: SubjectType }) {
             width={0}
             height={0}
             sizes={'100vh'}
-            className="h-auto w-[12rem]"
+            className="h-auto w-[22rem]"
           />
         )}
       </figure>

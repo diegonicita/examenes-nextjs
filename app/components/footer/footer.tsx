@@ -8,7 +8,7 @@ export const Footer = () => {
 
   return (
     <div className="bg-base-200 text-base-content py-2 px-4">
-      <footer className="footer items-center pb-4 pt-4 max-w-[60rem] mx-auto justify-center lg:justify-stretch">
+      <footer className="footer items-center pb-4 pt-4 max-w-[55rem] mx-auto justify-center lg:justify-stretch">
         <aside className="items-center grid-flow-col">
           <svg
             width="36"
@@ -23,7 +23,7 @@ export const Footer = () => {
           </svg>
           <p> Nicita Software © 2023 - All right reserved</p>
         </aside>
-        <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        <nav className="grid-flow-col gap-4 justify-self-center md:place-self-center md:justify-self-end">
           <a>
             <svg
               xmlns="http://www.w3.org/2000/svg"

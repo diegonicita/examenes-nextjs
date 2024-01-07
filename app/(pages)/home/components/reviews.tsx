@@ -11,7 +11,7 @@ export default function Review() {
   return (
     <section>
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
-  <div className="text-center">
+  <div className="text-center mx-auto max-w-[55rem] mb-8">
       <button
         className="bg-accent 
         rounded-md btn btn-accent text-accent-content text-center"

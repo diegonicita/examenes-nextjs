@@ -19,11 +19,11 @@ export default function Counter() {
   const [incrementAmount, setIncrementAmount] = useState(2)
 
   return (
-    <div>
+    <div className="flex flex-col mt-8 border p-2">
       <div className="text-primary-base">
         Counter Slice:
       </div>
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-3 items-center flex-col mt-4">
         <button
           className="btn btn-accent btn-sm"
           aria-label="Decrement value"

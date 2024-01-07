@@ -40,7 +40,7 @@ export default function Consultas() {
           className="flex flex-col w-full px-8"
           ref={formRef}
         >
-          <h1 className="text-left md: text-slate-700 text-xl md:text-3xl pb-4">
+          <h1 className="text-center mt-8 md:mt-0 md:text-left md:text-slate-700 text-xl md:text-3xl pb-4">
             Envianos tu Consulta
           </h1>
           <div className="p-8 flex flex-col bg-base-200 rounded-lg">

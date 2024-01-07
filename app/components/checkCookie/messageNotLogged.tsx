@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const MessageNotLogged = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen mx-10">
       <div>
         <div className="text-xl pb-4">
           No iniciaste sesion todavia, por favor,{' '}

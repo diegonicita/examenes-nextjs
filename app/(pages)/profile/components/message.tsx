@@ -21,11 +21,11 @@ export default function Message() {
 
   return (
     <>
-      <div className="flex gap-2 w-[35rem] mt-8">
+      <div className="flex gap-2 mt-8">
         <div className="text-primary-base bg-yellow-50">Message Slice:</div>
-        <div className="bg-yellow-200 w-full text-center m-auto">{' ' + message}</div>
+        <div className="bg-yellow-200 text-center m-auto">{' ' + message}</div>
       </div>
-      <div className="flex gap-2 w-[35rem] mt-8">
+      <div className="flex gap-2 mt-8 flex-col">
         <div className="text-primary-base bg-yellow-50">Message Slice:</div>
         <input
           className="text-center input input-bordered w-full h-auto"
