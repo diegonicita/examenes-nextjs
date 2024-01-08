@@ -2,7 +2,6 @@
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import Consults from '@/app/(pages)/consults/components/display/consults'
 import { RowDataPacket } from 'mysql2'
-import { jwtVerify } from 'jose'
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import getRole from './getRole'
 
