@@ -2,6 +2,7 @@ import SearchQuestion from '@/app/(pages)/questions/components/searchQuestions'
 import QuestionList from '@/app/(pages)/questions/components/questionList'
 import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
+import Pagination from '@/app/(pages)/questions/components/pagination'
 
 export default function QuestionPage({
   searchParams,
@@ -13,16 +14,22 @@ export default function QuestionPage({
 }) {
   const auth = cookies().get('auth')
   const currentPage = Number(searchParams?.page) || 1
-  const query = searchParams?.query || ''  
+  const query = searchParams?.query || ''
 
   return (
     <div>
       <CheckServerCookie auth={auth}>
         <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
           <div className="mx-auto">
-          <SearchQuestion />
+            <SearchQuestion />
           </div>
-          {query !== '' && query.length > 2 && <QuestionList query={query} currentPage={currentPage} />}
+          {query !== '' && query.length > 2 && (
+            <>
+              <Pagination />
+              <QuestionList query={query} currentPage={currentPage} />
+              <Pagination />
+            </>
+          )}
         </div>
       </CheckServerCookie>
     </div>

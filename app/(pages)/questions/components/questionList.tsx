@@ -7,21 +7,12 @@ const QuestionList = async ({
 }: {
   query: string
   currentPage: number
-}) => {
-  const isLoading = false
-  const data = {
-    id: 1,
-    texto: '¿Cuantos huesos, aproximadamente, tiene un ser humano?',
-    opcion1: '100 huesos',
-    opcion2: '200 huesos',
-    opcion3: '300 huesos',
-    opcion4: '400 huesos',
-  }
+}) => { 
   console.log('query', query)
   const querylike = '%' + query + '%'
 
   let result = null
-  result = (await executeQuery('select * from preguntas where texto like ?', [
+  result = (await executeQuery('select * from preguntas where texto like ? limit 5 offset 0', [
     querylike,
   ])) as RowDataPacket  
 
