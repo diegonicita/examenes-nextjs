@@ -23,13 +23,13 @@ export default function QuestionPage({
           <div className="mx-auto">
             <SearchQuestion />
           </div>
-          {query !== '' && query.length > 2 && (
+          {/* {query !== '' && query.length > 2 && ( */}
             <>
               <Pagination />
               <QuestionList query={query} currentPage={currentPage} />
               <Pagination />
             </>
-          )}
+          {/* )} */}
         </div>
       </CheckServerCookie>
     </div>
