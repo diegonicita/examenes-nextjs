@@ -1,4 +1,4 @@
-import SearchQuestion from '@/app/(pages)/questions/components/searchQuestions'
+import Searchbar from '@/app/(pages)/questions-algolia/components/searchbar'
 import QuestionList from '@/app/(pages)/questions/components/questionList'
 import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
@@ -12,24 +12,14 @@ export default function QuestionPage({
     query?: string
   }
 }) {
-  const auth = cookies().get('auth')
-  const currentPage = Number(searchParams?.page) || 1
-  const query = searchParams?.query || ''
-
+  const auth = cookies().get('auth')  
   return (
     <div>
       <CheckServerCookie auth={auth}>
         <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
           <div className="mx-auto">
-            <SearchQuestion />
+            <Searchbar />
           </div>
-          
-            <>
-              <Pagination />
-              <QuestionList query={query} currentPage={currentPage} />
-              <Pagination />
-            </>
-         
         </div>
       </CheckServerCookie>
     </div>

@@ -81,7 +81,8 @@ const QuestionList = async ({
     'presenta',
     'esta',
     'tiene',
-    'edad'
+    'edad',
+    'paciente',
   ]
 
   // Función para limpiar una palabra eliminando caracteres no deseados
@@ -131,7 +132,7 @@ const QuestionList = async ({
   // console.log(Object.keys(conteoPalabras).length)
   return (
     <div className="mx-auto">
-      {/* {result?.map((item: any, index: number) => (
+      {result?.map((item: any, index: number) => (
         <div key={index} className="max-w-prose">
           <div className="font-bold mt-2 mb-2">
             {'Pregunta N°: ' + item.numero} {item.texto}
@@ -145,7 +146,7 @@ const QuestionList = async ({
           )}
           <br />
         </div>
-      ))} */}
+      ))}
       <ul>
         {palabrasOrdenadas.map(
           ({ palabra, cantidad }: any) =>
