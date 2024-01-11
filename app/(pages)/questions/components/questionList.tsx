@@ -131,7 +131,20 @@ const QuestionList = async ({
   // console.log(conteoPalabras)
   // console.log(Object.keys(conteoPalabras).length)
   return (
-    <div className="mx-auto">
+    <div className="mx-auto">      
+      <ul>
+        {palabrasOrdenadas.map(
+          ({ palabra, cantidad }: any) =>
+            cantidad > 2 && (              
+                <li className="indicator m-2">
+                  <span className="indicator-item badge badge-secondary p-2">
+                    {cantidad}+
+                  </span>
+                  <button className="btn">{query} {palabra !== query ?' y ' + palabra:""}</button>
+                </li>   
+            ),
+        )}
+      </ul>
       {result?.map((item: any, index: number) => (
         <div key={index} className="max-w-prose">
           <div className="font-bold mt-2 mb-2">
@@ -147,16 +160,6 @@ const QuestionList = async ({
           <br />
         </div>
       ))}
-      <ul>
-        {palabrasOrdenadas.map(
-          ({ palabra, cantidad }: any) =>
-            cantidad > 2 && (
-              <li key={palabra}>
-                <strong>{palabra}:</strong> {cantidad}
-              </li>
-            ),
-        )}
-      </ul>
     </div>
   )
 }
