@@ -24,6 +24,7 @@ const QuestionList = async ({
             {item.opcion5 !== '' && (
               <div className="max-w-prose">{'5) ' + item.opcion5}</div>
             )}
+            {item.correcta}
             <br />
           </div>
         ))}
