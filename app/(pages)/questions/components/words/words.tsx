@@ -62,22 +62,21 @@ const Words = ({
     .map(([palabra, cantidad]) => ({ palabra, cantidad }))
     .sort((a: any, b: any) => b.cantidad - a.cantidad)
 
-    const palabrasOrdenadas20 = palabrasOrdenadas.slice(0, 20)
+    const palabrasOrdenadas20 = palabrasOrdenadas.slice(0, 5)
   // console.log(conteoPalabras)
   // console.log(Object.keys(conteoPalabras).length)
   return (
-    <div className="mx-auto max-w-[100ch]">
+    <div className="mx-auto w-full border border-gray">
       <ul>
         {palabrasOrdenadas20.map(
-          ({ palabra, cantidad }: any) =>
-            cantidad > 1 && (
-              <li key={palabra} className="indicator m-2">
-                <span className="indicator-item badge badge-secondary p-2">
-                  {cantidad}+
+          ({ palabra, cantidad }: any, index: number) =>
+            cantidad > 1 && query !== palabra && (
+              <li key={index} className="indicator my-4 px-8 flex">
+                <span className="indicator-item badge  indicator-middle indicator-end badge-secondary ">
+                  +{cantidad}
                 </span>
-                <button className="btn" onClick={() => handleAddWord(palabra)}>
-                  {/* {query} */}
-                  {palabra}
+                <button className="" onClick={() => handleAddWord(palabra)}>
+                  {query} {' '} {palabra}
                 </button>
               </li>
             ),

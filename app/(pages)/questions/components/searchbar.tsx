@@ -23,8 +23,8 @@ export default function Searchbar() {
   }
 
   return (
-    <div className="mb-3 min-w-[36rem]">
-      <div className="relative mb-4 flex w-full flex-wrap items-stretch">
+    <div className="min-w-[36rem]">
+      <div className="relative flex w-full flex-wrap items-stretch">
         <input
           type="search"
           onChange={(event) => handleSearch(event.target.value)}

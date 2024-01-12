@@ -33,19 +33,20 @@ export default async function QuestionPage({
         <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
           <div className="mx-auto">
             <Searchbar />
-          </div>
+          
           {query !== '' && query.length > 2 && (
             <>
-              <Pagination />
+              {/* <Pagination /> */}
               <Words query={query} result={result} />
               <Questions
                 query={query}
                 result={result}
                 currentPage={currentPage}
               />
-              <Pagination />
+              {/* <Pagination /> */}
             </>
           )}
+        </div>
         </div>
       </CheckServerCookie>
     </div>

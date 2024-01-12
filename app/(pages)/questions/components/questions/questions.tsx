@@ -10,7 +10,7 @@ const QuestionList = async ({
   result: RowDataPacket | undefined
 }) => {
   return (
-    <div className="mx-auto max-w-[100ch]">
+    <div className="mx-auto max-w-[70ch]">
       {result &&
         result.map((item: any, index: number) => (
           <div>
