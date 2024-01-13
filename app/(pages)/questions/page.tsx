@@ -1,10 +1,10 @@
-import Searchbar from '@/app/(pages)/questions/components/searchbar'
 import Questions from '@/app/(pages)/questions/components/questions/questions'
 import Words from '@/app/(pages)/questions/components/words/words'
 import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 import Pagination from '@/app/(pages)/questions/components/pagination'
 import searchQuestions from './actions/search'
+import Container from './components/container'
 
 export default async function QuestionPage({
   searchParams,
@@ -31,22 +31,19 @@ export default async function QuestionPage({
     <div>
       <CheckServerCookie auth={auth}>
         <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
-          <div className="mx-auto">
-            <Searchbar />
-          
-          {query !== '' && query.length > 2 && (
-            <>
-              {/* <Pagination /> */}
-              <Words query={query} result={result} />
-              <Questions
-                query={query}
-                result={result}
-                currentPage={currentPage}
-              />
-              {/* <Pagination /> */}
-            </>
-          )}
-        </div>
+          <Container query={query} result={result} currentPage={currentPage}>            
+            {query !== '' && query.length > 2 && (
+              <>
+                {/* <Pagination /> */}                
+                <Questions
+                  query={query}
+                  result={result}
+                  currentPage={currentPage}
+                />
+                {/* <Pagination /> */}
+              </>
+            )}
+          </Container>
         </div>
       </CheckServerCookie>
     </div>

@@ -1,7 +1,12 @@
 'use client'
+import React from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 
-export default function Searchbar() {
+export default function Searchbar({
+  inputRef,
+}: {
+  inputRef: React.RefObject<HTMLInputElement>
+}) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
@@ -28,11 +33,12 @@ export default function Searchbar() {
         <input
           type="search"
           onChange={(event) => handleSearch(event.target.value)}
-          className="relative m-0 -mr-0.5 block min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+          className="relative m-0 -mr-0.5 block min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:focus:border-primary"
           placeholder="Search"
           aria-label="Search"
           aria-describedby="button-addon1"
           defaultValue={defaultValue?.toString()}
+          ref={inputRef}
         />
 
         <button

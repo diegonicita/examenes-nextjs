@@ -66,4 +66,7 @@ export const excludedWords = [
   'no',
   ' ',
   'adecuada',
+  'usted',
+  'ef',
+  'segun'
 ]
