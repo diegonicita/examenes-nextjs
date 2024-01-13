@@ -8,9 +8,11 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 const Words = ({
   query,
   result,
+  inputRef,
 }: {
   query: string
   result: RowDataPacket | undefined
+  inputRef: React.RefObject<HTMLInputElement>
 }) => {
   const conteoPalabras = {} as any
   const searchParams = useSearchParams()
@@ -21,7 +23,8 @@ const Words = ({
     const params = new URLSearchParams(searchParams.toString())
     const currentQuery = params.get('query')
     if (term) {
-      const updatedQuery = currentQuery+' '+term
+      const updatedQuery = currentQuery + ' ' + term
+      if (inputRef.current) inputRef.current.value = updatedQuery
       params.set('query', updatedQuery)
     } else if (term) {
       // Si no hay un valor actual, simplemente establece el nuevo término
@@ -35,13 +38,22 @@ const Words = ({
     if (typeof texto === 'string') {
       const palabrasSinFiltrar = texto.split(/\s+/)
       const palabras = palabrasSinFiltrar.filter(
-        (palabra) => palabra.length > 4,
+        (palabra) => palabra.length > 3,
       )
 
       // Itera sobre cada palabra y realiza el conteo
       palabras.forEach((palabra: string) => {
         const palabraLimpia = cleanWord(palabra)
+
+        const params = new URLSearchParams(searchParams.toString())
+        const currentQuery = params.get('query')
+        let wordsArray: string[] = []
+        if (currentQuery) {
+          wordsArray = currentQuery.toLowerCase().split(' ')
+        }
+
         if (
+          !wordsArray.includes(palabraLimpia.toLowerCase()) &&
           !excludedWords.includes(palabraLimpia.toLowerCase()) &&
           !/\d/.test(palabraLimpia)
         ) {
@@ -62,21 +74,22 @@ const Words = ({
     .map(([palabra, cantidad]) => ({ palabra, cantidad }))
     .sort((a: any, b: any) => b.cantidad - a.cantidad)
 
-    const palabrasOrdenadas20 = palabrasOrdenadas.slice(0, 5)
+  const palabrasOrdenadas20 = palabrasOrdenadas.slice(0, 5)
   // console.log(conteoPalabras)
   // console.log(Object.keys(conteoPalabras).length)
   return (
     <div className="mx-auto w-full border border-gray">
       <ul>
-        {palabrasOrdenadas20.map(
+        {typeof document !== 'undefined' && inputRef.current === document.activeElement && palabrasOrdenadas20.map(
           ({ palabra, cantidad }: any, index: number) =>
-            cantidad > 1 && query !== palabra && (
+            cantidad > 1 &&
+            query !== palabra && (
               <li key={index} className="indicator my-4 px-8 flex">
                 <span className="indicator-item badge  indicator-middle indicator-end badge-secondary ">
                   +{cantidad}
                 </span>
                 <button className="" onClick={() => handleAddWord(palabra)}>
-                  {query} {' '} {palabra}
+                  {query} + {palabra}
                 </button>
               </li>
             ),
