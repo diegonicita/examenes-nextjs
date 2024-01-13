@@ -80,7 +80,7 @@ const Words = ({
   return (
     <div className="mx-auto w-full border border-gray">
       <ul>
-        {palabrasOrdenadas20.map(
+        {typeof document !== 'undefined' && inputRef.current === document.activeElement && palabrasOrdenadas20.map(
           ({ palabra, cantidad }: any, index: number) =>
             cantidad > 1 &&
             query !== palabra && (
