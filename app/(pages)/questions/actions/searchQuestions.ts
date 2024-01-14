@@ -1,12 +1,14 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
+import { excludedWords } from '@/app/(pages)/questions/components/words/excludedWords'
+import { cleanWord } from '@/app/(pages)/questions/components/words/cleanWord'
 
 export default async function searchQuestions(queries: string[]) {
   // Filtra las consultas que tienen al menos 3 caracteres
   const validQueries = queries.filter((q) => q.length > 2)
 
-  let result
+  let resultQueryLimit10
 
   if (validQueries.length > 0) {
     // Crea un array de condiciones para la búsqueda en todos los campos
@@ -23,9 +25,12 @@ export default async function searchQuestions(queries: string[]) {
     )
 
     // Construye y ejecuta la consulta
-    const queryString = `SELECT * FROM preguntas WHERE ${conditions}`
-    result = (await executeQuery(queryString, queryLikes)) as RowDataPacket
+    const queryString1 = `SELECT * FROM preguntas WHERE ${conditions} limit 10`
+    resultQueryLimit10 = (await executeQuery(
+      queryString1,
+      queryLikes,
+    )) as RowDataPacket
   }
 
-  return result
+  return resultQueryLimit10
 }

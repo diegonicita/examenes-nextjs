@@ -13,7 +13,7 @@ const QuestionList = async ({
     <div className="mx-auto max-w-[70ch]">
       {result &&
         result.map((item: any, index: number) => (
-          <div>
+          <div key={index}>
             <div className="font-bold mt-2 mb-2">
               {'Pregunta N°: ' + item.numero} {item.texto}
             </div>

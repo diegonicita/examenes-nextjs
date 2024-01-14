@@ -1,10 +1,10 @@
 import Questions from '@/app/(pages)/questions/components/questions/questions'
-import Words from '@/app/(pages)/questions/components/words/words'
 import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 import Pagination from '@/app/(pages)/questions/components/pagination'
-import searchQuestions from './actions/search'
-import Container from './components/container'
+import searchQuestions from './actions/searchQuestions'
+import searchWordsSuggestions from './actions/searchWordsSuggestions'
+import SearchContainer from './components/searchContainer'
 
 export default async function QuestionPage({
   searchParams,
@@ -25,25 +25,31 @@ export default async function QuestionPage({
     // Si la cadena está vacía, establece el array de consultas como un array vacío
     queries = []
   }
-  let result = await searchQuestions(queries)
+  let resultQueryLimit10 = await searchQuestions(queries)
+  let wordsSuggestions = await searchWordsSuggestions(queries)
 
   return (
     <div>
       <CheckServerCookie auth={auth}>
         <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
-          <Container query={query} result={result} currentPage={currentPage}>            
+          <SearchContainer
+            query={query}
+            result={resultQueryLimit10}
+            currentPage={currentPage}
+            wordsSuggestions={wordsSuggestions}
+          >
             {query !== '' && query.length > 2 && (
               <>
-                {/* <Pagination /> */}                
+                {/* <Pagination /> */}
                 <Questions
                   query={query}
-                  result={result}
+                  result={resultQueryLimit10}
                   currentPage={currentPage}
                 />
                 {/* <Pagination /> */}
               </>
             )}
-          </Container>
+          </SearchContainer>
         </div>
       </CheckServerCookie>
     </div>
