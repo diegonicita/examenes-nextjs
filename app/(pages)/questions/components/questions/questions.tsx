@@ -1,4 +1,5 @@
 import { RowDataPacket } from 'mysql2'
+import Reactions from './reactions'
 
 const QuestionList = async ({
   query,
@@ -26,6 +27,7 @@ const QuestionList = async ({
             )}
             <div className="font-bold"> Respuesta Correcta: {item.correcta} </div>
             <br />
+            <Reactions />
           </div>
         ))}
     </div>
