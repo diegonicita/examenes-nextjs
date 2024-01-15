@@ -27,7 +27,7 @@ const QuestionList = async ({
             )}
             <div className="font-bold"> Respuesta Correcta: {item.correcta} </div>
             <br />
-            <Reactions />
+            <Reactions id_question={item.id}/>
           </div>
         ))}
     </div>
