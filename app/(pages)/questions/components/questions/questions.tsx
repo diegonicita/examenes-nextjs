@@ -14,7 +14,7 @@ const QuestionList = async ({
     <div className="mx-auto max-w-[70ch]">
       {result &&
         result.map((item: any, index: number) => (
-          <div key={index}>
+          <div key={index} className=" border border-gray-400 rounded my-4 p-4">
             <div className="font-bold mt-2 mb-2">
               {'Pregunta N°: ' + item.numero} {item.texto}
             </div>
@@ -25,8 +25,7 @@ const QuestionList = async ({
             {item.opcion5 !== '' && (
               <div className="max-w-prose">{'5) ' + item.opcion5}</div>
             )}
-            <div className="font-bold"> Respuesta Correcta: {item.correcta} </div>
-            <br />
+            {/* <div className="font-bold pb-2"> Respuesta Correcta: {item.correcta} </div>           */}
             <Reactions id_question={item.id}/>
           </div>
         ))}
