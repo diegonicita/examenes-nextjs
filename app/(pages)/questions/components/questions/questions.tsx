@@ -8,7 +8,7 @@ const QuestionList = async ({
 }: {
   query: string
   currentPage: number
-  result: RowDataPacket | undefined
+  result: object | undefined
 }) => {
   const { resultQueryLimit10, valorations } = result as any
   return (
