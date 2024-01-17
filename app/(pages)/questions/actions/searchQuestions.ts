@@ -1,8 +1,7 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
-import { excludedWords } from '@/app/(pages)/questions/components/words/excludedWords'
-import { cleanWord } from '@/app/(pages)/questions/components/words/cleanWord'
+import searchValorations from './searchValoration'
 
 export default async function searchQuestions(queries: string[]) {
   // Filtra las consultas que tienen al menos 3 caracteres
@@ -32,5 +31,6 @@ export default async function searchQuestions(queries: string[]) {
     )) as RowDataPacket
   }
 
-  return resultQueryLimit10
+  const valorations = await searchValorations(resultQueryLimit10)
+  return { resultQueryLimit10, valorations }
 }

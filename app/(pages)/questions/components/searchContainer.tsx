@@ -13,7 +13,7 @@ const SearchContainer = ({
   children,
 }: {
   query: string
-  result: RowDataPacket | undefined
+  result: object | undefined
   children: ReactNode
   wordsSuggestions: { palabra: string; cantidad: unknown }[]
   currentPage: number

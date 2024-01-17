@@ -25,7 +25,7 @@ export default async function QuestionPage({
     // Si la cadena está vacía, establece el array de consultas como un array vacío
     queries = []
   }
-  let resultQueryLimit10 = await searchQuestions(queries)
+  const resultQueryLimit10 = await searchQuestions(queries)
   let wordsSuggestions = await searchWordsSuggestions(queries)
 
   return (
