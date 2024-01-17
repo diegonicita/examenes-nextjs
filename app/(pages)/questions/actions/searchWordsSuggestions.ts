@@ -68,9 +68,7 @@ export default async function searchWords(queries: string[]) {
     .map(([palabra, cantidad]) => ({ palabra, cantidad }))
     .sort((a: any, b: any) => b.cantidad - a.cantidad)
 
-  const palabrasOrdenadas20 = palabrasOrdenadas.slice(0, 5)
-  // console.log(conteoPalabras)
-  // console.log(Object.keys(conteoPalabras).length)
+  const palabrasOrdenadas20 = palabrasOrdenadas.slice(0, 5) 
 
   return palabrasOrdenadas20
 }
