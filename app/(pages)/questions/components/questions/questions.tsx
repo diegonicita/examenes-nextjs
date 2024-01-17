@@ -1,20 +1,17 @@
-import { RowDataPacket } from 'mysql2'
 import Reactions from './reactions'
 
 const QuestionList = async ({
-  query,
-  currentPage,
-  result,
+  questions,
+  valorations,
 }: {
-  query: string
-  currentPage: number
-  result: object | undefined
-}) => {
-  const { resultQueryLimit10, valorations } = result as any
-  return (
+  questions: any | undefined
+  valorations: any | undefined
+}) => {  
+  console.log(valorations)
+  return (    
     <div className="mx-auto max-w-[70ch]">
-      {resultQueryLimit10 &&
-        resultQueryLimit10.map((item: any, index: number) => (
+      {questions &&
+        questions.map((item: any, index: number) => (
           <div key={index} className=" border border-gray-400 rounded my-4 p-4">
             <div className="font-bold mt-2 mb-2">
               {'Pregunta N°: ' + item.numero} {item.texto}

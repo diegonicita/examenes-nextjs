@@ -1,38 +1,33 @@
 import React from 'react'
-import { cookies } from 'next/headers'
-import getData from './getData'
+import type { UserType } from '@/app/models/User'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import Counter from './components/counter'
 import Message from './components/message'
 import MessageNotLogged from '@/app/components/checkCookie/messageNotLogged'
 
-type Response = {
-  username: string
-  email: string
-  role: string
-}
-
 const Profile = async () => {
-  const auth = cookies().get('auth')
-  if (auth) {
-    try {
-      const data = (await getData(auth)) as Response
+  try {
+    const authData = (await getInfoAuthCookie()) as UserType
+    if (authData) {
       return (
         <div className="flex flex-col items-center mt-4">
           <div>
             <div className="text-xl pb-4 font-bold">Perfil del Usuario</div>
-            <div>Usuario: {data && data.username}</div>
-            <div>Correo: {data && data.email}</div>
-            <div>Rol: {data && data.role} </div>
+            <div>Usuario Id: {authData && authData.id?.toString()}</div>
+            <div>Usuario: {authData && authData.username}</div>
+            <div>Correo: {authData && authData.email}</div>
+            <div>Rol: {authData && authData.role} </div>
           </div>
           <Counter />
           <Message />
         </div>
       )
-    } catch (error) {
-      console.log('Error en Profile')
+    } else {
+      return <MessageNotLogged />
     }
+  } catch (error) {
+    console.log('Error al requerir el Profile')
   }
-  return <MessageNotLogged />
 }
 
 export default Profile

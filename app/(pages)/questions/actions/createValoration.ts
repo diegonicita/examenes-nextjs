@@ -1,28 +1,37 @@
 'use server'
 
-import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { ConsultType } from '@/app/models/Consult'
-import { RowDataPacket } from 'mysql2'
 import { refreshAction } from '@/app/(pages)/questions/actions/refreshAction'
+import type { UserType } from '@/app/models/User'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import createValorationQuery from './Queries/createValorationQuery'
+
+function transformBitsToByte(bit1: boolean, bit2: boolean, bit3: boolean) {
+  return ((bit1 ? 1 : 0) << 2) | ((bit2 ? 1 : 0) << 1) | (bit3 ? 1 : 0)
+}
 
 export const createValoration = async (
   prevState: ConsultType,
   formData: FormData,
 ) => {
-  const valor1 = formData.get('like') === 'true' ? true : false
-  const valor2 = formData.get('unlike') === 'true' ? true : false
-  const valor3 = formData.get('love') === 'true' ? true : false
-  const id = formData.get('id')
-
-  let binario =
-    ((valor1 ? 1 : 0) << 2) | ((valor2 ? 1 : 0) << 1) | (valor3 ? 1 : 0)
-
-  const result = (await executeQuery(
-    'insert into valoraciones (id, id_user, value) Values(?,?,?) on duplicate key update value=?',
-    [id, 1, binario, binario],
-  )) as RowDataPacket
-
-  const formData2 = new FormData()
-  formData.append('auth', 'false')
-  refreshAction(formData2)
+  const like = formData.get('like') === 'true' ? true : false
+  const unlike = formData.get('unlike') === 'true' ? true : false
+  const love = formData.get('love') === 'true' ? true : false
+  const id = formData.get('id') // Id de la pregunta
+  const authData = (await getInfoAuthCookie()) as UserType
+  if (authData && authData.id && id) {
+    let byte = transformBitsToByte(like, unlike, love)
+    try {
+      const result = await createValorationQuery({
+        id,
+        userId: authData.id,
+        byte,
+      })
+      const formData2 = new FormData()
+      formData.append('auth', 'false')
+      refreshAction(formData2)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

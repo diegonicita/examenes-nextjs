@@ -1,10 +1,10 @@
 import Questions from '@/app/(pages)/questions/components/questions/questions'
 import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
-import Pagination from '@/app/(pages)/questions/components/pagination'
 import searchQuestions from './actions/searchQuestions'
 import searchWordsSuggestions from './actions/searchWordsSuggestions'
 import SearchContainer from './components/searchContainer'
+import searchValorations from './actions/searchValoration'
 
 export default async function QuestionPage({
   searchParams,
@@ -25,8 +25,10 @@ export default async function QuestionPage({
     // Si la cadena está vacía, establece el array de consultas como un array vacío
     queries = []
   }
-  const resultQueryLimit10 = await searchQuestions(queries)
-  let wordsSuggestions = await searchWordsSuggestions(queries)
+
+  const questions = await searchQuestions(queries)
+  const valorations = await searchValorations(questions)
+  const wordsSuggestions = await searchWordsSuggestions(queries)
 
   return (
     <div>
@@ -34,19 +36,13 @@ export default async function QuestionPage({
         <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
           <SearchContainer
             query={query}
-            result={resultQueryLimit10}
             currentPage={currentPage}
             wordsSuggestions={wordsSuggestions}
           >
             {query !== '' && query.length > 2 && (
               <>
                 {/* <Pagination /> */}
-                <Questions
-                  query={query}
-                  result={resultQueryLimit10}
-                  currentPage={currentPage}
-                />
-                {/* <Pagination /> */}
+                <Questions questions={questions} valorations={valorations} />
               </>
             )}
           </SearchContainer>
@@ -57,5 +53,5 @@ export default async function QuestionPage({
 }
 
 export const metadata = {
-  title: 'Preguntas desde API',
+  title: 'Buscador de Preguntas',
 }
