@@ -1,15 +1,20 @@
 import { RowDataPacket } from 'mysql2'
 import Reactions from './reactions'
+import Comments from './comments'
 
 const QuestionList = async ({
   query,
   currentPage,
   result,
+ 
 }: {
   query: string
   currentPage: number
   result: RowDataPacket | undefined
+  
 }) => {
+ 
+  
   return (
     <div className="mx-auto max-w-[70ch]">
       {result &&
@@ -27,6 +32,9 @@ const QuestionList = async ({
             )}
             {/* <div className="font-bold pb-2"> Respuesta Correcta: {item.correcta} </div>           */}
             <Reactions id_question={item.id}/>
+            <div className="flex flex-row">
+            <Comments  />
+            </div>
           </div>
         ))}
     </div>
