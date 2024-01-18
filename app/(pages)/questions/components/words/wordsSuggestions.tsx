@@ -6,10 +6,12 @@ const WordsSuggestions = ({
   query,
   inputRef,
   wordsSuggestions,
+  reset  
 }: {
   query: string
   inputRef: React.RefObject<HTMLInputElement>
   wordsSuggestions: { palabra: string; cantidad: unknown }[]
+  reset: string | null | undefined  
 }) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -30,7 +32,7 @@ const WordsSuggestions = ({
   }
 
   return (
-    <div className="mx-auto w-full border border-gray">
+    <div key={reset} className="mx-auto border border-gray">
       <ul>
         {typeof document !== 'undefined' &&
           inputRef.current === document.activeElement &&

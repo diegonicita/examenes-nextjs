@@ -33,7 +33,7 @@ export default async function QuestionPage({
   return (
     <div>
       <CheckServerCookie auth={auth}>
-        <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
+        <div className="flex flex-col items-start max-w-[60rem] mx-auto mt-8">
           <SearchContainer
             query={query}
             currentPage={currentPage}

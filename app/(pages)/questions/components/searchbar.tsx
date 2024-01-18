@@ -4,8 +4,10 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 
 export default function Searchbar({
   inputRef,
+  handleChangeResetKey,
 }: {
   inputRef: React.RefObject<HTMLInputElement>
+  handleChangeResetKey: () => void
 }) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -28,23 +30,25 @@ export default function Searchbar({
   }
 
   return (
-    <div className="min-w-[36rem]">
-      <div className="relative flex w-full flex-wrap items-stretch">
+    <div className="w-full">
+      <div className="relative flex">
         <input
           type="search"
           onChange={(event) => handleSearch(event.target.value)}
-          className="relative m-0 -mr-0.5 block min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:focus:border-primary"
+          className="relative m-0 block flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:focus:border-primary"
           placeholder="Search"
           aria-label="Search"
           aria-describedby="button-addon1"
           defaultValue={defaultValue?.toString()}
           ref={inputRef}
+          onBlur={handleChangeResetKey}
         />
 
         <button
           className="relative z-[0] flex items-center rounded-r bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
           type="button"
           id="button-addon1"
+          onClick={handleChangeResetKey}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

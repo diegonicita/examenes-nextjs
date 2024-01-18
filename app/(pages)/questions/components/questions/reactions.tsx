@@ -33,6 +33,28 @@ export default function Reactions({
     { label: 'mala', node: '👎', key: 'unlike' },
   ]
 
+  const ReactBar = () => {
+    return (
+      <>
+        {!valueEmoji && (
+          <ReactionBarSelector
+            iconSize={25}
+            reactions={reactions}
+            onSelect={handleReaction}
+            style={{
+              zIndex: 10,
+              marginBottom: '1.2rem',
+              position: 'absolute',
+              bottom: 0,
+              width: '11rem',
+              justifyContent: 'center',
+            }}
+          />
+        )}
+      </>
+    )
+  }
+
   const submitFormData = () => {
     var formData = new FormData()
     formData.append('id', id_question.toString())
@@ -53,27 +75,15 @@ export default function Reactions({
     submitFormData()
   }
 
+  {
+    id_question === 1622 && console.log(valueEmoji)
+  }
+
   return (
     <>
       <Valorations id_question={id_question} valorations={valorations} />
       <div className="flex gap-4">
-        <Tooltip
-          content={
-            <ReactionBarSelector
-              iconSize={25}
-              reactions={reactions}
-              onSelect={handleReaction}
-              style={{
-                zIndex: 10,
-                marginBottom: '1.2rem',
-                position: 'absolute',
-                bottom: 0,
-                width: '11rem',
-                justifyContent: 'center',
-              }}
-            />
-          }
-        >
+        <Tooltip key={valueEmoji} content={<ReactBar />}>
           {!valueEmoji ? (
             <form action={formAction}>
               <button
@@ -98,6 +108,7 @@ export default function Reactions({
             </>
           )}
         </Tooltip>
+
         <form action={formAction}>
           <button
             type="submit"
