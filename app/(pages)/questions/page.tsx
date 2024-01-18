@@ -1,10 +1,10 @@
-import Questions from '@/app/(pages)/questions/components/questions/questions'
 import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 import searchQuestions from './actions/searchQuestions'
 import searchWordsSuggestions from './actions/searchWordsSuggestions'
 import SearchContainer from './components/searchContainer'
 import searchValorations from './actions/searchValoration'
+import Examen from './components/choices/examen'
 
 export default async function QuestionPage({
   searchParams,
@@ -42,7 +42,8 @@ export default async function QuestionPage({
             {query !== '' && query.length > 2 && (
               <>
                 {/* <Pagination /> */}
-                <Questions questions={questions} valorations={valorations} />
+                {/* <Questions questions={questions} valorations={valorations} />*/}
+                <Examen data={questions} valorations={valorations} />
               </>
             )}
           </SearchContainer>

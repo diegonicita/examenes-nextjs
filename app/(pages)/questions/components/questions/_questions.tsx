@@ -1,14 +1,16 @@
 import Reactions from './reactions'
 
+// DEPRECATED //
+// AHORA USAMOS examen
+
 const QuestionList = async ({
   questions,
   valorations,
 }: {
   questions: any | undefined
   valorations: any | undefined
-}) => {  
-  console.log(valorations)
-  return (    
+}) => {
+  return (
     <div className="mx-auto max-w-[70ch]">
       {questions &&
         questions.map((item: any, index: number) => (

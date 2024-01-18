@@ -1,5 +1,5 @@
 import Searchbar from '@/app/(pages)/questions-algolia/components/searchbar'
-import QuestionList from '@/app/(pages)/questions/components/questions/questions'
+import QuestionList from '@/app/(pages)/questions/components/questions/_questions'
 import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 import Pagination from '@/app/(pages)/questions/components/pagination'
@@ -12,7 +12,7 @@ export default function QuestionPage({
     query?: string
   }
 }) {
-  const auth = cookies().get('auth')  
+  const auth = cookies().get('auth')
   return (
     <div>
       <CheckServerCookie auth={auth}>
