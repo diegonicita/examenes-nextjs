@@ -32,9 +32,8 @@ const QuestionList = async ({
             )}
             {/* <div className="font-bold pb-2"> Respuesta Correcta: {item.correcta} </div>           */}
             <Reactions id_question={item.id}/>
-            <div className="flex flex-row">
+           
             <Comments  />
-            </div>
           </div>
         ))}
     </div>
