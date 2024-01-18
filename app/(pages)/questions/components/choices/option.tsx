@@ -32,11 +32,11 @@ export const Option = ({
   let backgroundColor = null
   if (optionAnswered === optionNumber && optionAnswered === correct) {
     backgroundColor =
-      'bg-success text-black font-bold hover:bg-success hover:text-black'
+      'bg-success text-white hover:bg-success hover:text-white'
   }
   if (optionAnswered === optionNumber && optionAnswered !== correct) {
     backgroundColor =
-      'bg-error text-black font-bold hover:bg-error hover:text-black'
+      'bg-error text-white hover:bg-error hover:text-white'
   }
   if (
     optionAnswered &&
@@ -44,17 +44,17 @@ export const Option = ({
     optionNumber === correct
   ) {
     backgroundColor =
-      'bg-success text-black font-bold hover:bg-success hover:text-black'
+      'bg-success text-white hover:bg-success hover:text-white'
   }
 
   return (
     <>
       <TailwindToaster />
       <div
-        className={`btn font-normal btn-outline w-full h-fit text-base text-start justify-start ${backgroundColor}`}
+        className={`py-2 btn btn-outline btn-md w-full h-fit text-base text-start justify-start ${backgroundColor} text-pretty`}
         onClick={() => handleAnswered(optionNumber)}
       >
-        {optionNumber}) {texto}
+        {texto}
       </div>
     </>
   )

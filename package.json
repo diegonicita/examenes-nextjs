@@ -28,9 +28,9 @@
     "@types/redux-logger": "3.0.9",
     "autoprefixer": "^10.4.16",
     "daisyui": "^4.4.2",
-    "postcss": "^8.4.31",
+    "postcss": "^8.4.33",
     "redux-logger": "3.0.6",
-    "tailwindcss": "^3.3.5",
+    "tailwindcss": "^3.4.1",
     "typescript": "5.1.3"
   }
 }

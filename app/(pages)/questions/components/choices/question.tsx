@@ -29,7 +29,7 @@ const Question = ({
         <h2 className="text-md font-bold">
           {title} - Año {year.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
         </h2>
-        <div className="w-full">{description}</div>
+        <div className="w-full text-pretty">{description}</div>
         <div className="card-actions m-0">
           {options.map(
             (option, index) =>

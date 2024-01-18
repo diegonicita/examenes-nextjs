@@ -21,7 +21,7 @@ const SearchContainer = ({
   }
 
   return (
-    <div className="w-full mx-auto max-w-[70ch]">
+    <div className="w-full mx-auto max-w-[75ch] px-1">
       <Searchbar
         inputRef={inputRef}
         handleChangeResetKey={handleChangeResetKey}
