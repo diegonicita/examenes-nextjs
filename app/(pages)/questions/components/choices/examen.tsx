@@ -2,6 +2,7 @@
 import Reactions from '@/app/(pages)/questions/components/questions/reactions'
 import type { Question as QuestionType } from '@/app/models/Question'
 import Question from './question'
+import Comments from '../questions/comments'
 
 export const Examen = ({
   data,
@@ -31,6 +32,7 @@ export const Examen = ({
               image={''}
             />
             <Reactions id_question={item.id} valorations={valorations} />
+            <Comments  />
           </div>
         ))}
     </>
