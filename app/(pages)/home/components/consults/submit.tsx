@@ -2,7 +2,7 @@
 //@ts-ignore
 import { useFormStatus } from 'react-dom'
 
-export default function SubmitButtom({
+function SubmitButton({
   text,
   textOnClick,
 }: {
@@ -21,3 +21,5 @@ export default function SubmitButtom({
     </button>
   )
 }
+
+export default SubmitButton
