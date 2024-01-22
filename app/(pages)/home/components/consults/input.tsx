@@ -1,11 +1,6 @@
 import React from 'react'
 
 type Props = {
-  handleFocus: (
-    event:
-      | React.FocusEvent<HTMLInputElement>
-      | React.FocusEvent<HTMLTextAreaElement>,
-  ) => void
   handleBlur: (
     event:
       | React.FocusEvent<HTMLInputElement>
@@ -21,7 +16,7 @@ type Props = {
   }
 }
 
-export const Input = ({ handleFocus, handleBlur, data }: Props) => {
+export const Input = ({ handleBlur, data }: Props) => {
   return (
     <>
       <label
@@ -30,7 +25,7 @@ export const Input = ({ handleFocus, handleBlur, data }: Props) => {
         font-inter leading-none pb-3"
       >
         {data.text}
-      </label>      
+      </label>
       <input
         type={data.type}
         placeholder={data.placeholder}
@@ -38,15 +33,14 @@ export const Input = ({ handleFocus, handleBlur, data }: Props) => {
         name={data.name}
         id={data.id}
         autoComplete="off"
-        onFocus={handleFocus}
         onBlur={handleBlur}
       />
       <div className="relative pb-8">
-      {data.error && (
-        <div className="absolute h-2 text-error font-bold text-start px-2">
-          {data.error}
-        </div>        
-      )}
+        {data.error && (
+          <div className="absolute h-2 text-error font-bold text-start px-2">
+            {data.error}
+          </div>
+        )}
       </div>
     </>
   )

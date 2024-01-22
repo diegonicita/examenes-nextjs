@@ -1,20 +1,15 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import { ConsultType } from '@/app/models/Consult'
 import { RowDataPacket } from 'mysql2'
 import { z } from 'zod'
 
-export const insertAction = async (
-  prevState: ConsultType,
-  formData: FormData,
-) => {
+export const insertAction = async (formData: FormData) => {
   const fullname = formData.get('fullname')
   const email = formData.get('email')
   const consult = formData.get('consult')
 
-  const validationResult = z
+  const result = z
     .object({
       fullname: z
         .string()
@@ -30,27 +25,22 @@ export const insertAction = async (
       consult,
     })
 
-  if (validationResult.success) {
-    const result = (await executeQuery(
-      'insert into consultas values (NULL, ?, ?, ?)',
-      [fullname, email, consult],
-    )) as RowDataPacket
+  if (result.success) {
+    try {
+      const response = (await executeQuery(
+        'insert into consultas values (NULL, ?, ?, ?)',
+        [fullname, email, consult],
+      )) as RowDataPacket
 
-    if (result && result?.affectedRows) {
-      revalidatePath('/')      
-      return {        
-        message: JSON.stringify(validationResult),
+      if (response && response?.affectedRows) {
+        return {
+          message: 'success',
+        }
       }
-    } else {
-      revalidatePath('/')
-      return {        
-        message: JSON.stringify(validationResult),
+    } catch (error) {
+      return {
+        message: 'errors',
       }
-    }
-  } else {
-    revalidatePath('/')
-    return {            
-      message: JSON.stringify(validationResult),
     }
   }
 }
