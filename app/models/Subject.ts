@@ -1,5 +1,7 @@
 export type SubjectType = {
   id: number
-  tema: string
+  titulo: string
   imagen: string
+  descripcion: string
+  visible: boolean
 }

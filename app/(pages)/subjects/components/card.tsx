@@ -4,26 +4,29 @@ import defaultImage from '@/app/assets/OIG-4.jpg'
 import type { SubjectType } from '@/app/models/Subject'
 
 export default function Card({ item }: { item: SubjectType }) {
+
+  console.log(item)
+
   return (
-    <div className="card w-80 sm:w-60 md:w-48 bg-base-100 shadow-xl m-2 border border-black rounded-none">
-      <figure className="pt-0 rounded-none">
+    <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black rounded-none">
+      <figure className="pt-0">
         {item.imagen ? (
           <Image
-            src={'https://mercado.webapp.ar/images/' + item?.imagen}
+            src={'https://mercado.webapp.ar/images_medicina/' + item?.imagen}
             alt="imagen"
             width={0}
             height={0}
             sizes={'100vh'}
-            className="h-auto w-[12rem]"
+            className="h-auto w-28"
           />
         ) : (
           <Image
-            src={defaultImage}
+          src={'https://mercado.webapp.ar/images_medicina/medicina-1.png'}
             alt="imagen"
             width={0}
             height={0}
             sizes={'100vh'}
-            className="h-auto w-[22rem]"
+            className="h-auto w-28"
           />
         )}
       </figure>
@@ -34,7 +37,7 @@ export default function Card({ item }: { item: SubjectType }) {
         <div className="h-full flex items-center p-1">
           {/* <span className="font-bold">Título: </span> */}
           <div className="max-w-[10rem] mx-auto">
-          {item.tema ? item.tema : 'Sin título'}
+          {item.titulo ? item.titulo : 'Sin título'}
           </div>
         </div>
         <div className="h-auto">

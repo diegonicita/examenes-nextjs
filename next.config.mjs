@@ -10,9 +10,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'mercado.webapp.ar',
+        hostname: 'mercado.webapp.ar/images_medicina',
         port: '',
-        pathname: '/images/**',
+        pathname: '/**',
       },
       {
         protocol: 'https',

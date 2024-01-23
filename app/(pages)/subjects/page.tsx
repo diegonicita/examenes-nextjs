@@ -21,11 +21,12 @@ export default async function SubjectPage() {
   const data = await getData()
 
   return (
-    <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-8">      
+    <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-8">
       {data &&
-        data.temas.map((p: SubjectType, index: number) => (
-          <Card item={p} key={index} />
-        ))}
+        data.temas.map((p: SubjectType, index: number) => {
+          if (p.visible)
+          return <Card item={p} key={index} />          
+        })}
     </div>
   )
 }
