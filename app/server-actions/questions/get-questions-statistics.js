@@ -82,7 +82,19 @@ export default async function getQuestionsStatistics() {
 
   const result3 = await executeQuery('select * from clasificaciones', [])
 
-  respuesta.temas.push(...result3)
+  const result4 = await executeQuery(
+    'SELECT id, COUNT(*) as total FROM (SELECT clasifica1 as id FROM preguntas WHERE clasifica1 BETWEEN 1 AND 45 UNION ALL SELECT clasifica2 FROM preguntas WHERE clasifica2 BETWEEN 1 AND 45 UNION ALL SELECT clasifica3 FROM preguntas WHERE clasifica3 BETWEEN 1 AND 45 UNION ALL SELECT clasifica4 FROM preguntas WHERE clasifica4 BETWEEN 1 AND 45 UNION ALL SELECT clasifica5 FROM preguntas WHERE clasifica5 BETWEEN 1 AND 41) AS subconsulta GROUP BY id ORDER BY id;',
+  )
+
+  // Unir los arrays de objetos basándose en el ID
+  let arrayFinal = result3.map((obj1) => {
+    let obj2 = result4.find((obj2) => obj2.id === obj1.id)
+    return { ...obj1, ...obj2 }
+  })
+
+  respuesta.temas.push(...arrayFinal)
+
+  // respuesta.estadisticas.push(...result4)
 
   return respuesta
 }

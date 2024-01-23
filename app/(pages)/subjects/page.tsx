@@ -21,16 +21,18 @@ export default async function SubjectPage() {
   const data = await getData()
 
   return (
-    <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-8">
-      {data &&
-        data.temas.map((p: SubjectType, index: number) => {
-          if (p.visible)
-          return <Card item={p} key={index} />          
-        })}
-    </div>
+    <>
+      <h1 className="text-center mt-2 font-bold text-xl"> Preguntas por Tema </h1>
+      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
+        {data &&
+          data.temas.map((p: SubjectType, index: number) => {
+            if (p.visible) return <Card item={p} key={index} />
+          })}
+      </div>
+    </>
   )
 }
 
 export const metadata = {
-  title: 'Examenes y Temas',
+  title: 'Preguntas por Tema',
 }

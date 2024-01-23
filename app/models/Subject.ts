@@ -4,4 +4,5 @@ export type SubjectType = {
   imagen: string
   descripcion: string
   visible: boolean
+  total: number
 }

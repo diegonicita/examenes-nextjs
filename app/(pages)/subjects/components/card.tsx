@@ -1,14 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
-import defaultImage from '@/app/assets/OIG-4.jpg'
 import type { SubjectType } from '@/app/models/Subject'
 
 export default function Card({ item }: { item: SubjectType }) {
-
   console.log(item)
 
   return (
-    <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black rounded-none">
+    <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator">
+      <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">
+        +{item?.total}
+      </span>
       <figure className="pt-0">
         {item.imagen ? (
           <Image
@@ -17,16 +18,16 @@ export default function Card({ item }: { item: SubjectType }) {
             width={0}
             height={0}
             sizes={'100vh'}
-            className="h-auto w-28"
+            className="h-auto w-80 sm:w-60 lg:w-28"
           />
         ) : (
           <Image
-          src={'https://mercado.webapp.ar/images_medicina/medicina-1.png'}
+            src={'https://mercado.webapp.ar/images_medicina/medicina-1.png'}
             alt="imagen"
             width={0}
             height={0}
             sizes={'100vh'}
-            className="h-auto w-28"
+            className="h-auto w-80 sm:w-60 lg:w-28"
           />
         )}
       </figure>
@@ -36,8 +37,8 @@ export default function Card({ item }: { item: SubjectType }) {
         </h1> */}
         <div className="h-full flex items-center p-1">
           {/* <span className="font-bold">Título: </span> */}
-          <div className="max-w-[10rem] mx-auto">
-          {item.titulo ? item.titulo : 'Sin título'}
+          <div className="max-w-[10rem] mx-auto mb-2">
+            {item.titulo ? item.titulo : 'Sin título'}
           </div>
         </div>
         <div className="h-auto">

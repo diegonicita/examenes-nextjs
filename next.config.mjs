@@ -10,16 +10,15 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'mercado.webapp.ar/images_medicina',
+        hostname: 'mercado.webapp.ar',
         port: '',
-        pathname: '/**',
+        pathname: '/images_medicina/**',
       },
       {
         protocol: 'https',
         hostname: '**.api-ninjas.com',
         port: '',
         pathname: '/**',
-
       }
       
     ],
