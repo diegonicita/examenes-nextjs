@@ -3,8 +3,6 @@ import Image from 'next/image'
 import type { ExamType } from '@/app/models/Exam'
 
 export default function Card({ item }: { item: ExamType }) {
-  console.log(item)
-
   return (
     <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator">
       <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">

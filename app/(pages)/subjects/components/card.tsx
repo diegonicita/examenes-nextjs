@@ -2,8 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import type { SubjectType } from '@/app/models/Subject'
 
-export default function Card({ item }: { item: SubjectType }) {
-  console.log(item)
+export default function Card({ item }: { item: SubjectType }) {  
 
   return (
     <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator">
