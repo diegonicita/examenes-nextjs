@@ -12,14 +12,13 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'mercado.webapp.ar',
         port: '',
-        pathname: '/images/**',
+        pathname: '/images_medicina/**',
       },
       {
         protocol: 'https',
         hostname: '**.api-ninjas.com',
         port: '',
         pathname: '/**',
-
       }
       
     ],

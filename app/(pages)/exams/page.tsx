@@ -21,12 +21,17 @@ export default async function ClasificacionesPage() {
   const data = await getData()
 
   return (
-    <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-8">
-      {data &&
-        data.examenes.map((p: ExamType, index: number) => (
-          <Card item={p} key={index} />
-        ))}     
-    </div>
+    <>
+      <h1 className="text-center mt-2 font-bold text-xl">
+        Preguntas por Examen
+      </h1>
+      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
+        {data &&
+          data.examenes.map((p: ExamType, index: number) => (
+            <Card item={p} key={index} />
+          ))}
+      </div>
+    </>
   )
 }
 
