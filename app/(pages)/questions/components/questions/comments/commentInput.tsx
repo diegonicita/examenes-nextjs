@@ -1,10 +1,10 @@
 "use client"
 import { useState } from "react";
-import { IconEmojiSmile } from "./icons";
+import { IconEmojiSmile } from "../icons";
 import { z } from "zod";
 //@ts-ignore
 import { useFormStatus, useFormState } from 'react-dom'
-import createComment from "../../actions/commentPost";
+import createComment from "../../../actions/commentPost";
 
 
 export default function CommentInput({

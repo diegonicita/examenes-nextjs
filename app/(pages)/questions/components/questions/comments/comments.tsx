@@ -1,40 +1,20 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
-import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+
+import EmojiPicker from "emoji-picker-react";
 import CommentInput from "./commentInput";
+import useEmoji from "@/app/hooks/questions/comments/useEmoji";
+import UserComments from "./userComments";
 
 export default function Comments() {
-  const [openEmoji, setOpenEmoji] = useState(false);
-  const [saveTextAndEmoji, setSaveTextAndEmoji] = useState<string | undefined>(
-    ""
-  );
-
-  const handleOpenEmoji = () => {
-    setOpenEmoji(!openEmoji);
-  };
-
-  const handleCloseEmoji = () => {
-    setOpenEmoji(false);
-  };
-
-  const handleSaveEmoji = (emoji: EmojiClickData, event: MouseEvent) => {
-    setSaveTextAndEmoji((prevText) => prevText + emoji.emoji);
-    if(emoji.emoji){
-      setOpenEmoji(false)
-    }
-  };
-  const handleInputComment = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setSaveTextAndEmoji(e.target.value);
-  };
-  const handleStopPropagation: React.MouseEventHandler<HTMLDivElement> = (
-    e
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
+  const {
+    handleSaveEmoji,
+    openEmoji,
+    handleInputComment,
+    handleCloseEmoji,
+    handleOpenEmoji,
+    handleStopPropagation,
+    saveTextAndEmoji,
+  } = useEmoji();
   return (
     <div>
       <div className="flex flex-row mt-2 ">
@@ -64,10 +44,11 @@ export default function Comments() {
       <div onClick={handleCloseEmoji}>
         {openEmoji && (
           <div onClick={handleStopPropagation} className="w-[348px]">
-            <EmojiPicker  searchDisabled onEmojiClick={handleSaveEmoji} />
+            <EmojiPicker searchDisabled onEmojiClick={handleSaveEmoji} />
           </div>
         )}
       </div>
+      <UserComments />
     </div>
   );
 }
