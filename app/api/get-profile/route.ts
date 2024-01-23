@@ -1,7 +1,8 @@
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { NextRequest, NextResponse } from 'next/server'
 export const dynamic = 'force-dynamic' // defaults to auto
 
-export async function GET(req: Request, res: Response) {
+export async function GET(req: NextRequest, res: NextResponse) {
   const { searchParams } = new URL(req.url)
   let id = searchParams.get('id')
   const payload = (await getInfoAuthCookie()) as any
@@ -19,7 +20,7 @@ export async function GET(req: Request, res: Response) {
       requestOptions,
     )
     const json = await respuesta.json()
-    return Response.json(json)
+    return NextResponse.json(json)
   }
 
   if (payload?.role === 'client' && process.env.URL_PROFILE && payload?.id) {
@@ -28,7 +29,7 @@ export async function GET(req: Request, res: Response) {
       requestOptions,
     )
     const json = await respuesta.json()
-    return Response.json(json)
+    return NextResponse.json(json)
   }
-  return Response.json({ error: 'No estas autorizado' })
+  return NextResponse.json({ error: 'No estas autorizado' })
 }
