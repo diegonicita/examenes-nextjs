@@ -6,4 +6,8 @@ export type ExamType = {
   imagen: string
   total: number
   visible: boolean
+  preguntas: {
+    ano: number
+    cantidad_preguntas: number
+  }[]
 }

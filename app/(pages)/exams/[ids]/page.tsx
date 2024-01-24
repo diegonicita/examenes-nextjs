@@ -1,5 +1,10 @@
-import Card from '@/app/(pages)/exams/components/card'
+import Card from './components/card'
 import type { ExamType } from '@/app/models/Exam'
+
+type YearData = {
+  ano: number
+  cantidad_preguntas: number
+}
 
 async function getData() {
   const url = process.env.URL_API
@@ -13,18 +18,25 @@ async function getData() {
   }
 }
 
-export default async function ExamPage() {
+export default async function ExamIdPage({
+  params,
+}: {
+  params: { ids: string }
+}) {
   const data = await getData()
+  const exam = data?.examenes.find(
+    (p: ExamType) => p.id === parseInt(params.ids),
+  )
 
   return (
     <>
       <h1 className="text-center mt-2 font-bold text-xl">
-        Preguntas por Examen
+        {exam?.titulo} - {exam?.pais}
       </h1>
       <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
-        {data &&
-          data.examenes.map((p: ExamType, index: number) => (
-            <Card item={p} key={index} />
+        {exam &&
+          exam.preguntas.map((e: YearData, index: number) => (
+            <Card item={exam} key={index} yearData={e} />
           ))}
       </div>
     </>
