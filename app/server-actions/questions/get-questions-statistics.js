@@ -99,9 +99,52 @@ export default async function getQuestionsStatistics() {
     return { ...obj1, ...obj2 }
   })
 
+  const result5 = await executeQuery(
+    'SELECT ano, examen, COUNT(*) as cantidad_preguntas FROM preguntas GROUP BY examen, ano',
+  )
+
+  console.log(result5)
+
+  // Agrupa los resultados por examen en un array de objetos
+  const preguntasPorExamen = result5.reduce((acc, result) => {
+    const examenId = result.examen
+    const objetoExamen = acc.find((obj) => obj.id === examenId)
+
+    if (objetoExamen) {
+      objetoExamen.preguntas.push({
+        ano: result.ano,
+        cantidad_preguntas: result.cantidad_preguntas,
+      })
+    } else {
+      acc.push({
+        id: examenId,
+        preguntas: [
+          {
+            ano: result.ano,
+            cantidad_preguntas: result.cantidad_preguntas,
+          },
+        ],
+      })
+    }
+
+    return acc
+  }, [])
+
   respuesta.temas.push(...arrayFinal)
 
-  // respuesta.estadisticas.push(...result4)
+  // Combina la información de preguntas en los objetos de examenes
+  const examenesConPreguntas = respuesta.examenes.map((examen) => {
+    const preguntasExamen = preguntasPorExamen.find((p) => p.id === examen.id)
+
+    return {
+      ...examen,
+      preguntas: preguntasExamen ? preguntasExamen.preguntas : [],
+    }
+  })
+
+  console.log(examenesConPreguntas)
+
+  respuesta.examenes = examenesConPreguntas
 
   return respuesta
 }
