@@ -1,11 +1,17 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ReactionBarSelector, ReactionCounter } from '@charkour/react-reactions'
 import Tooltip from './tooltip'
+
 //@ts-ignore
-import { useFormStatus, useFormState } from 'react-dom'
+import { useFormStatus, useFormState,useOptimistic } from 'react-dom'
 import { createValoration } from '../../actions/createValoration'
 import Valorations from './valorations'
+import Comments from './comments/comments'
+import { getUserComments } from '../../actions/commentPost'
+import UserComments from './comments/userComments'
+import CommentInput from './comments/commentInput'
+import { useSearchParams } from 'next/navigation'
 const initialState = {
   message: 'testing',
 }
@@ -32,6 +38,7 @@ export default function Reactions({
     { label: 'buena', node: '👍', key: 'like' },
     { label: 'mala', node: '👎', key: 'unlike' },
   ]
+ 
 
   const ReactBar = () => {
     return (
@@ -78,13 +85,27 @@ export default function Reactions({
   {
     id_question === 1622 && console.log(valueEmoji)
   }
+  const [openComments, setOpenComments] = useState(false)
+  const [data, setData] = useState <Array<any>>([])
+  
+  
+  //comments
+  const handleOpenComments = async () => {  
+    setOpenComments(true)
+    const result = await getUserComments()
+    console.log(result)
+    setData(result)
+  }
+ 
+ 
 
   return (
     <>
       <Valorations id_question={id_question} valorations={valorations} />
-      <div className="flex gap-4">
+      <div className="flex gap-4 ">
         <Tooltip key={valueEmoji} content={<ReactBar />}>
           {!valueEmoji ? (
+            
             <form action={formAction}>
               <button
                 type="submit"
@@ -108,16 +129,22 @@ export default function Reactions({
             </>
           )}
         </Tooltip>
-
-        <form action={formAction}>
+        {/* //comments */}
           <button
-            type="submit"
+            type="button"
             className="p-2 w-44 cursor-pointer transition duration-300 bg-base-200 hover:bg-base-300"
+            onClick={handleOpenComments}
           >
             Comentarios
           </button>
-        </form>
-      </div>
+          </div>
+          {((openComments ||(data && data.length > 0)) && (
+            <div>
+            {/* <Comments key={data} > */}
+            {openComments && <CommentInput messages={data}/>}
+            {/* </Comments> */}
+          </div>
+))}
     </>
   )
 }

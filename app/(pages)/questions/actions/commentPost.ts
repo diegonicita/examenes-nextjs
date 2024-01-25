@@ -3,6 +3,7 @@
 import { z } from "zod";
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from "mysql2";
+import { revalidatePath } from "next/cache";
 
 const schema = z.object({
     comment: z
@@ -25,12 +26,22 @@ const schema = z.object({
       }
     }
     if (validatedFields.data.comment) {
-        const result = (await executeQuery('insert into comments value (NULL,?,?,?,?)', [
+      const result = (await executeQuery('insert into comments value (NULL,?,?,?,?)', [
           1,1,validatedFields.data.comment,1
         ])) as RowDataPacket
-        console.log(result)
-        console.log(validatedFields.data.comment)
+        if(result){
+          revalidatePath("/")
+          return {message:"message"}
+        }
     }
-   
     
+  }
+
+  export async function getUserComments (){
+    const result = (await executeQuery('SELECT id, id_question, id_user, comment_text, id_parent_comment FROM comments'))
+    
+  return result
+    
+  
+
   }
