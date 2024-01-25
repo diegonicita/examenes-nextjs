@@ -1,12 +1,16 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ReactionBarSelector, ReactionCounter } from '@charkour/react-reactions'
 import Tooltip from './tooltip'
+
 //@ts-ignore
-import { useFormStatus, useFormState } from 'react-dom'
+import { useFormStatus, useFormState,useOptimistic } from 'react-dom'
 import { createValoration } from '../../actions/createValoration'
 import Valorations from './valorations'
 import Comments from './comments/comments'
+import { getUserComments } from '../../actions/commentPost'
+import UserComments from './comments/userComments'
+import CommentInput from './comments/commentInput'
 const initialState = {
   message: 'testing',
 }
@@ -33,6 +37,7 @@ export default function Reactions({
     { label: 'buena', node: '👍', key: 'like' },
     { label: 'mala', node: '👎', key: 'unlike' },
   ]
+ 
 
   const ReactBar = () => {
     return (
@@ -80,9 +85,17 @@ export default function Reactions({
     id_question === 1622 && console.log(valueEmoji)
   }
   const [openComments, setOpenComments] = useState(false)
-  const handleOpenComments = () => {
+  const [data, setData] = useState <Array<any>>([])
+  
+  
+  const handleOpenComments = async () => {
     setOpenComments(true)
+    const result = await getUserComments()
+    console.log(result)
+    setData(result)
   }
+ 
+ 
 
   return (
     <>
@@ -115,7 +128,6 @@ export default function Reactions({
           )}
         </Tooltip>
 
-        
           <button
             type="button"
             className="p-2 w-44 cursor-pointer transition duration-300 bg-base-200 hover:bg-base-300"
@@ -124,10 +136,14 @@ export default function Reactions({
             Comentarios
           </button>
           </div>
-          {openComments &&
-         
-          <Comments  />
-}
+          {((openComments ||(data && data.length > 0)) && (
+            <div>
+            <Comments >
+
+            {openComments && <CommentInput messages={data}/>}
+            </Comments>
+          </div>
+))}
     </>
   )
 }

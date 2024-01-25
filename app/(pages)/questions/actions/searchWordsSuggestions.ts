@@ -24,7 +24,7 @@ export default async function searchWords(queries: string[]) {
     )
 
     // Construye y ejecuta la consulta
-    const queryString2 = `SELECT * FROM preguntas WHERE ${conditions}`
+    const queryString2 = ` * FROM preguntas WHERE ${conditions}`
     resultQueryNoLimits = (await executeQuery(
       queryString2,
       queryLikes,

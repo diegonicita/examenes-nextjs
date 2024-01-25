@@ -1,23 +1,17 @@
 "use client"
-import { useState } from "react";
+//@ts-ignore
+import { useRef, useState,useOptimistic } from "react";
 import { IconEmojiSmile } from "../icons";
 import { z } from "zod";
 //@ts-ignore
-import { useFormStatus, useFormState } from 'react-dom'
+import { useFormStatus, useFormStat} from 'react-dom'
 import createComment from "../../../actions/commentPost";
+import useEmoji from "@/app/hooks/questions/comments/useEmoji";
+import EmojiPicker from "emoji-picker-react";
+import UserComments from "./userComments";
 
 
-export default function CommentInput({
-  handleEmoji,
-  emojiPick,
-  handleInputComment,
-  children,
-}: {
-  handleEmoji: () => void;
-  emojiPick: string | undefined;
-  handleInputComment: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  children: React.ReactNode;
-}) {
+export default function CommentInput({messages}:{messages?:any}) {
   const [errorClientSide, setErrorClientSide] = useState("")
   const schema = z.object({
     comment: z
@@ -25,12 +19,20 @@ export default function CommentInput({
       .min(2, { message: "debe contener al meenos una palabra" })
       .trim()
   });
+  const {
+    saveTextAndEmoji,
+    handleInputComment,
+    handleOpenEmoji,
+    handleStopPropagation,
+    openEmoji,
+    handleCloseEmoji,
+    handleSaveEmoji
+  } = useEmoji();
+  const formRef = useRef()
 
   const input = async (formData: FormData) => {
 
      const newTodo = {comment: formData.get("comment")}
-
-
      const result = schema.safeParse(newTodo)
      console.log(result)
      if(!result.success) {
@@ -42,18 +44,27 @@ export default function CommentInput({
       return
     } else {
       setErrorClientSide("")
+      formRef?.current?.reset();
+      addOptimisticMessage(result.data)
     }
     console.log(result.data.comment)
    await createComment(result.data)
   };
+  const [optimisticMessages, addOptimisticMessage] = useOptimistic(
+    messages,
+    (state, newMessage) => {
+      return[...state, newMessage];
+    }
+  );
+
   
   return (
     <div className=" flex-grow">
-      <form action={input}>
+      <form action={input} ref={formRef}>
         <div className="rounded-full border border-gray-300 relative p-2">
           <input
             type="text"
-            value={emojiPick}
+            value={saveTextAndEmoji}
             placeholder="add a comment"
             className="focus:outline-none w-full "
             name="comment"
@@ -62,14 +73,32 @@ export default function CommentInput({
           
           <span
             className="absolute right-5 top-3 cursor-pointer"
-            onClick={handleEmoji}
+            onClick={handleOpenEmoji}
           >
             <IconEmojiSmile />
           </span>
         </div>
-        <div className="">{children}</div>
+        {saveTextAndEmoji && (
+            <button className="btn-sm btn mt-2" type="submit">
+              post
+            </button>
+          )}
         <label htmlFor="">{errorClientSide}</label>
       </form>
+      <div onClick={handleCloseEmoji}>
+        {openEmoji && (
+          <div onClick={handleStopPropagation} className="w-[348px]">
+            <EmojiPicker searchDisabled onEmojiClick={handleSaveEmoji} />
+          </div>
+        )}
+      </div>
+      {optimisticMessages?.map((message, index) => (
+        <div key={index}>
+          <UserComments data={message} />
+         
+          {!!message.sending && <small> (Sending...)</small>}
+        </div>
+      ))}
     </div>
   );
 }

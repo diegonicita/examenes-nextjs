@@ -1,6 +1,7 @@
-export default function UserComments() {
+export default function UserComments({data}:{data:any}) {
   return (
     <section className="grid grid-cols-[40px,1fr] mt-5 ">
+      <>
       <div className="">
         <img
           alt="profile"
@@ -18,7 +19,7 @@ export default function UserComments() {
             <h3 className="text-sm ">...</h3>
           </div>
           <div className="">
-            <p>this is the most famous comment in examens</p>
+            <p>{data.comment_text}</p>
           </div>
         </div>
         <div className="flex flex-row gap-2 ml-2 mt-2">
@@ -26,6 +27,7 @@ export default function UserComments() {
           <span>respuesta</span>
         </div>
       </main>
+      </>
     </section>
   );
 }
