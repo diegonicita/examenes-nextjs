@@ -1,5 +1,5 @@
 'use server'
-import searchQuestionsQuery from './Queries/searchQuestionsQuery'
+import searchQuestionsQuery from './queries/searchQuestionsQuery'
 
 export default async function searchQuestions(queries: string[]) {
   try {

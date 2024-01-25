@@ -43,7 +43,11 @@ export default async function QuestionPage({
               <>
                 {/* <Pagination /> */}
                 {/* <Questions questions={questions} valorations={valorations} />*/}
-                <Examen data={questions} valorations={valorations} />
+                <Examen
+                  data={questions}
+                  valorations={valorations}
+                  logged={auth ? true : false}
+                />
               </>
             )}
           </SearchContainer>

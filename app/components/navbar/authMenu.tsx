@@ -56,17 +56,17 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
           {!isLogged && (
             <>
               <li>
-                <Link href="login">Ingresar</Link>
+                <Link href="/login">Ingresar</Link>
               </li>
               <li>
-                <Link href="register">Registrarte</Link>
+                <Link href="/register">Registrarte</Link>
               </li>
             </>
           )}
           {isLogged && (
             <>
               <li>
-                <Link href="profile" className="justify-between">
+                <Link href="/profile" className="justify-between">
                   Ver tu perfil
                   <span className="badge">New</span>
                 </Link>

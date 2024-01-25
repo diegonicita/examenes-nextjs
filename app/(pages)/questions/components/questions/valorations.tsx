@@ -7,6 +7,9 @@ export const Valorations = ({
   valorations: any
   id_question: number
 }) => {
+  console.log(valorations)
+  console.log(id_question)
+
   return (
     <>
       {valorations && valorations[id_question] && (

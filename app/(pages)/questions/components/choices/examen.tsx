@@ -7,15 +7,20 @@ import Comments from '../questions/comments'
 export const Examen = ({
   data,
   valorations,
+  logged,
 }: {
   data: any
   valorations: any | undefined
+  logged: boolean
 }) => {
   return (
     <>
       {data &&
         data.map((item: QuestionType, index: number) => (
-          <div key={index} className=" border border-gray-400 rounded my-4 px-4 pb-4">
+          <div
+            key={index}
+            className=" border border-gray-400 rounded my-4 px-4 pb-4"
+          >
             <Question
               title={'Pregunta N°' + item.numero}
               questionNumber={item.numero}
@@ -31,8 +36,12 @@ export const Examen = ({
               ]}
               image={''}
             />
-            <Reactions id_question={item.id} valorations={valorations} />
-            <Comments  />
+            {logged && (
+              <>
+                <Reactions id_question={item.id} valorations={valorations} />
+                <Comments />
+              </>
+            )}
           </div>
         ))}
     </>
