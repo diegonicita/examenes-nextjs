@@ -6,12 +6,10 @@ import Comments from '../questions/comments'
 
 export const Examen = ({
   data,
-  valorations,
-  logged,
+  valorations,  
 }: {
   data: any
-  valorations: any | undefined
-  logged: boolean
+  valorations: any | undefined  
 }) => {
   return (
     <>
@@ -36,7 +34,7 @@ export const Examen = ({
               ]}
               image={''}
             />
-            {logged && (
+            {valorations && (
               <>
                 <Reactions id_question={item.id} valorations={valorations} />
                 <Comments />

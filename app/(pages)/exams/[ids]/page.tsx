@@ -44,5 +44,5 @@ export default async function ExamIdPage({
 }
 
 export const metadata = {
-  title: 'Examenes y Temas',
+  title: 'Selecciona el Año del Examen',
 }

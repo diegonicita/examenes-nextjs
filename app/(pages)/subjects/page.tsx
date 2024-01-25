@@ -33,5 +33,5 @@ export default async function SubjectPage() {
 }
 
 export const metadata = {
-  title: 'Preguntas por Tema o Especialidad',
+  title: 'Selecciona un Tema o Especialidad',
 }
