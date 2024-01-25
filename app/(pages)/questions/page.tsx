@@ -4,7 +4,11 @@ import searchQuestions from './actions/searchQuestions'
 import searchWordsSuggestions from './actions/searchWordsSuggestions'
 import SearchContainer from './components/searchContainer'
 import searchValorations from './actions/searchValoration'
-import Examen from './components/choices/examen'
+import type { Question as QuestionType } from '@/app/models/Question'
+import Question from './components/choices/question'
+import Valorations from './components/questions/valorations'
+import ValorationButton from './components/questions/valorationButton'
+import CommentContainer from './components/questions/commentContainer'
 
 export default async function QuestionPage({
   searchParams,
@@ -27,7 +31,7 @@ export default async function QuestionPage({
   }
 
   const questions = await searchQuestions(queries)
-  let valorations = undefined
+  let valorations: undefined = undefined
   if (auth) valorations = await searchValorations(questions)
   const wordsSuggestions = await searchWordsSuggestions(queries)
 
@@ -42,9 +46,39 @@ export default async function QuestionPage({
           >
             {query !== '' && query.length > 2 && (
               <>
-                {/* <Pagination /> */}
-                {/* <Questions questions={questions} valorations={valorations} />*/}
-                <Examen data={questions} valorations={valorations} />
+                {questions &&
+                  questions.map((item: QuestionType, index: number) => (
+                    <div
+                      key={index}
+                      className=" border border-gray-400 rounded my-4 px-4 pb-4"
+                    >
+                      <Question
+                        title={'Pregunta N°' + item.numero}
+                        questionNumber={item.numero}
+                        description={item.texto}
+                        year={item.ano}
+                        correct={item.correcta}
+                        options={[
+                          item.opcion1,
+                          item.opcion2,
+                          item.opcion3,
+                          item.opcion4,
+                          item.opcion5,
+                        ]}
+                        image={''}
+                      />
+                      {valorations && (
+                        <>
+                          <Valorations
+                            id_question={item.id}
+                            valorations={valorations}
+                          />
+                          <ValorationButton id_question={item.id} />
+                          <CommentContainer />
+                        </>
+                      )}
+                    </div>
+                  ))}
               </>
             )}
           </SearchContainer>

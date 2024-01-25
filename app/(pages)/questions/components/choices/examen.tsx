@@ -1,15 +1,8 @@
-'use client'
-import Reactions from '@/app/(pages)/questions/components/questions/reactions'
+import Reactions from '@/app/(pages)/questions/components/questions/commentContainer'
 import type { Question as QuestionType } from '@/app/models/Question'
 import Question from './question'
 
-export const Examen = ({
-  data,
-  valorations,
-}: {
-  data: any
-  valorations: any | undefined
-}) => {
+export const Examen = ({ data }: { data: any }) => {
   return (
     <>
       {data &&
@@ -33,11 +26,6 @@ export const Examen = ({
               ]}
               image={''}
             />
-            {valorations && (
-              <>
-                <Reactions id_question={item.id} valorations={valorations} />
-              </>
-            )}
           </div>
         ))}
     </>

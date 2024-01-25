@@ -9,7 +9,6 @@ export const Valorations = ({
 }) => {
   console.log(valorations)
   console.log(id_question)
-
   return (
     <>
       {valorations && valorations[id_question] && (

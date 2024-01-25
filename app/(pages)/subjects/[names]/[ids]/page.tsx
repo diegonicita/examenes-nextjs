@@ -33,8 +33,8 @@ export default async function page({
 
   const payload = await getInfoAuthCookie()
   const questions = await getExamBySubject(exam.id, subject.id)
-  let valorations = undefined
-  if (payload?.id) valorations = await searchValorations(questions)
+  // let valorations = undefined
+  // if (payload?.id) valorations = await searchValorations(questions)
 
   return (
     <div className="w-full mx-auto max-w-[85ch] px-1">
@@ -46,7 +46,7 @@ export default async function page({
       </h1>
       <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
         <h1 className="text-center mt-2 font-bold text-xl"></h1>
-        <Examen data={questions} valorations={valorations} />
+        <Examen data={questions} />
       </div>
     </div>
   )
