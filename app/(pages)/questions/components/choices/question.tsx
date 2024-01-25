@@ -1,23 +1,18 @@
-"use client"
+'use client'
 import { Option } from './option'
 import { useState } from 'react'
 
 const Question = ({
-  questionNumber,
-  title,
-  description,
-  image,
-  year,
-  correct,
-  options,
+  data: { questionNumber, title, description, year, correct, options },
 }: {
-  questionNumber: number
-  title: string
-  description: string
-  image: string
-  year: number
-  correct: number
-  options: string[]
+  data: {
+    title: string
+    questionNumber: number
+    description: string   
+    year: number
+    correct: number
+    options: string[]
+  }
 }) => {
   const [optionAnswered, setOptionAnswered] = useState<number | null>(null)
   const handleAnswered = (numero: number) => {
