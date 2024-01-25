@@ -1,3 +1,4 @@
+"use client"
 import { Option } from './option'
 import { useState } from 'react'
 

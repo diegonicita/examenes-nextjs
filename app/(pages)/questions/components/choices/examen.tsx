@@ -2,14 +2,13 @@
 import Reactions from '@/app/(pages)/questions/components/questions/reactions'
 import type { Question as QuestionType } from '@/app/models/Question'
 import Question from './question'
-import Comments from '../questions/comments'
 
 export const Examen = ({
   data,
-  valorations,  
+  valorations,
 }: {
   data: any
-  valorations: any | undefined  
+  valorations: any | undefined
 }) => {
   return (
     <>
@@ -37,7 +36,6 @@ export const Examen = ({
             {valorations && (
               <>
                 <Reactions id_question={item.id} valorations={valorations} />
-                <Comments />
               </>
             )}
           </div>
