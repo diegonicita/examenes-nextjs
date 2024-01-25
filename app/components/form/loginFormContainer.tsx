@@ -4,12 +4,8 @@ import Form from './components/form'
 import Buttom from './components/buttom'
 import Input from './components/input'
 import TextArea from './components/textarea'
-// import {
-//   checkFullValidation,
-//   checkPartialValidation,
-//   getErrorsFromResult,
-// } from './consultFormValidation'
-// import { consultFormAction } from './consultFormAction'
+import { checkFullValidation, getErrorsFromResult } from './loginFormValidation'
+import { loginFormAction } from './loginFormAction'
 
 export const LoginFormContainer = () => {
   const formRef = useRef<HTMLFormElement>(null)
@@ -19,27 +15,20 @@ export const LoginFormContainer = () => {
   })
 
   const handleSubmit = async (formData: FormData) => {
-    // const result = checkFullValidation(formData)
-    // const response = getErrorsFromResult(result)
-    // setErrors({ ...errors, ...response })
-    // consultFormAction({ result, formData, formRef })
+    const result = checkFullValidation(formData)
+    console.log(result)
+    const response = getErrorsFromResult(result)
+    console.log(response)
+    setErrors({ ...errors, ...response })
+    loginFormAction({ result, formData, formRef })
   }
 
-  const handleBlur = (
-    event:
-      | React.FocusEvent<HTMLInputElement>
-      | React.FocusEvent<HTMLTextAreaElement>,
-  ) => {
-    // const result = checkPartialValidation(
-    //   new FormData(formRef.current as HTMLFormElement),
-    //   {
-    //     fullname: event.target.id === 'fullname' ? undefined : true,
-    //     email: event.target.id === 'email' ? undefined : true,
-    //     consult: event.target.id === 'consult' ? undefined : true,
-    //   },
-    // )
-    // const response = getErrorsFromResult(result)
-    // setErrors({ ...errors, ...response })
+  const handleBlur = () => {
+    const result = checkFullValidation(
+      new FormData(formRef.current as HTMLFormElement),
+    )
+    const response = getErrorsFromResult(result)
+    setErrors({ ...errors, ...response })
   }
 
   return (
@@ -66,7 +55,7 @@ export const LoginFormContainer = () => {
             error: errors.password,
           }}
           handleBlur={handleBlur}
-        />        
+        />
         <Buttom text="Ingresar" textOnClick="...Espere..." />
       </Form>
     </div>
