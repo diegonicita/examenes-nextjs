@@ -1,6 +1,7 @@
 import Client from './components/client'
 import { cookies } from 'next/headers'
 import MessageLogged from '@/app/components/checkCookie/messageLogged'
+import LoginFormContainer from '@/app/components/form/loginFormContainer'
 
 export default function Login() {
   const email = process.env.USER_EMAIL
@@ -17,6 +18,7 @@ export default function Login() {
               initialPassword={password}
               disabled={isLogged}
             />
+            <LoginFormContainer />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 'use server'
 import type { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
-import searchOwnValorationQuery from './Queries/searchOwnValorationQuery'
+import searchOwnValorationQuery from './queries/searchOwnValorationQuery'
 
 const searchOwnValoration = async (questionId: number) => {
   const authData = (await getInfoAuthCookie()) as UserType

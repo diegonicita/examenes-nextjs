@@ -27,7 +27,8 @@ export default async function QuestionPage({
   }
 
   const questions = await searchQuestions(queries)
-  const valorations = await searchValorations(questions)
+  let valorations = undefined
+  if (auth) valorations = await searchValorations(questions)
   const wordsSuggestions = await searchWordsSuggestions(queries)
 
   return (
@@ -51,8 +52,4 @@ export default async function QuestionPage({
       </CheckServerCookie>
     </div>
   )
-}
-
-export const metadata = {
-  title: 'Buscador de Preguntas',
 }

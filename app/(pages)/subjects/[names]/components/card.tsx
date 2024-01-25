@@ -1,11 +1,17 @@
-import React from 'react'
 import Image from 'next/image'
 import type { ExamType } from '@/app/models/Exam'
 import Link from 'next/link'
 
-export default function Card({ item }: { item: ExamType }) {
+export default function Card({
+  item,
+  subjectId,
+}: {
+  item: ExamType
+  subjectId: string
+}) {
+  const enlace = `/subjects/${subjectId}/${item.id}`
   return (
-    <Link href={`/exams/${item.id}`}>
+    <Link href={enlace}>
       <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator">
         <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">
           {item?.total}
@@ -39,8 +45,7 @@ export default function Card({ item }: { item: ExamType }) {
             {/* <span className="font-bold">Título: </span> */}
             <div className="max-w-[10rem] mx-auto mb-2 text-sm text-pretty">
               {item.titulo ? item.titulo : 'Sin título'}
-              <br />
-              ({item.pais})
+              <br />({item.pais})
             </div>
           </div>
           <div className="h-auto">

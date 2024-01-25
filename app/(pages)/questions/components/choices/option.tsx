@@ -11,7 +11,7 @@ export const Option = ({
   optionNumber,
   texto,
   questionNumber,
-}:{
+}: {
   handleAnswered: (option: number) => void
   optionAnswered: number | null
   correct: number
@@ -31,25 +31,21 @@ export const Option = ({
 
   let backgroundColor = null
   if (optionAnswered === optionNumber && optionAnswered === correct) {
-    backgroundColor =
-      'bg-success text-white hover:bg-success hover:text-white'
+    backgroundColor = 'bg-success text-white hover:bg-success hover:text-white'
   }
   if (optionAnswered === optionNumber && optionAnswered !== correct) {
-    backgroundColor =
-      'bg-error text-white hover:bg-error hover:text-white'
+    backgroundColor = 'bg-error text-white hover:bg-error hover:text-white'
   }
   if (
     optionAnswered &&
     optionAnswered !== optionNumber &&
     optionNumber === correct
   ) {
-    backgroundColor =
-      'bg-success text-white hover:bg-success hover:text-white'
+    backgroundColor = 'bg-success text-white hover:bg-success hover:text-white'
   }
 
   return (
     <>
-      <TailwindToaster />
       <div
         className={`py-2 btn btn-outline btn-md w-full h-fit text-base text-start justify-start ${backgroundColor} text-pretty`}
         onClick={() => handleAnswered(optionNumber)}

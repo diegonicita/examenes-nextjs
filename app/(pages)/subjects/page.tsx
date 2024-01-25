@@ -1,14 +1,10 @@
-import { unstable_noStore as noStore } from 'next/cache'
 import Card from './components/card'
 import type { SubjectType } from '@/app/models/Subject'
 
 async function getData() {
-  noStore()
   const url = process.env.URL_API
   try {
-    const res = await fetch(url + '/api/get-questions-statistics', {
-      cache: 'no-store',
-    })
+    const res = await fetch(url + '/api/get-questions-statistics', {})
     return res.json()
   } catch (error) {
     console.log(error)
@@ -22,7 +18,10 @@ export default async function SubjectPage() {
 
   return (
     <>
-      <h1 className="text-center mt-2 font-bold text-xl"> Preguntas por Tema </h1>
+      <h1 className="text-center mt-2 font-bold text-xl">
+        {' '}
+        Preguntas por Tema{' '}
+      </h1>
       <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
         {data &&
           data.temas.map((p: SubjectType, index: number) => {
@@ -34,5 +33,5 @@ export default async function SubjectPage() {
 }
 
 export const metadata = {
-  title: 'Preguntas por Tema',
+  title: 'Selecciona un Tema o Especialidad',
 }
