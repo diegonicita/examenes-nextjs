@@ -11,37 +11,35 @@ type Props = {
     placeholder: string
     name: string
     id: string
+    type: string
     error: string
   }
 }
 
-export const TextArea = ({ handleBlur, data }: Props) => {
+export const Input = ({ handleBlur, data }: Props) => {
   return (
-    <>
-      <label
-        htmlFor="nombreyapellido"
-        className="text-slate-800 text-base font-medium 
-        font-inter leading-none pb-3"
-      >
-        {data.text}
+    <div className="form-control">
+      <label htmlFor={data.id} className="label">
+        <span className="label-text">{data.text}</span>
       </label>
-      <textarea
+      <input
+        type={data.type}
         placeholder={data.placeholder}
-        className="h-36 px-4 py-4 bg-base rounded-md border border-base-300"
+        className="input input-bordered"
         name={data.name}
         id={data.id}
         autoComplete="off"
         onBlur={handleBlur}
       />
-      <div className="relative pb-8">
+      <div className="relative pb-5">
         {data.error && (
-          <div className="absolute h-2 text-error font-bold text-start px-2">
+          <div className="absolute h-2 text-error text-xs font-bold text-start pt-1 px-2">
             {data.error}
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }
 
-export default TextArea
+export default Input

@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import React, { useState } from 'react'
 
 export const checkFullValidation = (formData: FormData) => {
   return z
@@ -46,7 +45,7 @@ export const checkPartialValidation = (
 }
 
 export const getErrorsFromResult = (result: any) => {
-  let newObject = {fullname: '', email: '', consult: ''}
+  let newObject = { fullname: '', email: '', consult: '' }
   if (!result.success) {
     result.error.issues.forEach((issue: { path: any[]; message: any }) => {
       newObject = {
