@@ -1,4 +1,5 @@
-export default function UserComments({data}:{data:any}) {
+export default function UserComments(data:any) {
+  
   return (
     <section className="grid grid-cols-[40px,1fr] mt-5 ">
       <>
@@ -19,7 +20,7 @@ export default function UserComments({data}:{data:any}) {
             <h3 className="text-sm ">...</h3>
           </div>
           <div className="">
-            <p>{data.comment_text}</p>
+            <p>{data?.data?.comment_text}</p>
           </div>
         </div>
         <div className="flex flex-row gap-2 ml-2 mt-2">

@@ -11,6 +11,7 @@ import Comments from './comments/comments'
 import { getUserComments } from '../../actions/commentPost'
 import UserComments from './comments/userComments'
 import CommentInput from './comments/commentInput'
+import { useSearchParams } from 'next/navigation'
 const initialState = {
   message: 'testing',
 }
@@ -24,8 +25,8 @@ export default function Reactions({
   id_question,
   valorations,
 }: {
-  id_question: number
-  valorations: object
+  id_question?: number
+  valorations?: object
 }) {
   const [valueEmoji, setValueEmoji] = useState<string | null>(null)
   const { pending } = useFormStatus()
@@ -88,7 +89,9 @@ export default function Reactions({
   const [data, setData] = useState <Array<any>>([])
   
   
+  //comments
   const handleOpenComments = async () => {
+  
     setOpenComments(true)
     const result = await getUserComments()
     console.log(result)
@@ -127,7 +130,7 @@ export default function Reactions({
             </>
           )}
         </Tooltip>
-
+        {/* //comments */}
           <button
             type="button"
             className="p-2 w-44 cursor-pointer transition duration-300 bg-base-200 hover:bg-base-300"
@@ -138,10 +141,9 @@ export default function Reactions({
           </div>
           {((openComments ||(data && data.length > 0)) && (
             <div>
-            <Comments >
-
+            {/* <Comments key={data} > */}
             {openComments && <CommentInput messages={data}/>}
-            </Comments>
+            {/* </Comments> */}
           </div>
 ))}
     </>

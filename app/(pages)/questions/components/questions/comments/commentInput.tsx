@@ -1,23 +1,22 @@
-"use client"
+"use client";
 //@ts-ignore
-import { useRef, useState,useOptimistic } from "react";
+import { useRef, useState, useOptimistic } from "react";
 import { IconEmojiSmile } from "../icons";
 import { z } from "zod";
 //@ts-ignore
-import { useFormStatus, useFormStat} from 'react-dom'
 import createComment from "../../../actions/commentPost";
 import useEmoji from "@/app/hooks/questions/comments/useEmoji";
 import EmojiPicker from "emoji-picker-react";
 import UserComments from "./userComments";
 
 
-export default function CommentInput({messages}:{messages?:any}) {
-  const [errorClientSide, setErrorClientSide] = useState("")
+export default function CommentInput({ messages }: { messages?: any }) {
+  const [errorClientSide, setErrorClientSide] = useState("");
   const schema = z.object({
     comment: z
       .string({ invalid_type_error: "el comentario tiene que ser un string" })
       .min(2, { message: "debe contener al meenos una palabra" })
-      .trim()
+      .trim(),
   });
   const {
     saveTextAndEmoji,
@@ -26,38 +25,48 @@ export default function CommentInput({messages}:{messages?:any}) {
     handleStopPropagation,
     openEmoji,
     handleCloseEmoji,
-    handleSaveEmoji
+    handleSaveEmoji,
   } = useEmoji();
-  const formRef = useRef()
-
+  const formRef = useRef<HTMLFormElement>(null);
+ 
   const input = async (formData: FormData) => {
-
-     const newTodo = {comment: formData.get("comment")}
-     const result = schema.safeParse(newTodo)
-     console.log(result)
-     if(!result.success) {
+    const newTodo = { comment: formData.get("comment") };
+    const result = schema.safeParse(newTodo);
+    console.log(result,"result")
+    if (!result.success) {
       result.error.issues.forEach((issue) => {
-        setErrorClientSide(issue.path[0] + ": " + issue.message + ". ")
-        console.log(issue)
-      })
-    
-      return
+        setErrorClientSide(issue.path[0] + ": " + issue.message + ". ");
+        console.log(issue,"issue");
+      });
+
     } else {
-      setErrorClientSide("")
+      setErrorClientSide("");
       formRef?.current?.reset();
-      addOptimisticMessage(result.data)
+      
     }
-    console.log(result.data.comment)
-   await createComment(result.data)
+ 
+addOptimisticMessage(
+{
+  id: 5,
+  id_question: 1,
+  id_user: 1,
+  comment_text: result.data.comment,
+  id_parent_comment: 1
+});
+console.log("After:", optimisticMessages);
+   
+   
+    await createComment(result.data.comment);
   };
   const [optimisticMessages, addOptimisticMessage] = useOptimistic(
     messages,
     (state, newMessage) => {
-      return[...state, newMessage];
+      return [...state, newMessage];
     }
   );
-
   
+  console.log("After:", optimisticMessages);
+
   return (
     <div className=" flex-grow">
       <form action={input} ref={formRef}>
@@ -70,7 +79,7 @@ export default function CommentInput({messages}:{messages?:any}) {
             name="comment"
             onChange={handleInputComment}
           />
-          
+
           <span
             className="absolute right-5 top-3 cursor-pointer"
             onClick={handleOpenEmoji}
@@ -79,10 +88,10 @@ export default function CommentInput({messages}:{messages?:any}) {
           </span>
         </div>
         {saveTextAndEmoji && (
-            <button className="btn-sm btn mt-2" type="submit">
-              post
-            </button>
-          )}
+          <button className="btn-sm btn mt-2" type="submit">
+            post
+          </button>
+        )}
         <label htmlFor="">{errorClientSide}</label>
       </form>
       <div onClick={handleCloseEmoji}>
@@ -95,8 +104,7 @@ export default function CommentInput({messages}:{messages?:any}) {
       {optimisticMessages?.map((message, index) => (
         <div key={index}>
           <UserComments data={message} />
-         
-          {!!message.sending && <small> (Sending...)</small>}
+          {!!message.sending && <small>(Sending...)</small>}
         </div>
       ))}
     </div>
