@@ -1,4 +1,3 @@
-import Reactions from '@/app/(pages)/questions/components/questions/commentContainer'
 import type { Question as QuestionType } from '@/app/models/Question'
 import Question from './question'
 

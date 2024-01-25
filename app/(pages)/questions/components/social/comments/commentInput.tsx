@@ -1,7 +1,7 @@
 "use client";
 //@ts-ignore
 import { useRef, useState, useOptimistic } from "react";
-import { IconEmojiSmile } from "../icons";
+import { IconEmojiSmile } from "../valorations/icons";
 import { z } from "zod";
 //@ts-ignore
 import createComment from "../../../actions/commentPost";

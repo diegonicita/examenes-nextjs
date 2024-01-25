@@ -1,7 +1,7 @@
 import Searchbar from '@/app/(pages)/questions-algolia/components/searchbar'
 import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
-import Pagination from '@/app/(pages)/questions/components/pagination'
+import Pagination from '@/app/(pages)/questions/components/choices/pagination'
 
 export default function QuestionPage({
   searchParams,

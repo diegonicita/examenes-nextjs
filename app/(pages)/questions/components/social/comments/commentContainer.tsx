@@ -1,10 +1,10 @@
 'use client'
 import React, { useState } from 'react'
 //@ts-ignore
-import Comments from './comments/comments'
-import { getUserComments } from '../../actions/commentPost'
-import UserComments from './comments/userComments'
-import CommentInput from './comments/commentInput'
+import Comments from './comments'
+import { getUserComments } from '../../../actions/commentPost'
+import UserComments from './userComments'
+import CommentInput from './commentInput'
 import { useSearchParams } from 'next/navigation'
 
 export default function CommentContainer() {

@@ -1,6 +1,6 @@
 import Card from '@/app/(pages)/subjects/[names]/components/card'
 import type { ExamType } from '@/app/models/Exam'
-import Examen from '@/app/(pages)/questions/components/choices/examen'
+import Examen from '@/app/(pages)/questions/components/questions/examen'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import searchValorations from '@/app/(pages)/questions/actions/searchValoration'
 import getExamBySubject from '../../actions/getExamBySubject'

@@ -1,6 +1,4 @@
 import { useEffect } from 'react'
-// import confetti from 'canvas-confetti'
-import { TailwindToaster } from './tailwindToaster'
 import { notifyCorrect } from './notifyCorrect'
 import { notifyIncorrect } from './notifyIncorrect'
 

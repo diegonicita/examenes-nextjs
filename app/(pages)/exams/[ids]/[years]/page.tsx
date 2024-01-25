@@ -1,7 +1,7 @@
 import type { ExamType } from '@/app/models/Exam'
 import getExam from '@/app/(pages)/exams/actions/getExam'
 import searchValorations from '@/app/(pages)/questions/actions/searchValoration'
-import Examen from '@/app/(pages)/questions/components/choices/examen'
+import Examen from '@/app/(pages)/questions/components/questions/examen'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
 type YearData = {

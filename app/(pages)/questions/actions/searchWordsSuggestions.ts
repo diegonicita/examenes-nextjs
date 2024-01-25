@@ -1,8 +1,8 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
-import { excludedWords } from '@/app/(pages)/questions/components/words/excludedWords'
-import { cleanWord } from '@/app/(pages)/questions/components/words/cleanWord'
+import { excludedWords } from '@/app/(pages)/questions/components/searchbar/excludedWords'
+import { cleanWord } from '@/app/(pages)/questions/components/searchbar/cleanWord'
 
 export default async function searchWords(queries: string[]) {
   // Filtra las consultas que tienen al menos 3 caracteres

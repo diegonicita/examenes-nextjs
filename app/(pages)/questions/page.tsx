@@ -2,13 +2,13 @@ import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 import searchQuestions from './actions/searchQuestions'
 import searchWordsSuggestions from './actions/searchWordsSuggestions'
-import SearchContainer from './components/searchContainer'
+import SearchContainer from './components/searchbar/searchContainer'
 import searchValorations from './actions/searchValoration'
 import type { Question as QuestionType } from '@/app/models/Question'
-import Question from './components/choices/question'
-import Valorations from './components/questions/valorations'
-import ValorationButton from './components/questions/valorationButton'
-import CommentContainer from './components/questions/commentContainer'
+import Question from './components/questions/question'
+import Valorations from './components/social/valorations/valorations'
+import ValorationButton from './components/social/valorations/valorationButton'
+import CommentContainer from './components/social/comments/commentContainer'
 
 export default async function QuestionPage({
   searchParams,

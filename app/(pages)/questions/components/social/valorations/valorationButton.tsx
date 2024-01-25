@@ -1,17 +1,11 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { ReactionBarSelector, ReactionCounter } from '@charkour/react-reactions'
 import Tooltip from './tooltip'
 
 //@ts-ignore
 import { useFormStatus, useFormState, useOptimistic } from 'react-dom'
-import { createValoration } from '../../actions/createValoration'
-import Valorations from './valorations'
-import Comments from './comments/comments'
-import { getUserComments } from '../../actions/commentPost'
-import UserComments from './comments/userComments'
-import CommentInput from './comments/commentInput'
-import { useSearchParams } from 'next/navigation'
+import { createValoration } from '../../../actions/createValoration'
 const initialState = {
   message: 'testing',
 }
