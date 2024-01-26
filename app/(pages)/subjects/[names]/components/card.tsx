@@ -12,6 +12,7 @@ export default function Card({
   const enlace = `/subjects/${subjectId}/${item.id}`
   return (
     <Link href={enlace}>
+      <div className="btn btn-ghost h-full p-0 border-0 hover:bg-white">
       <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator hover:border-2 hover:shadow-2xl h-56">
         <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">
           {item?.total}
@@ -53,6 +54,7 @@ export default function Card({
             {/* {item.descripcion ? item.descripcion : 'sin descripción'} */}
           </div>
         </div>
+      </div>
       </div>
     </Link>
   )
