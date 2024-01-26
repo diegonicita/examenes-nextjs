@@ -1,8 +1,8 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
-import { excludedWords } from '@/app/(pages)/questions/components/words/excludedWords'
-import { cleanWord } from '@/app/(pages)/questions/components/words/cleanWord'
+import { excludedWords } from '@/app/(pages)/questions/components/searchbar/excludedWords'
+import { cleanWord } from '@/app/(pages)/questions/components/searchbar/cleanWord'
 
 export default async function searchWords(queries: string[]) {
   // Filtra las consultas que tienen al menos 3 caracteres
@@ -24,7 +24,7 @@ export default async function searchWords(queries: string[]) {
     )
 
     // Construye y ejecuta la consulta
-    const queryString2 = ` * FROM preguntas WHERE ${conditions}`
+    const queryString2 = `SELECT * FROM preguntas WHERE ${conditions}`
     resultQueryNoLimits = (await executeQuery(
       queryString2,
       queryLikes,
@@ -68,7 +68,7 @@ export default async function searchWords(queries: string[]) {
     .map(([palabra, cantidad]) => ({ palabra, cantidad }))
     .sort((a: any, b: any) => b.cantidad - a.cantidad)
 
-  const palabrasOrdenadas20 = palabrasOrdenadas.slice(0, 5) 
+  const palabrasOrdenadas20 = palabrasOrdenadas.slice(0, 5)
 
   return palabrasOrdenadas20
 }

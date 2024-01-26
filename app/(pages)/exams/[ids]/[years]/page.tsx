@@ -1,7 +1,7 @@
 import type { ExamType } from '@/app/models/Exam'
 import getExam from '@/app/(pages)/exams/actions/getExam'
 import searchValorations from '@/app/(pages)/questions/actions/searchValoration'
-import Examen from '@/app/(pages)/questions/components/choices/examen'
+import Examen from '@/app/(pages)/questions/components/questions/examen'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
 type YearData = {
@@ -35,8 +35,8 @@ export default async function ExamIdPage({
   )
   const payload = await getInfoAuthCookie()
   const questions = await getExam(exam.id, year.ano)
-  let valorations = undefined
-  if (payload?.id) valorations = await searchValorations(questions)
+  // let valorations = undefined
+  // if (payload?.id) valorations = await searchValorations(questions)
 
   return (
     <div className="w-full mx-auto max-w-[85ch] px-1">
@@ -47,7 +47,7 @@ export default async function ExamIdPage({
         <h1 className="text-center mt-2 font-bold text-xl">
           Año {year?.ano} - {year?.cantidad_preguntas} Preguntas
         </h1>
-        <Examen data={questions} valorations={valorations} />
+        <Examen data={questions} />
       </div>
     </div>
   )

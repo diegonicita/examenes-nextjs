@@ -1,17 +1,11 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { ReactionBarSelector, ReactionCounter } from '@charkour/react-reactions'
 import Tooltip from './tooltip'
 
 //@ts-ignore
-import { useFormStatus, useFormState,useOptimistic } from 'react-dom'
-import { createValoration } from '../../actions/createValoration'
-import Valorations from './valorations'
-import Comments from './comments/comments'
-import { getUserComments } from '../../actions/commentPost'
-import UserComments from './comments/userComments'
-import CommentInput from './comments/commentInput'
-import { useSearchParams } from 'next/navigation'
+import { useFormStatus, useFormState, useOptimistic } from 'react-dom'
+import { createValoration } from '../../../actions/createValoration'
 const initialState = {
   message: 'testing',
 }
@@ -21,12 +15,10 @@ export interface ReactionCounterObject {
   by: string
 }
 
-export default function Reactions({
+export default function ValorationButton({
   id_question,
-  valorations,
 }: {
   id_question: number
-  valorations: object
 }) {
   const [valueEmoji, setValueEmoji] = useState<string | null>(null)
   const { pending } = useFormStatus()
@@ -38,7 +30,6 @@ export default function Reactions({
     { label: 'buena', node: '👍', key: 'like' },
     { label: 'mala', node: '👎', key: 'unlike' },
   ]
- 
 
   const ReactBar = () => {
     return (
@@ -82,30 +73,11 @@ export default function Reactions({
     submitFormData()
   }
 
-  {
-    id_question === 1622 && console.log(valueEmoji)
-  }
-  const [openComments, setOpenComments] = useState(false)
-  const [data, setData] = useState <Array<any>>([])
-  
-  
-  //comments
-  const handleOpenComments = async () => {  
-    setOpenComments(true)
-    const result = await getUserComments()
-    console.log(result)
-    setData(result)
-  }
- 
- 
-
   return (
     <>
-      <Valorations id_question={id_question} valorations={valorations} />
       <div className="flex gap-4 ">
         <Tooltip key={valueEmoji} content={<ReactBar />}>
           {!valueEmoji ? (
-            
             <form action={formAction}>
               <button
                 type="submit"
@@ -129,22 +101,7 @@ export default function Reactions({
             </>
           )}
         </Tooltip>
-        {/* //comments */}
-          <button
-            type="button"
-            className="p-2 w-44 cursor-pointer transition duration-300 bg-base-200 hover:bg-base-300"
-            onClick={handleOpenComments}
-          >
-            Comentarios
-          </button>
-          </div>
-          {((openComments ||(data && data.length > 0)) && (
-            <div>
-            {/* <Comments key={data} > */}
-            {openComments && <CommentInput messages={data}/>}
-            {/* </Comments> */}
-          </div>
-))}
+      </div>
     </>
   )
 }

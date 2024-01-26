@@ -1,7 +1,7 @@
 'use client'
 import React, { ReactNode, useRef, useState } from 'react'
-import Searchbar from '@/app/(pages)/questions/components/searchbar'
-import WordsSuggestions from '@/app/(pages)/questions/components/words/wordsSuggestions'
+import Searchbar from '@/app/(pages)/questions/components/searchbar/searchbar'
+import WordsSuggestions from '@/app/(pages)/questions/components/searchbar/wordsSuggestions'
 
 const SearchContainer = ({
   query,

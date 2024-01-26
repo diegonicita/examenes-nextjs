@@ -2,9 +2,13 @@ import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 import searchQuestions from './actions/searchQuestions'
 import searchWordsSuggestions from './actions/searchWordsSuggestions'
-import SearchContainer from './components/searchContainer'
+import SearchContainer from './components/searchbar/searchContainer'
 import searchValorations from './actions/searchValoration'
-import Examen from './components/choices/examen'
+import type { Question as QuestionType } from '@/app/models/Question'
+import Question from './components/questions/question'
+import Valorations from './components/social/valorations/valorations'
+import ValorationButton from './components/social/valorations/valorationButton'
+import CommentContainer from './components/social/comments/commentContainer'
 
 export default async function QuestionPage({
   searchParams,
@@ -27,9 +31,10 @@ export default async function QuestionPage({
   }
 
   const questions = await searchQuestions(queries)
-  let valorations = undefined
+  let valorations: undefined = undefined
   if (auth) valorations = await searchValorations(questions)
   const wordsSuggestions = await searchWordsSuggestions(queries)
+  console.log(wordsSuggestions)
 
   return (
     <div>
@@ -42,9 +47,25 @@ export default async function QuestionPage({
           >
             {query !== '' && query.length > 2 && (
               <>
-                {/* <Pagination /> */}
-                {/* <Questions questions={questions} valorations={valorations} />*/}
-                <Examen data={questions} valorations={valorations} />
+                {questions &&
+                  questions.map((item: QuestionType, index: number) => (
+                    <div
+                      key={index}
+                      className=" border border-gray-400 rounded my-4 px-4 pb-4"
+                    >
+                      <Question item={item} />
+                      {valorations && (
+                        <>
+                          <Valorations
+                            id_question={item.id}
+                            valorations={valorations}
+                          />
+                          <ValorationButton id_question={item.id} />
+                          <CommentContainer />
+                        </>
+                      )}
+                    </div>
+                  ))}
               </>
             )}
           </SearchContainer>
