@@ -30,8 +30,8 @@ const WordsSuggestions = ({
     }
     replace(`${pathname}?${params.toString()}`)
   }
-  console.log(query)
-  console.log(wordsSuggestions)
+  // console.log(query)
+  // console.log(wordsSuggestions)
 
   return (
     <div key={reset} className="mx-auto border border-gray">

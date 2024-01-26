@@ -6,16 +6,17 @@ import { getUserComments } from '../../../actions/commentPost'
 import UserComments from './userComments'
 import CommentInput from './commentInput'
 import { useSearchParams } from 'next/navigation'
+import { selectMessage } from '@/app/lib/redux'
 
 export default function CommentContainer() {
   const [openComments, setOpenComments] = useState(false)
-  const [data, setData] = useState<Array<any>>([])
+  const [data, setData] = useState<any>([])
 
   const handleOpenComments = async () => {
     setOpenComments(true)
     const result = await getUserComments()
     console.log(result)
-    // setData(result)
+    setData(result)
   }
 
   return (
@@ -31,9 +32,9 @@ export default function CommentContainer() {
       </div>
       {(openComments || (data && data.length > 0)) && (
         <div>
-          {/* <Comments key={data} > */}
-          {openComments && <CommentInput messages={data} />}
-          {/* </Comments> */}
+           <Comments key={data}>
+          {openComments && <CommentInput messages={data} setMessages={setData}/>}
+           </Comments> 
         </div>
       )}
     </>

@@ -34,7 +34,7 @@ export default async function QuestionPage({
   let valorations: undefined = undefined
   if (auth) valorations = await searchValorations(questions)
   const wordsSuggestions = await searchWordsSuggestions(queries)
-  console.log(wordsSuggestions)
+  // console.log(wordsSuggestions)
 
   return (
     <div>

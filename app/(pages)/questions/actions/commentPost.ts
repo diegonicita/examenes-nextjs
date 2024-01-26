@@ -18,7 +18,8 @@ const schema = z.object({
     )
     console.log(validatedFields)
 
-   
+    
+    
     // Return early if the form data is invalid
     if (!validatedFields.success) {
       return {
@@ -26,6 +27,7 @@ const schema = z.object({
       }
     }
     if (validatedFields.data.comment) {
+      console.log(validatedFields.data.comment)
       const result = (await executeQuery('insert into comments value (NULL,?,?,?,?)', [
           1,1,validatedFields.data.comment,1
         ])) as RowDataPacket
@@ -38,10 +40,8 @@ const schema = z.object({
   }
 
   export async function getUserComments (){
-    const result = (await executeQuery('SELECT id, id_question, id_user, comment_text, id_parent_comment FROM comments'))
-    
-  return result
-    
-  
+    const result = (await executeQuery('SELECT id, id_question, id_user, comment_text, id_parent_comment FROM comments'))    
+    console.log(result)
+    return result
 
   }
