@@ -7,9 +7,15 @@ function Button({ text, textOnClick }: { text: string; textOnClick: string }) {
 
   return (
     <div className="form-control mt-6">
-      <button type="submit" className="btn btn-primary" disabled={pending}>
-        {!pending ? text : textOnClick}
-      </button>
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className="btn btn-accent w-full max-w-60"
+          disabled={pending}
+        >
+          {!pending ? text : textOnClick}
+        </button>
+      </div>
     </div>
   )
 }
