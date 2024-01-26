@@ -22,7 +22,7 @@ export default async function SubjectPage() {
         {' '}
         Preguntas por Tema{' '}
       </h1>
-      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
+      <div className="flex flex-wrap justify-center gap-4 px-8 max-w-[60rem] mx-auto my-2 mb-8">
         {data &&
           data.temas.map((p: SubjectType, index: number) => {
             if (p.visible) return <Card item={p} key={index} />

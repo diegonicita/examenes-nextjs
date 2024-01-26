@@ -17,11 +17,11 @@ export default async function ExamPage() {
   const data = await getData()
 
   return (
-    <>
+    <>      
       <h1 className="text-center mt-2 font-bold text-xl">
-        Preguntas por Examen
+        Selecciona un Examen
       </h1>
-      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
+      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8 gap-4">
         {data &&
           data.examenes.map((p: ExamType, index: number) => (
             <Card item={p} key={index} />

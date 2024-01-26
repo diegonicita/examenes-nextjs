@@ -18,7 +18,7 @@ export default function Card({
   return (
     <>
       <Link href={`/exams/${item?.id}/${yearData?.ano}`}>
-        <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator">
+        <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator hover:border-2 hover:shadow-2xl h-48">
           <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">
             {yearData?.cantidad_preguntas}
           </span>
@@ -55,8 +55,8 @@ export default function Card({
             {item.titulo ? item.titulo : 'Sin título'}            
           </div> */}
             </div>
-            <div className="flex items-center">
-              <div className="max-w-[10rem] mx-auto mb-2 text-lg">
+            <div className="flex items-center h-full">
+              <div className="max-w-[10rem] mx-auto text-lg">
                 {yearData?.ano}
               </div>
             </div>

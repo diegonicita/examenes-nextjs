@@ -33,7 +33,10 @@ export default async function ExamIdPage({
       <h1 className="text-center mt-2 font-bold text-xl">
         {exam?.titulo} - {exam?.pais}
       </h1>
-      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
+      <h1 className="text-center mt-2 font-bold text-xl">
+        Selecciona el Año del Examen
+      </h1>
+      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8 gap-4">
         {exam &&
           exam.preguntas.map((e: YearData, index: number) => (
             <Card item={exam} key={index} yearData={e} />
