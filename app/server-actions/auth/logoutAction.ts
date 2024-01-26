@@ -2,13 +2,7 @@
 
 import { cookies } from 'next/headers'
 
-type State = {
-  email: string
-  password: string
-  message: string
-}
-
-export const logoutAction = async (prevState: State, formData: FormData) => {
+export const logoutAction = async () => {
   cookies().set('auth', '', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // solo se enviará en HTTPS en producción
@@ -17,6 +11,6 @@ export const logoutAction = async (prevState: State, formData: FormData) => {
     path: '/',
   })
   return {
-    message: JSON.stringify('logout ok'),
+    message: 'success',
   }
 }

@@ -10,6 +10,7 @@ import {
   getErrorsFromResult,
 } from './consultFormValidation'
 import { consultFormAction } from './consultFormAction'
+import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 
 export const ConsultFormContainer = () => {
   const formRef = useRef<HTMLFormElement>(null)
@@ -21,9 +22,10 @@ export const ConsultFormContainer = () => {
 
   const handleSubmit = async (formData: FormData) => {
     const result = checkFullValidation(formData)
-    const response = getErrorsFromResult(result)
-    setErrors({ ...errors, ...response })
-    consultFormAction({ result, formData, formRef })
+    const response1 = getErrorsFromResult(result)
+    setErrors({ ...errors, ...response1 })
+    const response2 = await consultFormAction({ result, formData, formRef })
+    if (response2?.message === 'success') refreshAction()
   }
 
   const handleBlur = (

@@ -30,11 +30,16 @@ export const checkPartialValidation = (
     .object({
       fullname: z
         .string()
-        .min(3, { message: 'Debes ingresar al menos 3 caracteres' }),
-      email: z.string().email({ message: 'Correo Electronico Invalido' }),
+        .min(3, { message: 'Debes ingresar al menos 3 caracteres' })
+        .min(1, { message: 'No dejes el campo vacio' }),
+      email: z
+        .string()
+        .email({ message: 'Correo Electronico Invalido' })
+        .min(1, { message: 'No dejes el campo vacio' }),
       consult: z
         .string()
-        .min(5, { message: 'Debes ingresar al menos 5 caracteres' }),
+        .min(5, { message: 'Debes ingresar al menos 5 caracteres' })
+        .min(1, { message: 'No dejes el campo vacio' }),
     })
     .partial(partial)
     .safeParse({

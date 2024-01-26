@@ -13,15 +13,22 @@ type Props = {
 
 export const loginFormAction = async ({ result, formData, formRef }: Props) => {
   if (result.success) {
-    const resp = await loginAction(formData)
-    console.log(resp)
-    if (resp?.isError === false) {
-      notifySuccess()
-      if (formRef?.current) {
-        formRef?.current.reset()
+    try {
+      const resp = await loginAction(formData)
+      console.log(resp)
+      if (resp?.isError === false) {
+        notifySuccess('Login exitoso. Bienvenido')
+        if (formRef?.current) {
+          formRef?.current.reset()
+        }
+        return { message: 'success'}
+      } else {
+        notifyErrors('Falló el Login. Inténtalo mas tarde.')
+        return { message: 'Errores en el logueo'}
       }
-    } else {
-      notifyErrors()
+    } catch (error) {
+      console.log(error)
+      return { message: 'error try catch'}
     }
   }
 }

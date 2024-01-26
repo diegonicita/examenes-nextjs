@@ -6,36 +6,45 @@ import userNotLogged from '@/app/assets/icon-not-logged.png'
 import userLogged from '@/app/assets/icon-logged.png'
 import Link from 'next/link'
 //@ts-ignore
-import { useFormState } from 'react-dom'
-import { logoutAction } from '@/app/(pages)/(auth)/login/actions/logout'
-import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
+import { logoutAction } from '@/app/server-actions/auth/logoutAction'
 import { redirect } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 
-const notifyLogoutSuccess = () => toast.success('Logout Exitoso')
-
-const initialState = {
-  email: '',
-  password: '',
-  message: '',
-}
+// const notifyLogoutSuccess = () => toast.success('Logout Exitoso')
+export const notifySuccess = (text: string) =>
+  toast.custom(
+    (t) => (
+      <div
+        className={`text-white font-bold bg-success px-6 py-4 shadow  ${
+          t.visible ? 'animate-enter' : 'animate-leave'
+        }`}
+      >
+        {text}
+      </div>
+    ),
+    {
+      position: 'bottom-left',
+    },
+  )
 
 export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
-  const [state, formActionLogout] = useFormState(logoutAction, initialState)
-  const [state2, formActionRefresh] = useFormState(refreshAction, initialState)
   const [isPending, startTransition] = useTransition()
 
-  const handleLogout = () => {
-    formActionLogout()
-    formActionRefresh()
-    notifyLogoutSuccess()
-    setTimeout(
-      () =>
-        startTransition(() => {
-          redirect('/')
-        }),
-      500,
-    )
+  const handleLogout = async () => {
+    const response = await logoutAction()
+    refreshAction()
+    notifySuccess('Logout Exitoso. Hasta la próxima.')
+    await new Promise((res) => setTimeout(res, 500))
+    if (response?.message === 'success') {
+      setTimeout(
+        () =>
+          startTransition(() => {
+            redirect('/')
+          }),
+        500,
+      )
+    }
   }
 
   return (

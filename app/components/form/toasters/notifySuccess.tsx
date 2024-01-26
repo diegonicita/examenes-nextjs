@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
 
-export const notifySuccess = () =>
+export const notifySuccess = (text: string) =>
   toast.custom(
     (t) => (
       <div
@@ -8,7 +8,7 @@ export const notifySuccess = () =>
           t.visible ? 'animate-enter' : 'animate-leave'
         }`}
       >
-        ¡ Consulta Enviada !
+        {text}
       </div>
     ),
     {
