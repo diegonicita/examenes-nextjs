@@ -2,7 +2,10 @@
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
 
-export default async function searchQuestionsQuery(queries: string[], limit: number) {
+export default async function searchQuestionsQuery(
+  queries: string[],
+  limit: number,
+) {
   // Filtra las consultas que tienen al menos 3 caracteres
   const validQueries = queries.filter((q) => q.length > 2)
 
@@ -31,6 +34,5 @@ export default async function searchQuestionsQuery(queries: string[], limit: num
       queryLikes,
     )) as RowDataPacket
   }
-
   return resultQueryLimit10
 }

@@ -57,7 +57,8 @@ export default function CommentInput({
     })
     console.log('After:', optimisticMessages)
 
-    await createComment({ comment: result.data.comment })
+    const response = await createComment({ comment: result.data.comment })
+    console.log(response)
     setMessages((messages: any) => [
       ...messages,
       {
