@@ -14,7 +14,7 @@ const Home = () => {
           <ConsultForm />
         </div>
       </div>
-      <Review />
+      {/* <Review /> */}
     </>
   )
 }
