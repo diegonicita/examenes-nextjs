@@ -59,6 +59,8 @@ export default function CommentInput({
 
     const response = await createComment({ comment: result.data.comment })
     console.log(response)
+    if (response?.message === 'success')
+    {
     setMessages((messages: any) => [
       ...messages,
       {
@@ -69,7 +71,7 @@ export default function CommentInput({
         id_parent_comment: 1,
       },
     ])
-  }
+  }}
 
   const [optimisticMessages, addOptimisticMessage] = useOptimistic(
     messages,

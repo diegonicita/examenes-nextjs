@@ -22,6 +22,7 @@ export default async function createComment(newTodo: unknown) {
     }
   }
   if (validatedFields.data.comment) {
+    await new Promise((res) => setTimeout(res, 1000));
     console.log(validatedFields.data.comment)
     const result = (await executeQuery(
       'insert into comments value (NULL,?,?,?,?)',
@@ -29,7 +30,7 @@ export default async function createComment(newTodo: unknown) {
     )) as RowDataPacket
     if (result) {
       // revalidatePath("/")
-      return { message: 'message' }
+      return { message: 'success' }
     }
   }
 }
