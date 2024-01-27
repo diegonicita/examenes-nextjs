@@ -52,7 +52,7 @@ export const LoginFormContainer = ({ disabled }: Props) => {
 
   return (
     <div className="card w-full bg-base-300 mb-2">
-      <Form handleSubmit={handleSubmit} formRef={formRef}>
+      <Form handleSubmit={handleSubmit} formRef={formRef} title="¡Bienvenido a Exámenes!">
         <fieldset disabled={disabled}>
           <Input
             data={{

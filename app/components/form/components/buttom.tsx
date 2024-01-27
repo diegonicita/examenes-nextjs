@@ -7,7 +7,7 @@ function Button({ text, textOnClick }: { text: string; textOnClick: string }) {
 
   return (
     <div className="form-control mt-6">
-      <div className="flex justify-center">
+      <div className="flex justify-center sm:min-w-80">
         <button
           type="submit"
           className="btn btn-accent w-full max-w-60"
