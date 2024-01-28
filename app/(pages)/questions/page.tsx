@@ -60,8 +60,10 @@ export default async function QuestionPage({
                             id_question={item.id}
                             valorations={valorations}
                           />
-                          <ValorationButton id_question={item.id} />
-                          <CommentContainer />
+                          <div className="flex flex-wrap gap-4">
+                            <ValorationButton id_question={item.id} />
+                            <CommentContainer />
+                          </div>
                         </>
                       )}
                     </div>

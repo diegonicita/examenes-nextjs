@@ -1,6 +1,6 @@
 'use client'
 //@ts-ignore
-import { useRef, useState, useOptimistic } from 'react'
+import React, { useRef, useState, useOptimistic } from 'react'
 import { IconEmojiSmile } from '../valorations/icons'
 import { z } from 'zod'
 //@ts-ignore
@@ -14,7 +14,7 @@ export default function CommentInput({
   setMessages,
 }: {
   messages?: any
-  setMessages: () => void
+  setMessages: React.Dispatch<any> 
 }) {
   const [errorClientSide, setErrorClientSide] = useState('')
   const schema = z.object({
@@ -52,11 +52,12 @@ export default function CommentInput({
       id: 5,
       id_question: 1,
       id_user: 1,
+      //@ts-ignore
       comment_text: result.data.comment,
       id_parent_comment: 1,
     })
     console.log('After:', optimisticMessages)
-
+    //@ts-ignore
     const response = await createComment({ comment: result.data.comment })
     console.log(response)
     if (response?.message === 'success')
@@ -67,6 +68,7 @@ export default function CommentInput({
         id: 5,
         id_question: 1,
         id_user: 1,
+        //@ts-ignore
         comment_text: result.data.comment,
         id_parent_comment: 1,
       },
@@ -75,7 +77,7 @@ export default function CommentInput({
 
   const [optimisticMessages, addOptimisticMessage] = useOptimistic(
     messages,
-    (state, newMessage) => {
+    (state: any, newMessage: any) => {
       return [...state, newMessage]
     },
   )
@@ -83,7 +85,7 @@ export default function CommentInput({
   console.log('After:', optimisticMessages)
 
   return (
-    <div className=" flex-grow">
+    <div className="w-full">
       <form action={input} ref={formRef}>
         <div className="rounded-full border border-gray-300 relative p-2">
           <input
@@ -116,7 +118,7 @@ export default function CommentInput({
           </div>
         )}
       </div>
-      {optimisticMessages?.map((message, index) => (
+      {optimisticMessages?.map((message: any, index: number) => (
         <div key={index}>
           <UserComments data={message} />
           {!!message.sending && <small>(Sending...)</small>}
