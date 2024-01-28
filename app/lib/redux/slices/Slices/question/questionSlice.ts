@@ -4,6 +4,9 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 export type Question = {
   id: number
   selected: number
+  examenId: number
+  year: number
+  correct: boolean
 }
 
 export interface QuestionSliceState {
@@ -32,10 +35,12 @@ export const questionSlice = createSlice({
   },
 })
 
-export const selectQuestion = (
-  state: ReduxState,
-  id: number,
-) => {
+export const selectQuestion = (state: ReduxState, id: number) => {
   // Utilizar find para buscar la pregunta con el ID especificado
   return state.question.answered.find((question) => question.id === id)
+}
+
+export const selectAllQuestion = (state: ReduxState) => {
+  // Utilizar find para buscar la pregunta con el ID especificado
+  return state.question.answered
 }

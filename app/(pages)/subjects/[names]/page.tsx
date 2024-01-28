@@ -23,7 +23,7 @@ export default async function page({ params }: { params: { names: string } }) {
       <h1 className="text-center mt-2 font-bold text-xl">
         Preguntas de {subject?.titulo}
       </h1>
-      <h1 className="text-center mt-2 font-bold text-xl">
+      <h1 className="text-center font-bold text-xl">
         Selecciona un Examen
       </h1>
       <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8 gap-4">

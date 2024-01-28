@@ -43,8 +43,8 @@ export default async function ExamIdPage({
       <h1 className="text-center mt-2 font-bold text-xl">
         {exam?.titulo} - {exam?.pais}
       </h1>
-      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
-        <h1 className="text-center mt-2 font-bold text-xl">
+      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mb-8">
+        <h1 className="text-center font-bold text-xl">
           Año {year?.ano} - {year?.cantidad_preguntas} Preguntas
         </h1>
         <Examen data={questions} />

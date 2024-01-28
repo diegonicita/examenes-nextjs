@@ -15,7 +15,13 @@ const Question = ({ item }: { item: QuestionType }) => {
   const handleAnswered = (numero: number) => {
     // if (optionAnswered === null) setOptionAnswered(numero)
     dispatch(
-      questionSlice.actions.setQuestion({ id: item.id, selected: numero }),
+      questionSlice.actions.setQuestion({
+        id: item.id,
+        selected: numero,
+        examenId: item.examen,
+        correct: item.correcta === numero ? true : false,
+        year: item.ano
+      }),
     )
   }
   // Redux //
