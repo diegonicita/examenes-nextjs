@@ -45,6 +45,7 @@ export default async function ExamIdPage({
               key={index}
               year={e.ano}
               link={`/exams/${exam.id}/${e.ano}`}
+              total={e.cantidad_preguntas}
             />
           ))}
       </div>

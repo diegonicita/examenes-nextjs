@@ -29,6 +29,7 @@ export default async function ExamPage() {
               key={index}
               year={undefined}
               link={`/exams/${p.id}`}
+              total={p.total}
             />
           ))}
       </div>

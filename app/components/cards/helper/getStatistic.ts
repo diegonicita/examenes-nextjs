@@ -4,13 +4,19 @@ export const getStatistics = ({
   data,
   year,
   id,
-  total,
 }: {
   data: QuestionLib[]
   year: number | undefined
   id: number
-  total: number
 }) => {
+  const total = data.filter((answeredQuestion) => {
+    console.log(year)
+    if (year === undefined) return answeredQuestion.examenId === id
+    else {
+      return answeredQuestion.examenId === id && answeredQuestion.year === year
+    }
+  }).length
+
   const answered = data.filter((answeredQuestion) => {
     if (year === undefined) return answeredQuestion.examenId === id
     else {

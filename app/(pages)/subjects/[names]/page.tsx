@@ -32,6 +32,7 @@ export default async function page({ params }: { params: { names: string } }) {
               key={index}
               year={undefined}
               link={`/subjects/${params.names}/${p.id}`}
+              total={p.total}
             />
           ))}
       </div>
