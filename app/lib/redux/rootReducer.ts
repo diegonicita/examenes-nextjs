@@ -1,5 +1,5 @@
 /* Instruments */
-import { counterSlice, messageSlice, userSlice } from './slices'
+import { counterSlice, messageSlice, userSlice, questionSlice } from './slices'
 import { pokemonApi } from '../services/pokemon'
 import { choiceApi } from '../services/choice'
 
@@ -9,4 +9,5 @@ export const reducer = {
   counter: counterSlice.reducer,
   message: messageSlice.reducer,
   user: userSlice.reducer,
+  question: questionSlice.reducer,
 }

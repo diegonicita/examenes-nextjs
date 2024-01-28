@@ -11,7 +11,7 @@ export const Option = ({
   questionNumber,
 }: {
   handleAnswered: (option: number) => void
-  optionAnswered: number | null
+  optionAnswered: number | undefined
   correct: number
   optionNumber: number
   texto: string
@@ -19,11 +19,11 @@ export const Option = ({
 }) => {
   useEffect(() => {
     if (optionAnswered === optionNumber && optionAnswered === correct) {
-      notifyCorrect(questionNumber)
+      // notifyCorrect(questionNumber)
       // confetti()
     }
     if (optionAnswered === optionNumber && optionAnswered !== correct) {
-      notifyIncorrect(questionNumber)
+      // notifyIncorrect(questionNumber)
     }
   }, [optionAnswered])
 
