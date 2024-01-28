@@ -1,4 +1,4 @@
-import Card from './components/card'
+import CardSubject from '@/app/components/cards/cardSubject'
 import type { SubjectType } from '@/app/models/Subject'
 
 async function getData() {
@@ -18,14 +18,11 @@ export default async function SubjectPage() {
 
   return (
     <>
-      <h1 className="text-center mt-2 font-bold text-xl">
-        {' '}
-        Preguntas por Tema{' '}
-      </h1>
+      <h1 className="text-center mt-2 font-bold text-xl">Preguntas por Tema</h1>
       <div className="flex flex-wrap justify-center gap-4 px-8 max-w-[60rem] mx-auto my-2 mb-8">
         {data &&
           data.temas.map((p: SubjectType, index: number) => {
-            if (p.visible) return <Card item={p} key={index} />
+            if (p.visible) return <CardSubject item={p} key={index} />
           })}
       </div>
     </>

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import type { SubjectType } from '@/app/models/Subject'
 import Link from 'next/link'
 
-export default function Card({ item }: { item: SubjectType }) {
+export default function CardSubject({ item }: { item: SubjectType }) {
   const enlace = `/subjects/${item.id}`
   return (
     <Link href={enlace}>
