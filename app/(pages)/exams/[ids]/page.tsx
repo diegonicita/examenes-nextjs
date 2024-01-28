@@ -1,4 +1,5 @@
-import Card from './components/card'
+// import Card from './components/card'
+import CardExam from '@/app/components/cards/cardExam'
 import type { ExamType } from '@/app/models/Exam'
 
 type YearData = {
@@ -39,7 +40,12 @@ export default async function ExamIdPage({
       <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mt-2 mx-auto mb-8 gap-4">
         {exam &&
           exam.preguntas.map((e: YearData, index: number) => (
-            <Card item={exam} key={index} yearData={e} />
+            <CardExam
+              item={exam}
+              key={index}
+              year={e.ano}
+              link={`/exams/${exam.id}/${e.ano}`}
+            />
           ))}
       </div>
     </>

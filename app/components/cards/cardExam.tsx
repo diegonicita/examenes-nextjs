@@ -3,26 +3,29 @@ import React from 'react'
 import Image from 'next/image'
 import type { ExamType } from '@/app/models/Exam'
 import Link from 'next/link'
-/* Instruments */
 import { useSelector, selectAllQuestion } from '@/app/lib/redux'
+import { getStatistics } from './helper/getStatistic'
 
-export default function Card({ item }: { item: ExamType }) {
+export default function Card({
+  item,
+  year,
+  link,
+}: {
+  item: ExamType
+  year: number | undefined
+  link: string
+}) {
   const answeredArray = useSelector((state) => selectAllQuestion(state))
-
-  const answered = answeredArray.filter(
-    (answeredQuestion) => answeredQuestion.examenId === item.id,
-  ).length
-  const corrects = answeredArray.filter(
-    (answeredQuestion) =>
-      answeredQuestion.examenId === item.id && answeredQuestion.correct,
-  ).length
-  const total = item.total
-  const percentCorrect = answered !== 0 ? ((corrects * 100) / answered).toFixed(1) : 0
-  const percentNotCorrect =
-    answered !== 0 ? (((answered - corrects) * 100) / answered).toFixed(1) : 0
+  const { answered, corrects, total, percentCorrect, percentNotCorrect } =
+    getStatistics({
+      data: answeredArray,
+      year: undefined,
+      id: item.id,
+      total: item.total,
+    })
 
   return (
-    <Link href={`/exams/${item.id}`}>
+    <Link href={link}>
       <div className="btn btn-ghost h-full p-0 border-0 hover:bg-white">
         <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator hover:border-2 hover:shadow-2xl h-auto pb-4">
           <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">
@@ -54,19 +57,20 @@ export default function Card({ item }: { item: ExamType }) {
           <div className="text-lg text-center flex-1">
             <div className="h-full flex flex-col items-center p-1">
               <div className="max-w-[10rem] mx-auto mb-2 text-sm text-pretty">
-                {item.titulo ? item.titulo : 'Sin título'}
-                <br />({item.pais})
-              </div>             
+                {!year && (
+                  <>
+                    {item.titulo ? item.titulo : 'Sin título'} <br /> (
+                    {item.pais})
+                  </>
+                )}
+                {year && <>Año {year}</>}
+              </div>
               <div className="text-xs text-success">
                 Correctas: {corrects} ({percentCorrect}%)
               </div>
               <div className="text-xs text-error">
                 Incorrectas: {answered - corrects} ({percentNotCorrect}%)
               </div>
-            </div>
-            <div className="h-auto">
-              <span className="font-bold"></span>
-              {/* {item.descripcion ? item.descripcion : 'sin descripción'} */}
             </div>
           </div>
         </div>

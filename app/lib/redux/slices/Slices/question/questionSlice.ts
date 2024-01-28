@@ -1,16 +1,8 @@
 import type { ReduxState } from '@/app/lib/redux'
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-
-export type Question = {
-  id: number
-  selected: number
-  examenId: number
-  year: number
-  correct: boolean
-}
-
+import type { QuestionLib } from '@/app/models/QuestionLib'
 export interface QuestionSliceState {
-  answered: Question[]
+  answered: QuestionLib[]
 }
 
 const initialState: QuestionSliceState = {
@@ -21,7 +13,7 @@ export const questionSlice = createSlice({
   name: 'question',
   initialState,
   reducers: {
-    setQuestion: (state, action: PayloadAction<Question>) => {
+    setQuestion: (state, action: PayloadAction<QuestionLib>) => {
       const { id } = action.payload
       // Verificar si la pregunta con el mismo ID ya existe
       const existingQuestion = state.answered.find(
