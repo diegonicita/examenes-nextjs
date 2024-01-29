@@ -13,7 +13,7 @@ const CheckServerCookie = ({
   if (!auth) {
     const formData = new FormData()
     formData.append('auth', 'false')
-    refreshAction(formData)
+    refreshAction()
   }
   return (
     <>
