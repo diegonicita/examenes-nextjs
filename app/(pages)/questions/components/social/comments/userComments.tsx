@@ -1,4 +1,7 @@
+import ReplyComments from "./replyComments";
+
 export default function UserComments(data:any) {
+  console.log(data)
   
   return (
     <section className="grid grid-cols-[40px,1fr] mt-5 ">
@@ -23,10 +26,8 @@ export default function UserComments(data:any) {
             <p>{data?.data?.comment_text}</p>
           </div>
         </div>
-        <div className="flex flex-row gap-2 ml-2 mt-2">
-          <span>que opinas</span>
-          <span>respuesta</span>
-        </div>
+       
+        
       </main>
       </>
     </section>

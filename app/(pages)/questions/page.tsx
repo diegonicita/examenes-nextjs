@@ -9,6 +9,8 @@ import Question from './components/questions/question'
 import Valorations from './components/social/valorations/valorations'
 import ValorationButton from './components/social/valorations/valorationButton'
 import CommentContainer from './components/social/comments/commentContainer'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { UserType } from '@/app/models/User'
 
 export default async function QuestionPage({
   searchParams,
@@ -21,6 +23,7 @@ export default async function QuestionPage({
   const auth = cookies().get('auth')
   const currentPage = Number(searchParams?.page) || 1
   const query = searchParams?.query || ''
+  const authData = (await getInfoAuthCookie()) as UserType
   let queries: string | string[]
   if (query) {
     // Divide la cadena en un array de palabras si no está vacía
@@ -62,7 +65,7 @@ export default async function QuestionPage({
                           />
                           <div className="flex flex-wrap gap-4">
                             <ValorationButton id_question={item.id} />
-                            <CommentContainer />
+                            <CommentContainer id_question={item.id} id_user={authData.id}/>
                           </div>
                         </>
                       )}

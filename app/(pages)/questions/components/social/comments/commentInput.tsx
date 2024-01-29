@@ -1,28 +1,24 @@
 'use client'
 //@ts-ignore
-import React, { useRef, useState, useOptimistic } from 'react'
+import React from 'react'
 import { IconEmojiSmile } from '../valorations/icons'
-import { z } from 'zod'
 //@ts-ignore
-import createComment from '../../../actions/commentPost'
 import useEmoji from '@/app/hooks/questions/comments/useEmoji'
 import EmojiPicker from 'emoji-picker-react'
 import UserComments from './userComments'
+import useCommentInput from '@/app/hooks/questions/comments/commentInput'
 
 export default function CommentInput({
   messages,
   setMessages,
+  id_question,
+  id_user
 }: {
   messages?: any
-  setMessages: React.Dispatch<any> 
+  setMessages?: React.Dispatch<any>,
+  
 }) {
-  const [errorClientSide, setErrorClientSide] = useState('')
-  const schema = z.object({
-    comment: z
-      .string({ invalid_type_error: 'el comentario tiene que ser un string' })
-      .min(2, { message: 'debe contener al meenos una palabra' })
-      .trim(),
-  })
+  
   const {
     saveTextAndEmoji,
     handleInputComment,
@@ -32,58 +28,8 @@ export default function CommentInput({
     handleCloseEmoji,
     handleSaveEmoji,
   } = useEmoji()
-  const formRef = useRef<HTMLFormElement>(null)
-
-  const input = async (formData: FormData) => {
-    const newTodo = { comment: formData.get('comment') }
-    const result = schema.safeParse(newTodo)
-    console.log(result, 'result')
-    if (!result.success) {
-      result.error.issues.forEach((issue) => {
-        setErrorClientSide(issue.path[0] + ': ' + issue.message + '. ')
-        console.log(issue, 'issue')
-      })
-    } else {
-      setErrorClientSide('')
-      formRef?.current?.reset()
-    }
-
-    addOptimisticMessage({
-      id: 5,
-      id_question: 1,
-      id_user: 1,
-      //@ts-ignore
-      comment_text: result.data.comment,
-      id_parent_comment: 1,
-    })
-    console.log('After:', optimisticMessages)
-    //@ts-ignore
-    const response = await createComment({ comment: result.data.comment })
-    console.log(response)
-    if (response?.message === 'success')
-    {
-    setMessages((messages: any) => [
-      ...messages,
-      {
-        id: 5,
-        id_question: 1,
-        id_user: 1,
-        //@ts-ignore
-        comment_text: result.data.comment,
-        id_parent_comment: 1,
-      },
-    ])
-  }}
-
-  const [optimisticMessages, addOptimisticMessage] = useOptimistic(
-    messages,
-    (state: any, newMessage: any) => {
-      return [...state, newMessage]
-    },
-  )
-
-  console.log('After:', optimisticMessages)
-
+  const {formRef,errorClientSide,optimisticMessages,input} = useCommentInput({messages,setMessages,id_question,id_user})
+  
   return (
     <div className="w-full">
       <form action={input} ref={formRef}>
