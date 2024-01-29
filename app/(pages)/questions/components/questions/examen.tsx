@@ -1,3 +1,4 @@
+'use client'
 import type { QuestionSQL as QuestionType } from '@/app/models/QuestionSQL'
 import Question from './question'
 

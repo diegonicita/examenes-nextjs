@@ -1,12 +1,22 @@
 import type { ReduxState } from '@/app/lib/redux'
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import type { QuestionLib } from '@/app/models/QuestionLib'
+
 export interface QuestionSliceState {
   answered: QuestionLib[]
 }
 
+const questions = () => {
+  if (typeof window !== 'undefined')
+    if (localStorage.getItem('question') !== null) {
+      const r = localStorage.getItem('question')
+      return JSON.parse(r || '[]')
+    }
+  return []
+}
+
 const initialState: QuestionSliceState = {
-  answered: [],
+  answered: questions(),
 }
 
 export const questionSlice = createSlice({
@@ -16,13 +26,14 @@ export const questionSlice = createSlice({
     setQuestion: (state, action: PayloadAction<QuestionLib>) => {
       const { id } = action.payload
       // Verificar si la pregunta con el mismo ID ya existe
-      const existingQuestion = state.answered.find(
+      const existingQuestionIndex = state.answered.findIndex(
         (question) => question.id === id,
       )
       // Si no existe, agregarla al array
-      if (!existingQuestion) {
+      if (existingQuestionIndex === -1) {
         state.answered.push(action.payload)
       }
+      localStorage.setItem('question', JSON.stringify(state.answered))
     },
   },
 })
