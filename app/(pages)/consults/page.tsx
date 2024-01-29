@@ -15,7 +15,7 @@ const Page = async () => {
 }
 
 export const metadata = {
-  title: 'Consultas',
+  title: 'Admin Only',
 }
 
 export default Page

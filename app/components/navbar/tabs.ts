@@ -18,13 +18,19 @@ export const tabs = [
     requireLogin: false,
   },
   {
-    name: 'Buscador de Preguntas',
+    name: 'Buscador',
     path: '/questions',
     active: true,
     requireLogin: true,
   },
   {
-    name: 'Tus Consultas',
+    name: 'Progreso',
+    path: '/progress',
+    active: true,
+    requireLogin: false,
+  },
+  {
+    name: 'Admin',
     path: '/consults',
     active: true,
     requireLogin: true,

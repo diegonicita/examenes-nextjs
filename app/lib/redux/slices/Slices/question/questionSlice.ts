@@ -35,6 +35,15 @@ export const questionSlice = createSlice({
       }
       localStorage.setItem('question', JSON.stringify(state.answered))
     },
+    deleteQuestionsByExamenId: (state, action: PayloadAction<number>) => {
+      const examenIdToDelete = action.payload
+      // Filtrar las preguntas que no pertenecen al examenId a eliminar
+      state.answered = state.answered.filter(
+        (question) => question.examenId !== examenIdToDelete,
+      )
+
+      localStorage.setItem('question', JSON.stringify(state.answered))
+    },
   },
 })
 

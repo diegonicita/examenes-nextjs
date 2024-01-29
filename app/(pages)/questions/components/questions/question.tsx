@@ -1,6 +1,5 @@
 'use client'
 import { Option } from './option'
-import { useState } from 'react'
 import type { QuestionSQL as QuestionType } from '@/app/models/QuestionSQL'
 /* Instruments */
 import {
