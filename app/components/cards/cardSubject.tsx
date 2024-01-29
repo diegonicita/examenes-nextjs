@@ -1,28 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
-import type { ExamType } from '@/app/models/Exam'
+import type { SubjectType } from '@/app/models/Subject'
 import Link from 'next/link'
 
-type YearData = {
-  ano: number
-  cantidad_preguntas: number
-}
-
-export default function Card({
-  item,
-  yearData,
-}: {
-  item: ExamType
-  yearData: YearData
-}) {
+export default function CardSubject({ item }: { item: SubjectType }) {
+  const enlace = `/subjects/${item.id}`
   return (
-    <>
-      <Link href={`/exams/${item?.id}/${yearData?.ano}`}>
-        <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator">
+    <Link href={enlace}>
+      <div className="btn btn-ghost h-full p-0 border-0 hover:bg-white">
+        <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator hover:border-2 hover:shadow-2xl h-40 pt-2">
           <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">
-            {yearData?.cantidad_preguntas}
+            {item?.total}
           </span>
-          <figure className="pt-2">
+          <figure className="pt-0">
             {item.imagen ? (
               <Image
                 src={
@@ -32,7 +22,7 @@ export default function Card({
                 width={0}
                 height={0}
                 sizes={'100vh'}
-                className="h-auto w-80 sm:w-60 lg:w-32"
+                className="h-auto w-80 sm:w-60 lg:w-28"
               />
             ) : (
               <Image
@@ -49,15 +39,10 @@ export default function Card({
             {/* <h1 className="font-bold">
           Código: <span>{item.id}</span>
         </h1> */}
-            <div className="flex items-center">
+            <div className="h-full flex items-center p-1">
               {/* <span className="font-bold">Título: </span> */}
-              {/* <div className="max-w-[10rem] mx-auto text-sm text-pretty">
-            {item.titulo ? item.titulo : 'Sin título'}            
-          </div> */}
-            </div>
-            <div className="flex items-center">
-              <div className="max-w-[10rem] mx-auto mb-2 text-lg">
-                {yearData?.ano}
+              <div className="max-w-[10rem] text-sm mx-auto mb-2">
+                {item.titulo ? item.titulo : 'Sin título'}
               </div>
             </div>
             <div className="h-auto">
@@ -66,7 +51,7 @@ export default function Card({
             </div>
           </div>
         </div>
-      </Link>
-    </>
+      </div>
+    </Link>
   )
 }

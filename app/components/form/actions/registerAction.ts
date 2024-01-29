@@ -1,15 +1,7 @@
 'use server'
-
 import { cookies } from 'next/headers'
 
-type State = {
-  username: string
-  email: string
-  password: string
-  message: string
-}
-
-export const registerAction = async (prevState: State, formData: FormData) => {
+export const registerAction = async (formData: FormData) => {
   const url = process.env.URL_REGISTER
   const username = formData.get('username')
   const email = formData.get('email')
@@ -28,13 +20,12 @@ export const registerAction = async (prevState: State, formData: FormData) => {
       credentials: 'include', // incluir la cookie en las solicitudes
       cache: 'no-store',
     })
-    const result = await response.json()
-    console.log(result)
+    const result = await response.json()    
     if (result.isError === false) {
       cookies().set('auth', result.token)
       return {
         response: 'register exitoso',
-        message: result.message,
+        message: 'success',
       }
     }
     if (result.isError === true) {

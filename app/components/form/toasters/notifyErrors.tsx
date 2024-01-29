@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
 
-export const notifyErrors = () =>
+export const notifyErrors = (text: string) =>
   toast.custom(
     (t) => (
       <div
@@ -8,7 +8,7 @@ export const notifyErrors = () =>
           t.visible ? 'animate-enter' : 'animate-leave'
         }`}
       >
-        Consulta no enviada. Intenta más tarde.
+        {text}
       </div>
     ),
     {

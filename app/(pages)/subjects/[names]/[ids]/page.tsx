@@ -1,8 +1,5 @@
-import Card from '@/app/(pages)/subjects/[names]/components/card'
 import type { ExamType } from '@/app/models/Exam'
 import Examen from '@/app/(pages)/questions/components/questions/examen'
-import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
-import searchValorations from '@/app/(pages)/questions/actions/searchValoration'
 import getExamBySubject from '../../actions/getExamBySubject'
 
 async function getData() {
@@ -12,7 +9,6 @@ async function getData() {
     return res.json()
   } catch (error) {
     console.log(error)
-
     return null
   }
 }
@@ -30,18 +26,14 @@ export default async function page({
   const exam = data?.examenes.find(
     (p: ExamType) => p.id === parseInt(params.ids),
   )
-
-  const payload = await getInfoAuthCookie()
   const questions = await getExamBySubject(exam.id, subject.id)
-  // let valorations = undefined
-  // if (payload?.id) valorations = await searchValorations(questions)
 
   return (
     <div className="w-full mx-auto max-w-[85ch] px-1">
       <h1 className="text-center mt-2 font-bold text-xl">
         Preguntas de {subject?.titulo}
       </h1>
-      <h1 className="text-center mt-2 font-bold text-xl">
+      <h1 className="text-center font-bold text-xl">
         {exam?.titulo} - {exam?.pais}
       </h1>
       <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">

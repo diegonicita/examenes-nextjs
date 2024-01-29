@@ -3,7 +3,7 @@ import React from 'react'
 
 import { notifyErrors } from '@/app/components/form/toasters/notifyErrors'
 import { notifySuccess } from '@/app/components/form/toasters/notifySuccess'
-import { loginAction } from '@/app/components/form/actions/loginAction'
+import { registerAction } from '@/app/components/form/actions/registerAction'
 
 type Props = {
   result: { success: any }
@@ -11,24 +11,24 @@ type Props = {
   formRef: React.MutableRefObject<HTMLFormElement | null> | undefined
 }
 
-export const loginFormAction = async ({ result, formData, formRef }: Props) => {
+export const registerFormAction = async ({ result, formData, formRef }: Props) => {
   if (result.success) {
     try {
-      const resp = await loginAction(formData)
+      const resp = await registerAction(formData)
       console.log(resp)
-      if (resp?.isError === false) {
-        notifySuccess('Login exitoso. Bienvenido')
+      if (resp?.message === 'success') {
+        notifySuccess('Register exitoso. Bienvenido')
         if (formRef?.current) {
           formRef?.current.reset()
         }
         return { message: 'success'}
       } else {
-        notifyErrors('Falló el Login. Inténtalo mas tarde.')
-        return { message: 'Errores en el logueo'}
+        notifyErrors('El Register falló. Inténtalo mas tarde.')
+        return { message: 'Errores en el registro'}
       }
     } catch (error) {
       console.log(error)
-      return { message: 'error try catch en login'}
+      return { message: 'error try catch en register'}
     }
   }
 }

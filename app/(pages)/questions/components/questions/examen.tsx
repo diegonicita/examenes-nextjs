@@ -1,4 +1,4 @@
-import type { Question as QuestionType } from '@/app/models/Question'
+import type { QuestionSQL as QuestionType } from '@/app/models/QuestionSQL'
 import Question from './question'
 
 export const Examen = ({ data }: { data: any }) => {

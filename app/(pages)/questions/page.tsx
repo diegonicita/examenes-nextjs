@@ -4,7 +4,7 @@ import searchQuestions from './actions/searchQuestions'
 import searchWordsSuggestions from './actions/searchWordsSuggestions'
 import SearchContainer from './components/searchbar/searchContainer'
 import searchValorations from './actions/searchValoration'
-import type { Question as QuestionType } from '@/app/models/Question'
+import type { QuestionSQL } from '@/app/models/QuestionSQL'
 import Question from './components/questions/question'
 import Valorations from './components/social/valorations/valorations'
 import ValorationButton from './components/social/valorations/valorationButton'
@@ -48,7 +48,7 @@ export default async function QuestionPage({
             {query !== '' && query.length > 2 && (
               <>
                 {questions &&
-                  questions.map((item: QuestionType, index: number) => (
+                  questions.map((item: QuestionSQL, index: number) => (
                     <div
                       key={index}
                       className=" border border-gray-400 rounded my-4 px-4 pb-4"
@@ -60,8 +60,10 @@ export default async function QuestionPage({
                             id_question={item.id}
                             valorations={valorations}
                           />
-                          <ValorationButton id_question={item.id} />
-                          <CommentContainer />
+                          <div className="flex flex-wrap gap-4">
+                            <ValorationButton id_question={item.id} />
+                            <CommentContainer />
+                          </div>
                         </>
                       )}
                     </div>

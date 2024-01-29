@@ -3,10 +3,7 @@ import React, { useState } from 'react'
 //@ts-ignore
 import Comments from './comments'
 import { getUserComments } from '../../../actions/commentPost'
-import UserComments from './userComments'
 import CommentInput from './commentInput'
-import { useSearchParams } from 'next/navigation'
-import { selectMessage } from '@/app/lib/redux'
 
 export default function CommentContainer() {
   const [openComments, setOpenComments] = useState(false)
@@ -31,7 +28,7 @@ export default function CommentContainer() {
         </button>
       </div>
       {(openComments || (data && data.length > 0)) && (
-        <div>
+        <div className="w-full pr-8">
            <Comments key={data}>
           {openComments && <CommentInput messages={data} setMessages={setData}/>}
            </Comments> 

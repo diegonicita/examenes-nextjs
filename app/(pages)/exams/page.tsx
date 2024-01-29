@@ -1,4 +1,4 @@
-import Card from '@/app/(pages)/exams/components/card'
+import CardExam from '@/app/components/cards/cardExam'
 import type { ExamType } from '@/app/models/Exam'
 
 async function getData() {
@@ -19,12 +19,18 @@ export default async function ExamPage() {
   return (
     <>
       <h1 className="text-center mt-2 font-bold text-xl">
-        Preguntas por Examen
+        Selecciona un Examen
       </h1>
-      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
+      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8 gap-4">
         {data &&
           data.examenes.map((p: ExamType, index: number) => (
-            <Card item={p} key={index} />
+            <CardExam
+              item={p}
+              key={index}
+              year={undefined}
+              link={`/exams/${p.id}`}
+              total={p.total}
+            />
           ))}
       </div>
     </>

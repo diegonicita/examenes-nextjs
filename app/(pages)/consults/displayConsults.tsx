@@ -1,9 +1,9 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import Consults from '@/app/(pages)/consults/components/display/consults'
+import Consults from '@/app/(pages)/consults/components/consults'
 import { RowDataPacket } from 'mysql2'
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
-import getRole from './getRole'
+import getRole from '@/app/server-actions/helpers/getRole'
 
 type Auth = { auth: RequestCookie | undefined }
 

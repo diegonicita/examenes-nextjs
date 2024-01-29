@@ -12,7 +12,7 @@ type Props = {
     name: string
     id: string
     type: string
-    error: string
+    error: string    
   }
 }
 

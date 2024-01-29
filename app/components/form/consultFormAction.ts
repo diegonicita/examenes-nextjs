@@ -18,12 +18,14 @@ export const consultFormAction = async ({
   if (result.success) {
     const resp = await insertConsult(formData)
     if (resp?.message === 'success') {
-      notifySuccess()
+      notifySuccess('Consulta enviada exitosamente. Gracias')
       if (formRef?.current) {
         formRef?.current.reset()
       }
+      return { message: 'success' }
     } else {
-      notifyErrors()
+      notifyErrors('Consulta no enviada. Intenta más tarde.')
+      return { message: 'error' }
     }
   }
 }

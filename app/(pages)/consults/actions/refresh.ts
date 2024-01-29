@@ -2,7 +2,8 @@
 
 import { revalidatePath } from 'next/cache'
 
-export const refreshAction = async (formData: FormData) => {
+export const refreshAction = async () => {
+  revalidatePath('/')
   revalidatePath('/consults')
   revalidatePath('/questions')
 }

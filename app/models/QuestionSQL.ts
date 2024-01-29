@@ -1,4 +1,4 @@
-export type Question = {
+export type QuestionSQL = {
   id: number
   numero: number
   texto: string

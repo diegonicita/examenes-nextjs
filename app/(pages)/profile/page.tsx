@@ -10,16 +10,21 @@ const Profile = async () => {
     const authData = (await getInfoAuthCookie()) as UserType
     if (authData) {
       return (
-        <div className="flex flex-col items-center mt-4">
-          <div>
-            <div className="text-xl pb-4 font-bold">Perfil del Usuario</div>
-            <div>Usuario Id: {authData && authData.id?.toString()}</div>
-            <div>Usuario: {authData && authData.username}</div>
-            <div>Correo: {authData && authData.email}</div>
+        <div className="flex flex-col items-center mt-4 justify-center">
+          <div className="bg-base-200 p-2 rounded">
+            <img
+              src={
+                'https://mercado.webapp.ar/images_avatar/avatar-001-normal.png'
+              }
+            />
+            <div className="text-xl pb-4 font-bold text-center">Perfil del Usuario</div>
+            <div>ID: {authData && authData.id?.toString()}</div>
+            <div>Nombre: {authData && authData.username}</div>
+            <div>Email: {authData && authData.email}</div>
             <div>Rol: {authData && authData.role} </div>
           </div>
-          <Counter />
-          <Message />
+          {/* <Counter />
+          <Message /> */}
         </div>
       )
     } else {

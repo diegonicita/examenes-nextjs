@@ -10,6 +10,7 @@ import {
   getErrorsFromResult,
 } from './consultFormValidation'
 import { consultFormAction } from './consultFormAction'
+import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 
 export const ConsultFormContainer = () => {
   const formRef = useRef<HTMLFormElement>(null)
@@ -21,9 +22,10 @@ export const ConsultFormContainer = () => {
 
   const handleSubmit = async (formData: FormData) => {
     const result = checkFullValidation(formData)
-    const response = getErrorsFromResult(result)
-    setErrors({ ...errors, ...response })
-    consultFormAction({ result, formData, formRef })
+    const response1 = getErrorsFromResult(result)
+    setErrors({ ...errors, ...response1 })
+    const response2 = await consultFormAction({ result, formData, formRef })
+    if (response2?.message === 'success') refreshAction()
   }
 
   const handleBlur = (
@@ -44,45 +46,47 @@ export const ConsultFormContainer = () => {
   }
 
   return (
-    <Form
-      handleSubmit={handleSubmit}
-      formRef={formRef}
-      title="Ingresa tu Consulta"
-    >
-      <Input
-        data={{
-          type: 'text',
-          text: 'Nombre y Apellido',
-          placeholder: 'Ingresa tu nombre y apellido',
-          id: 'fullname',
-          name: 'fullname',
-          error: errors.fullname,
-        }}
-        handleBlur={handleBlur}
-      />
-      <Input
-        data={{
-          type: 'text',
-          text: 'Correo electrónico',
-          placeholder: 'Ingresa tu correo electronico',
-          id: 'email',
-          name: 'email',
-          error: errors.email,
-        }}
-        handleBlur={handleBlur}
-      />
-      <TextArea
-        data={{
-          text: 'Mensaje',
-          placeholder: 'Ingresa tu consulta',
-          id: 'consult',
-          name: 'consult',
-          error: errors.consult,
-        }}
-        handleBlur={handleBlur}
-      />
-      <Buttom text="Enviar" textOnClick="...Espere..." />
-    </Form>
+    <div className="card w-full bg-base-300 mb-2 ml-8">
+      <Form
+        handleSubmit={handleSubmit}
+        formRef={formRef}
+        title="Ingresa tu Consulta"
+      >
+        <Input
+          data={{
+            type: 'text',
+            text: 'Nombre y Apellido',
+            placeholder: 'Ingresa tu nombre y apellido',
+            id: 'fullname',
+            name: 'fullname',
+            error: errors.fullname,
+          }}
+          handleBlur={handleBlur}
+        />
+        <Input
+          data={{
+            type: 'text',
+            text: 'Correo electrónico',
+            placeholder: 'Ingresa tu correo electronico',
+            id: 'email',
+            name: 'email',
+            error: errors.email,
+          }}
+          handleBlur={handleBlur}
+        />
+        <TextArea
+          data={{
+            text: 'Mensaje',
+            placeholder: 'Ingresa tu consulta',
+            id: 'consult',
+            name: 'consult',
+            error: errors.consult,
+          }}
+          handleBlur={handleBlur}
+        />
+        <Buttom text="Enviar" textOnClick="...Espere..." />
+      </Form>
+    </div>
   )
 }
 
