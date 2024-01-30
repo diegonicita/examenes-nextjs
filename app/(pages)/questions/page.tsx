@@ -15,6 +15,7 @@ import searchComments from './actions/searchComments'
 import createTree from './actions/createTree'
 import RenderTree from './components/social/comments/renderTree'
 import { tree } from 'next/dist/build/templates/app-page'
+import FirstInputComment from './components/social/comments/firstInputComment'
 
 export default async function QuestionPage({
   searchParams,
@@ -116,6 +117,11 @@ export default async function QuestionPage({
                               Comentarios
                             </div>
                             <div className="collapse-content">
+                              <FirstInputComment
+                                questionId={item.id}
+                                parentId={null}
+                                depth={1}
+                              />
                               <RenderTree
                                 tree={treeComments[item.id]}
                                 parentId={null}

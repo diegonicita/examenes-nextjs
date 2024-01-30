@@ -22,9 +22,8 @@ export default async function createReply(prevState: any, formData: FormData) {
   }
 
   const validatedFields = schema.safeParse(newTodo)
-  if (newTodo.id_parent_comment === 'nula') newTodo.id_parent_comment = null
+  console.log(newTodo)
   const authData = (await getInfoAuthCookie()) as UserType
-
   // Return early if the form data is invalid
   if (!validatedFields.success) {
     return {
@@ -40,10 +39,13 @@ export default async function createReply(prevState: any, formData: FormData) {
         validatedFields.data.id_question,
         authData?.id,
         validatedFields.data.comment,
-        validatedFields.data.id_parent_comment,
+        validatedFields.data.id_parent_comment !== 'nula'
+          ? validatedFields.data.id_parent_comment
+          : null,
       ],
     )) as RowDataPacket
-    if (result) {      
+    if (result && result?.affectedRows) {
+      console.log('success')
       revalidatePath('/questions')
       return { message: 'success' }
     }
