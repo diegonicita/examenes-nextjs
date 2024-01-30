@@ -1,12 +1,16 @@
-"use client"
-import useEmoji from "@/app/hooks/questions/comments/useEmoji"
-import createReply from "../../../actions/createComment"
+'use client'
+import React, { useEffect, useState } from 'react'
+import useEmoji from '@/app/hooks/questions/comments/useEmoji'
+import createReply from '../../../actions/createComment'
 //@ts-ignore
 import { useFormStatus, useFormState } from 'react-dom'
 
+
+
+
 const initialState = {
-  message: "",
-};
+  message: '',
+}
 const RenderTree = ({
   tree,
   parentId,
@@ -25,13 +29,17 @@ const RenderTree = ({
     handleCloseEmoji,
     handleSaveEmoji,
   } = useEmoji()
-  const { pending } = useFormStatus()
-  const [state, formAction] = useFormState(createReply,initialState)
-  console.log(state)
- 
-  console.log(tree)
+
+  const [state, formAction] = useFormState(createReply, initialState)
+  const [reset, setReset] = useState('')
+
+  useEffect(() => {
+    if (state.message === 'success') {
+      setReset(Math.random().toString())
+    }
+  }, [state])
+
   if (tree) {
-    
     return tree.map(
       (t: {
         comment: {
@@ -56,18 +64,32 @@ const RenderTree = ({
                 MENSAJE: {t.comment.comment_text}{' '}
               </span>
             </div>
-            <form action={formAction} >
-              <input type="hidden" name="id_parent_comment" value={t.comment.id_parent_comment ? 
-                t.comment.id_parent_comment.toString() : "nula"} />
-              <input type="hidden" name="id_question" value={t.comment.id_question.toString()} />
-            <input
-            type="text"
-            placeholder="add a comment"
-            className="focus:outline-none w-full "
-            name="okay" 
-          />
-          <button type="submit">reply</button>
-          </form>
+            <form key={reset} action={formAction}>
+              <input
+                id="id_parent_comment"
+                type="hidden"
+                name="id_parent_comment"
+                value={
+                  t.comment.id_parent_comment
+                    ? t.comment.id_parent_comment.toString()
+                    : 'nula'
+                }
+              />
+              <input
+                id="id_question"
+                type="hidden"
+                name="id_question"
+                value={t.comment.id_question.toString()}
+              />
+              <input
+                type="text"
+                placeholder="add a comment"
+                className="focus:outline-none w-full "
+                name="comment"
+                id="comment"
+              />
+              <button type="submit">reply</button>
+            </form>
             <RenderTree
               tree={t.children}
               parentId={t.comment.id}

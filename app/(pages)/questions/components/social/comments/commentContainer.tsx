@@ -6,7 +6,7 @@ import { getUserComments } from "../../../actions/commentPost";
 import CommentInput from "./commentInput";
 import ReplyComments from "./replyComments";
 
-export default function CommentContainer(id_question,id_user) {
+export default function CommentContainer(id_question: number, id_user: number) {
   const [openComments, setOpenComments] = useState(false);
   const [openReplyComments, setOpenReplyComments] = useState(false);
   const [data, setData] = useState<any>([]);

@@ -38,10 +38,10 @@ export default async function QuestionPage({
   }
 
   const questions = await searchQuestions(queries)
-  console.log(questions)
+  //console.log(questions)
   let valorations: undefined = undefined
   if (auth) valorations = await searchValorations(questions)
-  console.log(valorations)
+  //console.log(valorations)
   const wordsSuggestions = await searchWordsSuggestions(queries)
 
   // Comments //
@@ -49,13 +49,13 @@ export default async function QuestionPage({
 
   if (auth) {
     const result = await searchComments(questions)
-    console.log(result)
+    // console.log(result)
     treeComments = {
       ...(result && result.tree ? result.tree : null),
     }
   }
 
-  console.log(treeComments[328])
+  // console.log(treeComments[328])
 
   // console.log(comments)
   // let arbol = {} as any
@@ -121,7 +121,9 @@ export default async function QuestionPage({
                                 parentId={null}
                                 depth={1}
                               />
-                              {treeComments[item.id] === undefined && <div> No hay comentarios </div>}
+                              {treeComments[item.id] === undefined && (
+                                <div> No hay comentarios </div>
+                              )}
                             </div>
                           </div>
                         </>
