@@ -4,7 +4,7 @@ import { useState,useOptimistic, useRef } from "react"
 import { z } from "zod"
 import createComment from "@/app/(pages)/questions/actions/commentPost"
 
-export default function useCommentInput({setMessages,messages,id_question,id_user}:{setMessages?:any,messages?:any}){
+export default function useCommentInput({setMessages,messages,id_question,id_user,id_parent}:{setMessages?:any,messages?:any}){
 const [errorClientSide, setErrorClientSide] = useState('')
 const formRef = useRef<HTMLFormElement>(null)
 
@@ -31,7 +31,7 @@ const formRef = useRef<HTMLFormElement>(null)
       id_user: id_user,
       //@ts-ignore
       comment_text: result.data.comment,
-      id_parent_comment: 1,
+      id_parent_comment: id_parent,
     })
     
     //@ts-ignore
@@ -47,7 +47,7 @@ const formRef = useRef<HTMLFormElement>(null)
             id_user: id_user,
             //@ts-ignore
             comment_text: result.data.comment,
-            id_parent_comment: 1,
+            id_parent_comment: id_parent,
           },
         ]);
       }
