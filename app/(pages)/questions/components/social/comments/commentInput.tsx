@@ -127,7 +127,7 @@ export default function CommentInput({
         <div key={index}>
           <UserComments data={message} />
           {!!message.sending && <small>(Sending...)</small>}
-          <div> INPUT </div>
+          {/* <CommentInput /> */}
         </div>
       ))}
     </div>

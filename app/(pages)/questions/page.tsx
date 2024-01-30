@@ -105,10 +105,10 @@ export default async function QuestionPage({
                           />
                           <div className="flex flex-wrap gap-4">
                             <ValorationButton id_question={item.id} />
-                            <CommentContainer
+                            {/* <CommentContainer
                               id_question={item.id}
                               id_user={authData.id}
-                            />
+                            /> */}
                           </div>
                           <div className="collapse bg-base-200 mt-4">
                             <input type="checkbox" />
