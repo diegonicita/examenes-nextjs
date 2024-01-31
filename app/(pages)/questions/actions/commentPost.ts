@@ -40,10 +40,10 @@
 //   }
 // }
 
-export async function getUserComments() {
-  const result = await executeQuery(
-    'SELECT id, id_question, id_user, comment_text, id_parent_comment FROM comments',
-  )
-  console.log(result)
-  return result
-}
+// export default async function getUserComments() {
+//   const result = await executeQuery(
+//     'SELECT id, id_question, id_user, comment_text, id_parent_comment FROM comments',
+//   )
+//   console.log(result)
+//   return result
+// }

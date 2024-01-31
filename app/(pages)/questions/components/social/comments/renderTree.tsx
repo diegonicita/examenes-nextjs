@@ -41,6 +41,7 @@ const RenderTree = ({
       (t: {
         comment: {
           id: number
+          id_user: number
           id_parent_comment: number | string
           comment_text: string
           id_question: number
@@ -50,16 +51,27 @@ const RenderTree = ({
         t.comment.id_parent_comment === parentId && (
           <div key={t.comment.id}>
             <div className="" style={{ paddingLeft: `${depth * 20}px` }}>
-              <span>ID:{t.comment.id}. </span>
-              <span>
-                PARENT:
+              <div className="chat chat-start pt-4">
+              <div className="indicator">
+                  <span className="indicator-item badge badge-primary">{t.comment.id_user}</span> 
+                <div className="chat-image avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS chat bubble component"
+                      src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    />
+                  </div>
+                </div>
+                </div>
+                <div className="chat-bubble">{t.comment.comment_text}.</div>
+              </div>
+              <span className="text-xs">msg-id:{t.comment.id}. </span>
+              <span className="text-xs">
+                parent-id:
                 {t.comment.id_parent_comment
                   ? t.comment.id_parent_comment.toString() + '. '
                   : ' NULO. '}
-              </span>
-              <span className="bg-green-100">
-                MENSAJE: {t.comment.comment_text}{' '}
-              </span>
+              </span>              
               <form key={reset} action={formAction}>
                 <input
                   id="id_parent_comment"
@@ -74,16 +86,16 @@ const RenderTree = ({
                   value={t.comment.id_question.toString()}
                 />
                 <div className="flex flex-row gap-2 p-2">
-                <input
-                  type="text"
-                  placeholder={'add a comment to ' + t.comment.id}
-                  className="focus:outline-none w-full "
-                  name="comment"
-                  id="comment"
-                />
-                <button className="btn btn-sm btn-accent" type="submit">
-                  reply
-                </button>
+                  <input
+                    type="text"
+                    placeholder={'add a comment to msg ' + t.comment.id}
+                    className="pl-2 focus:outline-none w-full "
+                    name="comment"
+                    id="comment"
+                  />
+                  <button className="btn btn-sm btn-accent" type="submit">
+                    reply
+                  </button>
                 </div>
               </form>
             </div>

@@ -54,7 +54,7 @@ const FirstInputComment = ({
         <input
           type="text"
           placeholder="add a comment to null parent"
-          className="focus:outline-none w-full "
+          className="focus:outline-none w-full p-1 pl-2 mb-2"
           name="comment"
           id="comment"
         />

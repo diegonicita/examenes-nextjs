@@ -8,7 +8,6 @@ import type { QuestionSQL } from '@/app/models/QuestionSQL'
 import Question from './components/questions/question'
 import Valorations from './components/social/valorations/valorations'
 import ValorationButton from './components/social/valorations/valorationButton'
-import CommentContainer from './components/social/comments/commentContainer'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import { UserType } from '@/app/models/User'
 import searchComments from './actions/searchComments'
@@ -105,11 +104,7 @@ export default async function QuestionPage({
                             valorations={valorations}
                           />
                           <div className="flex flex-wrap gap-4">
-                            <ValorationButton id_question={item.id} />
-                            {/* <CommentContainer
-                              id_question={item.id}
-                              id_user={authData.id}
-                            /> */}
+                            <ValorationButton id_question={item.id} />                            
                           </div>
                           <div className="collapse bg-base-200 mt-4">
                             <input type="checkbox" />
