@@ -8,7 +8,13 @@ import type { QuestionSQL } from '@/app/models/QuestionSQL'
 import Question from './components/questions/question'
 import Valorations from './components/social/valorations/valorations'
 import ValorationButton from './components/social/valorations/valorationButton'
-import CommentContainer from './components/social/comments/commentContainer'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { UserType } from '@/app/models/User'
+import searchComments from './actions/searchComments'
+import createTree from './actions/createTree'
+import RenderTree from './components/social/comments/renderTree'
+import { tree } from 'next/dist/build/templates/app-page'
+import FirstInputComment from './components/social/comments/firstInputComment'
 
 export default async function QuestionPage({
   searchParams,
@@ -21,6 +27,7 @@ export default async function QuestionPage({
   const auth = cookies().get('auth')
   const currentPage = Number(searchParams?.page) || 1
   const query = searchParams?.query || ''
+  const authData = (await getInfoAuthCookie()) as UserType
   let queries: string | string[]
   if (query) {
     // Divide la cadena en un array de palabras si no está vacía
@@ -31,10 +38,46 @@ export default async function QuestionPage({
   }
 
   const questions = await searchQuestions(queries)
+  //console.log(questions)
   let valorations: undefined = undefined
   if (auth) valorations = await searchValorations(questions)
+  //console.log(valorations)
   const wordsSuggestions = await searchWordsSuggestions(queries)
-  // console.log(wordsSuggestions)
+
+  // Comments //
+  let treeComments = {} as any
+
+  if (auth) {
+    const result = await searchComments(questions)
+    // console.log(result)
+    treeComments = {
+      ...(result && result.tree ? result.tree : null),
+    }
+  }
+
+  // console.log(treeComments[328])
+
+  // console.log(comments)
+  // let arbol = {} as any
+  // if (comments)
+  //   Object.keys(comments).map((key) => {
+  //     const temp = {} as any
+  //     if (comments) temp[key] = createTree(comments[key])
+  //     arbol[key] = temp[key][key]
+  //   })
+  //   console.log(arbol[120][0]?.comment)
+  //   console.log(arbol[120][1]?.comment)
+  //   console.log(arbol[120][2]?.comment)
+  //   console.log(arbol[120][0]?.children)
+  //   console.log(arbol[120][0]?.children[0])
+  //   console.log(arbol[120][0]?.children[1])
+  //   console.log(arbol[120][0]?.children[2])
+  //   console.log(arbol[120][1]?.children)
+  //   console.log(arbol[120][1]?.children[0])
+  //   console.log(arbol[120][1]?.children[1])
+  //   console.log(arbol[120][0]?.children[0]?.children)
+  //   console.log(arbol[120][0]?.children[1]?.children[0])
+  //   console.log(arbol[120][0]?.children[1]?.children[1])
 
   return (
     <div>
@@ -61,8 +104,28 @@ export default async function QuestionPage({
                             valorations={valorations}
                           />
                           <div className="flex flex-wrap gap-4">
-                            <ValorationButton id_question={item.id} />
-                            <CommentContainer />
+                            <ValorationButton id_question={item.id} />                            
+                          </div>
+                          <div className="collapse bg-base-200 mt-4">
+                            <input type="checkbox" />
+                            <div className="collapse-title text-xl font-medium">
+                              Comentarios
+                            </div>
+                            <div className="collapse-content">
+                              <FirstInputComment
+                                questionId={item.id}
+                                parentId={null}
+                                depth={1}
+                              />
+                              <RenderTree
+                                tree={treeComments[item.id]}
+                                parentId={null}
+                                depth={1}
+                              />
+                              {treeComments[item.id] === undefined && (
+                                <div> No hay comentarios </div>
+                              )}
+                            </div>
                           </div>
                         </>
                       )}
