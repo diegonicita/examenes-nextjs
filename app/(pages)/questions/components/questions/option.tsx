@@ -1,6 +1,8 @@
-import { useEffect } from 'react'
+'use client'
+import { useEffect, useState } from 'react'
 import { notifyCorrect } from './notifyCorrect'
 import { notifyIncorrect } from './notifyIncorrect'
+import useHasMounted from '@/app/hooks/useHasMounted'
 
 export const Option = ({
   handleAnswered,
@@ -44,12 +46,15 @@ export const Option = ({
 
   return (
     <>
-      <div
-        className={`py-2 btn btn-outline btn-md w-full h-fit text-base text-start justify-start ${backgroundColor} text-pretty`}
-        onClick={() => handleAnswered(optionNumber)}
-      >
-        {texto}
-      </div>
+      {useHasMounted() ? (
+        <div
+          suppressHydrationWarning={true}
+          className={`py-2 btn btn-outline btn-md w-full h-fit text-base text-start justify-start ${backgroundColor} text-pretty`}
+          onClick={() => handleAnswered(optionNumber)}
+        >
+          {texto}
+        </div>
+      ) : null}
     </>
   )
 }

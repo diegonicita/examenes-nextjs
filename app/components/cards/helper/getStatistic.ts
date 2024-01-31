@@ -10,7 +10,6 @@ export const getStatistics = ({
   id: number
 }) => {
   const total = data.filter((answeredQuestion) => {
-    console.log(year)
     if (year === undefined) return answeredQuestion.examenId === id
     else {
       return answeredQuestion.examenId === id && answeredQuestion.year === year
