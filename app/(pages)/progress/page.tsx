@@ -5,7 +5,9 @@ import type { ExamType } from '@/app/models/Exam'
 async function getData() {
   const url = process.env.URL_API
   try {
-    const res = await fetch(url + '/api/get-questions-statistics')
+    const res = await fetch(url + '/api/get-questions-statistics', {
+      next: { revalidate: 3600 },
+    })
     return res.json()
   } catch (error) {
     console.log(error)

@@ -4,7 +4,9 @@ import type { SubjectType } from '@/app/models/Subject'
 async function getData() {
   const url = process.env.URL_API
   try {
-    const res = await fetch(url + '/api/get-questions-statistics', {})
+    const res = await fetch(url + '/api/get-questions-statistics', {
+      next: { revalidate: 3600 },
+    })
     return res.json()
   } catch (error) {
     console.log(error)
