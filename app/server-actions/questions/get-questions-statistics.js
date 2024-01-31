@@ -76,8 +76,8 @@ export default async function getQuestionsStatistics() {
     'select count(*) as total from preguntas',
     [],
   )
-
-  respuesta.total = result1[0].total
+  
+  respuesta.total = result1[0]?.total
 
   for (let i = 0; i < 7; i++) {
     const result2 = await executeQuery(

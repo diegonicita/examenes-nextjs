@@ -1,20 +1,10 @@
 import CardExam from '@/app/components/cards/cardExam'
 import type { ExamType } from '@/app/models/Exam'
+import getQuestionsStatistics from '@/app/server-actions/questions/get-questions-statistics'
 
-async function getData() {
-  const url = process.env.URL_API
-  try {
-    const res = await fetch(url + '/api/get-questions-statistics',{ next: { revalidate: 3600 } })
-    return res.json()
-  } catch (error) {
-    console.log(error)
-
-    return null
-  }
-}
-
-export default async function ExamPage() {
-  const data = await getData()
+const Page = async () => {
+  const data = await getQuestionsStatistics()
+  const exams = data.examenes as ExamType[]
 
   return (
     <>
@@ -22,8 +12,8 @@ export default async function ExamPage() {
         Selecciona un Examen
       </h1>
       <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8 gap-4">
-        {data &&
-          data.examenes.map((p: ExamType, index: number) => (
+        {exams &&
+          exams.map((p: ExamType, index: number) => (
             <CardExam
               item={p}
               key={index}
@@ -36,6 +26,8 @@ export default async function ExamPage() {
     </>
   )
 }
+
+export default Page
 
 export const metadata = {
   title: 'Selecciona un Tipo de Examen',
