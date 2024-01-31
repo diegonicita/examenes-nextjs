@@ -4,7 +4,7 @@ import { ConsultType } from '@/app/models/Consult'
 import { refreshAction } from '@/app/(pages)/questions/actions/refreshAction'
 import type { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
-import createValorationQuery from './queries/createValorationQuery'
+import createValorationQuery from './Queries/createValorationQuery'
 
 function transformBitsToByte(bit1: boolean, bit2: boolean, bit3: boolean) {
   return ((bit1 ? 1 : 0) << 2) | ((bit2 ? 1 : 0) << 1) | (bit3 ? 1 : 0)

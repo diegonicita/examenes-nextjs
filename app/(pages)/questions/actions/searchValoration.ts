@@ -1,7 +1,7 @@
 'use server'
 import { RowDataPacket } from 'mysql2'
 import searchOwnValoration from './searchOwnValoration'
-import searchValorationsQuery from './queries/searchValorationsQuery'
+import searchValorationsQuery from './Queries/searchValorationsQuery'
 
 const searchValorations = async (results: RowDataPacket | undefined | null) => {
   const ids = results?.map((r: { id: any }) => r.id)
