@@ -9,9 +9,9 @@ export default async function getExamQuery(
 ) {
   const queryString1 = `SELECT * FROM preguntas WHERE examen = ? AND ano = ? LIMIT ?`
   const result = (await executeQuery(queryString1, [
-    examId,
-    year,
-    limit,
+    examId.toString(),
+    year.toString(),
+    limit.toString(),
   ])) as RowDataPacket
   return result
 }
