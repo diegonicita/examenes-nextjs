@@ -28,7 +28,7 @@ export default async function searchQuestionsQuery(
     queryLikes.push(limit.toString())
 
     // Construye y ejecuta la consulta
-    const queryString1 = `SELECT * FROM preguntas WHERE ${conditions} limit ?`
+    const queryString1 = `SELECT * FROM preguntas WHERE ${conditions} LIMIT ?`
     resultQueryLimit10 = (await executeQuery(
       queryString1,
       queryLikes,

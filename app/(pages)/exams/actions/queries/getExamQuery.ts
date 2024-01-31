@@ -7,7 +7,7 @@ export default async function getExamQuery(
   year: number,
   limit: number,
 ) {
-  const queryString1 = `SELECT * FROM preguntas WHERE examen = ? and ano =? limit ?`
+  const queryString1 = `SELECT * FROM preguntas WHERE examen = ? AND ano = ? LIMIT ?`
   const result = (await executeQuery(queryString1, [
     examId,
     year,
