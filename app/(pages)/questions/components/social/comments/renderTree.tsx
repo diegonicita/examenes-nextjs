@@ -1,77 +1,68 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import useEmoji from '@/app/hooks/questions/comments/useEmoji'
-import createReply from '../../../actions/createComment'
+"use client";
+import React, { useEffect, useState } from "react";
+import useEmoji from "@/app/hooks/questions/comments/useEmoji";
+import createReply from "../../../actions/createComment";
 //@ts-ignore
-import { useFormStatus, useFormState } from 'react-dom'
+import { useFormState } from "react-dom";
+import UserComments from "./userCommments";
+import ReplyInput from "./replyInput";
+
 
 const initialState = {
-  message: '',
+  message: "",
+};
+interface OpenCommentsState {
+  [commentId: number]: boolean;
 }
 const RenderTree = ({
   tree,
   parentId,
   depth = 0,
 }: {
-  tree: any
-  parentId: any
-  depth: number
+  tree: any;
+  parentId: any;
+  depth: number;
 }) => {
   const {
-    saveTextAndEmoji,
-    handleInputComment,
-    handleOpenEmoji,
-    handleStopPropagation,
-    openEmoji,
-    handleCloseEmoji,
-    handleSaveEmoji,
-  } = useEmoji()
+    resetSaveTextAndEmoji,
+  } = useEmoji();
 
-  const [state, formAction] = useFormState(createReply, initialState)
-  const [reset, setReset] = useState('')
+  const [state, formAction] = useFormState(createReply, initialState);
+  const [reset, setReset] = useState("");
+  const [openComments, setOpenComments] = useState<OpenCommentsState>({});
 
   useEffect(() => {
-    if (state?.message === 'success') {
-      setReset(Math.random().toString())
+    if (state?.message === "success") {
+      setReset(Math.random().toString());
+      resetSaveTextAndEmoji();
     }
-  }, [state])
+  }, [state]);
+  const handleOpenComments = (commentId: number) => {
+    setOpenComments((prevOpenComments: any) => ({
+      ...prevOpenComments,
+      [commentId]: !prevOpenComments[commentId],
+    }));
+  };
 
   if (tree) {
     return tree.map(
       (t: {
         comment: {
-          id: number
-          id_user: number
-          id_parent_comment: number | string
-          comment_text: string
-          id_question: number
-        }
-        children: object
+          id: number;
+          id_user: number;
+          id_parent_comment: number | string;
+          comment_text: string;
+          id_question: number;
+        };
+        children: object;
       }) =>
         t.comment.id_parent_comment === parentId && (
           <div key={t.comment.id}>
             <div className="" style={{ paddingLeft: `${depth * 20}px` }}>
-              <div className="chat chat-start pt-4">
-              <div className="indicator">
-                  <span className="indicator-item badge badge-primary">{t.comment.id_user}</span> 
-                <div className="chat-image avatar">
-                  <div className="w-10 rounded-full">
-                    <img
-                      alt="Tailwind CSS chat bubble component"
-                      src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                    />
-                  </div>
-                </div>
-                </div>
-                <div className="chat-bubble">{t.comment.comment_text}.</div>
-              </div>
-              <span className="text-xs">msg-id:{t.comment.id}. </span>
-              <span className="text-xs">
-                parent-id:
-                {t.comment.id_parent_comment
-                  ? t.comment.id_parent_comment.toString() + '. '
-                  : ' NULO. '}
-              </span>              
+              <UserComments
+                data={t}
+                handleOpenReply={() => handleOpenComments(t.comment.id)}
+              />
               <form key={reset} action={formAction}>
                 <input
                   id="id_parent_comment"
@@ -85,18 +76,11 @@ const RenderTree = ({
                   name="id_question"
                   value={t.comment.id_question.toString()}
                 />
-                <div className="flex flex-row gap-2 p-2">
-                  <input
-                    type="text"
-                    placeholder={'add a comment to msg ' + t.comment.id}
-                    className="pl-2 focus:outline-none w-full "
-                    name="comment"
-                    id="comment"
-                  />
-                  <button className="btn btn-sm btn-accent" type="submit">
-                    reply
-                  </button>
-                </div>
+                {openComments[t.comment.id] &&
+                  t.comment.id_parent_comment ===
+                    t.comment.id_parent_comment && (
+                    <ReplyInput id={t.comment.id} idParent={t.comment.id_parent_comment} />   
+                  )}
               </form>
             </div>
             <RenderTree
@@ -105,9 +89,9 @@ const RenderTree = ({
               depth={depth + 1}
             />
           </div>
-        ),
-    )
+        )
+    );
   }
-}
+};
 
-export default RenderTree
+export default RenderTree;
