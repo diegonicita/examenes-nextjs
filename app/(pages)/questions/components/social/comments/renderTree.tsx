@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import useEmoji from "@/app/hooks/questions/comments/useEmoji";
 import createReply from "../../../actions/createComment";
 //@ts-ignore
-import { useFormState } from "react-dom";
+import { useFormState,useFormStatus } from "react-dom";
 import UserComments from "./userCommments";
 import ReplyInput from "./replyInput";
 
@@ -30,7 +30,7 @@ const RenderTree = ({
   const [state, formAction] = useFormState(createReply, initialState);
   const [reset, setReset] = useState("");
   const [openComments, setOpenComments] = useState<OpenCommentsState>({});
-
+  
   useEffect(() => {
     if (state?.message === "success") {
       setReset(Math.random().toString());

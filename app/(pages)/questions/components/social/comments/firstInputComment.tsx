@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import useEmoji from '@/app/hooks/questions/comments/useEmoji'
 import createReply from '../../../actions/createComment'
 //@ts-ignore
-import { useFormStatus, useFormState } from 'react-dom'
+import { useFormState } from 'react-dom'
+import MainCommentInput from './mainCommentInput'
+
 
 const initialState = {
   message: '',
@@ -18,13 +20,8 @@ const FirstInputComment = ({
   depth: number
 }) => {
   const {
-    saveTextAndEmoji,
-    handleInputComment,
-    handleOpenEmoji,
-    handleStopPropagation,
-    openEmoji,
-    handleCloseEmoji,
-    handleSaveEmoji,
+    
+    resetSaveTextAndEmojiNoId
   } = useEmoji()
 
   const [state, formAction] = useFormState(createReply, initialState)
@@ -33,6 +30,7 @@ const FirstInputComment = ({
   useEffect(() => {
     if (state?.message === 'success') {
       setReset(Math.random().toString())
+      resetSaveTextAndEmojiNoId()
     }
   }, [state])
 
@@ -51,14 +49,7 @@ const FirstInputComment = ({
           name="id_question"
           value={questionId.toString()}
         />
-        <input
-          type="text"
-          placeholder="add a comment to null parent"
-          className="focus:outline-none w-full p-1 pl-2 mb-2"
-          name="comment"
-          id="comment"
-        />
-        <button  className="btn btn-sm btn-error" type="submit">reply</button>
+        <MainCommentInput />
       </form>
     </>
   )

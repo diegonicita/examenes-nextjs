@@ -1,8 +1,9 @@
 export default function UserComments({data, handleOpenReply}:{data:any,handleOpenReply:any}) {
-   
+  
+  console.log(data)
     
     return (
-      <section className="grid grid-cols-[40px,1fr] mt-5 ">
+      <section className="grid grid-cols-[40px,1fr] mt-5 pr-5">
         <>
         <div className="">
           <img
@@ -15,19 +16,17 @@ export default function UserComments({data, handleOpenReply}:{data:any,handleOpe
           <div className=" card w-full p-3  bg-gray-200 shadow-xl ml-2">
             <div className="flex flex-row">
               <div className="flex-grow">
-                <h1 className="text-sm ">{data.comment?.id_user}</h1>
+                <h1 className="text-base font-bold">{data.comment?.user_name}</h1>
               </div>
               <h2 className="text-sm">5min</h2>
               <h3 className="text-sm ">...</h3>
             </div>
             <div className="">
-              <p>{data.comment?.comment_text}</p>
+              <p className="text-base">{data.comment?.comment_text}</p>
               
             </div>
           </div>
-          <button  className="text-start ml-4"onClick={handleOpenReply}>responder</button>
-        
-         
+          <button  className="text-start ml-4 my-2.5"onClick={handleOpenReply}>responder</button>
           
         </main>
         </>
