@@ -28,7 +28,7 @@ export default function useEmoji() {
   };
   const handleInputCommentNoId = ( e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setSaveTextAndEmoji((prevText:any) => e.target.value);
+    setSaveTextAndEmoji(e.target.value);
   };
 
 
@@ -66,6 +66,6 @@ export default function useEmoji() {
     resetSaveTextAndEmoji,
     handleSaveEmojiNoId,
     handleInputCommentNoId,
-    resetSaveTextAndEmojiNoId
+    resetSaveTextAndEmojiNoId,
   };
 }

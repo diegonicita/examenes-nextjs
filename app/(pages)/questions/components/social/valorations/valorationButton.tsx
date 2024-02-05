@@ -72,6 +72,7 @@ export default function ValorationButton({
     keyRef.current = null
     submitFormData()
   }
+  console.log(valueEmoji)
 
   return (
     <>

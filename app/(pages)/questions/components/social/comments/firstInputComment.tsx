@@ -35,7 +35,7 @@ const FirstInputComment = ({
   }, [state])
 
   return (
-    <>
+    <section className=''>
       <form key={reset} action={formAction}>
         <input
           id="id_parent_comment"
@@ -51,7 +51,7 @@ const FirstInputComment = ({
         />
         <MainCommentInput />
       </form>
-    </>
+    </section>
   )
 }
 

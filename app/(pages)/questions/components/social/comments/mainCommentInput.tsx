@@ -16,7 +16,7 @@ export default function mainCommentInput() {
     handleCloseEmoji,
   } = useEmoji();
   return (
-    <section className="flex items-start">
+    <section className="flex items-start flex-wrap">
   <div>
     <img
       alt="profile"
@@ -55,7 +55,7 @@ export default function mainCommentInput() {
   <div onClick={handleCloseEmoji}>
     {openEmoji && (
       <div onClick={handleStopPropagation} className="w-[348px]">
-        {/* EmojiPicker component */}
+        <EmojiPicker searchDisabled onEmojiClick={handleSaveEmojiNoId}/>
       </div>
     )}
   </div>

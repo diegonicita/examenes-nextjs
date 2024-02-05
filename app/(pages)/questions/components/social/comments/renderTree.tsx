@@ -1,49 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import useEmoji from "@/app/hooks/questions/comments/useEmoji";
-import createReply from "../../../actions/createComment";
-//@ts-ignore
-import { useFormState,useFormStatus } from "react-dom";
 import UserComments from "./userCommments";
 import ReplyInput from "./replyInput";
+import { UserType } from "@/app/models/User";
+import useFormAction from "@/app/hooks/questions/comments/useFormAction";
 
-
-const initialState = {
-  message: "",
-};
-interface OpenCommentsState {
-  [commentId: number]: boolean;
-}
 const RenderTree = ({
   tree,
   parentId,
   depth = 0,
+  currentUser,
 }: {
   tree: any;
   parentId: any;
   depth: number;
+  currentUser: UserType
 }) => {
-  const {
-    resetSaveTextAndEmoji,
-  } = useEmoji();
-
-  const [state, formAction] = useFormState(createReply, initialState);
-  const [reset, setReset] = useState("");
-  const [openComments, setOpenComments] = useState<OpenCommentsState>({});
+  const {reset,formAction,openComments,handleOpenComments} = useFormAction()
   
-  useEffect(() => {
-    if (state?.message === "success") {
-      setReset(Math.random().toString());
-      resetSaveTextAndEmoji();
-    }
-  }, [state]);
-  const handleOpenComments = (commentId: number) => {
-    setOpenComments((prevOpenComments: any) => ({
-      ...prevOpenComments,
-      [commentId]: !prevOpenComments[commentId],
-    }));
-  };
-
   if (tree) {
     return tree.map(
       (t: {
@@ -61,8 +36,12 @@ const RenderTree = ({
             <div className="" style={{ paddingLeft: `${depth * 20}px` }}>
               <UserComments
                 data={t}
-                handleOpenReply={() => handleOpenComments(t.comment.id)}
+                currentUser={currentUser}
               />
+              <button type="button" className=" ml-14 my-2.5 cursor-pointer" onClick={() => handleOpenComments(t.comment.id)}
+            >
+            responder
+          </button>
               <form key={reset} action={formAction}>
                 <input
                   id="id_parent_comment"
@@ -87,6 +66,7 @@ const RenderTree = ({
               tree={t.children}
               parentId={t.comment.id}
               depth={depth + 1}
+              currentUser={currentUser}
             />
           </div>
         )

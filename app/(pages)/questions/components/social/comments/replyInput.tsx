@@ -22,8 +22,7 @@ export default function replyInput({
     handleStopPropagation,
   } = useEmoji();
   return (
-    <section className="flex items-start ml-16">
-      
+    <section className="flex flex-wrap items-start ml-16">
         <div className="">
           <img
             alt="profile"

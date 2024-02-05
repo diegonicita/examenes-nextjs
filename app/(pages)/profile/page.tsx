@@ -8,6 +8,7 @@ import MessageNotLogged from '@/app/components/checkCookie/messageNotLogged'
 const Profile = async () => {
   try {
     const authData = (await getInfoAuthCookie()) as UserType
+    
     if (authData) {
       return (
         <div className="flex flex-col items-center mt-4 justify-center">
