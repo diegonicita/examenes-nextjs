@@ -47,13 +47,13 @@ export default async function QuestionPage({
 
   if (auth) {
     const result = await searchComments(questions)
-    // console.log(result)
+    console.log(result)
     treeComments = {
       ...(result && result.tree ? result.tree : null),
     }
   }
 
-  console.log(treeComments[328])
+  console.log(treeComments[168])
 
   // console.log(comments)
   // let arbol = {} as any

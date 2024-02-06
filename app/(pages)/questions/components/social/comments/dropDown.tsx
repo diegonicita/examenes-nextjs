@@ -2,9 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import DeleteComments from './deleteComment/deleteComment';
 import { DropDown } from './icons/dropdown';
 
-interface DropdownProps {}
+interface DropdownProps {
+  id:number
+}
 
-const Dropdown: React.FC<DropdownProps> = () => {
+const Dropdown: React.FC<DropdownProps> = ({id}) => {
+  console.log(id)
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +43,7 @@ const Dropdown: React.FC<DropdownProps> = () => {
       {isOpen && (
         <div className="absolute right-3 mt-2 bg-white border rounded shadow-md p-4">
           <div >
-          <DeleteComments onclick={closeDropdown} />
+          <DeleteComments onclick={closeDropdown} id={id} />
           </div>
         </div>
       )}

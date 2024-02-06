@@ -37,7 +37,6 @@ function createTree(comentarios: Commentario[], key: number) {
       }
     }
   })
-
   return tree[key]
 }
 

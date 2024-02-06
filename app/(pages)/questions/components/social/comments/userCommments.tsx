@@ -13,6 +13,7 @@ interface UserCommentsProps {
   
   currentUser,
 }:UserCommentsProps ) {
+  console.log(data)
   console.log(currentUser);
   
  
@@ -37,7 +38,7 @@ interface UserCommentsProps {
               <h2 className="text-sm">5min</h2>
               <div >
                 {data && data?.comment.id_user === currentUser?.id || currentUser.role === "admin" ? 
-                <DropDownOptions/>
+                <DropDownOptions id={data?.comment.id}/>
                 :
                 <ReportComment />
 }
