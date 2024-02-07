@@ -32,10 +32,9 @@ export default function DeleteComments({
 
   return (
     <div>
-      {/* <div className=""> */}
       <button
       type="button"
-        className="btn w-[10rem] "
+        className=" w-full h-10 flex items-center gap-3 hover:bg-gray-200 active:bg-gray-400 p-2"
         onClick={() => {
           const modal = document.getElementById(
             "my_modal_1"
@@ -46,10 +45,8 @@ export default function DeleteComments({
         }}
       >
         <span><IconTrashCan /></span>
-        
         Eliminar
       </button>
-      {/* </div> */}
       <dialog id="my_modal_1" className="modal">
         <h1>{state.message}</h1>
         <div className="modal-box">

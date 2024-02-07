@@ -1,10 +1,11 @@
 "use client"
 import { DropDown } from "./icons/dropdown";
 import ReportComment from "./reportComment/reportComment";
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import DropDownOptions from "./dropDown";
 import { UserType } from "@/app/models/User";
 import { UserData } from "@/app/models/questions/comments/commentData";
+import EditCommentContent from "./editComment/editCommentContent";
 
 
 interface UserCommentsProps {
@@ -15,10 +16,13 @@ interface UserCommentsProps {
   data,
   currentUser,
 }:UserCommentsProps ) {
-
-  console.log(data)
-  console.log(currentUser);
-  
+  const [openEdit, setCloseEdit] = useState(false)
+  const handleClickEdit = () => {
+  setCloseEdit(true)
+  }
+  const handleCancel = () => {
+    setCloseEdit(false)
+    }
  
   return (
     <section className="grid grid-cols-[40px,1fr] mt-5 pr-5">
@@ -38,20 +42,20 @@ interface UserCommentsProps {
                   {data?.comment?.user_name}
                 </h1>
               </div>
-              <h2 className="text-sm">5min</h2>
-              <div >
+              <h2 className={`${openEdit === true  ? "hidden" : "text-sm"}`}>5min</h2>
+              <div className={`${openEdit === true  ? "hidden" : "text-sm"}`} >
                 {data && data?.comment.id_user === currentUser?.id || currentUser.role === "admin" ? 
-                <DropDownOptions id={data?.comment.id}/>
+                <DropDownOptions id={data?.comment.id} onclick={handleClickEdit}/>
                 :
                 <ReportComment />
 }
               </div>
             </div>
-            <div className="">
+            {openEdit ?
+              <EditCommentContent data={data.comment.comment_text} handleCancel={handleCancel} /> :
               <p className="text-base">{data.comment?.comment_text}</p>
-            </div>
+            }
           </div>
-          
         </main>
       </>
     </section>
