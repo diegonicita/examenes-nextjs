@@ -19,15 +19,13 @@ export default async function DeleteComment (prevState:{message:string},formData
     }
     try {
         // Delete comments from the main table based on the condition
-        const result = await executeQuery(
+        await executeQuery(
             'DELETE FROM comments WHERE id_parent_comment = ? OR id = ?',
             [validateFields.data.id, validateFields.data.id]
           ) as RowDataPacket
-        if (result && result.affectedRows) {
             revalidatePath("/questions");
-            
-        }
-        return { message: "success" };
+            return { message: "success" };   
+        
         }catch (e){
             return {message: "error"}
         }

@@ -1,18 +1,21 @@
+"use client"
 import deleteComment from "@/app/(pages)/questions/actions/deleteComments/deleteComments";
 import { notifyErrors } from "@/app/components/form/toasters/notifyErrors";
 import { notifySuccess } from "@/app/components/form/toasters/notifySuccess";
-import { useEffect } from "react";
 //@ts-ignore
 import { useFormState } from 'react-dom'
+
 const initialState = {
   message: '',
 }
+console.log(initialState)
 
 export default function DeleteComments({onclick,id}:{onclick:() => void,id:number}){
   console.log(id)
   const [state, formAction] = useFormState(deleteComment, initialState)
   console.log(state)
-  useEffect(() => {
+  
+  
 
   
   if (state?.message === "success") {
@@ -20,12 +23,13 @@ export default function DeleteComments({onclick,id}:{onclick:() => void,id:numbe
   }else if(state?.message === "error"){
     notifyErrors('Lo sentimos no pudimos eliminar tu mensaje Inténtalo mas tarde.')
   }
-},[state])
+
   
     return(
       <div >
         <button className="" onClick={()=>document.getElementById('my_modal_1').showModal()}>Eliminar</button>
       <dialog id="my_modal_1" className="modal">
+        <h1>{state.message}</h1>
       <div className="modal-box">
         <h3 className="font-bold text-lg">Hello!</h3>
         <p className="py-4">Press ESC key or click the button below to close</p>
