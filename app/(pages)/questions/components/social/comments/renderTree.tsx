@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import useEmoji from "@/app/hooks/questions/comments/useEmoji";
+import React from "react";
+
 import UserComments from "./userCommments";
 import ReplyInput from "./replyInput";
 import { UserType } from "@/app/models/User";
@@ -28,6 +28,7 @@ const RenderTree = ({
           id_parent_comment: number | string;
           comment_text: string;
           id_question: number;
+          user_name: string
         };
         children: object;
       }) =>

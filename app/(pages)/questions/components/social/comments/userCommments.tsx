@@ -3,16 +3,19 @@ import { DropDown } from "./icons/dropdown";
 import ReportComment from "./reportComment/reportComment";
 import { memo } from 'react';
 import DropDownOptions from "./dropDown";
+import { UserType } from "@/app/models/User";
+import { UserData } from "@/app/models/questions/comments/commentData";
+
 
 interface UserCommentsProps {
-  data: any;
-  currentUser: any;
+  data: UserData;
+  currentUser: UserType;
 }
  async function UserComments({
   data,
-  
   currentUser,
 }:UserCommentsProps ) {
+
   console.log(data)
   console.log(currentUser);
   

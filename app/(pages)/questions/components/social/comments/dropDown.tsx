@@ -41,8 +41,8 @@ const Dropdown: React.FC<DropdownProps> = ({id}) => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-3 mt-2 bg-white border rounded shadow-md p-4">
-          <div >
+        <div className="absolute right-0 mt-0 ">
+          <div  className=''>
           <DeleteComments onclick={closeDropdown} id={id} />
           </div>
         </div>
