@@ -19,16 +19,16 @@ export default function DeleteComments({
   id: number;
 }) {
   console.log(id);
-  const [state, formAction] = useFormState(deleteComment, initialState);
+  const [state, formAction] = useFormState(deleteComment,initialState);
   console.log(state);
 
-  if (state?.message === "success") {
-    notifySuccess("Tu Mensaje ha sido Eliminado exitosamente");
-  } else if (state?.message === "error") {
-    notifyErrors(
-      "Lo sentimos no pudimos eliminar tu mensaje Inténtalo mas tarde."
-    );
-  }
+  // if (state?.message === "success") {
+  //   notifySuccess("Tu Mensaje ha sido Eliminado exitosamente");
+  // } else if (state?.message === "error") {
+  //   notifyErrors(
+  //     "Lo sentimos no pudimos eliminar tu mensaje Inténtalo mas tarde."
+  //   );
+  // }
 
   return (
     <div>
@@ -55,7 +55,7 @@ export default function DeleteComments({
             Todos las respuestas incluidos en este comentario seran eliminados
           </p>
           <div className="modal-action">
-            <form method="dialog" action={formAction}>
+            <form  action={formAction}>
               {/* if there is a button in form, it will close the modal */}
               <input type="hidden" name="id" value={id} />
               

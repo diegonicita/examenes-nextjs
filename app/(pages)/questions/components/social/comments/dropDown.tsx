@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useRef, useEffect } from 'react';
 import DeleteComments from './deleteComment/deleteComment';
 import { DropDown } from './icons/dropdown';
@@ -36,7 +37,7 @@ const Dropdown: React.FC<DropdownProps> = ({id,onclick}) => {
   const closeDropdownEdit = () => {
     setIsOpen(false);
     onclick()
-  };
+  }
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -50,7 +51,7 @@ const Dropdown: React.FC<DropdownProps> = ({id,onclick}) => {
         <div className="absolute right-0 mt-0 w-[10rem] bg-white rounded border ">
           <div  className='flex flex-col '>
           <DeleteComments onclick={closeDropdown} id={id} />
-          <EditComment onclick={closeDropdownEdit} />
+          <EditComment closedropdown={closeDropdownEdit} />
           </div>
         </div>
       )}

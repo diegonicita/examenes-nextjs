@@ -1,29 +1,31 @@
 "use client"
-import { DropDown } from "./icons/dropdown";
 import ReportComment from "./reportComment/reportComment";
-import { memo, useState } from 'react';
+import { useState } from "react";
 import DropDownOptions from "./dropDown";
 import { UserType } from "@/app/models/User";
 import { UserData } from "@/app/models/questions/comments/commentData";
 import EditCommentContent from "./editComment/editCommentContent";
 
-
 interface UserCommentsProps {
   data: UserData;
   currentUser: UserType;
+  children: React.ReactNode;
 }
- async function UserComments({
+async function UserComments({
   data,
   currentUser,
-}:UserCommentsProps ) {
-  const [openEdit, setCloseEdit] = useState(false)
-  const handleClickEdit = () => {
-  setCloseEdit(true)
-  }
-  const handleCancel = () => {
-    setCloseEdit(false)
-    }
+  children,
+}: UserCommentsProps) {
  
+  const [openEdit, setOpenEdit] = useState(false);
+  
+  const handleClickEdit = () => {
+    setOpenEdit(true);
+  };
+  const handleCancel = () => {
+    setOpenEdit(false);
+  };
+  
   return (
     <section className="grid grid-cols-[40px,1fr] mt-5 pr-5">
       <>
@@ -42,19 +44,35 @@ interface UserCommentsProps {
                   {data?.comment?.user_name}
                 </h1>
               </div>
-              <h2 className={`${openEdit === true  ? "hidden" : "text-sm"}`}>5min</h2>
-              <div className={`${openEdit === true  ? "hidden" : "text-sm"}`} >
-                {data && data?.comment.id_user === currentUser?.id || currentUser.role === "admin" ? 
-                <DropDownOptions id={data?.comment.id} onclick={handleClickEdit}/>
-                :
-                <ReportComment />
-}
+              <h2 className={`${openEdit === true ? "hidden" : "text-sm"}`}>
+                5min
+              </h2>
+              <div className={`${openEdit === true ? "hidden" : "text-sm"}`}>
+                {(data && data?.comment.id_user === currentUser?.id) ||
+                currentUser.role === "admin" ? (
+                  <DropDownOptions
+                    id={data?.comment.id}
+                    onclick={handleClickEdit}
+                  />
+                ) : (
+                  <ReportComment />
+                )}
               </div>
             </div>
-            {openEdit ?
-              <EditCommentContent data={data.comment.comment_text} handleCancel={handleCancel} /> :
-              <p className="text-base">{data.comment?.comment_text}</p>
-            }
+            
+  {openEdit ? (
+    <EditCommentContent
+      id={data?.comment.id}
+      data={data?.comment.comment_text}
+      handleCancel={handleCancel}
+    />
+  ) :  (
+    <p className="text-base">{data?.comment?.comment_text}</p>
+  ) }
+
+          </div>
+          <div className={`${openEdit === true ? "hidden" : ""}`}>
+            {children}
           </div>
         </main>
       </>
@@ -62,4 +80,4 @@ interface UserCommentsProps {
   );
 }
 
-export default memo(UserComments)
+export default UserComments;

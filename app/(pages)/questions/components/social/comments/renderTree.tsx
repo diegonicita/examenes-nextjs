@@ -1,11 +1,17 @@
 "use client";
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import UserComments from "./userCommments";
 import ReplyInput from "./replyInput";
 import { UserType } from "@/app/models/User";
 import useFormAction from "@/app/hooks/questions/comments/useFormAction";
 
+//@ts-ignore
+import { useFormState} from "react-dom";
+import useEmoji from "@/app/hooks/questions/comments/useEmoji";
+import createReply from "../../../actions/createComment";
+const initialState = {
+  message: "",
+};
 const RenderTree = ({
   tree,
   parentId,
@@ -17,7 +23,19 @@ const RenderTree = ({
   depth: number;
   currentUser: UserType
 }) => {
-  const {reset,formAction,openComments,handleOpenComments} = useFormAction()
+  const {openComments,handleOpenComments} = useFormAction()
+  const [state, formAction] = useFormState(createReply, initialState);
+    const {
+        resetSaveTextAndEmoji,
+      } = useEmoji();
+      
+      useEffect(() => {
+        if (state?.message === "success") {
+          setReset(Math.random().toString());
+          resetSaveTextAndEmoji();
+        }
+      }, [state]);
+  const [reset, setReset] = useState("");
   
   if (tree) {
     return tree.map(
@@ -38,11 +56,12 @@ const RenderTree = ({
               <UserComments
                 data={t}
                 currentUser={currentUser}
-              />
-              <button type="button" className=" ml-14 my-2.5 cursor-pointer" onClick={() => handleOpenComments(t.comment.id)}
+              >
+              <button type="button" className=" text-left ml-5 my-2.5 cursor-pointer" onClick={() => handleOpenComments(t.comment.id)}
             >
             responder
           </button>
+          </UserComments>
               <form key={reset} action={formAction}>
                 <input
                   id="id_parent_comment"
