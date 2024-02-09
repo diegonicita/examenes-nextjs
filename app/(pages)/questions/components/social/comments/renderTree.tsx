@@ -7,8 +7,10 @@ import useFormAction from "@/app/hooks/questions/comments/useFormAction";
 
 //@ts-ignore
 import { useFormState} from "react-dom";
+import { startTransition} from 'react';
 import useEmoji from "@/app/hooks/questions/comments/useEmoji";
 import createReply from "../../../actions/createComment";
+
 const initialState = {
   message: "",
 };
@@ -25,6 +27,7 @@ const RenderTree = ({
 }) => {
   const {openComments,handleOpenComments} = useFormAction()
   const [state, formAction] = useFormState(createReply, initialState);
+  
     const {
         resetSaveTextAndEmoji,
       } = useEmoji();
@@ -57,9 +60,13 @@ const RenderTree = ({
                 data={t}
                 currentUser={currentUser}
               >
-              <button type="button" className=" text-left ml-5 my-2.5 cursor-pointer" onClick={() => handleOpenComments(t.comment.id)}
+              <button
+              name="button" 
+              type="button" 
+              className=" text-left ml-5 my-2.5 cursor-pointer" 
+              onClick={() => {startTransition(() =>{handleOpenComments(t.comment.id)})}}
             >
-            responder
+            <span>responder</span>
           </button>
           </UserComments>
               <form key={reset} action={formAction}>
