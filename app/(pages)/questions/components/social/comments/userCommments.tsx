@@ -5,6 +5,7 @@ import DropDownOptions from "./dropDown";
 import { UserType } from "@/app/models/User";
 import { UserData } from "@/app/models/questions/comments/commentData";
 import EditCommentContent from "./editComment/editCommentContent";
+import TimeAgo from "./createdComment";
 
 interface UserCommentsProps {
   data: UserData;
@@ -16,6 +17,7 @@ async function UserComments({
   currentUser,
   children,
 }: UserCommentsProps) {
+  console.log(data)
  
   const [openEdit, setOpenEdit] = useState(false);
   
@@ -44,9 +46,9 @@ async function UserComments({
                   {data?.comment?.user_name}
                 </h1>
               </div>
-              <h2 className={`${openEdit === true ? "hidden" : "text-sm"}`}>
-                5min
-              </h2>
+              
+               <span className={`${openEdit === true ? "hidden" : "text-xs mr-1"}`}><TimeAgo timestamp={data.comment.created_at}/></span>
+              
               <div className={`${openEdit === true ? "hidden" : "text-sm"}`}>
                 {(data && data?.comment.id_user === currentUser?.id) ||
                 currentUser.role === "admin" ? (
