@@ -9,5 +9,6 @@ export interface UserData {
     comment_text:      string;
     id_parent_comment: number | string;
     user_name:         string;
+    created_at: string;
   }
   

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ReportComment from "./reportComment/reportComment";
 import { useState } from "react";
 import DropDownOptions from "./dropDown";
@@ -17,17 +17,15 @@ async function UserComments({
   currentUser,
   children,
 }: UserCommentsProps) {
-  console.log(data)
- 
   const [openEdit, setOpenEdit] = useState(false);
-  
+
   const handleClickEdit = () => {
     setOpenEdit(true);
   };
   const handleCancel = () => {
     setOpenEdit(false);
   };
-  
+
   return (
     <section className="grid grid-cols-[40px,1fr] mt-5 pr-5">
       <>
@@ -46,9 +44,13 @@ async function UserComments({
                   {data?.comment?.user_name}
                 </h1>
               </div>
-              
-               <span className={`${openEdit === true ? "hidden" : "text-xs mr-1"}`}><TimeAgo timestamp={data.comment.created_at}/></span>
-              
+
+              <span
+                className={`${openEdit === true ? "hidden" : "text-xs mr-1"}`}
+              >
+                <TimeAgo timestamp={data.comment.created_at} />
+              </span>
+
               <div className={`${openEdit === true ? "hidden" : "text-sm"}`}>
                 {(data && data?.comment.id_user === currentUser?.id) ||
                 currentUser.role === "admin" ? (
@@ -61,17 +63,16 @@ async function UserComments({
                 )}
               </div>
             </div>
-            
-  {openEdit ? (
-    <EditCommentContent
-      id={data?.comment.id}
-      data={data?.comment.comment_text}
-      handleCancel={handleCancel}
-    />
-  ) :  (
-    <p className="text-base">{data?.comment?.comment_text}</p>
-  ) }
 
+            {openEdit ? (
+              <EditCommentContent
+                id={data?.comment.id}
+                data={data?.comment.comment_text}
+                handleCancel={handleCancel}
+              />
+            ) : (
+              <p className="text-base">{data?.comment?.comment_text}</p>
+            )}
           </div>
           <div className={`${openEdit === true ? "hidden" : ""}`}>
             {children}
