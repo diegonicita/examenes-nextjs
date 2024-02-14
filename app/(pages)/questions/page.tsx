@@ -11,11 +11,8 @@ import ValorationButton from './components/social/valorations/valorationButton'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import { UserType } from '@/app/models/User'
 import searchComments from './actions/searchComments'
-import createTree from './actions/createTree'
 import RenderTree from './components/social/comments/renderTree'
-import { tree } from 'next/dist/build/templates/app-page'
 import FirstInputComment from './components/social/comments/firstInputComment'
-
 export default async function QuestionPage({
   searchParams,
 }: {
@@ -28,6 +25,7 @@ export default async function QuestionPage({
   const currentPage = Number(searchParams?.page) || 1
   const query = searchParams?.query || ''
   const authData = (await getInfoAuthCookie()) as UserType
+  console.log(authData,"user")
   let queries: string | string[]
   if (query) {
     // Divide la cadena en un array de palabras si no está vacía
@@ -49,13 +47,13 @@ export default async function QuestionPage({
 
   if (auth) {
     const result = await searchComments(questions)
-    // console.log(result)
+    console.log(result)
     treeComments = {
       ...(result && result.tree ? result.tree : null),
     }
   }
 
-  // console.log(treeComments[328])
+  console.log(treeComments[168])
 
   // console.log(comments)
   // let arbol = {} as any
@@ -121,6 +119,7 @@ export default async function QuestionPage({
                                 tree={treeComments[item.id]}
                                 parentId={null}
                                 depth={1}
+                                currentUser={authData}
                               />
                               {treeComments[item.id] === undefined && (
                                 <div> No hay comentarios </div>

@@ -19,6 +19,7 @@ export const createValoration = async (
   const love = formData.get('love') === 'true' ? true : false
   const id = formData.get('id') // Id de la pregunta
   const authData = (await getInfoAuthCookie()) as UserType
+  console.log(authData)
   if (authData && authData.id && id) {
     let byte = transformBitsToByte(like, unlike, love)
     try {

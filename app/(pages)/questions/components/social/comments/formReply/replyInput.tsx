@@ -1,6 +1,9 @@
+
 import useEmoji from "@/app/hooks/questions/comments/useEmoji";
-import { IconEmojiSmile } from "../valorations/icons";
 import EmojiPicker from "emoji-picker-react";
+//@ts-ignore
+import { useFormStatus } from "react-dom";
+import { IconEmojiSmile } from "../../valorations/icons";
 
 export default function replyInput({
   id,
@@ -9,6 +12,7 @@ export default function replyInput({
   id: number;
   idParent: string | number;
 }) {
+  const { pending } = useFormStatus();
   const {
     saveTextAndEmoji,
     handleInputComment,
@@ -19,8 +23,7 @@ export default function replyInput({
     handleStopPropagation,
   } = useEmoji();
   return (
-    <section className="flex flex-col ml-16">
-      <div className="flex flex-row">
+    <section className="flex flex-wrap items-start ml-16">
         <div className="">
           <img
             alt="profile"
@@ -28,6 +31,7 @@ export default function replyInput({
             className="w-10 h-10 rounded-full mr-2"
           />
         </div>
+        <div className="flex-grow">
         <div className=" relative w-full">
           <input
             type="text"
@@ -46,15 +50,15 @@ export default function replyInput({
             <IconEmojiSmile />
           </span>
         </div>
-      </div>
       <div>
         {idParent === idParent &&
           saveTextAndEmoji[id] &&
           saveTextAndEmoji[id].length > 0 && (
-            <button className="btn btn-sm btn-accent" type="submit">
-              reply
+            <button className="btn btn-sm btn-accent" type="submit" disabled={pending}>
+            {pending ? "cargando..." : "responder"}
             </button>
           )}
+          </div>
       </div>
       <div onClick={handleCloseEmoji}>
         {openEmoji && (

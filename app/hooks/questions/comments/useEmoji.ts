@@ -17,6 +17,19 @@ export default function useEmoji() {
   const resetSaveTextAndEmoji = () => {
     setSaveTextAndEmoji({});
   };
+  const resetSaveTextAndEmojiNoId = () => {
+    setSaveTextAndEmoji("");
+  };
+  const handleSaveEmojiNoId = ( emoji: EmojiClickData, event?: MouseEvent) => {
+    setSaveTextAndEmoji((prevText:any) => prevText + emoji.emoji)
+    if (emoji.emoji) {
+      setOpenEmoji(false);
+    }
+  };
+  const handleInputCommentNoId = ( e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSaveTextAndEmoji(e.target.value);
+  };
 
 
   const handleSaveEmoji = (commentId: number, emoji: EmojiClickData, event?: MouseEvent) => {
@@ -50,6 +63,9 @@ export default function useEmoji() {
     saveTextAndEmoji,
     openEmoji,
     setSaveTextAndEmoji,
-    resetSaveTextAndEmoji
+    resetSaveTextAndEmoji,
+    handleSaveEmojiNoId,
+    handleInputCommentNoId,
+    resetSaveTextAndEmojiNoId,
   };
 }
