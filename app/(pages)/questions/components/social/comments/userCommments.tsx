@@ -44,7 +44,6 @@ async function UserComments({
                   {data?.comment?.user_name}
                 </h1>
               </div>
-
               <span
                 className={`${openEdit === true ? "hidden" : "text-xs mr-1"}`}
               >
