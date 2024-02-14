@@ -1,11 +1,11 @@
-"use client";
+"use client"
 import ReportComment from "./reportComment/reportComment";
 import { useState } from "react";
 import DropDownOptions from "./dropDown";
 import { UserType } from "@/app/models/User";
 import { UserData } from "@/app/models/questions/comments/commentData";
 import EditCommentContent from "./editComment/editCommentContent";
-import TimeAgo from "./createdComment";
+import TimeAgo from "./createdCommentTime";
 
 interface UserCommentsProps {
   data: UserData;

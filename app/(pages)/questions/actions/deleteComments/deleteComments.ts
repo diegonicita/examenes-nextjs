@@ -27,6 +27,7 @@ export default async function DeleteComment(
       [validateFields.data.id]
     )) as RowDataPacket;
     revalidatePath("/questions");
+    console.log(prevState.message)
     return { message: "success" };
   } catch (e) {
     return { message: "error" };

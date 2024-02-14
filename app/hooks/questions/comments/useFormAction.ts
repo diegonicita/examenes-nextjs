@@ -13,5 +13,5 @@ export default function useFormAction(){
       [commentId]: !prevOpenComments[commentId],
     }));
   };
-  return {openComments, handleOpenComments}
+  return {openComments, handleOpenComments, setOpenComments}
 }

@@ -26,6 +26,7 @@ const FirstInputComment = ({
 
   const [state, formAction] = useFormState(createReply, initialState)
   const [reset, setReset] = useState('')
+  console.log(state)
 
   useEffect(() => {
     if (state?.message === 'success') {

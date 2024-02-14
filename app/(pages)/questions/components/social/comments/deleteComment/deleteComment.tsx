@@ -9,7 +9,6 @@ import { IconTrashCan } from "../icons/iconTrash";
 const initialState = {
   message: "",
 };
-console.log(initialState);
 
 export default function DeleteComments({
   onclick,
