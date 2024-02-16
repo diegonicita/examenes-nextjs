@@ -4,4 +4,5 @@ export type QuestionLib = {
   examenId: number
   year: number
   correct: boolean
+  userId: number
 }

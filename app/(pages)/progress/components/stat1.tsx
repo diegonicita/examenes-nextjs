@@ -9,11 +9,16 @@ import {
   selectQuestion,
 } from '@/app/lib/redux'
 
-const Stat1 = () => {
+const Stat1 = ({ userId }: { userId: any }) => {
   const dispatch = useDispatch()
+  const _userId = userId ? userId : 0
   const answeredArray = useSelector((state) => selectAllQuestion(state))
-
-  const corrects = answeredArray.filter((item) => item.correct).length
+  const incorrects = answeredArray.filter(
+    (item) => item.correct === false && item.userId === _userId,
+  ).length
+  const corrects = answeredArray.filter(
+    (item) => item.correct && item.userId === _userId,
+  ).length
 
   return (
     <>
@@ -37,7 +42,7 @@ const Stat1 = () => {
             </div>
             <div className="stat-title">Respondidas</div>
             <div className="stat-value text-primary">
-              {answeredArray.length}
+              {corrects + incorrects}
             </div>
             <div className="stat-desc">21% más que el mes pasado</div>
           </div>

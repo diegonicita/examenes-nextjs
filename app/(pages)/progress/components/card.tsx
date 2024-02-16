@@ -18,17 +18,20 @@ export default function Card({
   year,
   link,
   total,
+  userId,
 }: {
   item: ExamType
   year: number | undefined
   link: string
   total: number
+  userId: any
 }) {
   const dispatch = useDispatch()
   const answeredArray = useSelector((state) => selectAllQuestion(state))
+  const _userId = userId ? userId : 0
   const { answered, corrects, percentCorrect, percentNotCorrect } =
     getStatistics({
-      data: answeredArray,
+      data: answeredArray.filter((item) => item.userId === _userId),
       year: year,
       id: item.id,
     })
@@ -36,7 +39,12 @@ export default function Card({
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     const target = event.currentTarget as HTMLDivElement
-    dispatch(questionSlice.actions.deleteQuestionsByExamenId(Number(target.id)))
+    dispatch(
+      questionSlice.actions.deleteQuestionsByExamenId({
+        examenId: Number(target.id),
+        userId: Number(_userId),
+      }),
+    )
   }
 
   return (

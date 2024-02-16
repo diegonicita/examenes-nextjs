@@ -24,10 +24,10 @@ export const questionSlice = createSlice({
   initialState,
   reducers: {
     setQuestion: (state, action: PayloadAction<QuestionLib>) => {
-      const { id } = action.payload
+      const { id, userId } = action.payload
       // Verificar si la pregunta con el mismo ID ya existe
       const existingQuestionIndex = state.answered.findIndex(
-        (question) => question.id === id,
+        (question) => question.id === id && question.userId === userId,
       )
       // Si no existe, agregarla al array
       if (existingQuestionIndex === -1) {
@@ -35,21 +35,35 @@ export const questionSlice = createSlice({
       }
       localStorage.setItem('question', JSON.stringify(state.answered))
     },
-    deleteQuestionsByExamenId: (state, action: PayloadAction<number>) => {
-      const examenIdToDelete = action.payload
-      // Filtrar las preguntas que no pertenecen al examenId a eliminar
-      state.answered = state.answered.filter(
-        (question) => question.examenId !== examenIdToDelete,
-      )
-
+    deleteQuestionsByExamenId: (
+      state,
+      action: PayloadAction<{ examenId: number; userId: number }>,
+    ) => {
+      const examenIdToDelete = action.payload.examenId
+      const userIdToDelete = action.payload.userId
+      for (let i = state.answered.length - 1; i >= 0; i--) {
+        const question = state.answered[i]
+        if (
+          question.userId === userIdToDelete &&
+          question.examenId === examenIdToDelete
+        ) {
+          state.answered.splice(i, 1)
+        }
+      }
       localStorage.setItem('question', JSON.stringify(state.answered))
     },
   },
 })
 
-export const selectQuestion = (state: ReduxState, id: number) => {
+export const selectQuestion = (
+  state: ReduxState,
+  id: number,
+  userId: number | null,
+) => {
   // Utilizar find para buscar la pregunta con el ID especificado
-  return state.question.answered.find((question) => question.id === id)
+  return state.question.answered.find(
+    (question) => question.id === id && question.userId === userId,
+  )
 }
 
 export const selectAllQuestion = (state: ReduxState) => {

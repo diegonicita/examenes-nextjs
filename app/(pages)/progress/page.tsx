@@ -2,17 +2,20 @@ import Stat1 from './components/stat1'
 import Card from './components/card'
 import type { ExamType } from '@/app/models/Exam'
 import getQuestionsStatistics from '@/app/server-actions/questions/get-questions-statistics'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { UserType } from '@/app/models/User'
 
 const Page = async () => {
   const data = await getQuestionsStatistics()
   const exams = data.examenes as ExamType[]
+  const payload = (await getInfoAuthCookie()) as UserType
 
   return (
     <div className="flex flex-col items-center mt-4 justify-center">
       <h1> Tu Progreso</h1>
       <div className="divider divider-start"></div>
       <div className="p-2 rounded">
-        <Stat1 />
+        <Stat1 userId={payload?.id} />
       </div>
       <div className="divider"></div>
       <h1> Tus Exámenes</h1>
@@ -25,6 +28,7 @@ const Page = async () => {
               year={undefined}
               link={`/exams/${p.id}`}
               total={p.total}
+              userId={payload?.id}
             />
           ))}
       </div>

@@ -9,7 +9,14 @@ import {
   selectQuestion,
 } from '@/app/lib/redux'
 
-const Question = ({ item }: { item: QuestionType }) => {
+const Question = ({
+  item,
+  userId,
+}: {
+  item: QuestionType
+  userId: number | null
+}) => {
+  console.log(userId)
   // const [optionAnswered, setOptionAnswered] = useState<number | null>(null)
   const handleAnswered = (numero: number) => {
     // if (optionAnswered === null) setOptionAnswered(numero)
@@ -19,13 +26,15 @@ const Question = ({ item }: { item: QuestionType }) => {
         selected: numero,
         examenId: item.examen,
         correct: item.correcta === numero ? true : false,
-        year: item.ano
+        year: item.ano,
+        userId: userId ? userId : 0,
       }),
     )
   }
   // Redux //
   const dispatch = useDispatch()
-  const answered = useSelector((state) => selectQuestion(state, item.id))
+  const answered = useSelector((state) => selectQuestion(state, item.id, userId ? userId : 0))
+  console.log(answered)
 
   const data = {
     id: item.id,

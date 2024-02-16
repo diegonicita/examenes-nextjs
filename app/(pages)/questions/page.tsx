@@ -25,8 +25,8 @@ export default async function QuestionPage({
   const currentPage = Number(searchParams?.page) || 1
   const query = searchParams?.query || ''
   const authData = (await getInfoAuthCookie()) as UserType
-  console.log(authData,"user")
   let queries: string | string[]
+  console.log(authData,"user")
   if (query) {
     // Divide la cadena en un array de palabras si no está vacía
     queries = query.split(' ')
@@ -94,7 +94,7 @@ export default async function QuestionPage({
                       key={index}
                       className=" border border-gray-400 rounded my-4 px-4 pb-4"
                     >
-                      <Question item={item} />
+                      <Question item={item} userId={authData.id}/>
                       {valorations && (
                         <>
                           <Valorations
