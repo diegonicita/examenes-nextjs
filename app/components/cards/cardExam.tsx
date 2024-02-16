@@ -7,21 +7,24 @@ import { useSelector, selectAllQuestion } from '@/app/lib/redux'
 import { getStatistics } from './helper/getStatistic'
 import useHasMounted from '@/app/hooks/useHasMounted'
 
-export default function Card({
+export default function CardExam({
   item,
   year,
   link,
   total,
+  userId,
 }: {
   item: ExamType
   year: number | undefined
   link: string
   total: number
+  userId: number | null
 }) {
   const answeredArray = useSelector((state) => selectAllQuestion(state))
+  const _userId = userId ? userId : 0
   const { answered, corrects, percentCorrect, percentNotCorrect } =
     getStatistics({
-      data: answeredArray,
+      data: answeredArray.filter((item) => item.userId === _userId),
       year: year,
       id: item.id,
     })

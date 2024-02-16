@@ -1,10 +1,13 @@
 import CardExam from '@/app/components/cards/cardExam'
 import type { ExamType } from '@/app/models/Exam'
+import { UserType } from '@/app/models/User'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import getQuestionsStatistics from '@/app/server-actions/questions/get-questions-statistics'
 
 const Page = async () => {
   const data = await getQuestionsStatistics()
   const exams = data.examenes as ExamType[]
+  const payload = (await getInfoAuthCookie()) as UserType
 
   return (
     <>
@@ -20,6 +23,7 @@ const Page = async () => {
               year={undefined}
               link={`/exams/${p.id}`}
               total={p.total}
+              userId={payload?.id}
             />
           ))}
       </div>
