@@ -6,18 +6,19 @@ const WordsSuggestions = ({
   query,
   inputRef,
   wordsSuggestions,
-  reset  
+  reset,
 }: {
   query: string
   inputRef: React.RefObject<HTMLInputElement>
   wordsSuggestions: { palabra: string; cantidad: unknown }[]
-  reset: string | null | undefined  
+  reset: string | null | undefined
 }) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
 
   const handleAddWord = (term: string) => {
+    console.log('Add word')
     const params = new URLSearchParams(searchParams.toString())
     const currentQuery = params.get('query')
     if (term) {
@@ -35,6 +36,13 @@ const WordsSuggestions = ({
 
   return (
     <div key={reset} className="mx-auto border border-gray">
+      {inputRef.current === document.activeElement && (
+        <>
+          <button className="py-2 pl-2">
+            <span className="font-bold">Búsqueda actual:</span> {query}</button>
+          <div className="font-bold pt-2 pl-2"> Sugerencias: </div>
+        </>
+      )}
       <ul>
         {typeof document !== 'undefined' &&
           inputRef.current === document.activeElement &&

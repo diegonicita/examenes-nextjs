@@ -16,8 +16,7 @@ export default function Searchbar({
   const pathname = usePathname()
   const { replace } = useRouter()
 
-  const handleSearch = useDebouncedCallback((term: string) => {
-    console.log(term)
+  const handleSearch = useDebouncedCallback((term: string) => {    
     const params = new URLSearchParams(searchParams)
     if (term) {
       params.set('query', term)
@@ -45,7 +44,7 @@ export default function Searchbar({
           aria-describedby="button-addon1"
           defaultValue={defaultValue?.toString()}
           ref={inputRef}
-          onBlur={handleChangeResetKey}
+          
         />
 
         <button
