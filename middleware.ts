@@ -24,7 +24,7 @@ export default authMiddleware({
           response.cookies.delete('auth')
           return response
         } else {
-          // console.log('El token está vigente.')
+          console.log('El token está vigente.')
         }
       } catch (error) {
         authCookieServer = undefined
@@ -38,10 +38,10 @@ export default authMiddleware({
   },
 
   // Routes that can be accessed while signed out
-  publicRoutes: ['/login', '/register'],
+  publicRoutes: ['/', '/login', '/register'],
   // Routes that can always be accessed, and have
   // no authentication information
-  ignoredRoutes: ['/', '/exams', '/subjects', '/progress'],
+  ignoredRoutes: ['/exams', '/subjects', '/progress','/api/webhooks/user'],
 })
 
 export const config = {
