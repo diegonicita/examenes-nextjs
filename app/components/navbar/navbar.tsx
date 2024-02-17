@@ -3,6 +3,7 @@ import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 import Tab from './tab'
 import { cookies } from 'next/headers'
+import { UserButton } from '@clerk/nextjs'
 
 export const Nav = () => {
   const auth = cookies().get('auth')
@@ -29,7 +30,10 @@ export const Nav = () => {
             )
           })}
         </div>
-        <AuthMenu isLogged={isLogged} />
+        <div className="flex justify-center items-center">
+          <AuthMenu isLogged={isLogged} />
+          <UserButton />
+        </div>
       </nav>
     </div>
   )

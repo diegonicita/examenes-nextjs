@@ -8,6 +8,7 @@
   "dependencies": {
     "@algolia/autocomplete-core": "^1.13.0",
     "@charkour/react-reactions": "^0.11.0",
+    "@clerk/nextjs": "^4.29.7",
     "@reduxjs/toolkit": "1.9.5",
     "emoji-picker-react": "^4.6.11",
     "jose": "^5.1.3",
