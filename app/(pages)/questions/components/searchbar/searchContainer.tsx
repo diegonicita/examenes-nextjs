@@ -8,17 +8,21 @@ const SearchContainer = ({
   currentPage,
   wordsSuggestions,
   children,
+  questionsCount
 }: {
   query: string
   children: ReactNode
   wordsSuggestions: { palabra: string; cantidad: unknown }[]
   currentPage: number
+  questionsCount: number | null
 }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [reset, setReset] = useState<string | null | undefined>(undefined)
   const handleChangeResetKey = () => {
     setReset(Math.random().toString() + Date.now().toString())
   }
+
+  // console.log(wordsSuggestions)
 
   return (
     <div className="w-full mx-auto max-w-[75ch] px-1">
@@ -32,6 +36,7 @@ const SearchContainer = ({
           reset={reset}
           inputRef={inputRef}
           wordsSuggestions={wordsSuggestions}
+          questionsCount={questionsCount}
         />
       )}
       {children}

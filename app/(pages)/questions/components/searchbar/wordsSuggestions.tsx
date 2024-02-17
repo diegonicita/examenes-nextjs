@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 
 const WordsSuggestions = ({
@@ -7,15 +7,18 @@ const WordsSuggestions = ({
   inputRef,
   wordsSuggestions,
   reset,
+  questionsCount,
 }: {
   query: string
   inputRef: React.RefObject<HTMLInputElement>
   wordsSuggestions: { palabra: string; cantidad: unknown }[]
   reset: string | null | undefined
+  questionsCount: number | null
 }) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
+  const [localReset, setLocalReset] = useState(0)
 
   const handleAddWord = (term: string) => {
     console.log('Add word')
@@ -31,18 +34,38 @@ const WordsSuggestions = ({
     }
     replace(`${pathname}?${params.toString()}`)
   }
-  // console.log(query)
-  // console.log(wordsSuggestions)
+
+  const handleWord = () => {
+    setLocalReset(localReset === 0 ? 1 : 0)
+  }
 
   return (
-    <div key={reset} className="mx-auto border border-gray">
-      {inputRef.current === document.activeElement && (
-        <>
-          <button className="py-2 pl-2">
-            <span className="font-bold">Búsqueda actual:</span> {query}</button>
-          <div className="font-bold pt-2 pl-2"> Sugerencias: </div>
-        </>
-      )}
+    <div
+      key={reset + localReset.toString()}
+      className="border border-gray w-full"
+    >
+      {typeof document !== 'undefined' &&
+        inputRef.current === document.activeElement && (
+          <>
+            <button className="py-2 pl-2 text-left" onClick={handleWord}>
+              <span className="font-bold">Búsqueda actual:</span> {query}
+              <span className="indicator my-1 px-4">
+                <span className="indicator-item badge  indicator-middle indicator-end badge-secondary ">
+                  +{questionsCount}
+                </span>
+              </span>
+              <div className="pl-4 text-xs mt-2">
+                <span className="font-bold">Usuarios Free:</span> no pueden ver
+                todos los resultados de la busqueda
+              </div>
+              <div className="pl-4 text-xs">
+                <span className="font-bold">Usuarios Premium:</span> pueden ver
+                todos los resultados de la busqueda (sin límites)
+              </div>
+            </button>
+            <div className="font-bold pt-2 pl-2"> Sugerencias: </div>
+          </>
+        )}
       <ul>
         {typeof document !== 'undefined' &&
           inputRef.current === document.activeElement &&
