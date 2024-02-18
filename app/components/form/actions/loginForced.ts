@@ -3,9 +3,10 @@
 import { cookies } from 'next/headers'
 
 export const loginForced = async () => {
+  console.log('trying to login')
   const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiJkaWVnbzFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkaWVnbyBuaWNpdGEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDgxODk0NjQsImV4cCI6MTcwODE5NjY2NH0._sPiDLIoHlS5KvPzlo8i8aHE2gpRp0jiOZU63RO_dz8'
-  cookies().set('auth', token, {
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZ…M0N30.LZ-MbDlJoX8USopnsInIipRR9MfQMpWwFYpEdQ7tp7k'
+  cookies().set('auth333', token, {
     httpOnly: true,
     path: '/',
     maxAge: 60 * 60 * 2,
