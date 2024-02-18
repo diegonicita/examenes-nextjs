@@ -55,7 +55,7 @@ export default function mainCommentInput() {
   <div onClick={handleCloseEmoji}>
     {openEmoji && (
       <div onClick={handleStopPropagation} className="w-[348px]">
-        <EmojiPicker searchDisabled onEmojiClick={handleSaveEmojiNoId}/>
+        <EmojiPicker  searchDisabled onEmojiClick={handleSaveEmojiNoId}/>
       </div>
     )}
   </div>

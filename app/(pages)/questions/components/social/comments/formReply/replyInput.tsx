@@ -66,6 +66,7 @@ export default function replyInput({
             <EmojiPicker
               searchDisabled
               onEmojiClick={(emoji) => handleSaveEmoji(id, emoji)}
+              
             />
           </div>
         )}

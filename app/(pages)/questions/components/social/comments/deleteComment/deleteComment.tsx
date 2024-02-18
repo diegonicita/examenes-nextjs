@@ -3,13 +3,12 @@ import { IconTrashCan } from "../icons/iconTrash";
 import DeleteForm from "./deleteForm";
 
 export default function DeleteComments({
-  onclick,
+
   id,
 }: {
-  onclick: () => void;
+
   id: number;
 }) {
- 
   return (
     <div>
       <button
@@ -38,7 +37,7 @@ export default function DeleteComments({
             Todos las respuestas incluidos en este comentario seran eliminados
           </p>
           <div className="modal-action">
-            <DeleteForm id={id} onclick={onclick} />
+            <DeleteForm id={id}  />
           </div>
         </div>
       </dialog>

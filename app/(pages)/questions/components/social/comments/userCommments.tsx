@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ReportComment from "./reportComment/reportComment";
 import { useState } from "react";
 import DropDownOptions from "./dropDown";
@@ -6,6 +6,8 @@ import { UserType } from "@/app/models/User";
 import { UserData } from "@/app/models/questions/comments/commentData";
 import EditCommentContent from "./editComment/editCommentContent";
 import TimeAgo from "./createdCommentTime";
+import DeleteComments from "./deleteComment/deleteComment";
+import EditComment from "./editComment/editComment";
 
 interface UserCommentsProps {
   data: UserData;
@@ -53,10 +55,10 @@ async function UserComments({
               <div className={`${openEdit === true ? "hidden" : "text-sm"}`}>
                 {(data && data?.comment.id_user === currentUser?.id) ||
                 currentUser.role === "admin" ? (
-                  <DropDownOptions
-                    id={data?.comment.id}
-                    onclick={handleClickEdit}
-                  />
+                  <DropDownOptions >
+                    <DeleteComments id={data?.comment.id} />
+                    <EditComment openEditClick={handleClickEdit} />
+                  </DropDownOptions>
                 ) : (
                   <ReportComment />
                 )}

@@ -1,5 +1,5 @@
 /* Instruments */
-import { counterSlice, messageSlice, userSlice, questionSlice } from './slices'
+import { counterSlice, messageSlice, userSlice, questionSlice} from './slices'
 import { pokemonApi } from '../services/pokemon'
 import { choiceApi } from '../services/choice'
 
