@@ -111,7 +111,6 @@ export default async function QuestionPage({
                               Comentarios
                             </div>
                             <div className="collapse-content">
-                            {/* <UseDropDown > */}
                               <FirstInputComment
                                 questionId={item.id}
                                 parentId={null}
@@ -126,7 +125,6 @@ export default async function QuestionPage({
                               {treeComments[item.id] === undefined && (
                                 <div> No hay comentarios </div>
                               )}
-                              {/* </UseDropDown> */}
                             </div>
                           </div>
                         </>
