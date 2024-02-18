@@ -41,7 +41,7 @@ export default authMiddleware({
   publicRoutes: ['/', '/login', '/register'],
   // Routes that can always be accessed, and have
   // no authentication information
-  ignoredRoutes: ['/exams', '/subjects', '/progress','/api/webhooks/user'],
+  ignoredRoutes: ['/exams', '/subjects', '/progress','/api/webhooks/user', '/api/cookie', '/questions', '/consults'],
 })
 
 export const config = {

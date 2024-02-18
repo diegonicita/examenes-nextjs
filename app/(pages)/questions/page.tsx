@@ -1,5 +1,3 @@
-import { cookies } from 'next/headers'
-import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 import searchQuestions from './actions/searchQuestions'
 import searchWordsSuggestions from './actions/searchWordsSuggestions'
 import SearchContainer from './components/searchbar/searchContainer'
@@ -22,7 +20,6 @@ export default async function QuestionPage({
     query?: string
   }
 }) {
-  const auth = cookies().get('auth')
   const currentPage = Number(searchParams?.page) || 1
   const query = searchParams?.query || ''
   const authData = (await getInfoAuthCookie()) as UserType
@@ -41,14 +38,14 @@ export default async function QuestionPage({
   const questionsCount = searchQuestionsResult?.resultLength
   //console.log(questions)
   let valorations: undefined = undefined
-  if (auth) valorations = await searchValorations(questions)
+  if (authData) valorations = await searchValorations(questions)
   //console.log(valorations)
   const wordsSuggestions = await searchWordsSuggestions(queries)
 
   // Comments //
   let treeComments = {} as any
 
-  if (auth) {
+  if (authData) {
     const result = await searchComments(questions)
     console.log(result)
     treeComments = {
@@ -82,7 +79,7 @@ export default async function QuestionPage({
 
   return (
     <div>
-      <CheckServerCookie auth={auth}>
+      {authData && (
         <div className="flex flex-col items-start max-w-[60rem] mx-auto mt-8">
           <SearchContainer
             query={query}
@@ -138,7 +135,16 @@ export default async function QuestionPage({
             )}
           </SearchContainer>
         </div>
-      </CheckServerCookie>
+      )}
+      {!authData && (
+        <div className="flex items-center justify-center h-screen">
+          <div>
+            <div className="text-xl pb-4">
+              No estas autorizado para ver esta pagina. Tiene que.
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

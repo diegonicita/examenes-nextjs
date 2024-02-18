@@ -3,4 +3,6 @@ export type UserType = {
   username: string | null
   email: string | null
   role: string | null
+  clerkId?: string | null
+  clerkImage?: string | null
 }

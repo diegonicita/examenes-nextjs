@@ -1,25 +1,11 @@
 import Searchbar from '@/app/(pages)/questions-algolia/components/searchbar'
-import { cookies } from 'next/headers'
-import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 
-export default function QuestionPage({
-  searchParams,
-}: {
-  searchParams?: {
-    page?: string
-    query?: string
-  }
-}) {
-  const auth = cookies().get('auth')
+export default function QuestionPage() {
   return (
-    <div>
-      <CheckServerCookie auth={auth}>
-        <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
-          <div className="mx-auto">
-            <Searchbar />
-          </div>
-        </div>
-      </CheckServerCookie>
+    <div className="flex flex-col items-start px-8 max-w-[60rem] mx-auto mt-8">
+      <div className="mx-auto">
+        <Searchbar />
+      </div>
     </div>
   )
 }

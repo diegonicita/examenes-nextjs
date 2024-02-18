@@ -11,7 +11,7 @@ const Searchbar = (props) => {
     collections: [],
     isOpen: false,
   })
-  const [isClient, setIsClient] = useState(false)  
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
