@@ -13,6 +13,7 @@ import { UserType } from '@/app/models/User'
 import searchComments from './actions/searchComments'
 import RenderTree from './components/social/comments/renderTree'
 import FirstInputComment from './components/social/comments/firstInputComment'
+import { UseDropDown } from '@/app/hooks/questions/comments/useDropDown'
 export default async function QuestionPage({
   searchParams,
 }: {
@@ -110,6 +111,7 @@ export default async function QuestionPage({
                               Comentarios
                             </div>
                             <div className="collapse-content">
+                            {/* <UseDropDown > */}
                               <FirstInputComment
                                 questionId={item.id}
                                 parentId={null}
@@ -124,6 +126,7 @@ export default async function QuestionPage({
                               {treeComments[item.id] === undefined && (
                                 <div> No hay comentarios </div>
                               )}
+                              {/* </UseDropDown> */}
                             </div>
                           </div>
                         </>

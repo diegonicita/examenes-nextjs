@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 import { DropDown } from "./icons/dropdown";
-import useDropDown from "@/app/hooks/questions/comments/useDropDown";
+import { UseDropDown, useDropDownContext } from "@/app/hooks/questions/comments/useDropDown";
 
 const Dropdown = ({ children}: { children: React.ReactNode }) => {
-const{isOpen,toggleDropdown,dropdownRef,closeDropdown} = useDropDown()
+const{isOpen,toggleDropdown,dropdownRef} = useDropDownContext()
 
   return (
+    
     <div className="relative" ref={dropdownRef}>
       <button onClick={toggleDropdown}>
         <DropDown />
@@ -20,6 +21,7 @@ const{isOpen,toggleDropdown,dropdownRef,closeDropdown} = useDropDown()
         </div>
       )}
     </div>
+    
   );
 };
 

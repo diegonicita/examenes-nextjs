@@ -3,7 +3,7 @@ import { useFormState } from "react-dom";
 import DeleteComment from "@/app/(pages)/questions/actions/deleteComments/deleteComments";
 import { notifySuccess } from "@/app/components/form/toasters/notifySuccess";
 import { notifyErrors } from "@/app/components/form/toasters/notifyErrors";
-import useDropDown from "@/app/hooks/questions/comments/useDropDown";
+import  { useDropDownContext } from "@/app/hooks/questions/comments/useDropDown";
 
 const initialState = {
   message: "",
@@ -11,7 +11,7 @@ const initialState = {
 
 export default function DeleteForm({ id}: { id: number}) {
   const [state, formAction] = useFormState(DeleteComment, initialState);
-  const { closeDropdown} = useDropDown()
+  const {closeDropdown} = useDropDownContext()
   
   console.log(state.message, "state");
   const handleCloseDropdownandModal = () =>{
@@ -21,10 +21,7 @@ export default function DeleteForm({ id}: { id: number}) {
     if (modal) {
       modal.close();
     }
-    const dropdown = document.getElementById("dropdown-comment") as HTMLElement | null
-    if(dropdown){
-    dropdown.classList.add("bg-red-100")
-    }
+    closeDropdown()
   }
 
   return (
