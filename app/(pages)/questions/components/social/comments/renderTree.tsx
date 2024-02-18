@@ -5,6 +5,7 @@ import { UserType } from "@/app/models/User";
 import useFormAction from "@/app/hooks/questions/comments/useFormAction";
 import { startTransition } from "react";
 import FormReply from "./formReply/formReply";
+import { UseDropDown } from "@/app/hooks/questions/comments/useDropDown";
 
 const RenderTree = ({
   tree,
@@ -36,6 +37,7 @@ const RenderTree = ({
         t.comment.id_parent_comment === parentId && (
           <div key={t.comment.id}>
             <div className="" style={{ paddingLeft: `${depth * 20}px` }}>
+            <UseDropDown key={t.comment.id} >
               <UserComments data={t} currentUser={currentUser}>
                 <button
                   name="button"
@@ -47,9 +49,11 @@ const RenderTree = ({
                     });
                   }}
                 >
+                
                   <span>responder</span>
                 </button>
               </UserComments>
+              </UseDropDown >
               {openComments[t.comment.id] &&
                 parentId === t.comment.id_parent_comment&& (
                 <FormReply t={t} />

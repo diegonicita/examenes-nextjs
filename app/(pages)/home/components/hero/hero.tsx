@@ -27,7 +27,7 @@ export default function Hero() {
           </h1>
           <p
             className="text-wrap-balance max-w-[20rem] text-center text-gray-500 
-        text-sm font-normal font-inter leading-relaxed mt-5 mb-[25px] md:text-left"
+        text-sm -normal font-inter leading-relaxed mt-5 mb-[25px] md:text-left"
           >
             Practica con nuestros exámenes de residencias médicas. Más de 5000
             preguntas disponibles de exámenes de Argentina, España, México y
