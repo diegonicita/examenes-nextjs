@@ -1,6 +1,9 @@
 'use client'
 import React from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { useDebouncedCallback } from 'use-debounce'
+
+const WAIT_BETWEEN_CHANGE = 300
 
 export default function Searchbar({
   inputRef,
@@ -13,7 +16,7 @@ export default function Searchbar({
   const pathname = usePathname()
   const { replace } = useRouter()
 
-  const handleSearch = (term: string) => {
+  const handleSearch = useDebouncedCallback((term: string) => {    
     const params = new URLSearchParams(searchParams)
     if (term) {
       params.set('query', term)
@@ -22,7 +25,7 @@ export default function Searchbar({
     }
     params.set('page', '1')
     replace(`${pathname}?${params.toString()}`)
-  }
+  }, WAIT_BETWEEN_CHANGE)
 
   let defaultValue = searchParams.get('query') as string | undefined | null
   if (defaultValue === null) {
@@ -41,7 +44,7 @@ export default function Searchbar({
           aria-describedby="button-addon1"
           defaultValue={defaultValue?.toString()}
           ref={inputRef}
-          onBlur={handleChangeResetKey}
+          
         />
 
         <button

@@ -26,8 +26,8 @@ export default async function QuestionPage({
   const currentPage = Number(searchParams?.page) || 1
   const query = searchParams?.query || ''
   const authData = (await getInfoAuthCookie()) as UserType
-  console.log(authData,"user")
   let queries: string | string[]
+  console.log(authData, 'user')
   if (query) {
     // Divide la cadena en un array de palabras si no está vacía
     queries = query.split(' ')
@@ -36,7 +36,9 @@ export default async function QuestionPage({
     queries = []
   }
 
-  const questions = await searchQuestions(queries)
+  const searchQuestionsResult = await searchQuestions(queries)
+  const questions = searchQuestionsResult?.resultQueryLimit10
+  const questionsCount = searchQuestionsResult?.resultLength
   //console.log(questions)
   let valorations: undefined = undefined
   if (auth) valorations = await searchValorations(questions)
@@ -86,6 +88,7 @@ export default async function QuestionPage({
             query={query}
             currentPage={currentPage}
             wordsSuggestions={wordsSuggestions}
+            questionsCount={questionsCount}
           >
             {query !== '' && query.length > 2 && (
               <>
@@ -95,7 +98,7 @@ export default async function QuestionPage({
                       key={index}
                       className=" border border-gray-400 rounded my-4 px-4 pb-4"
                     >
-                      <Question item={item} />
+                      <Question item={item} userId={authData.id} />
                       {valorations && (
                         <>
                           <Valorations
@@ -103,7 +106,7 @@ export default async function QuestionPage({
                             valorations={valorations}
                           />
                           <div className="flex flex-wrap gap-4">
-                            <ValorationButton id_question={item.id} />                            
+                            <ValorationButton id_question={item.id} />
                           </div>
                           <div className="collapse bg-base-200 mt-4">
                             <input type="checkbox" />

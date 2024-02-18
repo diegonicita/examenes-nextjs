@@ -2,7 +2,13 @@
 import type { QuestionSQL as QuestionType } from '@/app/models/QuestionSQL'
 import Question from './question'
 
-export const Examen = ({ data }: { data: any }) => {
+export const Examen = ({
+  data,
+  userId,
+}: {
+  data: any
+  userId: any
+}) => {
   return (
     <>
       {data &&
@@ -11,7 +17,7 @@ export const Examen = ({ data }: { data: any }) => {
             key={index}
             className=" border border-gray-400 rounded my-4 px-4 pb-4"
           >
-            <Question item={item} />
+            <Question item={item} userId={userId} />
           </div>
         ))}
     </>

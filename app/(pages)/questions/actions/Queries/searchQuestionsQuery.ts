@@ -10,6 +10,7 @@ export default async function searchQuestionsQuery(
   const validQueries = queries.filter((q) => q.length > 2)
 
   let resultQueryLimit10
+  let resultLength
 
   if (validQueries.length > 0) {
     // Crea un array de condiciones para la búsqueda en todos los campos
@@ -25,14 +26,26 @@ export default async function searchQuestionsQuery(
       Array.from({ length: 6 }, () => `%${q}%`),
     )
     // Add Limit
-    queryLikes.push(limit.toString())
+    const finalQueryLikes = [...queryLikes, limit.toString()]
 
     // Construye y ejecuta la consulta
     const queryString1 = `SELECT * FROM preguntas WHERE ${conditions} LIMIT ?`
     resultQueryLimit10 = (await executeQuery(
       queryString1,
+      finalQueryLikes,
+    )) as RowDataPacket
+
+    const countQueryString = `SELECT COUNT(*) as count FROM preguntas WHERE ${conditions}`
+    resultLength = (await executeQuery(
+      countQueryString,
       queryLikes,
     )) as RowDataPacket
+
+    console.log(resultLength[0].count)
   }
-  return resultQueryLimit10
+
+  return {
+    resultQueryLimit10,
+    resultLength: Array.isArray(resultLength) ? resultLength[0].count : null,
+  }
 }

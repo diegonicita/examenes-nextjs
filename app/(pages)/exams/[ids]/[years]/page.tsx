@@ -35,8 +35,6 @@ export default async function ExamIdPage({
   )
   const payload = await getInfoAuthCookie()
   const questions = await getExam(exam.id, year.ano)
-  // let valorations = undefined
-  // if (payload?.id) valorations = await searchValorations(questions)
 
   return (
     <div className="w-full mx-auto max-w-[85ch] px-1">
@@ -47,7 +45,7 @@ export default async function ExamIdPage({
         <h1 className="text-center font-bold text-xl">
           Año {year?.ano} - {year?.cantidad_preguntas} Preguntas
         </h1>
-        <Examen data={questions} />
+        <Examen data={questions} userId={payload?.id} />
       </div>
     </div>
   )
