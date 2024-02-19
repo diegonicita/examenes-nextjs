@@ -50,14 +50,18 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
   return (
     <div>
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">
-        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-          <div className="w-8 rounded-full">
-            <Image
-              alt="Icono del usuario"
-              src={isLogged ? userLogged : userNotLogged}
-            />
-          </div>
-        </label>
+        {!isLogged && (
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div className="w-8 rounded-full">
+              <Image alt="Icono del usuario" src={userNotLogged} />
+            </div>
+          </label>
+        )}
+        {isLogged && (
+          <label tabIndex={0} className="btn mx-2">
+            Perfil
+          </label>
+        )}
         <ul
           tabIndex={0}
           className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
@@ -65,10 +69,10 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
           {!isLogged && (
             <>
               <li>
-                <Link href="/login">Ingresar</Link>
+                <Link href="/sign-in">Ingresar</Link>
               </li>
               <li>
-                <Link href="/register">Registrarte</Link>
+                <Link href="/sign-up">Registrarte</Link>
               </li>
             </>
           )}
@@ -80,12 +84,12 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
                   <span className="badge">New</span>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <div>Preferencias</div>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <div onClick={() => handleLogout()}>Salir (Logout)</div>
-              </li>
+              </li> */}
             </>
           )}
         </ul>

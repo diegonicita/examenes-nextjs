@@ -38,10 +38,16 @@ export default authMiddleware({
   },
 
   // Routes that can be accessed while signed out
-  publicRoutes: ['/', '/login', '/register'],
+  publicRoutes: ['/', '/login', '/register', '/questions', '/consults'],
   // Routes that can always be accessed, and have
   // no authentication information
-  ignoredRoutes: ['/exams', '/subjects', '/progress','/api/webhooks/user', '/api/cookie', '/questions', '/consults'],
+  ignoredRoutes: [
+    '/exams',
+    '/subjects',
+    '/progress',
+    '/api/webhooks/user',
+    '/api/cookie',
+  ],
 })
 
 export const config = {
