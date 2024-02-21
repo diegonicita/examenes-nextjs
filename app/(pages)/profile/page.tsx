@@ -2,7 +2,6 @@ import React from 'react'
 import type { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import MessageNotLogged from '@/app/components/messages/messageNotLogged'
-import { OrganizationSwitcher } from '@clerk/nextjs'
 
 const Profile = async () => {
   try {
@@ -20,7 +19,6 @@ const Profile = async () => {
             <div className="text-xl pb-4 font-bold text-center">
               Perfil del Usuario
             </div>
-            <OrganizationSwitcher />
             <div>ID: {authData && authData.id?.toString()}</div>
             <div>Clerk Id: {authData && authData.clerkId} </div>
             <div>Nombre: {authData && authData.username}</div>

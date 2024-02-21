@@ -2,6 +2,7 @@ import { clerkClient } from '@clerk/nextjs'
 import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
+import { getUserId } from './getUserId'
 
 const getInfoAuthCookie = async () => {
   const publicKey = process.env.CLERK_PEM_PUBLIC_KEY
@@ -15,13 +16,20 @@ const getInfoAuthCookie = async () => {
         const user = await clerkClient.users.getUser(decoded?.sub?.toString())
         console.log(user, 'user')
         const username = user.firstName + ' ' + user.lastName
-        return {
-          id: 8,
-          email: user.emailAddresses[0].emailAddress,
-          role: 'admin',
-          username: username,
-          clerkId: user.id,
-          clerkImage: user.imageUrl
+        const respuesta = await getUserId(user.emailAddresses[0].emailAddress)
+        console.log(respuesta, 'id')
+        if (respuesta && respuesta.id) {
+          console.log(respuesta, 'id')
+          return {
+            id: respuesta && respuesta.id ? respuesta.id : undefined,
+            email: user.emailAddresses[0].emailAddress,
+            role: 'admin',
+            username: username,
+            clerkId: user.id,
+            clerkImage: user.imageUrl,
+          }
+        } else {
+          return null
         }
       }
     } else {
