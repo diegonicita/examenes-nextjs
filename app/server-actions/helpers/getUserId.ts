@@ -3,6 +3,7 @@
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
 import { z } from 'zod'
+import { createUser } from './createUser'
 
 export const getUserId = async (email: string) => {
   const result = z
@@ -26,24 +27,12 @@ export const getUserId = async (email: string) => {
           id: response[0].id,
         }
       }
-      // email not founded // create one
-      try {
-        const response = (await executeQuery(
-          'insert into usuarios (email, role) values (?, "user")',
-          [email],
-        )) as RowDataPacket
-        console.log(response)
-        if (response && response?.affectedRows) {
-          console.log(response?.affectedRows)
-          return {
-            message: 'user created',
-            id: response?.insertId,
-          }
-        }
-      } catch (error) {}
+      
+      // if email not founded create user
+      const response2 = createUser(email)
 
       return {
-        message: 'email not founded',
+        message: 'email not founded. User Created.',
         id: null,
       }
     } catch (error) {
