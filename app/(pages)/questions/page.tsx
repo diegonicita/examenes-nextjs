@@ -140,7 +140,7 @@ export default async function QuestionPage({
         <div className="flex items-center justify-center h-screen">
           <div>
             <div className="text-xl pb-4">
-              No estas autorizado para ver esta pagina. Tiene que.
+              No estas autorizado para ver esta pagina. Tienes que loguearte.
             </div>
           </div>
         </div>

@@ -21,19 +21,20 @@ export const getUserId = async (email: string) => {
         [email],
       )) as RowDataPacket
       if (response && response.length > 0) {
-        console.log(response)
         return {
           message: 'success',
           id: response[0].id,
         }
       }
-      
       // if email not founded create user
-      const response2 = createUser(email)
-
-      return {
-        message: 'email not founded. User Created.',
-        id: null,
+      const createResponse: { message: string; id: number } = await createUser(
+        email,
+      )
+      if (createResponse.message === 'success') {
+        return {
+          message: 'success',
+          id: createResponse.id,
+        }
       }
     } catch (error) {
       return {

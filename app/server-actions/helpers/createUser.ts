@@ -20,14 +20,27 @@ export const createUser = async (email: string) => {
         [email],
       )) as RowDataPacket
       console.log(response)
-
       if (response && response?.affectedRows) {
         console.log(response?.affectedRows)
         return {
-          message: 'user created',
+          message: 'success',
           id: response?.insertId,
         }
+      } else {
+        return {
+          message: 'error',
+          id: null,
+        }
       }
-    } catch (error) {}
+    } catch (error) {
+      return {
+        message: 'error',
+        id: null,
+      }
+    }
+  }
+  return {
+    message: 'error',
+    id: null,
   }
 }
