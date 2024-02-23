@@ -40,6 +40,8 @@ export default authMiddleware({
   // Routes that can be accessed while signed out
   publicRoutes: [
     '/',
+    '/sign-in',
+    '/sign-up',
     '/login',
     '/register',
     '/questions',
@@ -47,6 +49,13 @@ export default authMiddleware({
     '/exams(.*)',
     '/subjects(.*)',
     '/progress',
+    '/profile',
+    '/api/get-profile',
+    '/api/get-questions',
+    '/api/get-questions-statistics',
+    
+
+
   ],
   // Routes that can always be accessed, and have
   // no authentication information
