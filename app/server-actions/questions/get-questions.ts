@@ -1,7 +1,6 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
-import getRole from '@/app/server-actions/helpers/getRole'
 import getInfoAuthCookie from '../helpers/getInfoAuthCookie'
 
 export default async function getQuestions(query: string | null) {
