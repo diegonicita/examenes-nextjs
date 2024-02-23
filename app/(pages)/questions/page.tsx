@@ -98,7 +98,7 @@ export default async function QuestionPage({
                       key={index}
                       className=" border border-gray-400 rounded my-4 px-4 pb-4"
                     >
-                      <Question item={item} userId={authData.id} />
+                      <Question item={item} userId={authData?.id} />
                       {valorations && (
                         <>
                           <Valorations

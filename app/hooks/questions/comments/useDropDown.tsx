@@ -18,6 +18,7 @@ function useDropDownContext() {
   
   const context = useContext(DropDownContext);
   console.log(context)
+  
   if (!context) {
     throw new Error("useDropDownContext must be used within a DropDownContext.Provider");
   }
@@ -38,12 +39,12 @@ function UseDropDown({ children }: { children: React.ReactNode }) {
       }
     };
 
-    document.addEventListener("click", handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
-      document.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, []);
+  }, [isOpen]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

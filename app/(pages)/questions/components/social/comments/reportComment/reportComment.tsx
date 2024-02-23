@@ -1,15 +1,25 @@
+
+import ContentReport from "./contentReport";
+import IconFlag from "./reportIcon";
+
 export default function ReportComment(){
+ 
     return(
-        <ul
-                  tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-                >
-                  <li>
-                    <a>Item 5</a>
-                  </li>
-                  <li>
-                    <a>Item 6</a>
-                  </li>
-                </ul>
+        <section >
+          <button className=" w-full flex flex-row items-center hover:bg-gray-200 
+        active:bg-gray-400 gap-x-3 cursor-pointer p-2" onClick={() =>{
+          const modal = document.getElementById("content_report") as HTMLDialogElement
+          console.log(modal,"report")
+          if(modal){
+            modal.showModal()
+            
+          }
+          
+        }} >
+          <span><IconFlag /></span>
+          <h1>Reportar</h1>
+          </button>
+          <ContentReport />
+        </section>
     )
 }

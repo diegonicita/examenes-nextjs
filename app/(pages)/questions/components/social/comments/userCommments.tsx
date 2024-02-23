@@ -1,6 +1,6 @@
 "use client";
 import ReportComment from "./reportComment/reportComment";
-import { useState } from "react";
+import {  useState } from "react";
 import DropDownOptions from "./dropDown";
 import { UserType } from "@/app/models/User";
 import { UserData } from "@/app/models/questions/comments/commentData";
@@ -19,6 +19,7 @@ async function UserComments({
   currentUser,
   children,
 }: UserCommentsProps) {
+  console.log(data)
   const [openEdit, setOpenEdit] = useState(false);
 
   const handleClickEdit = () => {
@@ -60,7 +61,9 @@ async function UserComments({
                     <EditComment openEditClick={handleClickEdit} />
                   </DropDownOptions>
                 ) : (
-                  <ReportComment />
+                  <DropDownOptions>
+                    <ReportComment />
+                  </DropDownOptions>
                 )}
               </div>
             </div>
