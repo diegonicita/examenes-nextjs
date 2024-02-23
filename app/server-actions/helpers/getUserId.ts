@@ -17,13 +17,14 @@ export const getUserId = async (email: string) => {
   if (result.success) {
     try {
       const response = (await executeQuery(
-        'select id from usuarios where email = ?',
+        'select id, role from usuarios where email = ?',
         [email],
       )) as RowDataPacket
       if (response && response.length > 0) {
         return {
           message: 'success',
           id: response[0].id,
+          role: response[0].role,
         }
       }
       // if email not founded create user

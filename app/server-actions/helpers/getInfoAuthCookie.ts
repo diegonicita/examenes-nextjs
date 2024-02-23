@@ -11,8 +11,7 @@ const getInfoAuthCookie = async () => {
     return null
   }
 
-  const user = await clerkClient.users.getUser(userId)
-  console.log(user, 'user')
+  const user = await clerkClient.users.getUser(userId)  
   const name = user.firstName
   const lastname = user.lastName
   const fullname =
@@ -29,23 +28,12 @@ const getInfoAuthCookie = async () => {
     return {
       id: respuesta.id,
       email: user.emailAddresses[0].emailAddress,
-      role: 'admin',
+      role: respuesta.role,
       username: fullname,
       clerkId: user.id,
       clerkImage: user.imageUrl,
     }
-  }
-
-  // const auth = cookies().get('auth')
-  // const secret = process.env.JWT_SECRET
-  // if (auth) {
-  //   const { payload } = await jwtVerify(
-  //     auth.value,
-  //     new TextEncoder().encode(secret),
-  //   )
-  //   return payload
-  // }
-  // return null
+  }  
 }
 
 export default getInfoAuthCookie
