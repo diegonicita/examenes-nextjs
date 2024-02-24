@@ -43,7 +43,7 @@ export default async function createReply(prevState: any, formData: FormData) {
         validatedFields.data.id_parent_comment !== 'nula'
           ? Number(validatedFields.data.id_parent_comment)
           : null,
-          authData?.username
+        authData?.username || undefined,
       ],
     )) as RowDataPacket
     if (result && result?.affectedRows) {
