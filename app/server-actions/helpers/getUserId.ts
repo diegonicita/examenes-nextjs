@@ -20,6 +20,7 @@ export const getUserId = async (email: string) => {
         'select id, role from usuarios where email = ?',
         [email],
       )) as RowDataPacket
+      console.log(response[0].id, 'id')
       if (response && response.length > 0) {
         return {
           message: 'success',
@@ -32,6 +33,7 @@ export const getUserId = async (email: string) => {
         email,
       )
       if (createResponse.message === 'success') {
+        console.log('usuario creado')
         return {
           message: 'success',
           id: createResponse.id,
@@ -41,7 +43,7 @@ export const getUserId = async (email: string) => {
     } catch (error) {
       return {
         message: 'errors',
-        id: null,        
+        id: null,
       }
     }
   }

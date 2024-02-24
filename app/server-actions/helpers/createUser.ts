@@ -26,17 +26,9 @@ export const createUser = async (email: string) => {
           message: 'success',
           id: response?.insertId,
         }
-      } else {
-        return {
-          message: 'error',
-          id: null,
-        }
       }
     } catch (error) {
-      return {
-        message: 'error',
-        id: null,
-      }
+      console.log(error)
     }
   }
   return {

@@ -22,10 +22,10 @@ const getInfoAuthCookie = async () => {
       : lastname !== null
       ? lastname
       : user.emailAddresses[0].emailAddress
-  // Check if userId exists. If not create a new user.
-  console.log(user.emailAddresses[0].emailAddress, 'email user')
+  // Check if userId exists. If not create a new user.  
   const respuesta = await getUserId(user.emailAddresses[0].emailAddress)
   if (respuesta && respuesta.id) {
+    console.log("hay usuario")
     return {
       id: respuesta.id,
       email: user.emailAddresses[0].emailAddress,
@@ -35,6 +35,7 @@ const getInfoAuthCookie = async () => {
       clerkImage: user.imageUrl,
     }
   }  
+  console.log('no hay usuario')
   return null
 }
 

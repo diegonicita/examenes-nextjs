@@ -31,8 +31,9 @@ export default async function createReply(prevState: any, formData: FormData) {
   if (validatedFields.data.comment) {
     try {
       const authData = (await getInfoAuthCookie()) as UserType
-      console.log(authData)
+      console.log(authData, "Imprime datos del usuario")
       if (authData && authData.id) {
+        console.log("Existe id: crear comentario")
         const result = (await executeQuery(
           'insert into comments values (NULL,?,?,?,?,?,NOW())',
           [
@@ -47,7 +48,7 @@ export default async function createReply(prevState: any, formData: FormData) {
         )) as RowDataPacket
         if (result && result?.affectedRows) {
           console.log('success')
-          // revalidatePath('/questions')
+          revalidatePath('/questions')
           return { message: 'success' }
         }
       }

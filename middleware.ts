@@ -53,9 +53,6 @@ export default authMiddleware({
     '/api/get-profile',
     '/api/get-questions',
     '/api/get-questions-statistics',
-
-
-
   ],
   // Routes that can always be accessed, and have
   // no authentication information
