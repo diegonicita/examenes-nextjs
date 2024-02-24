@@ -38,7 +38,7 @@ export default async function createReply(prevState: any, formData: FormData) {
       'insert into comments values (NULL,?,?,?,?,?,NOW())',
       [
         Number(validatedFields.data.id_question),
-        authData?.id,
+        authData.id,
         validatedFields.data.comment,
         validatedFields.data.id_parent_comment !== 'nula'
           ? Number(validatedFields.data.id_parent_comment)
