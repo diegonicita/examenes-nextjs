@@ -35,7 +35,7 @@ export default async function createReply(prevState: any, formData: FormData) {
     // await new Promise((res) => setTimeout(res, 1000))
     console.log(validatedFields.data)
     try {
-      if (authData.id) {
+      if (authData && authData.id) {
         const result = (await executeQuery(
           'insert into comments values (NULL,?,?,?,?,?,NOW())',
           [
