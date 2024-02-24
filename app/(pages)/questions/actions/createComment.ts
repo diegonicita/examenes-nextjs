@@ -22,9 +22,6 @@ export default async function createReply(prevState: any, formData: FormData) {
   }
 
   const validatedFields = schema.safeParse(newTodo)
-  console.log(newTodo)
-  const authData = (await getInfoAuthCookie()) as UserType
-  console.log(authData)
   // Return early if the form data is invalid
   if (!validatedFields.success) {
     return {
@@ -32,10 +29,9 @@ export default async function createReply(prevState: any, formData: FormData) {
     }
   }
   if (validatedFields.data.comment) {
-    // await new Promise((res) => setTimeout(res, 1000))
-    console.log(validatedFields.data, 'validate Data')
-    console.log(authData?.id, 'authData.id')
     try {
+      const authData = (await getInfoAuthCookie()) as UserType
+      console.log(authData)
       if (authData && authData.id) {
         const result = (await executeQuery(
           'insert into comments values (NULL,?,?,?,?,?,NOW())',
