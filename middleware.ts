@@ -44,7 +44,7 @@ export default authMiddleware({
     '/sign-up',
     '/login',
     '/register',
-    '/questions',
+    '/questions(.*)',
     '/consults',
     '/exams(.*)',
     '/subjects(.*)',
@@ -53,7 +53,7 @@ export default authMiddleware({
     '/api/get-profile',
     '/api/get-questions',
     '/api/get-questions-statistics',
-    
+
 
 
   ],
