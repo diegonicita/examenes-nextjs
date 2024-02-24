@@ -33,15 +33,15 @@ export default async function createReply(prevState: any, formData: FormData) {
   }
   if (validatedFields.data.comment) {
     // await new Promise((res) => setTimeout(res, 1000))
-    console.log(validatedFields.data.comment)
+    console.log(validatedFields.data)
     const result = (await executeQuery(
       'insert into comments values (NULL,?,?,?,?,?,NOW())',
       [
-        validatedFields.data.id_question,
+        Number(validatedFields.data.id_question),
         authData?.id,
         validatedFields.data.comment,
         validatedFields.data.id_parent_comment !== 'nula'
-          ? validatedFields.data.id_parent_comment
+          ? Number(validatedFields.data.id_parent_comment)
           : null,
           authData?.username
       ],
