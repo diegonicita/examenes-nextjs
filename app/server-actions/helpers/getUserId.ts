@@ -24,7 +24,7 @@ export const getUserId = async (email: string) => {
         return {
           message: 'success',
           id: response[0].id,
-          role: response[0].role,
+          role: 'user',
         }
       }
       // if email not founded create user
@@ -35,12 +35,13 @@ export const getUserId = async (email: string) => {
         return {
           message: 'success',
           id: createResponse.id,
+          role: 'user',
         }
       }
     } catch (error) {
       return {
         message: 'errors',
-        id: null,
+        id: null,        
       }
     }
   }
