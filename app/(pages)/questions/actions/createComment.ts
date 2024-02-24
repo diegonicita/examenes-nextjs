@@ -34,22 +34,28 @@ export default async function createReply(prevState: any, formData: FormData) {
   if (validatedFields.data.comment) {
     // await new Promise((res) => setTimeout(res, 1000))
     console.log(validatedFields.data)
-    const result = (await executeQuery(
-      'insert into comments values (NULL,?,?,?,?,?,NOW())',
-      [
-        Number(validatedFields.data.id_question),
-        authData.id,
-        validatedFields.data.comment,
-        validatedFields.data.id_parent_comment !== 'nula'
-          ? Number(validatedFields.data.id_parent_comment)
-          : null,
-        authData?.username || null,
-      ],
-    )) as RowDataPacket
-    if (result && result?.affectedRows) {
-      console.log('success')
-      revalidatePath('/questions')
-      return { message: 'success' }
+    try {
+      if (authData.id) {
+        const result = (await executeQuery(
+          'insert into comments values (NULL,?,?,?,?,?,NOW())',
+          [
+            validatedFields.data.id_question.toString(),
+            authData.id,
+            validatedFields.data.comment,
+            validatedFields.data.id_parent_comment !== 'nula'
+              ? validatedFields.data.id_parent_comment.toString()
+              : null,
+            authData?.username || null,
+          ],
+        )) as RowDataPacket
+        if (result && result?.affectedRows) {
+          console.log('success')
+          revalidatePath('/questions')
+          return { message: 'success' }
+        }
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }
