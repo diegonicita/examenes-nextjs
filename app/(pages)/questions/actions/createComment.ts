@@ -33,7 +33,8 @@ export default async function createReply(prevState: any, formData: FormData) {
   }
   if (validatedFields.data.comment) {
     // await new Promise((res) => setTimeout(res, 1000))
-    console.log(validatedFields.data)
+    console.log(validatedFields.data, 'validate Data')
+    console.log(authData?.id, 'authData.id')
     try {
       if (authData && authData.id) {
         const result = (await executeQuery(
