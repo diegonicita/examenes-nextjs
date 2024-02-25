@@ -45,7 +45,7 @@ export default async function DeleteComment(
     await executeQuery('DELETE FROM comments WHERE id = ?', [
       validateFields.data.id,
     ])
-    // revalidatePath('/')
+    revalidatePath('/')
     console.log('success')
     return { message: 'success' }
   } catch (e) {

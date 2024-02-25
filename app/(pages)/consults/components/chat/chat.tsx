@@ -4,7 +4,6 @@ import { SetStateAction, useEffect, useState } from 'react'
 import Message from './message'
 import Avatar from './avatar'
 import moment from 'moment'
-import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 
 const ENDPOINT = 'https://mercado.webapp.ar'
 // const ENDPOINT = 'http://localhost:8126'
@@ -26,7 +25,9 @@ const Chat = ({
     }
   }, [])
 
-  const [user, setUser] = useState(username ? username : email ? email : 'invitado')
+  const [user, setUser] = useState(
+    username ? username : email ? email : 'invitado',
+  )
   const [usersList, setUsersList] = useState([])
   const [isRoomSelected, setIsRoomSelected] = useState(false)
   const [newMessage, setNewMessage] = useState('')
@@ -91,7 +92,6 @@ const Chat = ({
         ...oldChatMessages,
         { author: data.author, message: data.message },
       ])
-      if (data.message === 'Hola') refreshAction()
     }
 
     const handleRoomJoin = (data: { author: any; message: any }) => {

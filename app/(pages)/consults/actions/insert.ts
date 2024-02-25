@@ -1,5 +1,4 @@
 'use server'
-
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
 import { z } from 'zod'

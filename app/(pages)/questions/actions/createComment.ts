@@ -52,7 +52,7 @@ export default async function createReply(prevState: any, formData: FormData) {
         )) as RowDataPacket
         if (result && result?.affectedRows) {
           console.log('success')
-          // revalidatePath('/questions')
+          revalidatePath('/questions')
           return { message: 'success' }
         }
       }

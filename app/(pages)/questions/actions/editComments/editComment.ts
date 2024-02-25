@@ -28,7 +28,7 @@ export default async function editCommenAction(
       validateFields.data.id,
     ]);
     console.log(validateFields.data);
-    // revalidatePath("/questions");
+    revalidatePath("/questions");
     return { message: "success" };
   } catch (e) {
     return { message: "error" };
