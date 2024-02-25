@@ -16,7 +16,7 @@ export const deleteAction = async (
     ])) as RowDataPacket
 
     if (result?.affectedRows) {
-      revalidatePath('/consults')
+      // revalidatePath('/consults')
       return { message: 'Consulta Borrada...' }
     }
   }
