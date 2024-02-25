@@ -2,6 +2,7 @@ import DisplayConsults from '@/app/(pages)/consults/displayConsults'
 import Chat from '../consults/components/chat/chat'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import { auth } from '@clerk/nextjs'
+import { deleteAction } from '@/app/(pages)/consults/actions/delete'
 
 const Page = async () => {
   const { userId } = auth()
@@ -11,7 +12,7 @@ const Page = async () => {
     <>
       {payload && (
         <div>
-          {payload.role === 'admin' && <DisplayConsults />}
+          {payload.role === 'admin' && <DisplayConsults deleteAction={deleteAction} />}
           {payload.role === 'admin' && (
             <Chat email={payload?.email} username={payload?.username} />
           )}

@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import { ConsultType } from '@/app/models/Consult'
 import DeleteButton from './deleteButton'
 import { RowDataPacket } from 'mysql2'
 
@@ -9,7 +10,16 @@ type Result = {
   email: string
 }
 
-export default function Consults({ result }: { result: RowDataPacket | null }) {
+export default function Consults({
+  result,
+  deleteAction,
+}: {
+  result: RowDataPacket | null
+  deleteAction: (
+    prevState: ConsultType,
+    formData: FormData,
+  ) => Promise<{ message: string } | undefined>
+}) {
   return (
     <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
       {result &&
@@ -19,7 +29,7 @@ export default function Consults({ result }: { result: RowDataPacket | null }) {
             className="card max-w-[40rem] bg-base-100 shadow-xl m-2 border border-black px-4"
           >
             <div className="card-body gap-0 px-1 text-start">
-              <DeleteButton id={p.id} />
+              <DeleteButton id={p.id} deleteAction={deleteAction} />
               <h1 className="font-bold mb-4">
                 Consulta Id: <span>{p.id}</span>
               </h1>

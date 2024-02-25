@@ -5,6 +5,7 @@ import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
 import { type ConsultType } from '@/app/models/Consult'
 
+
 export const deleteAction = async (
   prevState: ConsultType,
   formData: FormData,
