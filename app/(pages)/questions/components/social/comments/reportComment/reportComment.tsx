@@ -2,8 +2,8 @@
 import ContentReport from "./contentReport";
 import IconFlag from "./reportIcon";
 
-export default function ReportComment(){
- 
+export default function ReportComment({id}:{id:string}){
+  
     return(
         <section >
           <button className=" w-full flex flex-row items-center hover:bg-gray-200 
@@ -19,7 +19,7 @@ export default function ReportComment(){
           <span><IconFlag /></span>
           <h1>Reportar</h1>
           </button>
-          <ContentReport />
+          <ContentReport id={id} />
         </section>
     )
 }

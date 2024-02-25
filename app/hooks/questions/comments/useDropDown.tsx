@@ -47,7 +47,7 @@ function UseDropDown({ children }: { children: React.ReactNode }) {
   }, [isOpen]);
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(prevOpen => !prevOpen);
   };
   const closeDropdown = () => {
     setIsOpen(false);

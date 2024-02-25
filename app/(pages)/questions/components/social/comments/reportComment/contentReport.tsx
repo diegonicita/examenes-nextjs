@@ -1,16 +1,25 @@
+import reportComment from "@/app/(pages)/questions/actions/reportComment/reportComent";
 import { useDropDownContext } from "@/app/hooks/questions/comments/useDropDown";
+//@ts-ignore
+import { useFormState } from "react-dom";
+const initialState ={
+  message :""
+}
 
-export default function ContentReport() {
+export default function ContentReport({id}:{id:string}) {
+  const [state, formAction] = useFormState(reportComment,initialState)
+  
   const { closeDropdown } = useDropDownContext();
   return (
     <dialog id="content_report" className="modal">
-      <form>
+      <form action={formAction}>
         <div className="modal-box">
           <h3 className="font-bold text-lg mb-2">
             Escribe la razon por la que quieres reportar este comentario
           </h3>
-
-          <textarea placeholder="Reportar commentario" name="report" id="" className="mb-2 p-3 resize-none outline-none w-full border border-gray-300" />
+         <input type="hidden" name="id" value={id}/>
+          <textarea placeholder="Reportar commentario" name="report" 
+          className="mb-2 p-3 resize-none outline-none w-full border border-gray-300" />
           {/* if there is a button in form, it will close the modal */}
           <div className="flex justify-end gap-x-2">
           <button
@@ -28,7 +37,7 @@ export default function ContentReport() {
           >
             Close
           </button>
-          <button className="btn btn-accent">reportar</button>
+          <button type="submit" className="btn btn-accent">reportar</button>
           </div>
         </div>
       </form>

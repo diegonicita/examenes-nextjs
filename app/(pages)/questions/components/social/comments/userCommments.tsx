@@ -62,7 +62,7 @@ async function UserComments({
                   </DropDownOptions>
                 ) : (
                   <DropDownOptions>
-                    <ReportComment />
+                    <ReportComment id={data?.comment.id} />
                   </DropDownOptions>
                 )}
               </div>
