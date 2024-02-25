@@ -32,9 +32,9 @@ export default async function createReply(prevState: any, formData: FormData) {
   if (validatedFields.data.comment) {
     try {
       const { userId } = auth()
-      const authData = await getInfoAuthCookie(userId)
+      const user = await currentUser()
+      const authData = await getInfoAuthCookie(user?.id ? user.id : null)
       console.log(authData, 'Imprime datos de getInfoAuthCookie')
-      const user = await currentUser();
       console.log(user, 'Imprime datos de currentUser')
       if (authData && authData.id) {
         console.log('Existe id: crear comentario')
