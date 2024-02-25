@@ -25,7 +25,7 @@ export const getUserId = async (email: string) => {
         return {
           message: 'success',
           id: response[0].id,
-          role: 'user',
+          role: response[0].role,
         }
       }
       // if email not founded create user

@@ -4,6 +4,7 @@ import getQuestionsStatistics from '@/app/server-actions/questions/get-questions
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import type { ExamType } from '@/app/models/Exam'
 import type { UserType } from '@/app/models/User'
+import { auth } from '@clerk/nextjs'
 
 function capitalizeFirstLetters(name: string) {
   var words = name.split(' ')
@@ -18,7 +19,8 @@ function capitalizeFirstLetters(name: string) {
 const Page = async () => {
   const data = await getQuestionsStatistics()
   const exams = data.examenes as ExamType[]
-  const payload = (await getInfoAuthCookie()) as UserType
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
 
   return (
     <div className="flex flex-col items-center mt-4 justify-center">

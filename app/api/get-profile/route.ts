@@ -1,15 +1,17 @@
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { auth } from '@clerk/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 export const dynamic = 'force-dynamic' // defaults to auto
 
 export async function GET(req: NextRequest, res: NextResponse) {
   const { searchParams } = new URL(req.url)
   let id = searchParams.get('id')
-  const payload = (await getInfoAuthCookie()) as any
-  const token = payload?.token
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)  
+  
   const requestOptions = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer`,
     },
   }
 

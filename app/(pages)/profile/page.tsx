@@ -1,11 +1,12 @@
 import React from 'react'
-import type { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import MessageNotLogged from '@/app/components/messages/messageNotLogged'
+import { auth } from '@clerk/nextjs'
 
 const Profile = async () => {
   try {
-    const authData = (await getInfoAuthCookie()) as UserType
+    const { userId } = auth()
+    const authData = await getInfoAuthCookie(userId)
 
     if (authData) {
       return (

@@ -1,8 +1,8 @@
 // import Card from './components/card'
 import CardExam from '@/app/components/cards/cardExam'
 import type { ExamType } from '@/app/models/Exam'
-import { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { auth } from '@clerk/nextjs'
 
 type YearData = {
   ano: number
@@ -30,7 +30,8 @@ export default async function ExamIdPage({
   const exam = data?.examenes.find(
     (p: ExamType) => p.id === parseInt(params.ids),
   )
-  const payload = (await getInfoAuthCookie()) as UserType
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
 
   return (
     <>

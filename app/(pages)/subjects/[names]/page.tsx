@@ -2,6 +2,7 @@ import CardExam from '@/app/components/cards/cardExam'
 import type { ExamType } from '@/app/models/Exam'
 import { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { auth } from '@clerk/nextjs'
 
 async function getData() {
   const url = process.env.URL_API
@@ -20,7 +21,8 @@ export default async function page({ params }: { params: { names: string } }) {
   const subject = data?.temas.find(
     (p: ExamType) => p.id === parseInt(params.names),
   )
-  const payload = (await getInfoAuthCookie()) as UserType
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
   return (
     <div>
       <h1 className="text-center mt-2 font-bold text-xl">

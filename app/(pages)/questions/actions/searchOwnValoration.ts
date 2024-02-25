@@ -2,9 +2,11 @@
 import type { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import searchOwnValorationQuery from './Queries/searchOwnValorationQuery'
+import { auth } from '@clerk/nextjs'
 
 const searchOwnValoration = async (questionId: number) => {
-  const authData = (await getInfoAuthCookie()) as UserType
+  const { userId } = auth()
+  const authData = await getInfoAuthCookie(userId)
   const valorations = {} as any
   let result = undefined
   if (authData && authData.id) {

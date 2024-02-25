@@ -12,6 +12,7 @@ import searchComments from './actions/searchComments'
 import RenderTree from './components/social/comments/renderTree'
 import FirstInputComment from './components/social/comments/firstInputComment'
 import { UseDropDown } from '@/app/hooks/questions/comments/useDropDown'
+import { auth } from '@clerk/nextjs'
 export default async function QuestionPage({
   searchParams,
 }: {
@@ -22,7 +23,8 @@ export default async function QuestionPage({
 }) {
   const currentPage = Number(searchParams?.page) || 1
   const query = searchParams?.query || ''
-  const authData = (await getInfoAuthCookie()) as UserType
+  const { userId } = auth()
+  const authData = await getInfoAuthCookie(userId)
   let queries: string | string[]
   console.log(authData, 'user')
   if (query) {

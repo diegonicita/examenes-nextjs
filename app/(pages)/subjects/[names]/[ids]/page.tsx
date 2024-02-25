@@ -2,6 +2,7 @@ import type { ExamType } from '@/app/models/Exam'
 import Examen from '@/app/(pages)/questions/components/questions/examen'
 import getExamBySubject from '../../actions/getExamBySubject'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { auth } from '@clerk/nextjs'
 
 async function getData() {
   const url = process.env.URL_API
@@ -28,7 +29,8 @@ export default async function page({
     (p: ExamType) => p.id === parseInt(params.ids),
   )
   const questions = await getExamBySubject(exam.id, subject.id)
-  const payload = await getInfoAuthCookie()
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
 
   return (
     <div className="w-full mx-auto max-w-[85ch] px-1">

@@ -1,9 +1,11 @@
 import MessageLogged from '@/app/components/messages/messageLogged'
 import RegisterFormContainer from '@/app/components/form/registerFormContainer'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { auth } from '@clerk/nextjs'
 
 export default async function Register() {
-  const payload = await getInfoAuthCookie()
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
   const isLogged = payload ? true : false
   return (
     <>

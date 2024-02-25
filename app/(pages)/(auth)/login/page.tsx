@@ -1,11 +1,13 @@
 import MessageLogged from '@/app/components/messages/messageLogged'
 import LoginFormContainer from '@/app/components/form/loginFormContainer'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { auth } from '@clerk/nextjs'
 
 export default async function Login() {
   const email = process.env.USER_EMAIL
   const password = process.env.USER_PASSWORD
-  const payload = await getInfoAuthCookie()
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
   const isLogged = payload ? true : false
   return (
     <>

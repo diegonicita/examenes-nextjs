@@ -2,9 +2,11 @@
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { RowDataPacket } from 'mysql2'
 import getInfoAuthCookie from '../helpers/getInfoAuthCookie'
+import { auth } from '@clerk/nextjs'
 
 export default async function getQuestions(query: string | null) {
-  const payload = await getInfoAuthCookie()
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
   if (payload && payload.role === 'admin') {
     const querylike = '%' + query + '%'
     let result = null

@@ -1,8 +1,8 @@
 import type { ExamType } from '@/app/models/Exam'
 import getExam from '@/app/(pages)/exams/actions/getExam'
-import searchValorations from '@/app/(pages)/questions/actions/searchValoration'
 import Examen from '@/app/(pages)/questions/components/questions/examen'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { auth } from '@clerk/nextjs'
 
 type YearData = {
   ano: number
@@ -33,7 +33,8 @@ export default async function ExamIdPage({
   const year = exam?.preguntas.find(
     (y: YearData) => y.ano === parseInt(params.years),
   )
-  const payload = await getInfoAuthCookie()
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
   const questions = await getExam(exam.id, year.ano)
 
   return (

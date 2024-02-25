@@ -2,12 +2,12 @@ import AuthMenu from './authMenu'
 import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 import Tab from './tab'
-import { UserButton } from '@clerk/nextjs'
+import { UserButton, auth } from '@clerk/nextjs'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
 export const Nav = async () => {
-  const payload = await getInfoAuthCookie()
-  const isLogged = payload ? true : false
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
 
   return (
     <div className="bg-base-200 text-base-content">
@@ -23,7 +23,7 @@ export const Nav = async () => {
           })}
           {tabs.map((tab, index) => {
             return (
-              isLogged &&
+              payload &&
               tab.requireLogin === true && (
                 <Tab name={tab.name} path={tab.path} key={index} />
               )
@@ -31,7 +31,7 @@ export const Nav = async () => {
           })}
         </div>
         <div className="flex justify-center items-center">
-          <AuthMenu isLogged={isLogged} />
+          <AuthMenu isLogged={payload ? true : false} />
           <UserButton />
         </div>
       </nav>

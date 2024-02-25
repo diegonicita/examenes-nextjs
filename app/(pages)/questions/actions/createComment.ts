@@ -5,6 +5,7 @@ import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import { UserType } from '@/app/models/User'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { z } from 'zod'
+import { auth } from '@clerk/nextjs'
 
 const schema = z.object({
   comment: z
@@ -30,10 +31,11 @@ export default async function createReply(prevState: any, formData: FormData) {
   }
   if (validatedFields.data.comment) {
     try {
-      const authData = (await getInfoAuthCookie()) as UserType
-      console.log(authData, "Imprime datos del usuario")
+      const { userId } = auth()
+      const authData = await getInfoAuthCookie(userId)
+      console.log(authData, 'Imprime datos del usuario')
       if (authData && authData.id) {
-        console.log("Existe id: crear comentario")
+        console.log('Existe id: crear comentario')
         const result = (await executeQuery(
           'insert into comments values (NULL,?,?,?,?,?,NOW())',
           [

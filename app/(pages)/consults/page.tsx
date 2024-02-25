@@ -1,22 +1,23 @@
 import DisplayConsults from '@/app/(pages)/consults/displayConsults'
 import Chat from '../consults/components/chat/chat'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
-import { UserType } from '@/app/models/User'
+import { auth } from '@clerk/nextjs'
 
 const Page = async () => {
-  const authData = await getInfoAuthCookie()
-  console.log(authData?.role, 'role')
+  const { userId } = auth()
+  const payload = await getInfoAuthCookie(userId)
+
   return (
     <>
-      {authData && (
+      {payload && (
         <div>
-          {authData.role === 'admin' && <DisplayConsults />}
-          {authData.role === 'admin' && (
-            <Chat email={authData?.email} username={authData?.username} />
+          {payload.role === 'admin' && <DisplayConsults />}
+          {payload.role === 'admin' && (
+            <Chat email={payload?.email} username={payload?.username} />
           )}
         </div>
       )}
-      {authData && authData.role !== 'admin' && (
+      {payload && payload.role !== 'admin' && (
         <div className="flex items-center justify-center h-screen">
           <div>
             <div className="text-xl pb-4">
