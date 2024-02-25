@@ -6,7 +6,7 @@ const getInfoAuthCookie = async (userId: string | null) => {
   if (!userId) {
     return null
   }
-  
+  try {
   const user = await clerkClient.users.getUser(userId)
   const name = user.firstName
   const lastname = user.lastName
@@ -31,6 +31,10 @@ const getInfoAuthCookie = async (userId: string | null) => {
       clerkImage: user.imageUrl,
     }
   }
+}
+catch(error) {
+  console.log(error)
+}
   console.log('no hay usuario')
   return null
 }
