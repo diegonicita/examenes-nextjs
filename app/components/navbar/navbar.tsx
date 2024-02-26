@@ -4,9 +4,9 @@ import { tabs } from './tabs'
 import Tab from './tab'
 import { UserButton, auth } from '@clerk/nextjs'
 
-export const Nav = async ({ getInfoAuth }: { getInfoAuth: any }) => {
-  const { userId } = auth()
-  const payload = await getInfoAuth(userId)
+export const Nav = async ({ logged }: { logged: boolean }) => {
+  // const { userId } = auth()
+  // const payload = await getInfoAuth(userId)
 
   return (
     <div className="bg-base-200 text-base-content">
@@ -22,7 +22,7 @@ export const Nav = async ({ getInfoAuth }: { getInfoAuth: any }) => {
           })}
           {tabs.map((tab, index) => {
             return (
-              payload &&
+              logged &&
               tab.requireLogin === true && (
                 <Tab name={tab.name} path={tab.path} key={index} />
               )
@@ -30,7 +30,7 @@ export const Nav = async ({ getInfoAuth }: { getInfoAuth: any }) => {
           })}
         </div>
         <div className="flex justify-center items-center">
-          <AuthMenu isLogged={payload ? true : false} />
+          <AuthMenu isLogged={logged ? true : false} />
           <UserButton />
         </div>
       </nav>
