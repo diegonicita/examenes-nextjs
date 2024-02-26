@@ -10,6 +10,7 @@ const Profile = async () => {
   try {
     const authData = (await getInfoAuthCookie()) as UserType
     const session = await auth()
+    console.log(session)
     if (authData) {
       return (
         <div className="flex mt-4 gap-4 text-center justify-center">
