@@ -3,13 +3,12 @@ import Chat from '../consults/components/chat/chat'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import { auth } from '@clerk/nextjs'
 import { deleteAction } from '@/app/(pages)/consults/actions/delete'
-import { unstable_noStore as noStore } from 'next/cache'
+import { Suspense } from 'react'
+import { headers } from 'next/headers'
 
-const Page = async () => {
+async function User() {
   const { userId } = auth()
   const payload = await getInfoAuthCookie(userId)
-  noStore()
-
   return (
     <>
       {payload && (
@@ -33,6 +32,15 @@ const Page = async () => {
         </div>
       )}
     </>
+  )
+}
+
+const Page = async () => {
+  const forwardedFor = headers().get('x-forwarded-for')
+  return (
+    <Suspense fallback={null}>
+      <User />
+    </Suspense>
   )
 }
 
