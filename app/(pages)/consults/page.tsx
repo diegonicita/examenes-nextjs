@@ -3,16 +3,20 @@ import Chat from '../consults/components/chat/chat'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import { auth } from '@clerk/nextjs'
 import { deleteAction } from '@/app/(pages)/consults/actions/delete'
+import { unstable_noStore as noStore } from 'next/cache'
 
 const Page = async () => {
   const { userId } = auth()
   const payload = await getInfoAuthCookie(userId)
+  noStore()
 
   return (
     <>
       {payload && (
         <div>
-          {payload.role === 'admin' && <DisplayConsults deleteAction={deleteAction} />}
+          {payload.role === 'admin' && (
+            <DisplayConsults deleteAction={deleteAction} />
+          )}
           {payload.role === 'admin' && (
             <Chat email={payload?.email} username={payload?.username} />
           )}
