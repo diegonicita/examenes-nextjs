@@ -4,8 +4,16 @@ import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 import Tab from './tab'
 import { UserButton } from '@clerk/nextjs'
+import { useAuth } from '@clerk/clerk-react'
 
 export const Nav = async ({ logged }: { logged: boolean }) => {
+  const { isLoaded, isSignedIn } = useAuth()
+
+  if (!isLoaded) {
+    // Handle loading state however you like
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="bg-base-200 text-base-content">
       <nav className="px-4 flex gap-4 sm:w-full max-w-[45rem] mx-auto text-sm items-center justify-between">
@@ -20,7 +28,7 @@ export const Nav = async ({ logged }: { logged: boolean }) => {
           })}
           {tabs.map((tab, index) => {
             return (
-              logged &&
+              isSignedIn &&
               tab.requireLogin === true && (
                 <Tab name={tab.name} path={tab.path} key={index} />
               )
@@ -28,7 +36,7 @@ export const Nav = async ({ logged }: { logged: boolean }) => {
           })}
         </div>
         <div className="flex justify-center items-center">
-          <AuthMenu isLogged={logged ? true : false} />
+          <AuthMenu isLogged={isSignedIn} />
           <UserButton />
         </div>
       </nav>
