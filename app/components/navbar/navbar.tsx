@@ -6,7 +6,7 @@ import Tab from './tab'
 import { UserButton } from '@clerk/nextjs'
 import { useAuth } from '@clerk/clerk-react'
 
-export const Nav = async ({ logged }: { logged: boolean }) => {
+export const Nav = ({ logged }: { logged: boolean }) => {
   const { isLoaded, isSignedIn } = useAuth()
 
   if (!isLoaded) {
