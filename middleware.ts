@@ -1,42 +1,6 @@
 import { authMiddleware } from '@clerk/nextjs'
-import { NextResponse } from 'next/server'
-import { jwtVerify } from 'jose'
 
 export default authMiddleware({
-  beforeAuth: async (req) => {
-    let authCookieServer = req.cookies.get('auth')
-    let authPayload = null
-    const secret = process.env.JWT_SECRET
-    if (authCookieServer) {
-      try {
-        const { payload } = await jwtVerify(
-          authCookieServer?.value,
-          new TextEncoder().encode(secret),
-        )
-        authPayload = payload
-        const currentTime = Date.now()
-        const currentTimeInSeconds = Math.floor(currentTime / 1000)
-        if (authPayload.exp && currentTimeInSeconds >= authPayload?.exp) {
-          console.log('El token ha caducado.')
-          authPayload = null
-          authCookieServer = undefined
-          let response = NextResponse.next()
-          response.cookies.delete('auth')
-          return response
-        } else {
-          console.log('El token está vigente.')
-        }
-      } catch (error) {
-        authCookieServer = undefined
-        authPayload = null
-        console.log('Error al verificar el token:', error)
-        let response = NextResponse.next()
-        response.cookies.delete('auth')
-        return response
-      }
-    }
-  },
-
   // Routes that can be accessed while signed out
   publicRoutes: [
     '/',
