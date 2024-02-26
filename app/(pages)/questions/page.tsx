@@ -13,6 +13,9 @@ import RenderTree from './components/social/comments/renderTree'
 import FirstInputComment from './components/social/comments/firstInputComment'
 import { UseDropDown } from '@/app/hooks/questions/comments/useDropDown'
 import { auth } from '@clerk/nextjs'
+import createReply from './actions/createComment'
+
+
 export default async function QuestionPage({
   searchParams,
 }: {
@@ -117,6 +120,7 @@ export default async function QuestionPage({
                                 questionId={item.id}
                                 parentId={null}
                                 depth={1}
+                                createReply={createReply}
                               />
                               <RenderTree
                                 tree={treeComments[item.id]}
