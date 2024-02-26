@@ -3,6 +3,7 @@ import { ConsultType } from '@/app/models/Consult'
 import React, { useEffect } from 'react'
 //@ts-ignore
 import { useFormStatus, useFormState } from 'react-dom'
+import { useRouter } from 'next/navigation'
 import { refreshAction } from '../actions/refresh'
 
 const initialState = {
@@ -21,6 +22,7 @@ export default function DeleteButton({
 }) {
   const { pending } = useFormStatus()
   const [state, formAction] = useFormState(deleteAction, initialState)
+  const router = useRouter()
 
   useEffect(() => {
     if (state?.message === 'success') {
