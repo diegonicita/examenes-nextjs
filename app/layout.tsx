@@ -12,8 +12,8 @@ export default async function RootLayout(props: React.PropsWithChildren) {
   const payload = await getInfoAuthCookie(userId)
 
   return (
-    <Providers>
-      <ClerkProvider>
+    <ClerkProvider>
+      <Providers>
         <html lang="en">
           <body className="block">
             <ClerkLoading>
@@ -32,7 +32,7 @@ export default async function RootLayout(props: React.PropsWithChildren) {
                       <div className="skeleton h-32 w-full"></div>
                       <div className="skeleton h-32 w-full"></div>
                       <div className="skeleton h-32 w-full"></div>
-                    </div>                   
+                    </div>
                   </div>
                 </div>
               </div>
@@ -47,7 +47,7 @@ export default async function RootLayout(props: React.PropsWithChildren) {
             <Footer />
           </body>
         </html>
-      </ClerkProvider>
-    </Providers>
+      </Providers>
+    </ClerkProvider>
   )
 }
