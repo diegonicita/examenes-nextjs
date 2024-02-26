@@ -3,11 +3,10 @@ import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 import Tab from './tab'
 import { UserButton, auth } from '@clerk/nextjs'
-import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
-export const Nav = async () => {
+export const Nav = async ({ getInfoAuth }: { getInfoAuth: any }) => {
   const { userId } = auth()
-  const payload = await getInfoAuthCookie(userId)
+  const payload = await getInfoAuth(userId)
 
   return (
     <div className="bg-base-200 text-base-content">

@@ -5,6 +5,7 @@ import { Footer } from './components/footer/footer'
 import './styles/globals.css'
 import { Toaster } from 'react-hot-toast'
 import { ClerkProvider } from '@clerk/nextjs'
+import getInfoAuthCookie from './server-actions/helpers/getInfoAuthCookie'
 
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
@@ -12,7 +13,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
       <ClerkProvider>
         <html lang="en">
           <body className="block">
-            <Nav />
+            <Nav getInfoAuth={getInfoAuthCookie} />
             <Toaster />
             <section className="min-h-screen bg-base-100 text-base-content">
               <main>{props.children}</main>

@@ -9,10 +9,16 @@ import {
   checkPartialValidation,
   getErrorsFromResult,
 } from './consultFormValidation'
-import { consultFormAction } from './consultFormAction'
 import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
+import type { ConsultFormActionType } from '@/app/models/actions/ConsultFormAction'
 
-export const ConsultFormContainer = () => {
+export const ConsultFormContainer = ({
+  formAction,
+}: {
+  formAction: (
+    arg0: ConsultFormActionType,
+  ) => Promise<{ message: string } | undefined>
+}) => {
   const formRef = useRef<HTMLFormElement>(null)
   const [errors, setErrors] = useState({
     fullname: '',
@@ -24,7 +30,7 @@ export const ConsultFormContainer = () => {
     const result = checkFullValidation(formData)
     const response1 = getErrorsFromResult(result)
     setErrors({ ...errors, ...response1 })
-    const response2 = await consultFormAction({ result, formData, formRef })
+    const response2 = await formAction({ result, formData, formRef })
     if (response2?.message === 'success') refreshAction()
   }
 

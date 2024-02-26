@@ -14,7 +14,7 @@ export const deleteAction = async (
     ])) as RowDataPacket
 
     if (result?.affectedRows) {
-      return { message: 'Consulta Borrada...' }
+      return { message: 'success' }
     }
   }
 }

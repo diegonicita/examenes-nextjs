@@ -1,8 +1,9 @@
 'use client'
 import { ConsultType } from '@/app/models/Consult'
-import React from 'react'
+import React, { useEffect } from 'react'
 //@ts-ignore
 import { useFormStatus, useFormState } from 'react-dom'
+import { refreshAction } from '../actions/refresh'
 
 const initialState = {
   message: 'Consulta Borrada Exitosamente...',
@@ -21,20 +22,28 @@ export default function DeleteButton({
   const { pending } = useFormStatus()
   const [state, formAction] = useFormState(deleteAction, initialState)
 
+  useEffect(() => {
+    if (state?.message === 'success') {
+      refreshAction()
+    }
+  }, [state])
+
   return (
     <form
       className="flex justify-end absolute right-1 top-1"
       name="consultf"
       action={formAction}
     >
-      <input type="hidden" name="id" id="id" defaultValue={id} />
-      <button
-        name="delete"
-        type="submit"
-        className="btn btn-error btn-sm text-error-content"
-      >
-        X
-      </button>
+      <fieldset disabled={pending}>
+        <input type="hidden" name="id" id="id" defaultValue={id} />
+        <button
+          name="delete"
+          type="submit"
+          className="btn btn-error btn-sm text-error-content"
+        >
+          X
+        </button>
+      </fieldset>
     </form>
   )
 }
