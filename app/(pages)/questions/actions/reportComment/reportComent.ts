@@ -25,24 +25,39 @@ export default async function reportComment(
   }
   try {
     // Step 1: Select data from comments
-    const commentData = await executeQuery(
+    const commentData = (await executeQuery(
       "SELECT id, id_user FROM comments WHERE id = ?",
       [validateFields.data.id]
-    )as RowDataPacket
-    console.log(commentData[0].id)
+    )) as RowDataPacket;
+    console.log(commentData[0].id);
+    
 
     // Step 2: Insert data into reportcoments
     if (commentData && commentData.length > 0) {
-        // Step 2: Insert data into reportcomments
-        await executeQuery(
-          "INSERT INTO reportcomments (id_user, id, reporting_comments) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE reporting_comments = ?",
-          [commentData[0]?.id_user, commentData[0].id, validateFields.data.report,validateFields.data.report]
-        ) 
-        revalidatePath("/")
-    } else {
-        return { message: "No data found for the specified comment ID" };
-    }
-} catch (e) {
+      // Step 2: Insert data into reportcomments
+      const insertResult = await executeQuery(
+          "INSERT INTO reportcomments (id_user, comment_id, reporting_comments) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE reporting_comments = ?",
+          [
+              commentData[0]?.id_user,
+              commentData[0].id,
+              validateFields.data.report,
+              validateFields.data.report,
+          ]
+      );
+
+      if (insertResult && insertResult.affectedRows > 0) {
+          console.log("success");
+          return { message: "success" };
+      } else {
+          
+          return { message: "error reporting comment" };
+      }
+  } else {
+      console.log("No data found for the given ID");
+      return { message: "error in select id or id_user in sql" };
+  }
+}catch (e) {
+    console.log("error", e);
     return { message: "error reporting comment" };
-}
+  }
 }
