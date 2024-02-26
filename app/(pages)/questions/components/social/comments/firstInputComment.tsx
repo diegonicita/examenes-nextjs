@@ -15,7 +15,7 @@ const FirstInputComment = ({
   parentId,
   depth = 0,
 }: {
-  createReply: (data: any) => Promise<any> | null
+  createReply: (prevState: any, formData: FormData) => Promise<any> | null
   questionId: number
   parentId: number | null
   depth: number
