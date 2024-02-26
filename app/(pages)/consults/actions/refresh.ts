@@ -3,5 +3,5 @@
 import { revalidatePath } from 'next/cache'
 
 export const refreshAction = async () => {
-  revalidatePath('/', 'page')  
+  revalidatePath('/', 'layout')
 }
