@@ -1,13 +1,11 @@
+'use client'
 import AuthMenu from './authMenu'
 import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 import Tab from './tab'
-import { UserButton, auth } from '@clerk/nextjs'
+import { UserButton } from '@clerk/nextjs'
 
 export const Nav = async ({ logged }: { logged: boolean }) => {
-  // const { userId } = auth()
-  // const payload = await getInfoAuth(userId)
-
   return (
     <div className="bg-base-200 text-base-content">
       <nav className="px-4 flex gap-4 sm:w-full max-w-[45rem] mx-auto text-sm items-center justify-between">

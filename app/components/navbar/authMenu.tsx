@@ -3,11 +3,7 @@
 import React, { useTransition } from 'react'
 import Image from 'next/image'
 import userNotLogged from '@/app/assets/icon-not-logged.png'
-import userLogged from '@/app/assets/icon-logged.png'
 import Link from 'next/link'
-//@ts-ignore
-import { logoutAction } from '@/app/server-actions/auth/logoutAction'
-import { redirect } from 'next/navigation'
 import toast from 'react-hot-toast'
 
 // const notifyLogoutSuccess = () => toast.success('Logout Exitoso')
@@ -28,23 +24,6 @@ export const notifySuccess = (text: string) =>
   )
 
 export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
-  const [isPending, startTransition] = useTransition()
-
-  const handleLogout = async () => {
-    const response = await logoutAction()    
-    notifySuccess('Logout Exitoso. Hasta la próxima.')
-    await new Promise((res) => setTimeout(res, 500))
-    if (response?.message === 'success') {
-      setTimeout(
-        () =>
-          startTransition(() => {
-            redirect('/')
-          }),
-        500,
-      )
-    }
-  }
-
   return (
     <div>
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">
@@ -82,12 +61,6 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
                   <span className="badge">New</span>
                 </Link>
               </li>
-              {/* <li>
-                <div>Preferencias</div>
-              </li> */}
-              {/* <li>
-                <div onClick={() => handleLogout()}>Salir (Logout)</div>
-              </li> */}
             </>
           )}
         </ul>
