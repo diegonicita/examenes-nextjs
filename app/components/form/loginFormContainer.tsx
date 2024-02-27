@@ -8,10 +8,8 @@ import {
   checkPartialValidation,
   getErrorsFromResult,
 } from './loginFormValidation'
-import { loginFormAction } from './loginFormAction'
-import { redirect } from 'next/navigation'
 import { signIn } from 'next-auth/react'
-import { sign } from 'crypto'
+import { AuthError } from 'next-auth'
 
 type Props = {
   initialEmail: string | undefined
@@ -30,15 +28,25 @@ export const LoginFormContainer = ({ disabled }: Props) => {
     const result = checkFullValidation(formData)
     const response1 = getErrorsFromResult(result)
     setErrors({ ...errors, ...response1 })
-    // const response2 = await loginFormAction({ result, formData, formRef })
-    // if (response2?.message === 'success') {
-    //   redirect('/')
-    // }
-    signIn('credentials', {
-      email: formData.get('email'),
-      password: formData.get('password'),
-      callbackUrl: '/',
-    })
+    if (!result.success) return null
+    try {
+      await signIn('credentials', {
+        email: formData.get('email'),
+        password: formData.get('password'),
+      })
+    } catch (error) {
+      if (error instanceof AuthError) {
+        switch (error.type) {
+          case 'CredentialsSignin':
+            setErrors({ ...errors, password: 'Invalid credentials' })
+            return 'Invalid credentials.'
+          default:
+            setErrors({ ...errors, password: 'Something went wrong.' })
+            return 'Something went wrong.'
+        }
+      }
+      throw error
+    }
   }
 
   const handleBlur = (

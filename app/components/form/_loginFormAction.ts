@@ -1,3 +1,4 @@
+// Deprecated //
 'use client'
 import React from 'react'
 
@@ -21,7 +22,7 @@ export const loginFormAction = async ({ result, formData, formRef }: Props) => {
         if (formRef?.current) {
           formRef?.current.reset()
         }
-        return { message: 'success'}
+        return { message: 'success', data: resp}
       } else {
         notifyErrors('Falló el Login. Inténtalo mas tarde.')
         return { message: 'Errores en el logueo'}

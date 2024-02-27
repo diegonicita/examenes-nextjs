@@ -3,18 +3,17 @@ import NextAuth from 'next-auth'
 import Google from 'next-auth/providers/google'
 import Github from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import bcrypt from 'bcryptjs'
-import { RowDataPacket } from 'mysql2'
+import { loginAction } from '@/app/components/form/actions/loginAction'
+import { checkFullValidation } from '@/app/components/form/loginFormValidation'
 
 const credentialsConfig = CredentialsProvider({
   name: 'Credentials',
   credentials: {
     email: {
-      label: 'User Name',
+      label: 'username',
     },
     password: {
-      label: 'Password',
+      label: 'password',
       type: 'password',
     },
   },
@@ -24,19 +23,19 @@ const credentialsConfig = CredentialsProvider({
       password: string
     }
     try {
-      const query = `SELECT * FROM usuarios WHERE email = ?`
-      const user = (await executeQuery(query, [email])) as RowDataPacket
-      if (!user) return null
-      const hash = user[0]?.password
-      if (!hash) return null
-      const passwordMatch = bcrypt.compareSync(password, hash)
-      if (passwordMatch)
+      var formData = new FormData()
+      formData.append('email', email)
+      formData.append('password', password)
+      const validation = checkFullValidation(formData)
+      if (!validation.success) return null
+      const response = await loginAction(formData)
+      if (response.isError === false) {
         return {
-          name: user[0].username,
-          email: user[0].email,
+          name: response.userResponse.username,
+          email: response.userResponse.email,
           image: null,
-        }
-      else return null
+        } as any
+      }
     } catch (error) {
       return null
     }
@@ -59,9 +58,9 @@ const config = {
       return true
     },
   },
-  trustHost: true,  
+  trustHost: true,
   pages: {
-    signIn: '/login',    
+    signIn: '/login',
     error: '/login',
   },
 } satisfies NextAuthConfig
