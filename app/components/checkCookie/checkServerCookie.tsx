@@ -2,23 +2,20 @@ import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import { ReactNode } from 'react'
 import MessageNotLogged from './messageNotLogged'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
-const CheckServerCookie = ({
-  auth,
-  children,
-}: {
-  auth: RequestCookie | undefined
-  children: ReactNode
-}) => {
-  if (!auth) {
+const CheckServerCookie = async ({ children }: { children: ReactNode }) => {
+  const payload = await getInfoAuthCookie()
+
+  if (!payload) {
     const formData = new FormData()
     formData.append('auth', 'false')
     refreshAction()
   }
   return (
     <>
-      {auth && auth?.value && <div>{children}</div>}
-      {!auth && <MessageNotLogged />}
+      {payload && <div>{children}</div>}
+      {!payload && <MessageNotLogged />}
     </>
   )
 }

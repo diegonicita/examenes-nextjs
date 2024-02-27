@@ -19,7 +19,6 @@ export const createUser = async (email: string) => {
         'insert into usuarios (email, role) values (?, "user")',
         [email],
       )) as RowDataPacket
-      console.log(response)
       if (response && response?.affectedRows) {
         console.log(response?.affectedRows)
         return {

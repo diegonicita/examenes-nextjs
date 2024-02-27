@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { createUser } from './createUser'
 
 export const getUserId = async (email: string | undefined | null) => {
+  console.log(email)
   if (!email) return null
   const result = z
     .object({
@@ -14,7 +15,7 @@ export const getUserId = async (email: string | undefined | null) => {
     .safeParse({
       email,
     })
-
+  console.log(result)
   if (result.success) {
     try {
       const response = (await executeQuery(

@@ -10,6 +10,8 @@ import {
 } from './loginFormValidation'
 import { loginFormAction } from './loginFormAction'
 import { redirect } from 'next/navigation'
+import { signIn } from 'next-auth/react'
+import { sign } from 'crypto'
 
 type Props = {
   initialEmail: string | undefined
@@ -28,10 +30,15 @@ export const LoginFormContainer = ({ disabled }: Props) => {
     const result = checkFullValidation(formData)
     const response1 = getErrorsFromResult(result)
     setErrors({ ...errors, ...response1 })
-    const response2 = await loginFormAction({ result, formData, formRef })
-    if (response2?.message === 'success') {
-      redirect('/')
-    }
+    // const response2 = await loginFormAction({ result, formData, formRef })
+    // if (response2?.message === 'success') {
+    //   redirect('/')
+    // }
+    signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      callbackUrl: '/',
+    })
   }
 
   const handleBlur = (
@@ -41,7 +48,7 @@ export const LoginFormContainer = ({ disabled }: Props) => {
   ) => {
     const result = checkPartialValidation(
       new FormData(formRef.current as HTMLFormElement),
-      {        
+      {
         email: event.target.id === 'email' ? undefined : true,
         password: event.target.id === 'password' ? undefined : true,
       },
@@ -52,7 +59,11 @@ export const LoginFormContainer = ({ disabled }: Props) => {
 
   return (
     <div className="card w-full bg-base-300 mb-2">
-      <Form handleSubmit={handleSubmit} formRef={formRef} title="¡Bienvenido a Exámenes!">
+      <Form
+        handleSubmit={handleSubmit}
+        formRef={formRef}
+        title="¡Bienvenido a Exámenes!"
+      >
         <fieldset disabled={disabled}>
           <Input
             data={{

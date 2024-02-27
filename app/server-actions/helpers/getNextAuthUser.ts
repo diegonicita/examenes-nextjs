@@ -1,20 +1,20 @@
+import { createUser } from './createUser'
 import { getUserId } from './getUserId'
-import { auth } from '@/app/auth'
+import { auth } from '@/auth'
 
 const getGitHubAuth = async () => {
   const session = await auth()
   if (!session) {
     return null
   }
+  const user = session?.user
+  const name = user?.name
+  const email = user?.email
+  const image = user?.image
 
   try {
-    const user = session?.user
-    const name = user?.name
-    const email = user?.email
-    const image = user?.image
     const respuesta = await getUserId(email)
     if (respuesta && respuesta.id) {
-      console.log('hay usuario')
       return {
         id: respuesta.id,
         email: email,
@@ -23,10 +23,21 @@ const getGitHubAuth = async () => {
         image: image,
       }
     }
+    if (email) {
+      const createResponse: { message: string; id: number } = await createUser(
+        email,
+      )
+      if (createResponse.message === 'success') {
+        return {
+          message: 'success',
+          id: createResponse.id,
+          role: 'user',
+        }
+      }
+    }
   } catch (error) {
     console.log(error)
   }
-  console.log('no hay usuario')
   return null
 }
 

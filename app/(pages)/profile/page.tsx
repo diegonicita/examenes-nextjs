@@ -4,7 +4,7 @@ import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import Counter from './components/counter'
 import Message from './components/message'
 import MessageNotLogged from '@/app/components/checkCookie/messageNotLogged'
-import { auth } from '@/app/auth'
+import { auth } from '@/auth'
 
 const Profile = async () => {
   try {
@@ -30,7 +30,10 @@ const Profile = async () => {
           </div>
           <div className="bg-base-200 p-2">
             {session && session.user && (
-              <img className="rounded-full" src={session.user?.image} />
+              <img
+                className="rounded-full"
+                src={session.user.image ? session.user?.image : undefined}
+              />
             )}
             <div className="font-bold"> GITHUB: </div>
             <div>Nombre: {session?.user?.name}</div>
