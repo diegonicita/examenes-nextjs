@@ -2,7 +2,7 @@
 import executeQuery from "@/app/server-actions/helpers/mysqldb";
 import getInfoAuthCookie from "@/app/server-actions/helpers/getInfoAuthCookie";
 import { RowDataPacket } from "mysql2";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 import { UserType } from "@/app/models/User";
 
@@ -44,7 +44,7 @@ export default async function DeleteComment(
       [validateFields.data.id]
     )) as RowDataPacket;
     if (deleteComment && deleteComment.affectedRows > 0) {
-      
+     
       return { message: "success" };
     } else {
       return { message: "error" };

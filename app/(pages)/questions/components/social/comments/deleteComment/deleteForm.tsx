@@ -7,11 +7,25 @@ import { useDropDownContext } from "@/app/hooks/questions/comments/useDropDown";
 import { useEffect } from "react";
 import { refreshAction } from "@/app/(pages)/consults/actions/refresh";
 
+
 const initialState = {
   message: "",
 };
-function Submit() {
+function Submit({classRef}:{ classRef: React.RefObject<HTMLDivElement> }) {
   const { pending } = useFormStatus();
+  console.log(pending)
+  if (pending) {
+    if (classRef) {
+      classRef?.current?.classList?.add("hidden");
+    }
+  } else {
+    setTimeout(() => {
+      if (classRef) {
+        classRef.current?.classList?.remove("hidden");
+      }
+    }, 4000);
+  }
+  
   return (
     <button
       type="submit"
@@ -24,16 +38,22 @@ function Submit() {
     </button>
   );
 }
+interface DeleteCommentsProps {
+  id: number;
+  classRef: React.RefObject<HTMLDivElement>
+}
 
-export default function DeleteForm({ id }: { id: number }) {
+export default function DeleteForm({ id,classRef }: DeleteCommentsProps) {
   const [state, formAction] = useFormState(DeleteComment, initialState);
   const { closeDropdown } = useDropDownContext();
+  
 
   const modal = document.getElementById(
     "my_modal_1"
   ) as HTMLDialogElement | null;
   useEffect(() => {
-      refreshAction()
+    refreshAction()
+    
     if (state?.message === "success") {
       notifySuccess("Tu comentario ha sido eliminado exitosamente");
       if (modal) {
@@ -49,7 +69,7 @@ export default function DeleteForm({ id }: { id: number }) {
         closeDropdown();
       }
     }
-  }, [state?.message,formAction]);
+  }, [state?.message]);
 
   const handleCloseDropdownandModal = () => {
     if (modal) {
@@ -59,7 +79,7 @@ export default function DeleteForm({ id }: { id: number }) {
   };
 
   return (
-    <form action={formAction }>
+    <form action={formAction}>
       {/* if there is a button in form, it will close the modal */}
       <input type="hidden" name="id" value={id} />
       <button
@@ -69,7 +89,7 @@ export default function DeleteForm({ id }: { id: number }) {
       >
         Cerrar
       </button>
-      <Submit />
+      <Submit classRef={classRef} />
     </form>
   );
 }

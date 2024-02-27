@@ -2,7 +2,7 @@
 import ContentReport from "./contentReport";
 import IconFlag from "./reportIcon";
 
-export default function ReportComment({id}:{id:string}){
+export default function ReportComment({id}:{id:string | number}){
   
     return(
         <section >

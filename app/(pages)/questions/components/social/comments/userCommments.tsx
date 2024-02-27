@@ -1,6 +1,6 @@
 "use client";
 import ReportComment from "./reportComment/reportComment";
-import {  useState } from "react";
+import {  use, useRef, useState } from "react";
 import DropDownOptions from "./dropDown";
 import { UserType } from "@/app/models/User";
 import { UserData } from "@/app/models/questions/comments/commentData";
@@ -19,8 +19,10 @@ async function UserComments({
   currentUser,
   children,
 }: UserCommentsProps) {
-  console.log(data)
   const [openEdit, setOpenEdit] = useState(false);
+  const currentClassRef = useRef<HTMLDivElement | null>(null)
+ 
+
 
   const handleClickEdit = () => {
     setOpenEdit(true);
@@ -30,9 +32,9 @@ async function UserComments({
   };
 
   return (
-    <section className="grid grid-cols-[40px,1fr] mt-5 pr-5">
+    <section  ref={currentClassRef}  className="grid grid-cols-[40px,1fr] mt-5 pr-5">
       <>
-        <div className="">
+        <div className=""  >
           <img
             alt="profile"
             src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
@@ -57,7 +59,7 @@ async function UserComments({
                 {(data && data?.comment.id_user === currentUser?.id) ||
                 currentUser.role === "admin" ? (
                   <DropDownOptions >
-                    <DeleteComments id={data?.comment.id} />
+                    <DeleteComments id={data?.comment.id} classRef={currentClassRef} />
                     <EditComment openEditClick={handleClickEdit} />
                   </DropDownOptions>
                 ) : (
@@ -78,7 +80,7 @@ async function UserComments({
               <p className="text-base">{data?.comment?.comment_text}</p>
             )}
           </div>
-          <div className={`${openEdit === true ? "hidden" : ""}`}>
+          <div  className={`${openEdit === true ? "hidden" : ""}`}>
             {children}
           </div>
         </main>

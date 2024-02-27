@@ -3,11 +3,12 @@ import { IconTrashCan } from "../icons/iconTrash";
 import DeleteForm from "./deleteForm";
 
 export default function DeleteComments({
-
+  classRef,
   id,
 }: {
 
-  id: number;
+  id: number,
+  classRef:React.RefObject<HTMLDivElement>
 }) {
   return (
     <div>
@@ -37,7 +38,7 @@ export default function DeleteComments({
             Todos las respuestas incluidos en este comentario seran eliminados
           </p>
           <div className="modal-action">
-            <DeleteForm id={id}  />
+            <DeleteForm id={id} classRef={classRef}  />
           </div>
         </div>
       </dialog>

@@ -24,7 +24,7 @@ function Submit({ empty }: { empty: boolean }) {
   );
 }
 
-export default function ContentReport({ id }: { id: string }) {
+export default function ContentReport({ id }: { id: string | number }) {
   const [state, formAction] = useFormState(reportComment, initialState);
   const [empty, setEmpty] = useState("");
   console.log(state)
