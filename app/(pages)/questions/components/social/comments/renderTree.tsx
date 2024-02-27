@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { memo } from "react";
 import UserComments from "./userCommments";
 import { UserType } from "@/app/models/User";
 import useFormAction from "@/app/hooks/questions/comments/useFormAction";
@@ -7,6 +7,25 @@ import { startTransition } from "react";
 import FormReply from "./formReply/formReply";
 import { UseDropDown } from "@/app/hooks/questions/comments/useDropDown";
 
+const ReplyButton= memo(({ handleOpenComments,commentId }:{handleOpenComments: (commentId:number) => void, commentId:number }) => {
+  const handleClick = () => {
+    startTransition(() => {
+      handleOpenComments(commentId);
+    });
+  };
+
+  return (
+    <button
+      name="button"
+      type="button"
+      className="text-left ml-5 my-2.5 cursor-pointer"
+      onClick={handleClick}
+    >
+      <span>responder</span>
+    </button>
+  );
+});
+  
 const RenderTree = ({
   tree,
   parentId,
@@ -39,19 +58,7 @@ const RenderTree = ({
             <div className="" style={{ paddingLeft: `${depth * 20}px` }}>
             <UseDropDown key={t.comment.id} >
               <UserComments data={t} currentUser={currentUser}>
-                <button
-                  name="button"
-                  type="button"
-                  className=" text-left ml-5 my-2.5 cursor-pointer"
-                  onClick={() => {
-                    startTransition(() => {
-                      handleOpenComments(t.comment.id);
-                    });
-                  }}
-                >
-                
-                  <span>responder</span>
-                </button>
+                <ReplyButton handleOpenComments={handleOpenComments} commentId={t.comment.id}  />
               </UserComments>
               </UseDropDown >
               {openComments[t.comment.id] &&
