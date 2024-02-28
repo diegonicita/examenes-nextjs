@@ -64,7 +64,6 @@ const config = {
   trustHost: true,
   pages: {
     signIn: '/login',
-    error: '/login',
   },
   session: { strategy: 'jwt' },
 } satisfies NextAuthConfig
