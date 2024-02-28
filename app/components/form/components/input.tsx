@@ -19,21 +19,21 @@ type Props = {
 export const Input = ({ handleBlur, data }: Props) => {
   return (
     <div className="form-control">
-      <label htmlFor={data.id} className="label">
+      <label htmlFor={data.id} className="label py-0">
         <span className="label-text">{data.text}</span>
       </label>
       <input
         type={data.type}
         placeholder={data.placeholder}
-        className="input input-bordered"
+        className="input input-bordered mt-0"
         name={data.name}
         id={data.id}
         autoComplete="off"
         onBlur={handleBlur}
       />
-      <div className="relative pb-5">
+      <div className="relative mb-4">
         {data.error && (
-          <div className="absolute h-2 text-error text-xs font-bold text-start pt-1 px-2">
+          <div className="absolute text-error text-xs font-bold pt-0 px-1">
             {data.error}
           </div>
         )}

@@ -17,7 +17,7 @@ export const Form = ({ title, handleSubmit, formRef, children }: Form) => {
       ref={formRef}
     >
       {title && (
-        <h1 className="text-center md:text-left md:text-slate-700 text-xl md:text-2xl">
+        <h1 className="text-center md:text-left md:text-slate-700 text-xl md:text-2xl mb-6">
           {title}
         </h1>
       )}

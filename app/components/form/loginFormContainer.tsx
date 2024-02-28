@@ -11,6 +11,7 @@ import {
   getErrorsFromResult,
 } from './loginFormValidation'
 import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 
 type Props = {
   initialEmail: string | undefined
@@ -86,11 +87,18 @@ export const LoginFormContainer = ({ disabled }: Props) => {
             }}
             handleBlur={handleBlur}
           />
-          <Buttom text="Ingresar" textOnClick="...Espere..." />
-          <div className="flex gap-1 justify-center mt-2">
+          <div className="pt-0">
+            <Buttom text="Ingresar" textOnClick="...Espere..." />
+          </div>
+          <div className="flex gap-4 justify-center mt-4">
             <ButtomGoogle text="Google" textOnClick="...Espere..." />
             <ButtomGithub text="Github" textOnClick="...Espere..." />
           </div>
+          <Link href="/register">
+            <div className="text-xs text-center w-full mt-4">
+              ¿ No tienes una cuenta ?
+            </div>
+          </Link>
         </fieldset>
       </Form>
     </div>

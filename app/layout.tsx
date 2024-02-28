@@ -13,7 +13,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
       <html lang="en">
         <body className="block">
           <ProvidersAuth>
-            <Nav />
+            {/* <Nav /> */}
             <AppBar />
             <Toaster />
             <section className="min-h-screen bg-base-100 text-base-content">
