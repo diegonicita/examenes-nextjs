@@ -62,12 +62,11 @@ const config = {
     },
   },
   trustHost: true,
+  pages: {
+    signIn: '/login',
+    error: '/login',
+  },
   session: { strategy: 'jwt' },
 } satisfies NextAuthConfig
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth(config)
+export const { handlers, auth, signIn, signOut } = NextAuth(config)
