@@ -12,7 +12,7 @@ import { UserType } from '@/app/models/User'
 import searchComments from './actions/searchComments'
 import RenderTree from './components/social/comments/renderTree'
 import FirstInputComment from './components/social/comments/firstInputComment'
-import { UseDropDown } from '@/app/hooks/questions/comments/useDropDown'
+
 export default async function QuestionPage({
   searchParams,
 }: {
@@ -25,7 +25,6 @@ export default async function QuestionPage({
   const query = searchParams?.query || ''
   const authData = (await getInfoAuthCookie()) as UserType
   let queries: string | string[]
-  console.log(authData, 'user')
   if (query) {
     // Divide la cadena en un array de palabras si no está vacía
     queries = query.split(' ')
@@ -36,47 +35,19 @@ export default async function QuestionPage({
 
   const searchQuestionsResult = await searchQuestions(queries)
   const questions = searchQuestionsResult?.resultQueryLimit10
-  const questionsCount = searchQuestionsResult?.resultLength
-  //console.log(questions)
+  const questionsCount = searchQuestionsResult?.resultLength  
   let valorations: undefined = undefined
-  if (authData) valorations = await searchValorations(questions)
-  //console.log(valorations)
+  if (authData) valorations = await searchValorations(questions)  
   const wordsSuggestions = await searchWordsSuggestions(queries)
 
   // Comments //
   let treeComments = {} as any
-
   if (authData) {
     const result = await searchComments(questions)
-    console.log(result)
     treeComments = {
       ...(result && result.tree ? result.tree : null),
     }
   }
-
-  console.log(treeComments[168])
-
-  // console.log(comments)
-  // let arbol = {} as any
-  // if (comments)
-  //   Object.keys(comments).map((key) => {
-  //     const temp = {} as any
-  //     if (comments) temp[key] = createTree(comments[key])
-  //     arbol[key] = temp[key][key]
-  //   })
-  //   console.log(arbol[120][0]?.comment)
-  //   console.log(arbol[120][1]?.comment)
-  //   console.log(arbol[120][2]?.comment)
-  //   console.log(arbol[120][0]?.children)
-  //   console.log(arbol[120][0]?.children[0])
-  //   console.log(arbol[120][0]?.children[1])
-  //   console.log(arbol[120][0]?.children[2])
-  //   console.log(arbol[120][1]?.children)
-  //   console.log(arbol[120][1]?.children[0])
-  //   console.log(arbol[120][1]?.children[1])
-  //   console.log(arbol[120][0]?.children[0]?.children)
-  //   console.log(arbol[120][0]?.children[1]?.children[0])
-  //   console.log(arbol[120][0]?.children[1]?.children[1])
 
   return (
     <div>
