@@ -2,6 +2,8 @@
 import React, { useRef, useState } from 'react'
 import Form from './components/form'
 import Buttom from './components/buttom'
+import ButtomGithub from './components/github-btn'
+import ButtomGoogle from './components/google-btn'
 import Input from './components/input'
 import {
   checkFullValidation,
@@ -9,7 +11,6 @@ import {
   getErrorsFromResult,
 } from './loginFormValidation'
 import { signIn } from 'next-auth/react'
-import { AuthError } from 'next-auth'
 
 type Props = {
   initialEmail: string | undefined
@@ -35,17 +36,7 @@ export const LoginFormContainer = ({ disabled }: Props) => {
         password: formData.get('password'),
       })
     } catch (error) {
-      if (error instanceof AuthError) {
-        switch (error.type) {
-          case 'CredentialsSignin':
-            setErrors({ ...errors, password: 'Invalid credentials' })
-            return 'Invalid credentials.'
-          default:
-            setErrors({ ...errors, password: 'Something went wrong.' })
-            return 'Something went wrong.'
-        }
-      }
-      throw error
+      console.log(error)
     }
   }
 
@@ -96,6 +87,10 @@ export const LoginFormContainer = ({ disabled }: Props) => {
             handleBlur={handleBlur}
           />
           <Buttom text="Ingresar" textOnClick="...Espere..." />
+          <div className="flex gap-1 justify-center mt-2">
+            <ButtomGoogle text="Google" textOnClick="...Espere..." />
+            <ButtomGithub text="Github" textOnClick="...Espere..." />
+          </div>
         </fieldset>
       </Form>
     </div>

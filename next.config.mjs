@@ -19,7 +19,14 @@ const nextConfig = {
         hostname: '**.api-ninjas.com',
         port: '',
         pathname: '/**',
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      
       
     ],
   },

@@ -20,7 +20,7 @@ export default async function QuestionPage({
     page?: string
     query?: string
   }
-}) {  
+}) {
   const currentPage = Number(searchParams?.page) || 1
   const query = searchParams?.query || ''
   const authData = (await getInfoAuthCookie()) as UserType
@@ -81,61 +81,63 @@ export default async function QuestionPage({
   return (
     <div>
       <CheckServerCookie>
-        <div className="flex flex-col items-start max-w-[60rem] mx-auto mt-8">
-          <SearchContainer
-            query={query}
-            currentPage={currentPage}
-            wordsSuggestions={wordsSuggestions}
-            questionsCount={questionsCount}
-          >
-            {query !== '' && query.length > 2 && (
-              <>
-                {questions &&
-                  questions.map((item: QuestionSQL, index: number) => (
-                    <div
-                      key={index}
-                      className=" border border-gray-400 rounded my-4 px-4 pb-4"
-                    >
-                      <Question item={item} userId={authData.id} />
-                      {valorations && (
-                        <>
-                          <Valorations
-                            id_question={item.id}
-                            valorations={valorations}
-                          />
-                          <div className="flex flex-wrap gap-4">
-                            <ValorationButton id_question={item.id} />
-                          </div>
-                          <div className="collapse bg-base-200 mt-4">
-                            <input type="checkbox" />
-                            <div className="collapse-title text-xl font-medium">
-                              Comentarios
+        {authData && (
+          <div className="flex flex-col items-start max-w-[60rem] mx-auto mt-8">
+            <SearchContainer
+              query={query}
+              currentPage={currentPage}
+              wordsSuggestions={wordsSuggestions}
+              questionsCount={questionsCount}
+            >
+              {query !== '' && query.length > 2 && (
+                <>
+                  {questions &&
+                    questions.map((item: QuestionSQL, index: number) => (
+                      <div
+                        key={index}
+                        className=" border border-gray-400 rounded my-4 px-4 pb-4"
+                      >
+                        <Question item={item} userId={authData.id} />
+                        {valorations && (
+                          <>
+                            <Valorations
+                              id_question={item.id}
+                              valorations={valorations}
+                            />
+                            <div className="flex flex-wrap gap-4">
+                              <ValorationButton id_question={item.id} />
                             </div>
-                            <div className="collapse-content">
-                              <FirstInputComment
-                                questionId={item.id}
-                                parentId={null}
-                                depth={1}
-                              />
-                              <RenderTree
-                                tree={treeComments[item.id]}
-                                parentId={null}
-                                depth={1}
-                                currentUser={authData}
-                              />
-                              {treeComments[item.id] === undefined && (
-                                <div> No hay comentarios </div>
-                              )}
+                            <div className="collapse bg-base-200 mt-4">
+                              <input type="checkbox" />
+                              <div className="collapse-title text-xl font-medium">
+                                Comentarios
+                              </div>
+                              <div className="collapse-content">
+                                <FirstInputComment
+                                  questionId={item.id}
+                                  parentId={null}
+                                  depth={1}
+                                />
+                                <RenderTree
+                                  tree={treeComments[item.id]}
+                                  parentId={null}
+                                  depth={1}
+                                  currentUser={authData}
+                                />
+                                {treeComments[item.id] === undefined && (
+                                  <div> No hay comentarios </div>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  ))}
-              </>
-            )}
-          </SearchContainer>
-        </div>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                </>
+              )}
+            </SearchContainer>
+          </div>
+        )}
       </CheckServerCookie>
     </div>
   )

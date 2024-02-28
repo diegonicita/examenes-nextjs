@@ -5,16 +5,16 @@ import { Footer } from './components/footer/footer'
 import './styles/globals.css'
 import { Toaster } from 'react-hot-toast'
 import ProvidersAuth from './providers-auth'
-import AppBar from './components/appbar'
+import AppBar from './components/navbar/navbar-extra'
 
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <Providers>
       <html lang="en">
         <body className="block">
-          <AppBar />
           <ProvidersAuth>
             <Nav />
+            <AppBar />
             <Toaster />
             <section className="min-h-screen bg-base-100 text-base-content">
               <main>{props.children}</main>

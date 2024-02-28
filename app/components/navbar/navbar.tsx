@@ -28,8 +28,7 @@ export const Nav = async () => {
               )
             )
           })}
-        </div>
-        <AuthMenu isLogged={isLogged} />
+        </div>        
       </nav>
     </div>
   )

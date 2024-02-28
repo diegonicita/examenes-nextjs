@@ -10,7 +10,7 @@ function Button({ text, textOnClick }: { text: string; textOnClick: string }) {
       <div className="flex justify-center sm:min-w-80">
         <button
           type="submit"
-          className="btn btn-accent w-full max-w-60"
+          className="btn btn-accent w-full"
           disabled={pending}
         >
           {!pending ? text : textOnClick}

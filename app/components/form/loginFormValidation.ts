@@ -7,10 +7,7 @@ export const checkFullValidation = (formData: FormData) => {
         .string()
         .email({ message: 'Correo Electronico Invalido' })
         .min(1, { message: 'No dejes el campo vacio' }),
-      password: z
-        .string()
-        .min(7, { message: 'Contraseña muy corta' })
-        .min(1, { message: 'No dejes el campo vacio' }),
+      password: z.string().min(1, { message: 'No dejes el campo vacio' }),
     })
     .safeParse({
       email: formData.get('email'),
@@ -31,13 +28,10 @@ export const checkPartialValidation = (
         .string()
         .email({ message: 'Correo Electronico Invalido' })
         .min(1, { message: 'No dejes el campo vacio' }),
-      password: z
-        .string()
-        .min(7, { message: 'Contraseña muy corta' })
-        .min(1, { message: 'No dejes el campo vacio' }),
+      password: z.string().min(1, { message: 'No dejes el campo vacio' }),
     })
     .partial(partial)
-    .safeParse({      
+    .safeParse({
       email: partial.email ? undefined : formData.get('email'),
       password: partial.password ? undefined : formData.get('password'),
     })

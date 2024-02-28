@@ -10,6 +10,7 @@ import { logoutAction } from '@/app/server-actions/auth/logoutAction'
 import { redirect } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
+import { useSession } from 'next-auth/react'
 
 // const notifyLogoutSuccess = () => toast.success('Logout Exitoso')
 export const notifySuccess = (text: string) =>
@@ -30,6 +31,7 @@ export const notifySuccess = (text: string) =>
 
 export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
   const [isPending, startTransition] = useTransition()
+  const { data: session } = useSession()
 
   const handleLogout = async () => {
     const response = await logoutAction()
@@ -52,10 +54,22 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-8 rounded-full">
-            <Image
-              alt="Icono del usuario"
-              src={isLogged ? userLogged : userNotLogged}
-            />
+            {session && session?.user && (
+              <Image
+                width={20}
+                height={20}
+                alt="Icono del usuario"
+                src={session?.user?.image ? session?.user?.image : userLogged}
+              />
+            )}
+            {!session && (
+              <Image
+                width={20}
+                height={20}
+                alt="Icono del usuario"
+                src={userNotLogged}
+              />
+            )}
           </div>
         </label>
         <ul
