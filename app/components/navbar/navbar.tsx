@@ -3,6 +3,7 @@ import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 import Tab from './tab'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import { signIn, signOut } from 'auth'
 
 export const Nav = async () => {
   const payload = await getInfoAuthCookie()
@@ -28,7 +29,43 @@ export const Nav = async () => {
               )
             )
           })}
-        </div>        
+        </div>
+        <div className="flex items-center px-2">
+          <div>
+            {payload && payload.username && (
+              <div className="text-[10px] w-20 text-center">
+                {payload.username.substring(0, 18)}
+              </div>
+            )}
+            {!payload && <div className="sm:w-40"></div>}
+          </div>
+          <AuthMenu isLogged={payload ? true : false} />
+        </div>
+        <div>
+          {payload && payload.username ? (
+            <div>
+              <form
+                action={async () => {
+                  'use server'
+                  await signOut()
+                }}
+              >
+                <button className="btn" type="submit">
+                  Salir
+                </button>
+              </form>
+            </div>
+          ) : (
+            <form
+              action={async () => {
+                'use server'
+                await signIn(undefined, { callbackUrl: '/' })
+              }}
+            >
+              <button type="submit">Inicia Sesión</button>
+            </form>
+          )}
+        </div>
       </nav>
     </div>
   )

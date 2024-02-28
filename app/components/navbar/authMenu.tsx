@@ -10,7 +10,7 @@ import { logoutAction } from '@/app/server-actions/auth/logoutAction'
 import { redirect } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 
 // const notifyLogoutSuccess = () => toast.success('Logout Exitoso')
 export const notifySuccess = (text: string) =>
@@ -34,19 +34,16 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
   const { data: session } = useSession()
 
   const handleLogout = async () => {
-    const response = await logoutAction()
-    refreshAction()
+    await signOut()
     notifySuccess('Logout Exitoso. Hasta la próxima.')
     await new Promise((res) => setTimeout(res, 500))
-    if (response?.message === 'success') {
-      setTimeout(
-        () =>
-          startTransition(() => {
-            redirect('/')
-          }),
-        500,
-      )
-    }
+    setTimeout(
+      () =>
+        startTransition(() => {
+          redirect('/')
+        }),
+      500,
+    )
   }
 
   return (

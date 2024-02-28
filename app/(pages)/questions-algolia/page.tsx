@@ -1,5 +1,5 @@
 import Searchbar from '@/app/(pages)/questions-algolia/components/searchbar'
-import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
+import CheckServerCookie from '@/app/components/messages/checkServerCookie'
 
 export default function QuestionPage({
   searchParams,

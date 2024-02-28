@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import MessageLogged from '@/app/components/checkCookie/messageLogged'
+import MessageLogged from '@/app/components/messages/messageLogged'
 import RegisterFormContainer from '@/app/components/form/registerFormContainer'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 

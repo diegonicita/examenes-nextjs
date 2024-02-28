@@ -3,7 +3,7 @@ import type { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import Counter from './components/counter'
 import Message from './components/message'
-import MessageNotLogged from '@/app/components/checkCookie/messageNotLogged'
+import MessageNotLogged from '@/app/components/messages/messageNotLogged'
 import { auth } from '@/auth'
 
 const Profile = async () => {
@@ -15,6 +15,7 @@ const Profile = async () => {
       return (
         <div className="flex mt-4 gap-4 text-center justify-center">
           <div className="bg-base-200 p-2 gap-4">
+            <div className="font-bold">CREDENTIALS</div>
             {authData && (
               <img
                 src={
@@ -22,21 +23,24 @@ const Profile = async () => {
                 }
               />
             )}
-            <div className="font-bold">CREDENTIALS</div>
             <div>ID: {authData && authData.id?.toString()}</div>
             <div>Nombre: {authData && authData.username}</div>
             <div>Email: {authData && authData.email}</div>
             <div>Rol: {authData && authData.role} </div>
           </div>
           <div className="bg-base-200 p-2">
-            {session && session.user && (
-              <img
-                className="rounded-full"
-                src={session.user.image ? session.user?.image : undefined}
-              />
-            )}
-            <div className="font-bold"> GITHUB: </div>
-            <div>Nombre: {session?.user?.name}</div>
+            <div className="font-bold"> SESSION: </div>
+            <div className="flex justify-center w-full">
+              {session && session.user && (
+                <img
+                  className="rounded-full"
+                  src={session.user.image ? session.user?.image : undefined}
+                />
+              )}
+            </div>
+            <div>{session?.user?.name}</div>
+            <div>{session?.user?.email}</div>
+            <div>{session?.user?.image?.substring(0, 20) + '...'}</div>
           </div>
           {/* <Counter />
           <Message /> */}

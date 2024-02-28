@@ -1,4 +1,4 @@
-import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
+import CheckServerCookie from '@/app/components/messages/checkServerCookie'
 import searchQuestions from './actions/searchQuestions'
 import searchWordsSuggestions from './actions/searchWordsSuggestions'
 import SearchContainer from './components/searchbar/searchContainer'

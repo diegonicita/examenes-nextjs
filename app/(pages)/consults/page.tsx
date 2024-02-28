@@ -1,5 +1,5 @@
 import DisplayConsults from '@/app/(pages)/consults/displayConsults'
-import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
+import CheckServerCookie from '@/app/components/messages/checkServerCookie'
 
 const Page = async () => {
   return (
