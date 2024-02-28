@@ -20,9 +20,9 @@ export default function useEmoji() {
   const resetSaveTextAndEmojiNoId = () => {
     setSaveTextAndEmoji("");
   };
-  const handleSaveEmojiNoId = ( emoji: EmojiClickData, event?: MouseEvent) => {
-    setSaveTextAndEmoji((prevText:any) => prevText + emoji.emoji)
-    if (emoji.emoji) {
+  const handleSaveEmojiNoId = ( emoji:any, event?: MouseEvent) => {
+    setSaveTextAndEmoji((prevText:any) => prevText + emoji.native)
+    if (emoji.native) {
       setOpenEmoji(false);
     }
   };
@@ -32,12 +32,12 @@ export default function useEmoji() {
   };
 
 
-  const handleSaveEmoji = (commentId: number, emoji: EmojiClickData, event?: MouseEvent) => {
+  const handleSaveEmoji = (commentId: number, emoji: any, event?: MouseEvent) => {
     setSaveTextAndEmoji((prevText:any) => ({
       ...prevText,
-      [commentId]: (prevText[commentId] || '') + emoji?.emoji,
+      [commentId]: (prevText[commentId] || '') + emoji?.native,
     }));
-    if (emoji.emoji) {
+    if (emoji.native) {
       setOpenEmoji(false);
     }
   };
