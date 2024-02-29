@@ -66,7 +66,11 @@ const config = {
     signIn: '/login',
     error: '/login',
   },
-  session: { strategy: 'jwt' },
 } satisfies NextAuthConfig
 
-export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth(config)
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth(config)
