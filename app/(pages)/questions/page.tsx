@@ -13,7 +13,7 @@ import { UserType } from '@/app/models/User'
 import searchComments from './actions/searchComments'
 import RenderTree from './components/social/comments/renderTree'
 import FirstInputComment from './components/social/comments/firstInputComment'
-import { UseDropDown } from '@/app/hooks/questions/comments/useDropDown'
+import Pagination from './components/questions/pagination'
 export default async function QuestionPage({
   searchParams,
 }: {
@@ -138,6 +138,7 @@ export default async function QuestionPage({
             )}
           </SearchContainer>
         </div>
+        {/* <Pagination /> */}
       </CheckServerCookie>
     </div>
   )

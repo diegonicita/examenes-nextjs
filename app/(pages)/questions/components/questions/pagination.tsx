@@ -1,17 +1,49 @@
-'use client'
-import React from 'react'
+"use client";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import React from "react";
 
-const Pagination = () => {
+const Pagination = ({ totalQuestions}: { totalQuestions: number }) => {
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const createPageUrl = (page: string | number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    return `${pathName}?${params.toString()}`;
+  };
   return (
-    <div className="join w-full mx-auto justify-center gap-1 mb-4">
-      <button className="join-item btn">«</button>
-      <button className="join-item btn">1</button>
-      <button className="join-item btn btn-active">2</button>
-      <button className="join-item btn">3</button>
-      <button className="join-item btn">4</button>
-      <button className="join-item btn">»</button>
+    <div className="join w-full mx-auto items-center justify-center gap-1 mb-4">
+      {currentPage === 1 ? (
+        <button disabled={currentPage === 1} className="btn btn-disabled">
+          Anterior
+        </button>
+      ) : (
+        <Link
+          href={createPageUrl(currentPage - 1)}
+          className="join-item btn btn-outline"
+        >
+          {" "}
+          Anterior
+        </Link>
+      )}
+      {currentPage >= totalQuestions? (
+        <button
+          disabled={currentPage >= totalQuestions}
+          className="btn btn-disabled"
+        >
+          Siguiente
+        </button>
+      ) : (
+        <Link
+          href={createPageUrl(currentPage + 1)}
+          className="join-item btn btn-outline"
+        >
+          Siguiente
+        </Link>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;
