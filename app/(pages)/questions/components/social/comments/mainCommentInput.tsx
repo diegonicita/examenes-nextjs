@@ -1,8 +1,13 @@
 import useEmoji from "@/app/hooks/questions/comments/useEmoji";
 //@ts-ignore
 import { useFormStatus } from "react-dom";
-import EmojiPicker from "emoji-picker-react";
 import { IconEmojiSmile } from "../valorations/icons";
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+import i18n from '@emoji-mart/data/i18n/es.json'
+
+
+
 
 export default function mainCommentInput() {
   const { pending } = useFormStatus();
@@ -44,7 +49,7 @@ export default function mainCommentInput() {
     </div>
     {saveTextAndEmoji && saveTextAndEmoji.length > 0 && (
       <button
-        className="btn btn-sm btn-accent"
+        className="btn btn-sm btn-accent mt-2 ml-3"
         type="submit"
         disabled={pending}
       >
@@ -55,7 +60,8 @@ export default function mainCommentInput() {
   <div onClick={handleCloseEmoji}>
     {openEmoji && (
       <div onClick={handleStopPropagation} className="w-[348px]">
-        <EmojiPicker  searchDisabled onEmojiClick={handleSaveEmojiNoId}/>
+        {/* <EmojiPicker  searchDisabled onEmojiClick={handleSaveEmojiNoId}/> */}
+        <Picker data={data} onEmojiSelect={handleSaveEmojiNoId} i18n={i18n} locale="es" searchPosition="none" />
       </div>
     )}
   </div>

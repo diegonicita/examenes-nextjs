@@ -4,6 +4,9 @@ import EmojiPicker from "emoji-picker-react";
 //@ts-ignore
 import { useFormStatus } from "react-dom";
 import { IconEmojiSmile } from "../../valorations/icons";
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+import i18n from '@emoji-mart/data/i18n/es.json'
 
 export default function replyInput({
   id,
@@ -54,7 +57,7 @@ export default function replyInput({
         {idParent === idParent &&
           saveTextAndEmoji[id] &&
           saveTextAndEmoji[id].length > 0 && (
-            <button className="btn btn-sm btn-accent" type="submit" disabled={pending}>
+            <button className="btn btn-sm btn-accent mt-2 ml-3" type="submit" disabled={pending}>
             {pending ? "cargando..." : "responder"}
             </button>
           )}
@@ -63,11 +66,11 @@ export default function replyInput({
       <div onClick={handleCloseEmoji}>
         {openEmoji && (
           <div onClick={handleStopPropagation} className="w-[348px]">
-            <EmojiPicker
-              searchDisabled
-              onEmojiClick={(emoji) => handleSaveEmoji(id, emoji)}
-              
-            />
+            <Picker data={data} onEmojiSelect=
+            {(emoji:any) =>handleSaveEmoji(id,emoji)} 
+            i18n={i18n} 
+            locale="es" 
+            searchPosition="none" />
           </div>
         )}
       </div>
