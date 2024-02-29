@@ -1,4 +1,4 @@
-import { EmojiClickData } from "emoji-picker-react";
+
 import { useState } from "react";
 
 export default function useEmoji() {

@@ -60,7 +60,7 @@ export default function mainCommentInput() {
   <div onClick={handleCloseEmoji}>
     {openEmoji && (
       <div onClick={handleStopPropagation} className="w-[348px]">
-        {/* <EmojiPicker  searchDisabled onEmojiClick={handleSaveEmojiNoId}/> */}
+       
         <Picker data={data} onEmojiSelect={handleSaveEmojiNoId} i18n={i18n} locale="es" searchPosition="none" />
       </div>
     )}
