@@ -1,18 +1,7 @@
 import { auth } from './auth'
 
-const authRoutes = ['/auth/login', '/auth/register', '/auth/error']
-const apiAuthPrefix = "/api/auth";
-
 export default auth((req) => {
-  const { nextUrl } = req
-  const isLoggedIn = !!req.auth
-
-  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
-
-  if (isApiAuthRoute) {
-    return null;
-  }
+  req.auth
 })
 
 // Optionally, don't invoke Middleware on some paths
