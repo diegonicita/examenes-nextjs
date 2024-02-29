@@ -54,6 +54,7 @@ const config = {
     }),
     credentialsConfig,
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl
