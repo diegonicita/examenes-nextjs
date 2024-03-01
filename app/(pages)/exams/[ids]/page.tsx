@@ -4,6 +4,7 @@ import type { ExamType } from '@/app/models/Exam'
 import { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
+
 type YearData = {
   ano: number
   cantidad_preguntas: number

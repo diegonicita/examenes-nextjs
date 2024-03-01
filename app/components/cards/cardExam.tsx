@@ -32,7 +32,10 @@ export default function CardExam({
   return (
     <>
       {useHasMounted() && (
-        <Link href={link}>
+        <Link href={{
+          pathname: link,
+          query:{page: "1"}
+        }}>
           <div className="btn btn-ghost h-full p-0 border-0 hover:bg-white">
             <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator hover:border-2 hover:shadow-2xl h-auto pb-4">
               <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">

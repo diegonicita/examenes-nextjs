@@ -4,6 +4,7 @@ import { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import getQuestionsStatistics from '@/app/server-actions/questions/get-questions-statistics'
 
+
 const Page = async () => {
   const data = await getQuestionsStatistics()
   const exams = data.examenes as ExamType[]
