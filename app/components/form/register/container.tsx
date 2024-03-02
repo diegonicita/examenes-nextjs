@@ -1,17 +1,17 @@
 'use client'
 import React, { useRef, useState } from 'react'
-import Form from './components/form'
-import Buttom from './components/buttom'
-import Input from './components/input'
+import Form from '../components/form'
+import Buttom from '../components/buttom'
+import Input from '../components/input'
 import {
   checkFullValidation,
   checkPartialValidation,
   getErrorsFromResult,
-} from './registerFormValidation'
-import { registerFormAction } from './registerFormAction'
+} from './validations'
+import { formAction } from './formAction'
 import { redirect } from 'next/navigation'
 
-export const RegisterFormContainer = ({ disabled }: { disabled: boolean }) => {
+export const Container = ({ disabled }: { disabled: boolean }) => {
   const formRef = useRef<HTMLFormElement>(null)
   const [errors, setErrors] = useState({
     username: '',
@@ -24,7 +24,7 @@ export const RegisterFormContainer = ({ disabled }: { disabled: boolean }) => {
     const result = checkFullValidation(formData)
     const response1 = getErrorsFromResult(result)
     setErrors({ ...errors, ...response1 })
-    const response2 = await registerFormAction({ result, formData, formRef })
+    const response2 = await formAction({ result, formData, formRef })
     if (response2?.message === 'success') {
       redirect('/')
     }
@@ -108,4 +108,4 @@ export const RegisterFormContainer = ({ disabled }: { disabled: boolean }) => {
   )
 }
 
-export default RegisterFormContainer
+export default Container

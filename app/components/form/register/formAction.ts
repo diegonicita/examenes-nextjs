@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 
-import { notifyErrors } from '@/app/components/form/toasters/notifyErrors'
-import { notifySuccess } from '@/app/components/form/toasters/notifySuccess'
-import { registerAction } from '@/app/components/form/actions/registerAction'
+import { notifyErrors } from '@/app/components/form/components/notifyErrors'
+import { notifySuccess } from '@/app/components/form/components/notifySuccess'
+import { registerAction } from '@/app/components/form/actions/register/registerAction'
 
 type Props = {
   result: { success: any }
@@ -11,7 +11,11 @@ type Props = {
   formRef: React.MutableRefObject<HTMLFormElement | null> | undefined
 }
 
-export const registerFormAction = async ({ result, formData, formRef }: Props) => {
+export const formAction = async ({
+  result,
+  formData,
+  formRef,
+}: Props) => {
   if (result.success) {
     try {
       const resp = await registerAction(formData)
@@ -21,14 +25,14 @@ export const registerFormAction = async ({ result, formData, formRef }: Props) =
         if (formRef?.current) {
           formRef?.current.reset()
         }
-        return { message: 'success'}
+        return { message: 'success' }
       } else {
         notifyErrors('El Register falló. Inténtalo mas tarde.')
-        return { message: 'Errores en el registro'}
+        return { message: 'Errores en el registro' }
       }
     } catch (error) {
       console.log(error)
-      return { message: 'error try catch en register'}
+      return { message: 'error try catch en register' }
     }
   }
 }

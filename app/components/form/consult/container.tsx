@@ -1,18 +1,18 @@
 'use client'
 import React, { useRef, useState } from 'react'
-import Form from './components/form'
-import Buttom from './components/buttom'
-import Input from './components/input'
-import TextArea from './components/textarea'
+import Form from '../components/form'
+import Buttom from '../components/buttom'
+import Input from '../components/input'
+import TextArea from '../components/textarea'
 import {
   checkFullValidation,
   checkPartialValidation,
   getErrorsFromResult,
-} from './consultFormValidation'
-import { consultFormAction } from './consultFormAction'
+} from './validations'
+import { formAction } from './formAction'
 import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 
-export const ConsultFormContainer = () => {
+export const Container = () => {
   const formRef = useRef<HTMLFormElement>(null)
   const [errors, setErrors] = useState({
     fullname: '',
@@ -24,7 +24,7 @@ export const ConsultFormContainer = () => {
     const result = checkFullValidation(formData)
     const response1 = getErrorsFromResult(result)
     setErrors({ ...errors, ...response1 })
-    const response2 = await consultFormAction({ result, formData, formRef })
+    const response2 = await formAction({ result, formData, formRef })
     if (response2?.message === 'success') refreshAction()
   }
 
@@ -90,4 +90,4 @@ export const ConsultFormContainer = () => {
   )
 }
 
-export default ConsultFormContainer
+export default Container

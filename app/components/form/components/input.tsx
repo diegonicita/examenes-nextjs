@@ -12,7 +12,8 @@ type Props = {
     name: string
     id: string
     type: string
-    error: string    
+    error: string
+    value?: string | number | readonly string[] | undefined
   }
 }
 
@@ -30,6 +31,7 @@ export const Input = ({ handleBlur, data }: Props) => {
         id={data.id}
         autoComplete="off"
         onBlur={handleBlur}
+        value={data?.value ? data.value : data.value}
       />
       <div className="relative pb-5">
         {data.error && (
