@@ -3,4 +3,5 @@ export type UserType = {
   username: string | null
   email: string | null
   role: string | null
+  verify: number | null
 }

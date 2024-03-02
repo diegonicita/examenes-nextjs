@@ -6,7 +6,8 @@ const initialState: UserType = {
   id: null,
   role: null,
   username: null,
-  email: null,
+  email: null,  
+  verify: null,
 }
 
 export const userSlice = createSlice({

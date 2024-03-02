@@ -5,48 +5,9 @@ import Image from 'next/image'
 import userNotLogged from '@/app/assets/icon-not-logged.png'
 import userLogged from '@/app/assets/icon-logged.png'
 import Link from 'next/link'
-//@ts-ignore
-import { logoutAction } from '@/app/server-actions/auth/logoutAction'
-import { redirect } from 'next/navigation'
-import toast from 'react-hot-toast'
-import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
-
-// const notifyLogoutSuccess = () => toast.success('Logout Exitoso')
-export const notifySuccess = (text: string) =>
-  toast.custom(
-    (t) => (
-      <div
-        className={`text-white font-bold bg-success px-6 py-4 shadow  ${
-          t.visible ? 'animate-enter' : 'animate-leave'
-        }`}
-      >
-        {text}
-      </div>
-    ),
-    {
-      position: 'bottom-left',
-    },
-  )
+import { handleLogout } from './helper/handleLogout'
 
 export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
-  const [isPending, startTransition] = useTransition()
-
-  const handleLogout = async () => {
-    const response = await logoutAction()
-    refreshAction()
-    notifySuccess('Logout Exitoso. Hasta la próxima.')
-    await new Promise((res) => setTimeout(res, 500))
-    if (response?.message === 'success') {
-      setTimeout(
-        () =>
-          startTransition(() => {
-            redirect('/')
-          }),
-        500,
-      )
-    }
-  }
-
   return (
     <div>
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">

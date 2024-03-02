@@ -41,7 +41,7 @@ export const LoginFormContainer = ({ disabled }: Props) => {
   ) => {
     const result = checkPartialValidation(
       new FormData(formRef.current as HTMLFormElement),
-      {        
+      {
         email: event.target.id === 'email' ? undefined : true,
         password: event.target.id === 'password' ? undefined : true,
       },
@@ -52,7 +52,11 @@ export const LoginFormContainer = ({ disabled }: Props) => {
 
   return (
     <div className="card w-full bg-base-300 mb-2">
-      <Form handleSubmit={handleSubmit} formRef={formRef} title="¡Bienvenido a Exámenes!">
+      <Form
+        handleSubmit={handleSubmit}
+        formRef={formRef}
+        title="¡Bienvenido a Exámenes!"
+      >
         <fieldset disabled={disabled}>
           <Input
             data={{
