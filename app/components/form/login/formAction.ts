@@ -14,8 +14,7 @@ type Props = {
 export const formAction = async ({ result, formData, formRef }: Props) => {
   if (result.success) {
     try {
-      const resp = await loginAction(formData)
-      console.log(resp)
+      const resp = await loginAction(formData)      
       if (resp?.isError === false) {
         notifySuccess('Login exitoso. Bienvenido')
         if (formRef?.current) {
@@ -26,8 +25,7 @@ export const formAction = async ({ result, formData, formRef }: Props) => {
         notifyErrors('Falló el Login. Inténtalo mas tarde.')
         return { message: 'Errores en el logueo' }
       }
-    } catch (error) {
-      console.log(error)
+    } catch (error) {      
       return { message: 'error try catch en login' }
     }
   }

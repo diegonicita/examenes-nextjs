@@ -34,7 +34,7 @@ export const Container = ({ disabled }: Props) => {
     if (code && email) {
       formData.set('email', email)
       formData.set('code', code)
-      const response = await sendCode({
+      await sendCode({
         formData,
         formRef,
       })
@@ -43,18 +43,14 @@ export const Container = ({ disabled }: Props) => {
   }
 
   const handleSendEmail = async (formData: FormData) => {
-    const result = checkFullValidation(formData)
-    console.log(result)
-    const response1 = getErrorsFromResult(result)
-    console.log(response1)
-    setErrors({ ...errors, ...response1 })
-    console.log('Action')
+    const result = checkFullValidation(formData)    
+    const response1 = getErrorsFromResult(result)   
+    setErrors({ ...errors, ...response1 })   
     const response2 = await sendEmail({
       result,
       formData,
       formRef,
-    })
-    console.log(response2)
+    })    
     if (response2?.message === 'success') {
       setCodeInputEnabled(true)
       const _email = formData?.get('email') as string
@@ -63,13 +59,10 @@ export const Container = ({ disabled }: Props) => {
   }
 
   const handleSkipSendEmail = async (formData: FormData) => {
-    const result = checkFullValidation(formData)
-    console.log(result)
-    const response1 = getErrorsFromResult(result)
-    console.log(response1)
+    const result = checkFullValidation(formData)    
+    const response1 = getErrorsFromResult(result)    
     setErrors({ ...errors, ...response1 })
-    if (result.success) {
-      console.log('Action Skip')
+    if (result.success) {      
       setCodeInputEnabled(true)
       const _email = formData?.get('email') as string
       setEmail(_email)
