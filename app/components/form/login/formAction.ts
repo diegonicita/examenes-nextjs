@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 
-import { notifyErrors } from '@/app/components/form/toasters/notifyErrors'
-import { notifySuccess } from '@/app/components/form/toasters/notifySuccess'
-import { loginAction } from '@/app/components/form/actions/loginAction'
+import { notifyErrors } from '@/app/components/form/components/notifyErrors'
+import { notifySuccess } from '@/app/components/form/components/notifySuccess'
+import { loginAction } from '@/app/components/form/actions/login/loginAction'
 
 type Props = {
   result: { success: any }
@@ -11,7 +11,7 @@ type Props = {
   formRef: React.MutableRefObject<HTMLFormElement | null> | undefined
 }
 
-export const loginFormAction = async ({ result, formData, formRef }: Props) => {
+export const formAction = async ({ result, formData, formRef }: Props) => {
   if (result.success) {
     try {
       const resp = await loginAction(formData)
@@ -21,14 +21,14 @@ export const loginFormAction = async ({ result, formData, formRef }: Props) => {
         if (formRef?.current) {
           formRef?.current.reset()
         }
-        return { message: 'success'}
+        return { message: 'success' }
       } else {
         notifyErrors('Falló el Login. Inténtalo mas tarde.')
-        return { message: 'Errores en el logueo'}
+        return { message: 'Errores en el logueo' }
       }
     } catch (error) {
       console.log(error)
-      return { message: 'error try catch en login'}
+      return { message: 'error try catch en login' }
     }
   }
 }

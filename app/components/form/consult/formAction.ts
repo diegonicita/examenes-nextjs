@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
-import { insertConsult } from '@/app/components/form/actions/insertConsult'
-import { notifyErrors } from '@/app/components/form/toasters/notifyErrors'
-import { notifySuccess } from '@/app/components/form/toasters/notifySuccess'
+import { insertConsult } from '@/app/components/form/actions/consult/insertConsult'
+import { notifyErrors } from '@/app/components/form/components/notifyErrors'
+import { notifySuccess } from '@/app/components/form/components/notifySuccess'
 
 type Props = {
   result: { success: any }
@@ -10,7 +10,7 @@ type Props = {
   formRef: React.MutableRefObject<HTMLFormElement | null> | undefined
 }
 
-export const consultFormAction = async ({
+export const formAction = async ({
   result,
   formData,
   formRef,

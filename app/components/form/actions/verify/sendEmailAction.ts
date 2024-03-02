@@ -1,7 +1,7 @@
 'use server'
 import jwt from 'jsonwebtoken'
 
-export const sendCodeAction = async (formData: FormData) => {
+export const sendEmailAction = async (formData: FormData) => {
   const url = process.env.URL_VERIFY
   const email = formData.get('email')
   let token = null

@@ -1,6 +1,6 @@
 import MessageNotLoggedVerify from '@/app/components/checkCookie/messageNotLoggedVerify'
 import MessageVerified from '@/app/components/checkCookie/messageVerified'
-import VerifyFormContainer from '@/app/components/form/verifyFormContainer'
+import VerifyFormContainer from '@/app/components/form/verify/container'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
 export default async function Verify() {

@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 
-import { notifyErrors } from '@/app/components/form/toasters/notifyErrors'
-import { notifySuccess } from '@/app/components/form/toasters/notifySuccess'
-import { sendCodeAction } from '@/app/components/form/actions/sendCodeAction'
+import { notifyErrors } from '@/app/components/form/components/notifyErrors'
+import { notifySuccess } from '@/app/components/form/components/notifySuccess'
+import { sendEmailAction } from '@/app/components/form/actions/verify/sendEmailAction'
 
 type Props = {
   result: { success: any }
@@ -16,7 +16,7 @@ type Response = {
   message: 'error' | 'success' | 'user verified'
 }
 
-export const verifyFormActionSendCode = async ({
+export const sendEmail = async ({
   result,
   formData,
   formRef,
@@ -24,7 +24,7 @@ export const verifyFormActionSendCode = async ({
   if (result.success) {
     console.log(formData.get('email'))
     try {
-      const resp: Response = await sendCodeAction(formData)
+      const resp: Response = await sendEmailAction(formData)
       console.log(resp)
       if (resp?.isError === false) {
         notifySuccess('Código enviado exitosamente!')

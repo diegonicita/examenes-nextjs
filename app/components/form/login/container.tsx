@@ -1,14 +1,14 @@
 'use client'
 import React, { useRef, useState } from 'react'
-import Form from './components/form'
-import Buttom from './components/buttom'
-import Input from './components/input'
+import Form from '../components/form'
+import Buttom from '../components/buttom'
+import Input from '../components/input'
 import {
   checkFullValidation,
   checkPartialValidation,
   getErrorsFromResult,
-} from './loginFormValidation'
-import { loginFormAction } from './loginFormAction'
+} from './validations'
+import { formAction } from './formAction'
 import { redirect } from 'next/navigation'
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
   disabled: boolean
 }
 
-export const LoginFormContainer = ({ disabled }: Props) => {
+export const Container = ({ disabled }: Props) => {
   const formRef = useRef<HTMLFormElement>(null)
   const [errors, setErrors] = useState({
     email: '',
@@ -28,7 +28,7 @@ export const LoginFormContainer = ({ disabled }: Props) => {
     const result = checkFullValidation(formData)
     const response1 = getErrorsFromResult(result)
     setErrors({ ...errors, ...response1 })
-    const response2 = await loginFormAction({ result, formData, formRef })
+    const response2 = await formAction({ result, formData, formRef })
     if (response2?.message === 'success') {
       redirect('/')
     }
@@ -87,4 +87,4 @@ export const LoginFormContainer = ({ disabled }: Props) => {
   )
 }
 
-export default LoginFormContainer
+export default Container

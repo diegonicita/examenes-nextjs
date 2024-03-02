@@ -2,7 +2,7 @@ import React from 'react'
 import Hero from '@/app/(pages)/home/components/hero/hero'
 import Review from '@/app/(pages)/home/components/reviews'
 import LeftColumn from './components/consults/leftColumn'
-import ConsultForm from '@/app/components/form/consultFormContainer'
+import ConsultForm from '@/app/components/form/consult/container'
 
 const Home = () => {
   return (

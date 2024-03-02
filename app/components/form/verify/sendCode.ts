@@ -1,10 +1,8 @@
 'use client'
 import React from 'react'
-
-import { notifyErrors } from '@/app/components/form/toasters/notifyErrors'
-import { notifySuccess } from '@/app/components/form/toasters/notifySuccess'
-import { verifyAction } from './actions/verifyAction'
-import { handleLogout } from '../navbar/helper/handleLogout'
+import { notifyErrors } from '@/app/components/form/components/notifyErrors'
+import { notifySuccess } from '@/app/components/form/components/notifySuccess'
+import { sendCodeAction } from '../actions/verify/sendCodeAction'
 
 type Props = {
   formData: FormData
@@ -16,12 +14,9 @@ type Response = {
   message: 'error' | 'success' | 'user verified'
 }
 
-export const verifyFormActionVerifyCode = async ({
-  formData,
-  formRef,
-}: Props) => {
+export const sendCode = async ({ formData, formRef }: Props) => {
   try {
-    const resp = await verifyAction(formData)
+    const resp = await sendCodeAction(formData)
     if (resp?.isError === false) {
       notifySuccess('Usuario Verificado!')
       if (formRef?.current) {
