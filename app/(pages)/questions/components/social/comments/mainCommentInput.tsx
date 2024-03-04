@@ -6,9 +6,6 @@ import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import i18n from '@emoji-mart/data/i18n/es.json'
 
-
-
-
 export default function mainCommentInput() {
   const { pending } = useFormStatus();
   const {
@@ -59,14 +56,12 @@ export default function mainCommentInput() {
   </div>
   <div onClick={handleCloseEmoji}>
     {openEmoji && (
-      <div onClick={handleStopPropagation} className="w-[348px]">
+      <div onClick={handleStopPropagation} className="">
        
-        <Picker data={data} onEmojiSelect={handleSaveEmojiNoId} i18n={i18n} locale="es" searchPosition="none" />
+        {openEmoji && <Picker data={data} onEmojiSelect={handleSaveEmojiNoId} i18n={i18n} locale="es" searchPosition="none" />}
       </div>
     )}
   </div>
 </section>
-
-  
   );
 }

@@ -3,7 +3,7 @@ import getExam from '@/app/(pages)/exams/actions/getExam'
 import searchValorations from '@/app/(pages)/questions/actions/searchValoration'
 import Examen from '@/app/(pages)/questions/components/questions/examen'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
-import Pagination from '@/app/(pages)/questions/components/questions/pagination'
+import Pagination from '@/app/components/pagination/pagination'
 
 type YearData = {
   ano: number

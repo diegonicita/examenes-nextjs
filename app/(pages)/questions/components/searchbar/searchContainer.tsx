@@ -29,8 +29,8 @@ const SearchContainer = ({
       <Searchbar
         inputRef={inputRef}
         handleChangeResetKey={handleChangeResetKey}
-      />
-      {query !== '' && query.length > 2 && (
+      /> 
+       {query !== '' && query.length > 2 && (
         <WordsSuggestions
           query={query}
           reset={reset}

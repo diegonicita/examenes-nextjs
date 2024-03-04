@@ -5,9 +5,11 @@ import { RowDataPacket } from 'mysql2'
 export default async function searchQuestionsQuery(
   queries: string[],
   limit: number,
+  page:number
 ) {
   // Filtra las consultas que tienen al menos 3 caracteres
   const validQueries = queries.filter((q) => q.length > 2)
+  const offset = (page - 1) * limit
 
   let resultQueryLimit10
   let resultLength
@@ -26,10 +28,10 @@ export default async function searchQuestionsQuery(
       Array.from({ length: 6 }, () => `%${q}%`),
     )
     // Add Limit
-    const finalQueryLikes = [...queryLikes, limit.toString()]
+    const finalQueryLikes = [...queryLikes, limit.toString(),offset.toString()]
 
     // Construye y ejecuta la consulta
-    const queryString1 = `SELECT * FROM preguntas WHERE ${conditions} LIMIT ?`
+    const queryString1 = `SELECT * FROM preguntas WHERE ${conditions} LIMIT ? OFFSET ?`
     resultQueryLimit10 = (await executeQuery(
       queryString1,
       finalQueryLikes,
