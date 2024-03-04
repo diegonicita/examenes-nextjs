@@ -3,6 +3,7 @@ import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 import Tab from './tab'
 import { cookies } from 'next/headers'
+import ThemeSelector from './theme'
 
 export const Nav = () => {
   const auth = cookies().get('auth')
@@ -30,6 +31,7 @@ export const Nav = () => {
           })}
         </div>
         <AuthMenu isLogged={isLogged} />
+        <ThemeSelector />
       </nav>
     </div>
   )

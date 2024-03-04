@@ -1,23 +1,23 @@
 // Este componente usa una clase llamada text-wrap-balance definida en global.css
 import Image from 'next/image'
-import heroImage from '@/app/assets/OIG-1.webp'
+import heroImage from '@/app/assets/OIG-2.webp'
 import ButtonLogin from './buttonLogin'
 
 export default function Hero() {
   return (
-    <div className="relative flex items-center justify-center px-10 text-accent-content">
+    <div className="relative flex items-center justify-center px-10 text-base-content">
       <div className="w-full max-w-[55rem] mx-auto">
         <section
           className="relative flex flex-col 
       items-center justify-center px-[21px]  pb-8 lg:items-start md:h-[550px]"
-        >         
+        >
           <Image
             src={heroImage}
             alt="Pets Home"
             width={0}
             height={0}
             sizes="100vw"
-            className="w-[20rem] pt-8 lg:absolute lg:right-16 lg:w-[30rem] xl:right-0"
+            className="w-[25rem] pt-8 lg:absolute lg:right-16 lg:w-[35rem] xl:right-0"
           />
           <h1
             className="text-wrap-balance text-[20px] leading-[26px] 
