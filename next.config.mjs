@@ -2,7 +2,11 @@
 const nextConfig = {
   experimental: {
     serverActions: {
-      allowedOrigins: ['www.examenes.com.ar', 'localhost:5000'],
+      allowedOrigins: [
+        'examenes.com.ar',
+        'www.examenes.com.ar',
+        'localhost:5000',
+      ],
     },
   },
   reactStrictMode: true,
@@ -19,8 +23,7 @@ const nextConfig = {
         hostname: '**.api-ninjas.com',
         port: '',
         pathname: '/**',
-      }
-      
+      },
     ],
   },
 }

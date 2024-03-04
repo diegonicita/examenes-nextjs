@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast'
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
     <Providers>
-      <html lang="en">
+      <html lang="en" data-theme="light">
         <body className="block">
           <Nav />
           <Toaster />
