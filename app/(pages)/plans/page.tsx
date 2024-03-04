@@ -3,13 +3,13 @@ import Faq from '../home/components/faq/faq'
 
 import React from 'react'
 
-export const page = () => {
+const Plans = async () => {
   return (
     <div className="mx-auto max-w-[55rem] mb-8 mt-8">
-      <Prices />      
+      <Prices />
       <Faq />
     </div>
   )
 }
 
-export default page
+export default Plans
