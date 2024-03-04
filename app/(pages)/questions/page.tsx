@@ -13,12 +13,12 @@ import { UserType } from '@/app/models/User'
 import searchComments from './actions/searchComments'
 import RenderTree from './components/social/comments/renderTree'
 import FirstInputComment from './components/social/comments/firstInputComment'
-import Pagination from './components/questions/pagination'
+import Pagination from '@/app/components/pagination/pagination'
 export default async function QuestionPage({
   searchParams,
 }: {
-  searchParams?: {
-    page?: string
+  searchParams: {
+    page: number
     query?: string
   }
 }) {
@@ -27,7 +27,6 @@ export default async function QuestionPage({
   const query = searchParams?.query || ''
   const authData = (await getInfoAuthCookie()) as UserType
   let queries: string | string[]
-  console.log(authData, 'user')
   if (query) {
     // Divide la cadena en un array de palabras si no está vacía
     queries = query.split(' ')
@@ -36,16 +35,16 @@ export default async function QuestionPage({
     queries = []
   }
 
-  const searchQuestionsResult = await searchQuestions(queries)
+  const searchQuestionsResult = await searchQuestions(queries,searchParams.page)
   const questions = searchQuestionsResult?.resultQueryLimit10
   const questionsCount = searchQuestionsResult?.resultLength
-  //console.log(questions)
+  const paginatiototalQuestion = Math.ceil(questionsCount / 10)
   let valorations: undefined = undefined
   if (auth) valorations = await searchValorations(questions)
-  //console.log(valorations)
+ 
   const wordsSuggestions = await searchWordsSuggestions(queries)
 
-  // Comments //
+ 
   let treeComments = {} as any
 
   if (auth) {
@@ -55,30 +54,6 @@ export default async function QuestionPage({
       ...(result && result.tree ? result.tree : null),
     }
   }
-
-  console.log(treeComments[168])
-
-  // console.log(comments)
-  // let arbol = {} as any
-  // if (comments)
-  //   Object.keys(comments).map((key) => {
-  //     const temp = {} as any
-  //     if (comments) temp[key] = createTree(comments[key])
-  //     arbol[key] = temp[key][key]
-  //   })
-  //   console.log(arbol[120][0]?.comment)
-  //   console.log(arbol[120][1]?.comment)
-  //   console.log(arbol[120][2]?.comment)
-  //   console.log(arbol[120][0]?.children)
-  //   console.log(arbol[120][0]?.children[0])
-  //   console.log(arbol[120][0]?.children[1])
-  //   console.log(arbol[120][0]?.children[2])
-  //   console.log(arbol[120][1]?.children)
-  //   console.log(arbol[120][1]?.children[0])
-  //   console.log(arbol[120][1]?.children[1])
-  //   console.log(arbol[120][0]?.children[0]?.children)
-  //   console.log(arbol[120][0]?.children[1]?.children[0])
-  //   console.log(arbol[120][0]?.children[1]?.children[1])
 
   return (
     <div>
@@ -138,7 +113,7 @@ export default async function QuestionPage({
             )}
           </SearchContainer>
         </div>
-        {/* <Pagination /> */}
+        <Pagination totalQuestions={paginatiototalQuestion} />
       </CheckServerCookie>
     </div>
   )

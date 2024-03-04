@@ -1,8 +1,13 @@
 /** @type {import('next').NextConfig} */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+
 const nextConfig = {
   experimental: {
     serverActions: {
-      allowedOrigins: ['www.examenes.com.ar', 'localhost:5000'],
+      allowedOrigins: ['examenes.com.ar', 'www.examenes.com.ar', 'localhost:5000'],
     },
   },
   reactStrictMode: true,
@@ -25,4 +30,4 @@ const nextConfig = {
   },
 }
 
-export default nextConfig
+module.exports = withBundleAnalyzer(nextConfig)
