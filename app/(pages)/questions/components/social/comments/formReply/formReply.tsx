@@ -1,9 +1,9 @@
 import createReply from "@/app/(pages)/questions/actions/createComment";
-import useEmoji from "@/app/hooks/questions/comments/useEmoji";
+import { useEmojiContext } from "@/app/hooks/questions/comments/useEmoji";
 import { useEffect, useState } from "react";
 //@ts-ignore
 import { useFormState } from "react-dom";
-import ReplyInput from "./replyInput";
+import {ReplyInput,PickerComponent} from "./replyInput";
 
 
 const initialState = {
@@ -24,10 +24,10 @@ interface FormReplyProps {
   }
   
 export default function FormReply({t}:FormReplyProps) {
-  console.log(t);
+
   const [state, formAction] = useFormState(createReply, initialState);
-  const { resetSaveTextAndEmoji } = useEmoji();
-console.log(state)
+  const { resetSaveTextAndEmoji } = useEmojiContext();
+
   useEffect(() => {
     if (state?.message === "success") {
       setReset(Math.random().toString());
@@ -36,7 +36,8 @@ console.log(state)
   }, [state]);
   const [reset, setReset] = useState("");
   return (
-  <form key={reset} action={formAction}>
+    
+  <form key={reset} action={formAction}  >
     <input
       id="id_parent_comment"
       type="hidden"
@@ -51,5 +52,6 @@ console.log(state)
     />
     <ReplyInput id={t.comment?.id} idParent={t.comment?.id_parent_comment} />
   </form>
+  
   )
 }

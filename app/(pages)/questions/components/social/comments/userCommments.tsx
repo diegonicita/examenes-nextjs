@@ -32,9 +32,9 @@ async function UserComments({
   };
 
   return (
-    <section  ref={currentClassRef}  className="grid grid-cols-[40px,1fr] mt-5 pr-5">
+    <section  ref={currentClassRef}  className="grid grid-cols-[40px,1fr] mt-5">
       <>
-        <div className=""  >
+        <div className="w-10 h-10"  >
           <img
             alt="profile"
             src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
@@ -42,7 +42,7 @@ async function UserComments({
           />
         </div>
         <main className="flex flex-col ">
-          <div className=" card w-full p-3 bg-gray-200 shadow-xl ml-2 relative">
+          <div className=" card p-3 bg-gray-200 shadow-xl ml-2 relative">
             <div className="flex flex-row ">
               <div className="flex-grow">
                 <h1 className="text-base font-bold">

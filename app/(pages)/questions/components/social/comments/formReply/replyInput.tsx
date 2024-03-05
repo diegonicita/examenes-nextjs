@@ -1,5 +1,5 @@
 
-import useEmoji from "@/app/hooks/questions/comments/useEmoji";
+import {useEmojiContext} from "@/app/hooks/questions/comments/useEmoji";
 //@ts-ignore
 import { useFormStatus } from "react-dom";
 import { IconEmojiSmile } from "../../valorations/icons";
@@ -7,7 +7,27 @@ import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import i18n from '@emoji-mart/data/i18n/es.json'
 
-export default function replyInput({
+export function PickerComponent({id}:{id:number}) {
+  
+  const { openEmoji, handleCloseEmoji, handleSaveEmoji } = useEmojiContext();
+
+  return (
+    <div onClick={handleCloseEmoji} className="mt-2 pr-5 ">
+      {openEmoji &&
+          <Picker
+            data={data}
+            onEmojiSelect={(emoji: any) => handleSaveEmoji(id, emoji)}
+            i18n={i18n}
+            locale="es"
+            emojiButtonSize={30}
+            searchPosition="none"
+            onClickOutside={handleCloseEmoji}
+          />
+}
+    </div>
+  );
+}
+export function ReplyInput({
   id,
   idParent,
 }: {
@@ -17,28 +37,26 @@ export default function replyInput({
   const { pending } = useFormStatus();
   const {
     saveTextAndEmoji,
+    openEmoji,
     handleInputComment,
     handleOpenEmoji,
-    handleCloseEmoji,
-    openEmoji,
-    handleSaveEmoji,
-    handleStopPropagation,
-  } = useEmoji();
+  } = useEmojiContext();
   return (
-    <section className="flex flex-wrap items-start ml-16">
-        <div className="">
+    <section className="flex flex-col ml-12 ">
+      <div className="flex">
+       
           <img
             alt="profile"
             src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-            className="w-10 h-10 rounded-full mr-2"
+            className="w-10 h-10 rounded-full"
           />
-        </div>
+        
         <div className="flex-grow">
-        <div className=" relative w-full">
+        <div className=" relative ml-1 ">
           <input
             type="text"
             placeholder={"add a comment to msg " + id}
-            className="w-full p-2 focus:outline-none rounded-full border border-gray-300 "
+            className="p-2 w-full focus:outline-none rounded-full border border-gray-300 "
             name="comment"
             id="comment"
             value={saveTextAndEmoji[id] || ""}
@@ -46,7 +64,7 @@ export default function replyInput({
           />
 
           <span
-            className="absolute right-5 top-3 cursor-pointer"
+            className="absolute right-6 top-3 cursor-pointer"
             onClick={handleOpenEmoji}
           >
             <IconEmojiSmile />
@@ -55,23 +73,13 @@ export default function replyInput({
       <div>
         {idParent === idParent &&
           saveTextAndEmoji[id] &&
-          saveTextAndEmoji[id].length > 0 && (
+          saveTextAndEmoji[id].trim().length > 0 && (
             <button className="btn btn-sm btn-accent mt-2 ml-3" type="submit" disabled={pending}>
             {pending ? "cargando..." : "responder"}
             </button>
           )}
           </div>
       </div>
-      <div onClick={handleCloseEmoji}>
-        {openEmoji && (
-          <div onClick={handleStopPropagation} className="w-[348px]">
-            <Picker data={data} onEmojiSelect=
-            {(emoji:any) =>handleSaveEmoji(id,emoji)} 
-            i18n={i18n} 
-            locale="es" 
-            searchPosition="none" />
-          </div>
-        )}
       </div>
     </section>
   );

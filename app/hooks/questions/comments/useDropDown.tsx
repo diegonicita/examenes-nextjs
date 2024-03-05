@@ -15,10 +15,8 @@ interface dropdown {
 const DropDownContext = createContext<dropdown>(dropdowninitialstate)
 
 function useDropDownContext() {
-  
+
   const context = useContext(DropDownContext);
-  console.log(context)
-  
   if (!context) {
     throw new Error("useDropDownContext must be used within a DropDownContext.Provider");
   }

@@ -6,6 +6,8 @@ import useFormAction from "@/app/hooks/questions/comments/useFormAction";
 import { startTransition } from "react";
 import FormReply from "./formReply/formReply";
 import { UseDropDown } from "@/app/hooks/questions/comments/useDropDown";
+import { PickerComponent } from "./formReply/replyInput";
+import {UseEmoji} from "@/app/hooks/questions/comments/useEmoji";
 
 const ReplyButton= memo(({ handleOpenComments,commentId }:{handleOpenComments: (commentId:number) => void, commentId:number }) => {
   const handleClick = () => {
@@ -55,7 +57,9 @@ const RenderTree = ({
       }) =>
         t.comment.id_parent_comment === parentId && (
           <div key={t.comment.id}>
+             <UseEmoji key={t.comment.id} >
             <div className="" style={{ paddingLeft: `${depth * 20}px` }}>
+             
             <UseDropDown key={t.comment.id} >
               <UserComments data={t} currentUser={currentUser}>
                 <ReplyButton handleOpenComments={handleOpenComments} commentId={t.comment.id}  />
@@ -66,12 +70,15 @@ const RenderTree = ({
                 <FormReply t={t} />
                 )}
             </div>
+            <PickerComponent id={t.comment?.id}/>
+            
             <RenderTree
               tree={t.children}
               parentId={t.comment.id}
               depth={depth + 1}
               currentUser={currentUser}
             />
+            </UseEmoji>
           </div>
         )
     );

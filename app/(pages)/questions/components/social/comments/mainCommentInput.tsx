@@ -1,4 +1,4 @@
-import useEmoji from "@/app/hooks/questions/comments/useEmoji";
+import { useEmojiContext } from "@/app/hooks/questions/comments/useEmoji";
 //@ts-ignore
 import { useFormStatus } from "react-dom";
 import { IconEmojiSmile } from "../valorations/icons";
@@ -10,41 +10,41 @@ export default function mainCommentInput() {
   const { pending } = useFormStatus();
   const {
     saveTextAndEmoji,
-    handleStopPropagation,
     handleInputCommentNoId,
     handleOpenEmoji,
     handleSaveEmojiNoId,
     openEmoji,
     handleCloseEmoji,
-  } = useEmoji();
+  } = useEmojiContext();
   return (
-    <section className="flex items-start flex-wrap">
-  <div>
+    <section className="flex flex-col ">
+     <div className="flex">
+  
     <img
       alt="profile"
       src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
       className="w-10 h-10 rounded-full mr-2"
     />
-  </div>
+ 
   <div className="flex-grow">
-    <div className="relative w-full">
+    <div className="relative w-[254px] md:w-full  ">
       <input
         type="text"
         placeholder="agrega un comentario"
-        className="w-full p-2 focus:outline-none rounded-full border border-gray-300"
+        className="w-[254px] md:w-full p-2 focus:outline-none rounded-full border border-gray-300"
         name="comment"
         id="comment"
         value={saveTextAndEmoji || ""}
         onChange={handleInputCommentNoId}
       />
       <span
-        className="absolute right-5 top-3 cursor-pointer"
+        className="absolute right-6 md:right-5 top-3 cursor-pointer"
         onClick={handleOpenEmoji}
       >
         <IconEmojiSmile />
       </span>
     </div>
-    {saveTextAndEmoji && saveTextAndEmoji.length > 0 && (
+    {saveTextAndEmoji.trim().length > 0 && (
       <button
         className="btn btn-sm btn-accent mt-2 ml-3"
         type="submit"
@@ -54,12 +54,17 @@ export default function mainCommentInput() {
       </button>
     )}
   </div>
+  </div>
   <div onClick={handleCloseEmoji}>
     {openEmoji && (
-      <div onClick={handleStopPropagation} className="">
-       
-        {openEmoji && <Picker data={data} onEmojiSelect={handleSaveEmojiNoId} i18n={i18n} locale="es" searchPosition="none" />}
-      </div>
+      <>
+        {openEmoji && <Picker data={data} 
+        emojiButtonSize={30} 
+        onEmojiSelect={handleSaveEmojiNoId} 
+        i18n={i18n} locale="es" 
+        searchPosition="none" 
+        onClickOutside={handleCloseEmoji} />}
+      </>
     )}
   </div>
 </section>
