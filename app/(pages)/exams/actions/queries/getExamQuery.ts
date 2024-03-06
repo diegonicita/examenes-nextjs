@@ -6,10 +6,10 @@ export default async function getExamQuery(
   examId: number,
   year: number,
   limit: number,
-  page:number
+  page: number
 ) {
   const offset = (page - 1) * limit
-  const queryString1 = `SELECT * FROM preguntas WHERE examen = ? AND ano = ? LIMIT ? OFFSET ?`
+  const queryString1 = `SELECT * FROM preguntas WHERE examen = ? AND ano = ? ORDER BY numero LIMIT ? OFFSET ?`
   const result = (await executeQuery(queryString1, [
     examId.toString(),
     year.toString(),

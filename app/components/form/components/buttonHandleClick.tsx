@@ -2,7 +2,7 @@
 //@ts-ignore
 import { useFormStatus } from 'react-dom'
 
-function Buttom2({
+function Button2({
   text,
   textOnClick,
   handleClick,
@@ -30,4 +30,4 @@ function Buttom2({
   )
 }
 
-export default Buttom2
+export default Button2

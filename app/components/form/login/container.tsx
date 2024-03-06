@@ -1,7 +1,7 @@
 'use client'
 import React, { useRef, useState } from 'react'
 import Form from '../components/form'
-import Buttom from '../components/buttom'
+import Button from '../components/button'
 import Input from '../components/input'
 import {
   checkFullValidation,
@@ -10,6 +10,7 @@ import {
 } from './validations'
 import { formAction } from './formAction'
 import { redirect } from 'next/navigation'
+import Link from 'next/link'
 
 type Props = {
   initialEmail: string | undefined
@@ -32,7 +33,7 @@ export const Container = ({ disabled }: Props) => {
     if (response2?.message === 'success') {
       redirect('/')
     }
-  }
+  }  
 
   const handleBlur = (
     event:
@@ -48,7 +49,7 @@ export const Container = ({ disabled }: Props) => {
     )
     const response = getErrorsFromResult(result)
     setErrors({ ...errors, ...response })
-  }
+  }  
 
   return (
     <div className="card w-full bg-base-300 mb-2">
@@ -80,7 +81,7 @@ export const Container = ({ disabled }: Props) => {
             }}
             handleBlur={handleBlur}
           />
-          <Buttom text="Ingresar" textOnClick="...Espere..." />
+          <Button text="Ingresar" textOnClick="...Espere..." />          
         </fieldset>
       </Form>
     </div>

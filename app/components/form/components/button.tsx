@@ -2,7 +2,7 @@
 //@ts-ignore
 import { useFormStatus } from 'react-dom'
 
-function Buttom({ text, textOnClick }: { text: string; textOnClick: string }) {
+function Button({ text, textOnClick }: { text: string; textOnClick: string }) {
   const { pending } = useFormStatus()
 
   return (
@@ -21,4 +21,4 @@ function Buttom({ text, textOnClick }: { text: string; textOnClick: string }) {
   )
 }
 
-export default Buttom
+export default Button
