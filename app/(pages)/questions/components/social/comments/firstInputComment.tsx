@@ -26,8 +26,7 @@ const FirstInputComment = ({
 
   const [state, formAction] = useFormState(createReply, initialState)
   const [reset, setReset] = useState('')
-  console.log(state)
-
+  
   useEffect(() => {
     if (state?.message === 'success') {
       setReset(Math.random().toString())
@@ -36,7 +35,7 @@ const FirstInputComment = ({
   }, [state])
 
   return (
-    <section className=''>
+    <section >
       <form key={reset} action={formAction}>
         <input
           id="id_parent_comment"

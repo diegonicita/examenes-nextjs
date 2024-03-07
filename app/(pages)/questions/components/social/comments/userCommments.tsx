@@ -42,15 +42,15 @@ async function UserComments({
           />
         </div>
         <main className="flex flex-col ">
-          <div className=" card p-3 bg-gray-200 shadow-xl ml-2 relative">
+          <div className=" card p-3 mb-2 min-w-[100px] max-w-[500px] bg-gray-200 shadow-xl ml-1 relative">
             <div className="flex flex-row ">
               <div className="flex-grow">
-                <h1 className="text-base font-bold">
+                <h1 className="text-base font-bold text-gray-800">
                   {data?.comment?.user_name}
                 </h1>
               </div>
               <span
-                className={`${openEdit === true ? "hidden" : "text-xs mr-1"}`}
+                className={`${openEdit === true ? "hidden" : "text-xs mr-1 text-gray-800"}`}
               >
                 <TimeAgo timestamp={data.comment.created_at} />
               </span>
@@ -77,7 +77,7 @@ async function UserComments({
                 handleCancel={handleCancel}
               />
             ) : (
-              <p className="text-base">{data?.comment?.comment_text}</p>
+              <p className="text-base text-gray-800 max-w-[470px] break-all">{data?.comment?.comment_text}</p>
             )}
           </div>
           <div  className={`${openEdit === true ? "hidden" : ""}`}>

@@ -58,7 +58,7 @@ const RenderTree = ({
         t.comment.id_parent_comment === parentId && (
           <div key={t.comment.id}>
              <UseEmoji key={t.comment.id} >
-            <div className="" style={{ paddingLeft: `${depth * 20}px` }}>
+            <div className="" style={{ paddingLeft: `${depth * 10}px` }}>
              
             <UseDropDown key={t.comment.id} >
               <UserComments data={t} currentUser={currentUser}>

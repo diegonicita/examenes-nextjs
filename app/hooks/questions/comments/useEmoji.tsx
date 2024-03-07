@@ -1,7 +1,7 @@
 "use client"
-import { useState,useContext,createContext } from "react";
+import { useState,useContext,createContext, useRef, useEffect } from "react";
 interface EmojiContextProps {
-  handleInputComment: (commentId: number, e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputComment: (commentId: number, e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSaveEmoji: (commentId: number, emoji: any, event?: MouseEvent) => void;
   handleCloseEmoji: () => void;
   handleOpenEmoji: () => void;
@@ -10,8 +10,9 @@ interface EmojiContextProps {
   setSaveTextAndEmoji: React.Dispatch<React.SetStateAction<{ [key: number]: string } | string>>;
   resetSaveTextAndEmoji: () => void;
   handleSaveEmojiNoId: (emoji: any, event?: MouseEvent) => void;
-  handleInputCommentNoId: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputCommentNoId: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   resetSaveTextAndEmojiNoId: () => void;
+  textareaRef:null
 }
 const initialState: EmojiContextProps = {
   handleInputComment: () => {},
@@ -25,6 +26,7 @@ const initialState: EmojiContextProps = {
   handleSaveEmojiNoId: () => {},
   handleInputCommentNoId: () => {},
   resetSaveTextAndEmojiNoId: () => {},
+  textareaRef:null
 };
 
 const EmojiContext = createContext<EmojiContextProps>(initialState)
@@ -43,7 +45,29 @@ function UseEmoji({children}:{children:React.ReactNode}) {
   const [saveTextAndEmoji, setSaveTextAndEmoji] = useState<string|any>(
     ""
   );
- 
+  const textareaRef = useRef(null);
+  // useEffect(() => {
+  //   // Set the initial height to 40px
+  //   if (textareaRef.current) {
+  //     textareaRef.current.style.height = "40px";
+  //   }
+  // }, [textareaRef]);
+
+ const handleTextareaRef = () =>{
+  if (textareaRef.current) {
+    textareaRef.current.style.height = "40px"; 
+
+    const newHeight = textareaRef.current.scrollHeight + "px";
+    if (newHeight !== textareaRef.current.style.height) {
+      textareaRef.current.style.height = newHeight;
+    }
+    const span = document.getElementById("emojiSpan");
+    if (span) {
+      span.style.top = `${textareaRef.clientHeight}px`;
+    }
+
+  }
+ }
   const handleOpenEmoji = () => {
     setOpenEmoji(!openEmoji);
   };
@@ -63,9 +87,11 @@ function UseEmoji({children}:{children:React.ReactNode}) {
       setOpenEmoji(false);
     }
   };
-  const handleInputCommentNoId = ( e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputCommentNoId = ( e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     setSaveTextAndEmoji(e.target.value);
+    handleTextareaRef()
+    
   };
 
 
@@ -78,7 +104,7 @@ function UseEmoji({children}:{children:React.ReactNode}) {
       setOpenEmoji(false);
     }
   };
-  const handleInputComment = (commentId: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputComment = (commentId: number, e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     setSaveTextAndEmoji((prevText:any) => ({
       ...prevText,
@@ -88,6 +114,7 @@ function UseEmoji({children}:{children:React.ReactNode}) {
   
   return (
     <EmojiContext.Provider value={{
+    textareaRef,
     handleInputComment,
     handleSaveEmoji,
     handleCloseEmoji,
