@@ -1,59 +1,15 @@
 "use client"
-import { useState,useContext,createContext, useRef, useEffect } from "react";
-interface EmojiContextProps {
-  handleInputComment: (commentId: number, e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  handleSaveEmoji: (commentId: number, emoji: any, event?: MouseEvent) => void;
-  handleCloseEmoji: () => void;
-  handleOpenEmoji: () => void;
-  saveTextAndEmoji: "", 
-  openEmoji: boolean;
-  setSaveTextAndEmoji: React.Dispatch<React.SetStateAction<{ [key: number]: string } | string>>;
-  resetSaveTextAndEmoji: () => void;
-  handleSaveEmojiNoId: (emoji: any, event?: MouseEvent) => void;
-  handleInputCommentNoId: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  resetSaveTextAndEmojiNoId: () => void;
-  textareaRef:null
-}
-const initialState: EmojiContextProps = {
-  handleInputComment: () => {},
-  handleSaveEmoji: () => {},
-  handleCloseEmoji: () => {},
-  handleOpenEmoji: () => {},
-  saveTextAndEmoji: "",
-  openEmoji: false,
-  setSaveTextAndEmoji: () => {},
-  resetSaveTextAndEmoji: () => {},
-  handleSaveEmojiNoId: () => {},
-  handleInputCommentNoId: () => {},
-  resetSaveTextAndEmojiNoId: () => {},
-  textareaRef:null
-};
-
-const EmojiContext = createContext<EmojiContextProps>(initialState)
-
-function useEmojiContext (){
-  const context = useContext(EmojiContext)
-  if(!context){
-    throw new Error ("emojiContext must be used within a DropDownContext.Provider");
-  }
-  return context
-
-}
+import { EmojiContext, useEmojiContext} from "@/app/utils/comments/emoji";
+import { useState, useRef} from "react";
 
 function UseEmoji({children}:{children:React.ReactNode}) {
   const [openEmoji, setOpenEmoji] = useState(false);
   const [saveTextAndEmoji, setSaveTextAndEmoji] = useState<string|any>(
     ""
   );
-  const textareaRef = useRef(null);
-  // useEffect(() => {
-  //   // Set the initial height to 40px
-  //   if (textareaRef.current) {
-  //     textareaRef.current.style.height = "40px";
-  //   }
-  // }, [textareaRef]);
-
- const handleTextareaRef = () =>{
+ const textareaRef = useRef<HTMLTextAreaElement | null>(null);;
+  
+ const handleTextareaRef = (spanId:string) =>{
   if (textareaRef.current) {
     textareaRef.current.style.height = "40px"; 
 
@@ -61,11 +17,10 @@ function UseEmoji({children}:{children:React.ReactNode}) {
     if (newHeight !== textareaRef.current.style.height) {
       textareaRef.current.style.height = newHeight;
     }
-    const span = document.getElementById("emojiSpan");
-    if (span) {
-      span.style.top = `${textareaRef.clientHeight}px`;
+    const div = document.getElementById(spanId);
+    if (div) {
+      div.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-
   }
  }
   const handleOpenEmoji = () => {
@@ -90,11 +45,9 @@ function UseEmoji({children}:{children:React.ReactNode}) {
   const handleInputCommentNoId = ( e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     setSaveTextAndEmoji(e.target.value);
-    handleTextareaRef()
+    handleTextareaRef("emojiSpanmaincomponent")
     
   };
-
-
   const handleSaveEmoji = (commentId: number, emoji: any, event?: MouseEvent) => {
     setSaveTextAndEmoji((prevText:any) => ({
       ...prevText,
@@ -110,6 +63,7 @@ function UseEmoji({children}:{children:React.ReactNode}) {
       ...prevText,
       [commentId]: e.target.value,
     }));
+    handleTextareaRef("spanidreplybutton")
   };
   
   return (

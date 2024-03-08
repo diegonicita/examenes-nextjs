@@ -1,7 +1,8 @@
 import { EmojiContextProps } from "@/app/models/comments/Emoji";
+import React from "react";
 import { createContext, useContext, useRef } from "react";
 
-export const initialState: EmojiContextProps = {
+export const InitialState: EmojiContextProps = {
   handleInputComment: () => {},
   handleSaveEmoji: () => {},
   handleCloseEmoji: () => {},
@@ -13,14 +14,14 @@ export const initialState: EmojiContextProps = {
   handleSaveEmojiNoId: () => {},
   handleInputCommentNoId: () => {},
   resetSaveTextAndEmojiNoId: () => {},
-  textareaRef: useRef<HTMLTextAreaElement | null>(null)
+  textareaRef: React.createRef<HTMLTextAreaElement | null>()
 };
-export const EmojiContext = createContext<EmojiContextProps>(initialState)
+export const EmojiContext = createContext<EmojiContextProps>(InitialState)
 
 export function useEmojiContext (){
   const context = useContext(EmojiContext)
   if(!context){
-    throw new Error ("emojiContext must be used within a DropDownContext.Provider");
+    throw new Error ("emojiContext must be used within a emoji.Provider");
   }
   return context
 

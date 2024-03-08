@@ -36,6 +36,7 @@ export function ReplyInput({
 }) {
   const { pending } = useFormStatus();
   const {
+    textareaRef,
     saveTextAndEmoji,
     openEmoji,
     handleInputComment,
@@ -43,20 +44,18 @@ export function ReplyInput({
   } = useEmojiContext();
   return (
     <section className="flex flex-col ml-12 ">
-      <div className="flex">
-       
+      <div className="flex flex-row">
           <img
             alt="profile"
             src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
             className="w-10 h-10 rounded-full"
           />
         
-        <div className="flex-grow">
-        <div className=" relative ml-1 ">
-          <input
-            type="text"
+        <div className=" relative ml-1 w-full ">
+          <textarea
+          // ref={textareaRef as React.RefObject<HTMLTextAreaElement>}
             placeholder={"add a comment to msg " + id}
-            className="p-2 w-full focus:outline-none rounded-full border border-gray-300 "
+            className="resize-none h-10 overflow-hidden w-full py-2 pl-3 pr-12 focus:outline-none rounded-lg border border-gray-300"
             name="comment"
             id="comment"
             value={saveTextAndEmoji[id] || ""}
@@ -64,6 +63,7 @@ export function ReplyInput({
           />
 
           <span
+          // id="spanidreplybutton"
             className="absolute right-6 top-3 cursor-pointer"
             onClick={handleOpenEmoji}
           >
@@ -79,7 +79,6 @@ export function ReplyInput({
             </button>
           )}
           </div>
-      </div>
       </div>
     </section>
   );

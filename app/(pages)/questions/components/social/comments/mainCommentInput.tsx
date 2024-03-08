@@ -15,7 +15,7 @@ export default function mainCommentInput() {
     handleSaveEmojiNoId,
     openEmoji,
     handleCloseEmoji,
-    textareaRef
+    textareaRef,
   } = useEmojiContext();
   return (
     <section className="flex flex-col">
@@ -25,36 +25,41 @@ export default function mainCommentInput() {
           src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
           className="w-10 h-10 rounded-full mr-2"
         />
-          <div  className=" w-full" >
-            <textarea
+        <div className="w-full ">
+          <textarea
             ref={textareaRef as React.RefObject<HTMLTextAreaElement>}
-              placeholder="agrega un comentario"
-              className="resize-none h-10 overflow-hidden w-full py-2 pl-3 pr-12 focus:outline-none rounded-lg border border-gray-300"
-              name="comment"
-              id="comment"
-              value={saveTextAndEmoji || ""}
-              onChange={handleInputCommentNoId}
-            />
-            <div className="w-full relative">
-            <span
-            id="emojiSpan"
-              className="absolute right-8 bottom-[15px] cursor-pointer"
-              onClick={handleOpenEmoji}
-            >
-              <IconEmojiSmile />
-            </span>
+            placeholder="agrega un comentario"
+            className="resize-none h-10 overflow-hidden w-full py-2 pl-3 pr-12 focus:outline-none rounded-lg border border-gray-300"
+            name="comment"
+            id="comment"
+            value={saveTextAndEmoji || ""}
+            onChange={handleInputCommentNoId}
+          />
+          <div className="flex justify-end mr-4">
+            <div className="absolute">
+              <span
+                className="cursor-pointer relative -top-8  "
+                onClick={handleOpenEmoji}
+              >
+                <IconEmojiSmile />
+              </span>
             </div>
+          </div>
           {saveTextAndEmoji.trim().length > 0 && (
-            <button
-              className="btn btn-sm btn-accent mt-2 ml-3"
-              type="submit"
-              disabled={pending}
-            >
-              {pending ? "cargando..." : "agregar comentario"}
-            </button>
-          )}
+        <div className="mt-1 ml-3"> 
+        <button
+          className="btn btn-sm btn-accent "
+          type="submit"
+          disabled={pending}
+        >
+          {pending ? "cargando..." : "agregar comentario"}
+        </button>
+        </div>
+      )}
         </div>
       </div>
+
+      
       <div onClick={handleCloseEmoji}>
         {openEmoji && (
           <>
