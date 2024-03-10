@@ -14,6 +14,7 @@ import searchComments from './actions/searchComments'
 import RenderTree from './components/social/comments/renderTree'
 import FirstInputComment from './components/social/comments/firstInputComment'
 import Pagination from '@/app/components/pagination/pagination'
+import { UseEmoji } from '@/app/hooks/questions/comments/useEmoji'
 export default async function QuestionPage({
   searchParams,
 }: {
@@ -88,18 +89,21 @@ export default async function QuestionPage({
                             <div className="collapse-title text-xl font-medium">
                               Comentarios
                             </div>
-                            <div className="collapse-content">
+                            <div className="collapse-content pr-5 min-w-[330px] md:max-w-full">
+                              <UseEmoji >
                               <FirstInputComment
                                 questionId={item.id}
                                 parentId={null}
                                 depth={1}
                               />
+                               </UseEmoji>
                               <RenderTree
                                 tree={treeComments[item.id]}
                                 parentId={null}
                                 depth={1}
                                 currentUser={authData}
                               />
+                             
                               {treeComments[item.id] === undefined && (
                                 <div> No hay comentarios </div>
                               )}
