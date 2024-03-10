@@ -2,12 +2,13 @@ import { refreshAction } from '@/app/(pages)/consults/actions/refresh'
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import { ReactNode } from 'react'
 import MessageNotLogged from './messageNotLogged'
+import { UserType } from '@/app/models/User'
 
 const CheckServerCookie = ({
   auth,
   children,
 }: {
-  auth: RequestCookie | undefined
+  auth: UserType | null
   children: ReactNode
 }) => {
   if (!auth) {
@@ -17,7 +18,7 @@ const CheckServerCookie = ({
   }
   return (
     <>
-      {auth && auth?.value && <div>{children}</div>}
+      {auth && <div>{children}</div>}
       {!auth && <MessageNotLogged />}
     </>
   )

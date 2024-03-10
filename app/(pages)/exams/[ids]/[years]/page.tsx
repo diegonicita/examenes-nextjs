@@ -14,7 +14,9 @@ type YearData = {
 async function getData() {
   const url = process.env.URL_API
   try {
-    const res = await fetch(url + '/api/get-questions-statistics')
+    const res = await fetch(url + '/api/get-questions-statistics', {
+      cache: 'no-store',
+    })
     return res.json()
   } catch (error) {
     console.log(error)
@@ -38,7 +40,9 @@ export default async function ExamIdPage({
     (y: YearData) => y.ano === parseInt(params.years),
   )
   const payload = await getInfoAuthCookie()
-  console.log(searchParams.page)
+  if (!exam || !year)
+    return <h1 className="p-4 text-center">¡Examen No Encontrado!</h1>
+  
   const questions = await getExam(exam.id, year.ano, 100, searchParams.page)
   const totalQuestion = Math.ceil(year?.cantidad_preguntas / 5)
   return (

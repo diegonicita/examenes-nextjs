@@ -1,14 +1,14 @@
 import DisplayConsults from '@/app/(pages)/consults/displayConsults'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
-import { cookies } from 'next/headers'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
 const Page = async () => {
-  const auth = cookies().get('auth')  
+  const auth = await getInfoAuthCookie()
 
   return (
     <div>
       <CheckServerCookie auth={auth}>
-        <DisplayConsults auth={auth}/>
+        {auth && <DisplayConsults auth={auth} />}
       </CheckServerCookie>
     </div>
   )

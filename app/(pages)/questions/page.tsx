@@ -1,4 +1,3 @@
-import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
 import searchQuestions from './actions/searchQuestions'
 import searchWordsSuggestions from './actions/searchWordsSuggestions'
@@ -23,7 +22,7 @@ export default async function QuestionPage({
     query?: string
   }
 }) {
-  const auth = cookies().get('auth')
+  
   const currentPage = Number(searchParams?.page) || 1
   const query = searchParams?.query || ''
   const authData = (await getInfoAuthCookie()) as UserType
@@ -41,14 +40,14 @@ export default async function QuestionPage({
   const questionsCount = searchQuestionsResult?.resultLength
   const paginatiototalQuestion = Math.ceil(questionsCount / 10)
   let valorations: undefined = undefined
-  if (auth) valorations = await searchValorations(questions)
+  if (authData) valorations = await searchValorations(questions)
  
   const wordsSuggestions = await searchWordsSuggestions(queries)
 
  
   let treeComments = {} as any
 
-  if (auth) {
+  if (authData) {
     const result = await searchComments(questions)
     console.log(result)
     treeComments = {
@@ -58,7 +57,7 @@ export default async function QuestionPage({
 
   return (
     <div>
-      <CheckServerCookie auth={auth}>
+      <CheckServerCookie auth={authData}>
         <div className="flex flex-col items-start max-w-[60rem] mx-auto mt-8">
           <SearchContainer
             query={query}

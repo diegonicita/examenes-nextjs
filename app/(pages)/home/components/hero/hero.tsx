@@ -1,6 +1,6 @@
 // Este componente usa una clase llamada text-wrap-balance definida en global.css
 import Image from 'next/image'
-import heroImage from '@/app/assets/OIG-2.webp'
+import heroImage from '@/app/assets/OIG-3.webp'
 import ButtonLogin from './buttonLogin'
 
 export default function Hero() {

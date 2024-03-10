@@ -62,8 +62,7 @@ export const EditItem = ({
   userId: number | null
   temas: SubjectType[]
   correctHardCoded: number
-}) => {
-  console.log(correctHardCoded)
+}) => {  
 
   const [correcta, setCorrecta] = useState<string>(
     correctHardCoded ? correctHardCoded.toString() : item.correcta.toString(),
@@ -83,8 +82,7 @@ export const EditItem = ({
   }
 
   const handleUpdate = async () => {
-    const formData = new FormData()
-    console.log(item.id)
+    const formData = new FormData()    
     formData.append('id', item.id.toString())
     formData.append('correcta', correcta)
     formData.append('clasifica1', clasificaciones[0].toString())
@@ -117,7 +115,7 @@ export const EditItem = ({
             />
           </label>
           {clasificaciones.map((clasificacion, index) => (
-            <>
+            <div key={index}>
               <label key={index} id={`clasifica${index + 1}`}>
                 Clasifica {index + 1}
                 <select
@@ -139,7 +137,7 @@ export const EditItem = ({
                 </select>
                 {temas[(item as any)[`clasifica${Number(index) + 1}`]].titulo}
               </label>
-            </>
+            </div>
           ))}
           <button className="btn btn-accent btn-sm w-24" onClick={handleUpdate}>
             Actualizar
