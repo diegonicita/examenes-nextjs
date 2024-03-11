@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
       const { payload } = await jwtVerify(
         authCookieServer?.value,
         new TextEncoder().encode(secret),
-      )      
+      )
       authPayload = payload
       const currentTime = Date.now()
       const currentTimeInSeconds = Math.floor(currentTime / 1000)
@@ -39,39 +39,4 @@ export async function middleware(request: NextRequest) {
       return response
     }
   }
-
-  if (request.nextUrl.pathname.includes('/consults-server')) {
-    let response = NextResponse.next()
-    if (!authPayload) {
-      response.cookies.delete('auth')
-    }
-    response.cookies.set('cs', authPayload ? 'true' : 'false')
-    return response
-  }
-
-  if (request.nextUrl.pathname.includes('/question')) {
-    let response = NextResponse.next()
-    if (!authPayload) {
-      response.cookies.delete('auth')
-    }
-    response.cookies.set('q', authPayload ? 'true' : 'false')
-    return response
-  }
-
-  // if (
-  //   request.nextUrl.pathname.startsWith('/api/authorization') &&
-  //   !authCookieServer
-  // ) {
-  //   const headersList = headers()
-  //   const authHeader = headersList.get('authorization')
-  //   const response = NextResponse.next()
-  //   if (authHeader) {
-  //     var partes = authHeader.split(' ')
-  //     if (partes.length >= 2) {
-  //       var token = partes[1]
-  //       response.cookies.set('auth', token)
-  //     }
-  //   }
-  //   return response
-  // }
 }

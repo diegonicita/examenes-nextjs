@@ -2,11 +2,11 @@ import AuthMenu from './authMenu'
 import AuthBurger from './authBurger'
 import { tabs } from './tabs'
 import Tab from './tab'
-import { cookies } from 'next/headers'
 import ThemeSelector from './theme'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
-export const Nav = () => {
-  const auth = cookies().get('auth')
+export const Nav = async () => {
+  const auth = await getInfoAuthCookie()
   const isLogged = auth ? true : false
 
   return (

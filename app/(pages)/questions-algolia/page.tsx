@@ -1,8 +1,9 @@
 import Searchbar from '@/app/(pages)/questions-algolia/components/searchbar'
 import { cookies } from 'next/headers'
 import CheckServerCookie from '@/app/components/checkCookie/checkServerCookie'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
-export default function QuestionPage({
+export default async function QuestionPage({
   searchParams,
 }: {
   searchParams?: {
@@ -10,7 +11,7 @@ export default function QuestionPage({
     query?: string
   }
 }) {
-  const auth = cookies().get('auth')
+  const auth = await getInfoAuthCookie()
   return (
     <div>
       <CheckServerCookie auth={auth}>

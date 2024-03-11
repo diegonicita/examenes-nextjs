@@ -1,7 +1,7 @@
 'use client'
 import React, { useRef, useState } from 'react'
 import Form from '../components/form'
-import Buttom from '../components/buttom'
+import Button from '../components/button'
 import Input from '../components/input'
 import {
   checkFullValidation,
@@ -101,7 +101,7 @@ export const Container = ({ disabled }: { disabled: boolean }) => {
             }}
             handleBlur={handleBlur}
           />
-          <Buttom text="Registrarse" textOnClick="...Espere..." />
+          <Button text="Registrarse" textOnClick="...Espere..." />
         </fieldset>
       </Form>
     </div>

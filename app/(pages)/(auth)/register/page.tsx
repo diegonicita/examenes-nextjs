@@ -1,9 +1,9 @@
-import { cookies } from 'next/headers'
 import MessageLogged from '@/app/components/checkCookie/messageLogged'
 import RegisterFormContainer from '@/app/components/form/register/container'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
-export default function Register() {
-  const auth = cookies().get('auth')
+export default async function Register() {
+  const auth = await getInfoAuthCookie()
   const isLogged = auth ? true : false
   return (
     <>

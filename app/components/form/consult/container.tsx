@@ -1,7 +1,7 @@
 'use client'
 import React, { useRef, useState } from 'react'
 import Form from '../components/form'
-import Buttom from '../components/buttom'
+import Button from '../components/button'
 import Input from '../components/input'
 import TextArea from '../components/textarea'
 import {
@@ -84,7 +84,7 @@ export const Container = () => {
           }}
           handleBlur={handleBlur}
         />
-        <Buttom text="Enviar" textOnClick="...Espere..." />
+        <Button text="Enviar" textOnClick="...Espere..." />
       </Form>
     </div>
   )

@@ -1,7 +1,7 @@
 'use client'
 import React, { startTransition, useRef, useState } from 'react'
 import Form from '../components/form'
-import Buttom from '../components/buttom'
+import Button from '../components/button'
 import Input from '../components/input'
 import {
   checkFullValidation,
@@ -11,7 +11,7 @@ import {
 import { sendEmail } from './sendEmail'
 import { sendCode } from './sendCode'
 import { redirect } from 'next/navigation'
-import ButtomHandleClick from '../components/buttomHandleClick'
+import ButtonHandleClick from '../components/buttonHandleClick'
 import { handleLogout } from '../../navbar/helper/handleLogout'
 
 type Props = {
@@ -43,14 +43,14 @@ export const Container = ({ disabled }: Props) => {
   }
 
   const handleSendEmail = async (formData: FormData) => {
-    const result = checkFullValidation(formData)    
-    const response1 = getErrorsFromResult(result)   
-    setErrors({ ...errors, ...response1 })   
+    const result = checkFullValidation(formData)
+    const response1 = getErrorsFromResult(result)
+    setErrors({ ...errors, ...response1 })
     const response2 = await sendEmail({
       result,
       formData,
       formRef,
-    })    
+    })
     if (response2?.message === 'success') {
       setCodeInputEnabled(true)
       const _email = formData?.get('email') as string
@@ -59,10 +59,10 @@ export const Container = ({ disabled }: Props) => {
   }
 
   const handleSkipSendEmail = async (formData: FormData) => {
-    const result = checkFullValidation(formData)    
-    const response1 = getErrorsFromResult(result)    
+    const result = checkFullValidation(formData)
+    const response1 = getErrorsFromResult(result)
     setErrors({ ...errors, ...response1 })
-    if (result.success) {      
+    if (result.success) {
       setCodeInputEnabled(true)
       const _email = formData?.get('email') as string
       setEmail(_email)
@@ -120,8 +120,8 @@ export const Container = ({ disabled }: Props) => {
           )}
           {!codeInputEnabled && (
             <>
-              <Buttom text="Solicitar Código" textOnClick="...Espere..." />
-              <ButtomHandleClick
+              <Button text="Solicitar Código" textOnClick="...Espere..." />
+              <ButtonHandleClick
                 text="Tengo un Codigo: Continuar"
                 textOnClick="...Espere..."
                 handleClick={() => {
@@ -134,7 +134,7 @@ export const Container = ({ disabled }: Props) => {
             </>
           )}
           {codeInputEnabled && (
-            <ButtomHandleClick
+            <ButtonHandleClick
               text="Enviar Código"
               textOnClick="...Espere..."
               handleClick={() => {
