@@ -29,6 +29,7 @@ export default function DisplayMedicineStudentMessage() {
 		{ id: 7, title: "falta de respiracion" },
 		{ id: 8, title: "perdida del olfalto o paladar" },
 	];
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		// Generate random medicine data on the client side
 		const randomizedData = randomData(data);

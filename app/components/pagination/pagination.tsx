@@ -18,7 +18,7 @@ const Pagination = ({ totalQuestions }: { totalQuestions: number }) => {
 				<button
 					type="button"
 					disabled={currentPage === 1}
-					className="btn btn-disabled text-base"
+					className="btn btn-disabled "
 				>
 					Anterior
 				</button>
