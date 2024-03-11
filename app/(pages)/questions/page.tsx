@@ -14,6 +14,7 @@ import RenderTree from "./components/social/comments/renderTree";
 import FirstInputComment from "./components/social/comments/firstInputComment";
 import Pagination from "@/app/components/pagination/pagination";
 import { UseEmoji } from "@/app/hooks/questions/comments/useEmoji";
+import DisplayMedicineStudentMessage from "./components/questions/displayMedicineStudentMessage/displayMedicineStudentMessage";
 export default async function QuestionPage({
 	searchParams,
 }: {
@@ -119,6 +120,7 @@ export default async function QuestionPage({
 				{searchParams.query && questions?.length > 0 && (
 					<Pagination totalQuestions={paginatiototalQuestion} />
 				)}
+				{!searchParams.query && !questions && <DisplayMedicineStudentMessage />}
 			</CheckServerCookie>
 		</div>
 	);
