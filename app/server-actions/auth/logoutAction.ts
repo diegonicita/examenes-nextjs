@@ -20,12 +20,18 @@ export const logoutAction = async () => {
     message = 'error'
   }
   if (authToken) {
-    cookies().set('token', '', {
+    const config = {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // solo se enviará en HTTPS en producción
       expires: new Date(0),
       domain: '.examenes.com.ar',
-    })
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      config.domain = ''
+    }
+
+    cookies().set('token', '', config)
     message = 'success'
   } else {
     message = 'error'

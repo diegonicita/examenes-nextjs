@@ -1,5 +1,5 @@
 import { UserType } from '@/app/models/User'
-import { jwtVerify } from 'jose'
+import jwt from 'jsonwebtoken'
 import { cookies } from 'next/headers'
 import { getUserId } from './getUserId'
 
@@ -7,12 +7,10 @@ const getInfoAuthCookie = async () => {
   const auth = cookies().get('auth')
   const token = cookies().get('token')
   const secret = process.env.JWT_SECRET
-  if (auth) {
+
+  if (auth && auth?.value && secret) {
     try {
-      const { payload } = await jwtVerify(
-        auth.value,
-        new TextEncoder().encode(secret),
-      )
+      const payload = jwt.verify(auth.value, secret) as any
       return payload as UserType
     } catch (error) {
       console.log(error)
@@ -20,12 +18,9 @@ const getInfoAuthCookie = async () => {
     }
   }
 
-  if (token) {
+  if (token && token?.value && secret) {
     try {
-      const { payload } = await jwtVerify(
-        token.value,
-        new TextEncoder().encode(secret),
-      )
+      const payload = jwt.verify(token.value, secret) as any
       const pl = {
         id: payload.clientId as number,
         email: payload.clientEmail as string,
@@ -36,10 +31,8 @@ const getInfoAuthCookie = async () => {
         exp: payload.exp,
       }
       // Check if userId exists. If not create a new user.
-      const respuesta = await getUserId(pl.email)      
+      const respuesta = await getUserId(pl.email)
       if (respuesta && respuesta.id) {
-        console.log(respuesta.id)
-        console.log('hay usuario')
         return {
           ...pl,
           id: respuesta.id,
