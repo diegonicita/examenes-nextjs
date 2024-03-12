@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import IconArrowUpCircle from "./icons/iconArrow";
 interface MedicineData {
 	id: number;
 	title: string;
@@ -37,20 +38,24 @@ export default function DisplayMedicineStudentMessage() {
 	}, []);
 
 	return (
-		<section className="mx-auto max-w-[75ch] mt-8">
-			<h1>Bienvinido a la seccion de busqueda </h1>
-			<p className="break-normal ">
+		<section className="max-w-[75ch] mt-8 mx-auto">
+			<h1 className="text-center font-bold">
+				Bienvenido a la seccion de busqueda{" "}
+			</h1>
+			<p className="break-normal font-semibold p-3 ">
 				Mientras exploras las preguntas Si te encuentras con algún término
 				médico o necesitas orientación sobre las pruebas, no dudes en ponerte en
 				contacto, te dejaremos palabras claves con las que puedes iniciar tu
 				busqueda
 			</p>
-			{randomMedicine.slice(0, 4).map((item) => (
-				<div
-					key={item.id}
-					className="card w-60 bg-neutral text-neutral-content"
-				>
-					<div className="card-body items-center text-center">
+			<div className="grid grid-cols-1  md:grid-cols-2  max-w-full gap-y-3 gap-x-3 mt-2 justify-items-center">
+				{randomMedicine.slice(0, 4).map((item, index) => (
+					<div
+						key={item.id}
+						className={`${
+							index < 2 ? "hidden md:block" : "block"
+						} " rounded-lg w-[318px] group/item "`}
+					>
 						<Link
 							href={{
 								pathname: pathname,
@@ -59,13 +64,14 @@ export default function DisplayMedicineStudentMessage() {
 									page: 1,
 								},
 							}}
-							className="card-title"
+							className="flex flex-row items-center font-semibold active:bg-stone-500 hover:bg-stone-300  text-gray-800 justify-between p-3  bg-stone-200 w-full"
 						>
 							{item.title}
+							<IconArrowUpCircle />
 						</Link>
 					</div>
-				</div>
-			))}
+				))}
+			</div>
 		</section>
 	);
 }
