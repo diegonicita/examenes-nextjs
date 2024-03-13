@@ -35,7 +35,7 @@ export default async function ExamIdPage({
 
   return (
     <div className="mt-8">
-      <Container title="Exámenes" subtitle="Selecciona un examen">
+      <Container title="Exámenes" subtitle="Selecciona el año">
         <div className="flex flex-wrap justify-center px-8 max-w-[75rem] mx-auto mb-8 gap-4 mt-8">
           {exam &&
             exam.preguntas.map((e: YearData, index: number) => (

@@ -65,7 +65,7 @@ const CardExam2 = ({
                 )}
               </figure>
             )}
-            {year && <h2 className="text-4xl font-bold">{year}</h2>}
+            {year && <h2 className="text-4xl font-bold p-4">{year}</h2>}
             {!year && <span className="text-sm">{item.pais}</span>}
           </div>
 
