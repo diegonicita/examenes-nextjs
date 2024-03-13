@@ -43,7 +43,7 @@
     "server-actions/products/displayProducts.js",
     "app/(pages)/home/components/consults/consults.tsx",
     "app/(pages)/home/components/consults/submit.tsx"
-, "app/(pages)/questions-algolia/components/searchbar.jsx", "app/(pages)/questions/components/choices/tailwindToaster.jsx", "app/server-actions/questions/get-questions-statistics.js"  ],
+, "app/(pages)/questions-algolia/components/searchbar.jsx", "app/(pages)/questions/components/choices/tailwindToaster.jsx", "app/server-actions/questions/get-questions-statistics.js", "app/components/cards/cardSubject2.tsx"  ],
   "exclude": [
     "node_modules"
   ]

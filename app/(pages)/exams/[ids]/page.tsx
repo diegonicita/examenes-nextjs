@@ -1,9 +1,9 @@
 // import Card from './components/card'
-import CardExam from '@/app/components/cards/cardExam'
+import CardExam2 from '@/app/components/cards/cardExam2'
+import Container from '@/app/components/container/container'
 import type { ExamType } from '@/app/models/Exam'
 import { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
-
 
 type YearData = {
   ano: number
@@ -34,27 +34,23 @@ export default async function ExamIdPage({
   const payload = (await getInfoAuthCookie()) as UserType
 
   return (
-    <>
-      <h1 className="text-center mt-2 font-bold text-xl">
-        {exam?.titulo} - {exam?.pais}
-      </h1>
-      <h1 className="text-center font-bold text-xl">
-        Selecciona el Año del Examen
-      </h1>
-      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mt-2 mx-auto mb-8 gap-4">
-        {exam &&
-          exam.preguntas.map((e: YearData, index: number) => (
-            <CardExam
-              item={exam}
-              key={index}
-              year={e.ano}
-              link={`/exams/${exam.id}/${e.ano}`}
-              total={e.cantidad_preguntas}
-              userId={payload?.id}
-            />
-          ))}
-      </div>
-    </>
+    <div className="mt-8">
+      <Container title="Exámenes" subtitle="Selecciona un examen">
+        <div className="flex flex-wrap justify-center px-8 max-w-[75rem] mx-auto mb-8 gap-4 mt-8">
+          {exam &&
+            exam.preguntas.map((e: YearData, index: number) => (
+              <CardExam2
+                item={exam}
+                key={index}
+                year={e.ano}
+                link={`/exams/${exam.id}/${e.ano}`}
+                total={e.cantidad_preguntas}
+                userId={payload?.id}
+              />
+            ))}
+        </div>
+      </Container>
+    </div>
   )
 }
 

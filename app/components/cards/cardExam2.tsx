@@ -37,48 +37,40 @@ const CardExam2 = ({
             <h2 className="text-xl ">
               {item.titulo ? item.titulo : 'Sin título'}
             </h2>
-            <figure className="flex justify-center">
-              {item.imagen ? (
-                <Image
-                  src={
-                    'https://mercado.webapp.ar/images_medicina/' + item?.imagen
-                  }
-                  alt="imagen"
-                  width={0}
-                  height={0}
-                  sizes={'100vh'}
-                  className="h-auto w-full max-w-40"
-                />
-              ) : (
-                <Image
-                  src={
-                    'https://mercado.webapp.ar/images_medicina/medicina-1.png'
-                  }
-                  alt="imagen"
-                  width={0}
-                  height={0}
-                  sizes={'100vh'}
-                  className="h-auto w-full"
-                />
-              )}
-            </figure>
-
-            <span className="text-sm">{item.pais}</span>
+            {!year && (
+              <figure className="flex justify-center">
+                {item.imagen ? (
+                  <Image
+                    src={
+                      'https://mercado.webapp.ar/images_medicina/' +
+                      item?.imagen
+                    }
+                    alt="imagen"
+                    width={0}
+                    height={0}
+                    sizes={'100vh'}
+                    className="h-auto w-full max-w-40"
+                  />
+                ) : (
+                  <Image
+                    src={
+                      'https://mercado.webapp.ar/images_medicina/medicina-1.png'
+                    }
+                    alt="imagen"
+                    width={0}
+                    height={0}
+                    sizes={'100vh'}
+                    className="h-auto w-full max-w-40"
+                  />
+                )}
+              </figure>
+            )}
+            {year && <h2 className="text-4xl font-bold">{year}</h2>}
+            {!year && <span className="text-sm">{item.pais}</span>}
           </div>
 
           <div className="flex flex-col justify-center items-center">
             <div className="flex items-center">{total} preguntas</div>
-
-            <div className="flex gap-2 items-center">
-              <div className="text-success">
-                Correctas: {corrects} ({percentCorrect}%)
-              </div>
-            </div>
-            <div className="flex gap-2 items-center">
-              <div className="text-error">
-                Incorrectas: {answered - corrects} ({percentNotCorrect}%)
-              </div>
-            </div>
           </div>
 
           <Link
