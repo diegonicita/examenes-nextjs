@@ -20,7 +20,12 @@ export const logoutAction = async () => {
     message = 'error'
   }
   if (authToken) {
-    const config = {
+    const config: {
+      httpOnly: boolean
+      secure: boolean
+      expires: Date
+      domain?: string
+    } = {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // solo se enviará en HTTPS en producción
       expires: new Date(0),
@@ -28,7 +33,7 @@ export const logoutAction = async () => {
     }
 
     if (process.env.NODE_ENV === 'development') {
-      config.domain = ''
+      delete config.domain
     }
 
     cookies().set('token', '', config)
