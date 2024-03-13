@@ -7,7 +7,7 @@ export default async function getQuestionsStatistics() {
     examenes: [
       {
         id: 0,
-        titulo: 'Examen Municipal',
+        titulo: 'Municipal',
         descripcion: '',
         pais: 'Argentina',
         imagen: 'medicina-5.png',
@@ -34,7 +34,7 @@ export default async function getQuestionsStatistics() {
       },
       {
         id: 3,
-        titulo: 'Examen Pediátrico',
+        titulo: 'Pediátrico',
         descripcion: '',
         pais: 'Argentina',
         imagen: 'medicina-5.png',
@@ -43,7 +43,7 @@ export default async function getQuestionsStatistics() {
       },
       {
         id: 4,
-        titulo: 'Examen Prov. Buenos Aires',
+        titulo: 'Prov. BsAs',
         descripcion: '',
         pais: 'Argentina',
         imagen: 'medicina-5.png',
@@ -76,7 +76,7 @@ export default async function getQuestionsStatistics() {
     'select count(*) as total from preguntas',
     [],
   )
-  
+
   respuesta.total = result1[0]?.total
 
   for (let i = 0; i < 7; i++) {
