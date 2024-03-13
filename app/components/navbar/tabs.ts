@@ -16,17 +16,5 @@ export const tabs = [
     path: '/questions',
     active: true,
     requireLogin: true,
-  }, 
-  {
-    name: 'Planes',
-    path: '/plans',
-    active: true,
-    requireLogin: false,
-  },
-  {
-    name: 'Admin',
-    path: '/consults',
-    active: true,
-    requireLogin: true,
-  },
+  },   
 ]

@@ -36,16 +36,22 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
           {isLogged && (
             <>
               <li>
-                <Link href="/profile" className="justify-between">
-                  Ver tu perfil
-                  <span className="badge">New</span>
+                <Link href="/profile" className="justify-center">
+                  Ver Perfil
                 </Link>
               </li>
               <li>
-                <div>Preferencias</div>
+                <Link href="/plans" className="justify-center">
+                  <div>Ver Planes</div>                 
+                </Link>
               </li>
               <li>
-                <div onClick={() => handleLogout()}>Salir (Logout)</div>
+                <Link href="/consults" className="justify-center">
+                  <div>Administrador</div>                 
+                </Link>
+              </li>
+              <li>
+                <div className="justify-center" onClick={() => handleLogout()}>Salir</div>
               </li>
             </>
           )}
