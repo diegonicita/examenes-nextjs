@@ -30,8 +30,10 @@ export const Nav = async () => {
             )
           })}
         </div>
-        <AuthMenu isLogged={isLogged} />
-        <ThemeSelector />
+        <div className="flex gap-8">
+          <AuthMenu isLogged={isLogged} />
+          <ThemeSelector />
+        </div>
       </nav>
     </div>
   )

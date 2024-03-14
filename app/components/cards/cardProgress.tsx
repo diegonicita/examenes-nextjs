@@ -3,7 +3,7 @@ import React from 'react'
 import type { ExamType } from '@/app/models/Exam'
 import { getStatistics } from '@/app/components/cards/helper/getStatistic'
 import useHasMounted from '@/app/hooks/useHasMounted'
-import TrashIcon from './icons/trashIcon'
+import TrashIcon from '@/app/assets/icons/trashIcon'
 import {
   selectAllQuestion,
   useSelector,

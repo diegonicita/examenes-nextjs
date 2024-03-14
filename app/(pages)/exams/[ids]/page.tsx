@@ -33,25 +33,25 @@ export default async function ExamIdPage({
 	);
 	const payload = (await getInfoAuthCookie()) as UserType;
 
-	return (
-		<div className="mt-8">
-			<Container title="Exámenes" subtitle="Selecciona el año">
-				<div className="flex flex-wrap justify-center px-8 max-w-[75rem] mx-auto mb-8 gap-4 mt-8">
-					{exam &&
-						exam.preguntas.map((e: YearData, index: number) => (
-							<CardExam2
-								item={exam}
-								key={index}
-								year={e.ano}
-								link={`/exams/${exam.id}/${e.ano}`}
-								total={e.cantidad_preguntas}
-								userId={payload?.id}
-							/>
-						))}
-				</div>
-			</Container>
-		</div>
-	);
+  return (
+    <div className="mt-8">
+      <Container title="Exámenes" subtitle="Selecciona el año">
+        <div className="flex flex-wrap justify-center px-8 max-w-[75rem] mx-auto mb-8 gap-4 mt-4">
+          {exam &&
+            exam.preguntas.map((e: YearData, index: number) => (
+              <CardExam2
+                item={exam}
+                key={index}
+                year={e.ano}
+                link={`/exams/${exam.id}/${e.ano}`}
+                total={e.cantidad_preguntas}
+                userId={payload?.id}
+              />
+            ))}
+        </div>
+      </Container>
+    </div>
+  )
 }
 
 export const metadata = {

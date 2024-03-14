@@ -28,7 +28,7 @@ export default async function page({ params }: { params: { names: string } }) {
         title={'Preguntas de ' + subject?.titulo}
         subtitle="Selecciona un examen"
       >
-        <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-8 mb-8 gap-4">
+        <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-4 mb-8 gap-4">
           {data &&
             data.examenes.map((p: ExamType, index: number) => (
               <CardExam2
