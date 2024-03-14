@@ -6,6 +6,7 @@ import getInfoAuthCookie from "@/app/server-actions/helpers/getInfoAuthCookie";
 import Pagination from "@/app/components/pagination/pagination";
 import { Editor } from "@/app/(pages)/questions/components/questions/editor";
 import Container from "@/app/components/container/container";
+import searchComments from "@/app/(pages)/questions/actions/searchComments";
 
 type YearData = {
 	ano: number;
@@ -34,6 +35,7 @@ export default async function ExamIdPage({
 	searchParams: { page: number };
 }) {
 	const data = await getData();
+	console.log(data);
 	const exam = data?.examenes.find(
 		(p: ExamType) => p.id === Number.parseInt(params.ids),
 	);
@@ -41,11 +43,20 @@ export default async function ExamIdPage({
 		(y: YearData) => y.ano === Number.parseInt(params.years),
 	);
 	const payload = await getInfoAuthCookie();
+	console.log(payload);
 	if (!exam || !year)
 		return <h1 className="p-4 text-center">¡Examen No Encontrado!</h1>;
 
 	const questions = await getExam(exam.id, year.ano, 5, searchParams.page);
 	const totalQuestion = Math.ceil(year?.cantidad_preguntas / 5);
+	let treeComments = {} as any;
+
+	if (payload) {
+		const result = await searchComments(questions);
+		treeComments = {
+			...(result?.tree ? result.tree : null),
+		};
+	}
 	return (
 		<div className="w-full mx-auto max-w-[85ch] px-1 mt-8">
 			<Container
@@ -58,7 +69,13 @@ export default async function ExamIdPage({
 							<Examen data={questions} userId={payload?.id} />
 						))}
 					{payload && payload.role === "admin" && (
-						<Editor data={questions} userId={payload?.id} temas={data.temas} />
+						<Editor
+							data={questions}
+							userId={payload?.id}
+							temas={data.temas}
+							currentUser={payload}
+							treeComments={treeComments}
+						/>
 					)}
 					<Pagination totalQuestions={totalQuestion} />
 				</div>

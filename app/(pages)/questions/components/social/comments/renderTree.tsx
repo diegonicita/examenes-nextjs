@@ -1,7 +1,7 @@
 "use client";
-import React, { memo } from "react";
+import React, { memo, useRef } from "react";
 import UserComments from "./userCommments";
-import { UserType } from "@/app/models/User";
+import type { UserType } from "@/app/models/User";
 import useFormAction from "@/app/hooks/questions/comments/useFormAction";
 import { startTransition } from "react";
 import FormReply from "./formReply/formReply";
@@ -50,6 +50,7 @@ const RenderTree = ({
 	currentUser: UserType;
 }) => {
 	const { openComments, handleOpenComments } = useFormAction();
+	const currentClassRef = useRef<HTMLDivElement | null>(null);
 
 	if (tree) {
 		return tree.map(
@@ -66,11 +67,15 @@ const RenderTree = ({
 				children: object;
 			}) =>
 				t.comment.id_parent_comment === parentId && (
-					<div key={t.comment.id}>
+					<div key={t.comment.id} ref={currentClassRef}>
 						<UseEmoji key={t.comment.id}>
 							<div className="" style={{ paddingLeft: `${depth * 10}px` }}>
 								<UseDropDown key={t.comment.id}>
-									<UserComments data={t} currentUser={currentUser}>
+									<UserComments
+										data={t}
+										currentUser={currentUser}
+										currentClassRef={currentClassRef}
+									>
 										<ReplyButton
 											handleOpenComments={handleOpenComments}
 											commentId={t.comment.id}
