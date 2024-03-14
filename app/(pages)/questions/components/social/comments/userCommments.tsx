@@ -2,8 +2,8 @@
 import ReportComment from "./reportComment/reportComment";
 import { useRef, useState } from "react";
 import DropDownOptions from "./dropDown";
-import { UserType } from "@/app/models/User";
-import { UserData } from "@/app/models/questions/comments/commentData";
+import type { UserType } from "@/app/models/User";
+import type { UserData } from "@/app/models/questions/comments/commentData";
 import EditCommentContent from "./editComment/editCommentContent";
 import TimeAgo from "./createdCommentTime";
 import DeleteComments from "./deleteComment/deleteComment";
@@ -13,14 +13,15 @@ interface UserCommentsProps {
 	data: UserData;
 	currentUser: UserType;
 	children: React.ReactNode;
+	currentClassRef: React.RefObject<HTMLDivElement>;
 }
 async function UserComments({
 	data,
 	currentUser,
 	children,
+	currentClassRef,
 }: UserCommentsProps) {
 	const [openEdit, setOpenEdit] = useState(false);
-	const currentClassRef = useRef<HTMLDivElement | null>(null);
 
 	const handleClickEdit = () => {
 		setOpenEdit(true);
@@ -30,7 +31,7 @@ async function UserComments({
 	};
 
 	return (
-		<section ref={currentClassRef} className="grid grid-cols-[40px,1fr] mt-5">
+		<section className="grid grid-cols-[40px,1fr] mt-5">
 			<>
 				<div className="w-10 h-10">
 					<img
@@ -85,6 +86,7 @@ async function UserComments({
 							</p>
 						)}
 					</div>
+
 					<div className={`${openEdit === true ? "hidden" : ""}`}>
 						{children}
 					</div>
