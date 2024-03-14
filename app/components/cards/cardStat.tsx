@@ -2,7 +2,7 @@
 import React from 'react'
 import useHasMounted from '@/app/hooks/useHasMounted'
 import { selectAllQuestion, useSelector, useDispatch } from '@/app/lib/redux'
-import RayIcon from '@/app/components/cards/icons/rayIcon'
+import RayIcon from '@/app/assets/icons/rayIcon'
 
 const CardStat = ({ userId }: { userId: number | null }) => {
   const _userId = userId ? userId : 0

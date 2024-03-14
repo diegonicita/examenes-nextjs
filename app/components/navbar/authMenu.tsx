@@ -12,7 +12,7 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
     <div>
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-          <div className="w-8 rounded-full">
+          <div className="w-10 rounded-full bg-base-300">
             <Image
               alt="Icono del usuario"
               src={isLogged ? userLogged : userNotLogged}

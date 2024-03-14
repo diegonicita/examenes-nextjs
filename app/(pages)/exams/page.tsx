@@ -17,7 +17,7 @@ const Page = async () => {
   return (
     <div className="mt-8">
       <Container title="Exámenes" subtitle="Selecciona un Examen">
-        <div className="flex flex-wrap justify-center px-8 max-w-[75rem] mx-auto mb-8 gap-4 mt-8">
+        <div className="flex flex-wrap justify-center px-8 max-w-[75rem] mx-auto mb-8 gap-4 mt-4">
           {exams &&
             exams.map((p: ExamType, index: number) => (
               <CardExam2
@@ -32,7 +32,7 @@ const Page = async () => {
         </div>
       </Container>     
       <Container title="Temas" subtitle="Selecciona un tema">
-        <div className="flex flex-wrap justify-center gap-4 px-8 max-w-[75rem] mx-auto my-2 mb-8">
+        <div className="flex flex-wrap justify-center gap-4 px-8 max-w-[75rem] mx-auto mt-4 mb-8">
           {temas &&
             temas.map((p: SubjectType, index: number) => {
               if (p.visible) return <CardSubject2 item={p} key={index} />

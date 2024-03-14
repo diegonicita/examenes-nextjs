@@ -1,19 +1,16 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
-import burger from '@/app/assets/burger.svg'
 import Link from 'next/link'
 import { tabs } from './tabs'
+import { BurgerIcon } from '@/app/assets/icons/burgerIcon'
 
 export default function AuthBurger() {
   return (
     <>
       <div className="w-auto md:hidden text-end dropdown dropdown-start">
-        <label tabIndex={0} className="btn btn-ghost">
-          <div className="w-8 rounded-full">
-            <Image alt="Icono del usuario" src={burger} />
-          </div>
+        <label tabIndex={0} className="btn btn-ghost text-base">
+          <BurgerIcon />
         </label>
         <ul
           tabIndex={0}

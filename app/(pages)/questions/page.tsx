@@ -67,7 +67,7 @@ export default async function QuestionPage({
       </Container>
 
       <CheckServerCookie auth={authData}>
-        <div className="flex flex-col items-start max-w-[60rem] mx-auto mt-8">
+        <div className="flex flex-col items-start max-w-[60rem] mx-auto mt-4">
           <SearchContainer
             query={query}
             currentPage={currentPage}

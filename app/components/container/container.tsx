@@ -10,7 +10,7 @@ export const Container = ({
   children: ReactNode
 }) => {
   return (
-    <div className="mx-auto max-w-[70rem] mb-8">
+    <div className="mx-auto max-w-[70rem]">
       <div className="flex flex-col gap-2 text-center">
         <Title title={title} />
         <Subtitle subtitle={subtitle} />
@@ -42,7 +42,7 @@ export const Section = ({
   children: ReactNode
 }) => {
   return (
-    <section className="mx-auto max-w-[70rem] mb-8">
+    <section className="mx-auto max-w-[70rem]">
       <div className="flex flex-col gap-2 text-center">
         <TitleSection title={title} />
         <Subtitle subtitle={subtitle} />
