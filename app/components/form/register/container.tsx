@@ -50,11 +50,11 @@ export const Container = ({ disabled }: { disabled: boolean }) => {
   }
 
   return (
-    <div className="card w-full bg-base-300 mb-2">
+    <div className="card w-full bg-base-300 mb-2 mt-8">
       <Form
         handleSubmit={handleSubmit}
         formRef={formRef}
-        title="Crea tu Cuenta"
+        title=""
       >
         <fieldset disabled={disabled}>
           <Input

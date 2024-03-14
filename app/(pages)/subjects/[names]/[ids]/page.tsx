@@ -2,6 +2,7 @@ import type { ExamType } from '@/app/models/Exam'
 import Examen from '@/app/(pages)/questions/components/questions/examen'
 import getExamBySubject from '../../actions/getExamBySubject'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import Container from '@/app/components/container/container'
 
 async function getData() {
   const url = process.env.URL_API
@@ -31,17 +32,16 @@ export default async function page({
   const payload = await getInfoAuthCookie()
 
   return (
-    <div className="w-full mx-auto max-w-[85ch] px-1">
-      <h1 className="text-center mt-2 font-bold text-xl">
-        Preguntas de {subject?.titulo}
-      </h1>
-      <h1 className="text-center font-bold text-xl">
-        {exam?.titulo} - {exam?.pais}
-      </h1>
-      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
-        <h1 className="text-center mt-2 font-bold text-xl"></h1>
-        <Examen data={questions} userId={payload?.id} />
-      </div>
+    <div className="w-full mx-auto max-w-[85ch] px-1 mt-8">
+      <Container
+        title={'Preguntas de ' + subject?.titulo}
+        subtitle={exam?.titulo + ' - ' + exam?.pais}
+      >
+        <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
+          <h1 className="text-center mt-2 font-bold text-xl"></h1>
+          <Examen data={questions} userId={payload?.id} />
+        </div>
+      </Container>
     </div>
   )
 }

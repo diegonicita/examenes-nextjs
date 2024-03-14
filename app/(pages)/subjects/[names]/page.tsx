@@ -1,4 +1,5 @@
-import CardExam from '@/app/components/cards/cardExam'
+import CardExam2 from '@/app/components/cards/cardExam2'
+import Container from '@/app/components/container/container'
 import type { ExamType } from '@/app/models/Exam'
 import { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
@@ -22,24 +23,25 @@ export default async function page({ params }: { params: { names: string } }) {
   )
   const payload = (await getInfoAuthCookie()) as UserType
   return (
-    <div>
-      <h1 className="text-center mt-2 font-bold text-xl">
-        Preguntas de {subject?.titulo}
-      </h1>
-      <h1 className="text-center font-bold text-xl">Selecciona un Examen</h1>
-      <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8 gap-4">
-        {data &&
-          data.examenes.map((p: ExamType, index: number) => (
-            <CardExam
-              item={p}
-              key={index}
-              year={undefined}
-              link={`/subjects/${params.names}/${p.id}`}
-              total={p.total}
-              userId={payload?.id}
-            />
-          ))}
-      </div>
+    <div className="mt-8">
+      <Container
+        title={'Preguntas de ' + subject?.titulo}
+        subtitle="Selecciona un examen"
+      >
+        <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-8 mb-8 gap-4">
+          {data &&
+            data.examenes.map((p: ExamType, index: number) => (
+              <CardExam2
+                item={p}
+                key={index}
+                year={undefined}
+                link={`/subjects/${params.names}/${p.id}`}
+                total={p.total}
+                userId={payload?.id}
+              />
+            ))}
+        </div>
+      </Container>
     </div>
   )
 }

@@ -38,6 +38,7 @@ export default function Consults({ result }: { result: RowDataPacket | null }) {
             </div>
           </div>
         ))}
+      {result && result.length === 0 && <p>No hay consultas de usuarios</p>}
     </div>
   )
 }

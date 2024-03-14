@@ -53,11 +53,11 @@ export const Container = ({ disabled, urlLoginWithGoogle }: Props) => {
   }
 
   return (
-    <div className="card w-full bg-base-300 mb-2">
+    <div className="card w-full bg-base-300 mb-2 mt-8">
       <Form
         handleSubmit={handleSubmit}
         formRef={formRef}
-        title="¡Bienvenido a Exámenes!"
+        title=""
       >
         <fieldset disabled={disabled}>
           <Input
