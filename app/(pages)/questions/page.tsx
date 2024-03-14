@@ -25,7 +25,7 @@ export default async function QuestionPage({
   }
 }) {
   const currentPage = Number(searchParams?.page) || 1
-  const query = searchParams?.query || ''
+  const query = searchParams?.query || ""
   const authData = (await getInfoAuthCookie()) as UserType
   let queries: string | string[]
   if (query) {
