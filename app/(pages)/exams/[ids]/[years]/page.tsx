@@ -35,7 +35,6 @@ export default async function ExamIdPage({
 	searchParams: { page: number };
 }) {
 	const data = await getData();
-	console.log(data);
 	const exam = data?.examenes.find(
 		(p: ExamType) => p.id === Number.parseInt(params.ids),
 	);
@@ -43,7 +42,7 @@ export default async function ExamIdPage({
 		(y: YearData) => y.ano === Number.parseInt(params.years),
 	);
 	const payload = await getInfoAuthCookie();
-	console.log(payload);
+	
 	if (!exam || !year)
 		return <h1 className="p-4 text-center">¡Examen No Encontrado!</h1>;
 
@@ -77,7 +76,7 @@ export default async function ExamIdPage({
 							treeComments={treeComments}
 						/>
 					)}
-					<Pagination totalQuestions={totalQuestion} />
+					<Pagination currentUser={payload} totalQuestions={totalQuestion} />
 				</div>
 			</Container>
 		</div>
