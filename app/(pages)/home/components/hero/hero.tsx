@@ -33,7 +33,19 @@ export default function Hero() {
             preguntas disponibles de exámenes de Argentina, España, México y
             Perú.
           </p>
-          <ButtonLogin />
+          <div>
+            <ButtonLogin />
+            {/* <div className="flex justify-center mt-2">
+              <a href="https://ko-fi.com/E1E6DPG1I" target="_blank">
+                <img
+                  height="36"
+                  className="h-18 w-48"
+                  src="https://storage.ko-fi.com/cdn/kofi2.png?v=3"
+                  alt="Buy Me a Coffee at ko-fi.com"
+                />
+              </a>
+            </div> */}
+          </div>
         </section>
       </div>
     </div>
