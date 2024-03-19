@@ -1,72 +1,75 @@
-'use client'
-import React from 'react'
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'
-import { useDebouncedCallback } from 'use-debounce'
+"use client";
+import type { RowDataPacket } from "mysql2";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
-const WAIT_BETWEEN_CHANGE = 300
+const WAIT_BETWEEN_CHANGE = 300;
 
 export default function Searchbar({
-  inputRef,
-  handleChangeResetKey,
+	inputRef,
+	handleChangeResetKey,
+	questions,
 }: {
-  inputRef: React.RefObject<HTMLInputElement>
-  handleChangeResetKey: () => void
+	inputRef: React.RefObject<HTMLInputElement>;
+	handleChangeResetKey: () => void;
+	questions: RowDataPacket | undefined;
 }) {
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
-  const { replace } = useRouter()
+	const searchParams = useSearchParams();
+	const pathname = usePathname();
+	const { replace } = useRouter();
 
-  const handleSearch = useDebouncedCallback((term: string) => {    
-    const params = new URLSearchParams(searchParams)
-    if (term) {
-      params.set('query', term)
-    } else {
-      params.delete('query')
-    }
-    params.set('page', '1')
-    replace(`${pathname}?${params.toString()}`)
-  }, WAIT_BETWEEN_CHANGE)
+	const handleSearch = useDebouncedCallback((term: string) => {
+		const params = new URLSearchParams(searchParams);
+		if (term) {
+			params.set("query", term);
+		} else {
+			params.delete("query");
+		}
+		if (questions?.length > 0) {
+			params.set("page", "1");
+		}
+		replace(`${pathname}?${params.toString()}`);
+	}, WAIT_BETWEEN_CHANGE);
 
-  let defaultValue = searchParams.get('query') as string | undefined | null
-  if (defaultValue === null) {
-    defaultValue = undefined
-  }
+	let defaultValue = searchParams.get("query") as string | undefined | null;
+	if (defaultValue === null) {
+		defaultValue = undefined;
+	}
 
-  return (
-    <div className="w-full">
-      <div className="relative flex">
-        <input
-          type="search"
-          onChange={(event) => handleSearch(event.target.value)}
-          className="relative m-0 block flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:focus:border-primary"
-          placeholder="Search"
-          aria-label="Search"
-          aria-describedby="button-addon1"
-          defaultValue={defaultValue?.toString()}
-          ref={inputRef}
-          
-        />
+	return (
+		<div className="w-full">
+			<div className="relative flex">
+				<input
+					type="search"
+					onChange={(event) => handleSearch(event.target.value)}
+					className="relative m-0 block flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-500 dark:placeholder:text-neutral-500 dark:focus:border-primary"
+					placeholder="Search"
+					aria-label="Search"
+					aria-describedby="button-addon1"
+					defaultValue={defaultValue?.toString()}
+					ref={inputRef}
+				/>
 
-        <button
-          className="relative z-[0] flex items-center rounded-r bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
-          type="button"
-          id="button-addon1"
-          onClick={handleChangeResetKey}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="h-5 w-5"
-          >
-            <path
-              fillRule="evenodd"
-              d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-  )
+				<button
+					className="relative z-[0] flex items-center rounded-r bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+					type="button"
+					id="button-addon1"
+					onClick={handleChangeResetKey}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						className="h-5 w-5"
+					>
+						<path
+							fillRule="evenodd"
+							d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+							clipRule="evenodd"
+						/>
+					</svg>
+				</button>
+			</div>
+		</div>
+	);
 }

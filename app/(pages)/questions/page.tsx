@@ -10,12 +10,9 @@ import ValorationButton from "./components/social/valorations/valorationButton";
 import getInfoAuthCookie from "@/app/server-actions/helpers/getInfoAuthCookie";
 import type { UserType } from "@/app/models/User";
 import searchComments from "./actions/searchComments";
-import RenderTree from "./components/social/comments/renderTree";
-import FirstInputComment from "./components/social/comments/firstInputComment";
 import Pagination from "@/app/components/pagination/pagination";
-import { UseEmoji } from "@/app/hooks/questions/comments/useEmoji";
 import DisplayMedicineStudentMessage from "./components/questions/displayMedicineStudentMessage/displayMedicineStudentMessage";
-import Container, { Section } from "@/app/components/container/container";
+import Container from "@/app/components/container/container";
 import AllTheCommentContent from "./components/social/comments/allTheCommentContent/allthecommentContent";
 export default async function QuestionPage({
 	searchParams,
@@ -74,6 +71,7 @@ export default async function QuestionPage({
 						currentPage={currentPage}
 						wordsSuggestions={wordsSuggestions}
 						questionsCount={questionsCount}
+						questions={questions}
 					>
 						{query !== "" && query.length > 2 && (
 							<>
@@ -107,9 +105,17 @@ export default async function QuestionPage({
 					</SearchContainer>
 				</div>
 				{searchParams.query && questions?.length > 0 && (
-					<Pagination totalQuestions={paginatiototalQuestion} />
+					<Pagination
+						currentUser={authData}
+						totalQuestions={paginatiototalQuestion}
+					/>
 				)}
 				{!searchParams.query && !questions && <DisplayMedicineStudentMessage />}
+				{questions?.length === 0 && (
+					<h1 className="text-center font-bold mt-5">
+						No encotramos coincidencia con tu busqueda
+					</h1>
+				)}
 			</CheckServerCookie>
 		</div>
 	);
