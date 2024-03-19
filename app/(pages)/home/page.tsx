@@ -1,10 +1,10 @@
-import React from 'react'
-import Hero from '@/app/(pages)/home/components/hero/hero'
-import Review from '@/app/(pages)/home/components/reviews'
-import LeftColumn from './components/consults/leftColumn'
-import ConsultForm from '@/app/components/form/consult/container'
-import Prices from './components/plans/plans'
-import Faq from './components/faq/faq'
+import React from "react";
+import Hero from "@/app/(pages)/home/components/hero/hero";
+import Review from "@/app/(pages)/home/components/reviews";
+import LeftColumn from "./components/consults/leftColumn";
+import ConsultForm from "@/app/components/form/consult/container";
+import Prices from "./components/plans/plans";
+import Faq from "./components/faq/faq";
 
 const Home = () => {
   return (
@@ -48,8 +48,8 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Home;
 
 export const metadata = {
-  title: 'Home Page',
-}
+	title: "Home Page",
+};
