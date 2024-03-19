@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function Plans() {
@@ -8,12 +9,10 @@ export default function Plans() {
           <h1 className="font-bold text-3xl">Planes</h1>
           <span>Estos son nuestros planes, elige el que prefieras</span>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 items-start px-2 gap-8">
           <div className="flex flex-col gap-6 bg-base-200 rounded-box p-8">
             <div className="flex flex-col gap-4 text-center">
               <h2 className="text-xl">Gratis</h2>
-
               <h1 className="text-5xl font-bold">Free</h1>
 
               <span className="text-sm">Gratis para siempre</span>
@@ -21,25 +20,24 @@ export default function Plans() {
 
             <div className="flex flex-col">
               <div className="flex gap-2 items-center">
-                <i className="fa-solid fa-check text-accent"></i>300 preguntas
+                <i className="text-accent"></i>300 preguntas
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="fa-solid fa-check text-accent"></i>
+                <i className="text-accent"></i>
                 10 preguntas por examen
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="fa-solid fa-check text-accent"></i>1 pregunta por
-                tema
+                <i className="text-accent"></i>1 pregunta por tema
               </div>
               <div className="flex gap-2 items-center">
-                <i className="fa-solid fa-check text-accent"></i>
+                <i className="text-accent"></i>
                 Buscador de preguntas Limitado
               </div>
             </div>
 
-            <a className="btn btn-neutral">Registrate</a>
+            <Link href="/register" className="btn btn-neutral">Registrate</Link>
           </div>
 
           <div className="flex flex-col gap-6 bg-base-200 rounded-box p-8 border border-accent shadow">
@@ -59,12 +57,12 @@ export default function Plans() {
 
             <div className="flex flex-col">
               <div className="flex gap-2 items-center">
-                <i className="fa-solid fa-check text-accent"></i>Más de 6000
-                preguntas actualizadas
+                <i className="text-accent"></i>Más de 6000 preguntas
+                actualizadas
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="fa-solid fa-check text-accent"></i>
+                <i className="text-accent"></i>
                 Incluye el Buscador de preguntas
               </div>
             </div>
@@ -83,17 +81,17 @@ export default function Plans() {
             </div>
             <div className="flex flex-col">
               <div className="flex gap-2 items-center">
-                <i className="fa-solid fa-check text-accent"></i>
+                <i className="text-accent"></i>
                 Más de 6000 preguntas actualizadas
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="fa-solid fa-check text-accent"></i>
+                <i className="text-accent"></i>
                 Sin limite de tiempo
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="fa-solid fa-check text-accent"></i>
+                <i className="text-accent"></i>
                 Incluye el Buscador de preguntas
               </div>
             </div>

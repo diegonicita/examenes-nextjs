@@ -1,5 +1,5 @@
 // import Card from './components/card'
-import CardExam2 from '@/app/components/cards/cardExam2'
+import CardExam from '@/app/components/cards/cardExam'
 import Container from '@/app/components/container/container'
 import type { ExamTypeFromApi } from '@/app/models/Exam'
 import type { UserType } from '@/app/models/User'
@@ -39,7 +39,7 @@ export default async function ExamIdPage({
         <div className="flex flex-wrap justify-center px-8 max-w-[75rem] mx-auto mb-8 gap-4 mt-4">
           {exam &&
             exam.preguntas.map((e: YearData, index: number) => (
-              <CardExam2
+              <CardExam
                 item={exam}
                 key={index}
                 year={e.ano}

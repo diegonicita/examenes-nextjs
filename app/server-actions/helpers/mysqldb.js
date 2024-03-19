@@ -10,10 +10,10 @@ const executeQuery = async (query, data) => {
       database: process.env.DB_NAME,
     })
     const [result] = await db.execute(query, data)
-    await db.end()    
+    await db.end()
     return result
   } catch (error) {
-    console.log(error)
+    throw error
   }
 }
 
