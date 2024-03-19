@@ -1,7 +1,7 @@
 import CardProgress from '@/app/components/cards/cardProgress'
 import CardStat from '@/app/components/cards/cardStat'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
-import type { ExamTypeFromDB } from '@/app/models/Exam'
+import type { ExamTypeFromApi, ExamTypeFromDB } from '@/app/models/Exam'
 import type { UserType } from '@/app/models/User'
 import Container from '@/app/components/container/container'
 import { SubjectType } from '@/app/models/Subject'
@@ -36,7 +36,14 @@ const Page = async () => {
           {exams &&
             exams.map((p, index: number) => (
               <CardProgress
-                item={p}
+                item={
+                  {
+                    id: p.id,
+                    titulo: p.name,
+                    visible: true,
+                    imagen: p.image,
+                  } as ExamTypeFromApi
+                }
                 key={index}
                 year={undefined}
                 link={`/exams/${p.id}`}

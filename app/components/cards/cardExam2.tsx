@@ -1,9 +1,6 @@
-'use client'
+'use server'
 import { ExamTypeFromApi } from '@/app/models/Exam'
-import React from 'react'
 import Image from 'next/image'
-import { useSelector, selectAllQuestion } from '@/app/lib/redux'
-import { getStatistics } from './helper/getStatistic'
 import Link from 'next/link'
 
 const CardExam2 = ({
@@ -19,15 +16,6 @@ const CardExam2 = ({
   total: number
   userId: number | null
 }) => {
-  const answeredArray = useSelector((state) => selectAllQuestion(state))
-  const _userId = userId ? userId : 0
-  const { answered, corrects, percentCorrect, percentNotCorrect } =
-    getStatistics({
-      data: answeredArray.filter((item) => item.userId === _userId),
-      year: year,
-      id: item.id,
-    })
-
   return (
     <div className="flex flex-col gap-2 bg-base-200 rounded-box p-8">
       <div className="flex flex-col text-center">
@@ -40,8 +28,8 @@ const CardExam2 = ({
                   'https://mercado.webapp.ar/images_medicina/' + item?.imagen
                 }
                 alt="imagen"
-                width={0}
-                height={0}
+                width={160}
+                height={160}
                 sizes={'100vh'}
                 className="h-auto w-full max-w-40"
               />

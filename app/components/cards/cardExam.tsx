@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
-import type { ExamType } from '@/app/models/Exam'
+import type { ExamTypeFromApi } from '@/app/models/Exam'
 import Link from 'next/link'
 import { useSelector, selectAllQuestion } from '@/app/lib/redux'
 import { getStatistics } from './helper/getStatistic'
@@ -14,7 +14,7 @@ export default function CardExam({
   total,
   userId,
 }: {
-  item: ExamType
+  item: ExamTypeFromApi
   year: number | undefined
   link: string
   total: number
@@ -32,10 +32,12 @@ export default function CardExam({
   return (
     <>
       {useHasMounted() && (
-        <Link href={{
-          pathname: link,
-          query:{page: "1"}
-        }}>
+        <Link
+          href={{
+            pathname: link,
+            query: { page: '1' },
+          }}
+        >
           <div className="btn btn-ghost h-full p-0 border-0">
             <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator hover:shadow-2xl h-auto pb-4">
               <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">

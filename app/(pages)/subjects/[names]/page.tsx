@@ -1,6 +1,6 @@
 import CardExam2 from '@/app/components/cards/cardExam2'
 import Container from '@/app/components/container/container'
-import type { ExamType } from '@/app/models/Exam'
+import type { ExamTypeFromApi } from '@/app/models/Exam'
 import { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
@@ -19,7 +19,7 @@ async function getData() {
 export default async function page({ params }: { params: { names: string } }) {
   const data = await getData()
   const subject = data?.temas.find(
-    (p: ExamType) => p.id === parseInt(params.names),
+    (p: ExamTypeFromApi) => p.id === parseInt(params.names),
   )
   const payload = (await getInfoAuthCookie()) as UserType
   return (
@@ -30,7 +30,7 @@ export default async function page({ params }: { params: { names: string } }) {
       >
         <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-4 mb-8 gap-4">
           {data &&
-            data.examenes.map((p: ExamType, index: number) => (
+            data.examenes.map((p: ExamTypeFromApi, index: number) => (
               <CardExam2
                 item={p}
                 key={index}

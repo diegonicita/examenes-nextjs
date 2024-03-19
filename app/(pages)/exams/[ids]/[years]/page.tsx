@@ -1,4 +1,4 @@
-import type { ExamType } from "@/app/models/Exam";
+import type { ExamTypeFromApi } from "@/app/models/Exam";
 import getExam from "@/app/(pages)/exams/actions/getExam";
 import searchValorations from "@/app/(pages)/questions/actions/searchValoration";
 import Examen from "@/app/(pages)/questions/components/questions/examen";
@@ -36,7 +36,7 @@ export default async function ExamIdPage({
 }) {
 	const data = await getData();
 	const exam = data?.examenes.find(
-		(p: ExamType) => p.id === Number.parseInt(params.ids),
+		(p: ExamTypeFromApi) => p.id === Number.parseInt(params.ids),
 	);
 	const year = exam?.preguntas.find(
 		(y: YearData) => y.ano === Number.parseInt(params.years),

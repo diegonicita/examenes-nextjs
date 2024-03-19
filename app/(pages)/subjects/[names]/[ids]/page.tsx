@@ -1,4 +1,4 @@
-import type { ExamType } from '@/app/models/Exam'
+import type { ExamTypeFromApi } from '@/app/models/Exam'
 import Examen from '@/app/(pages)/questions/components/questions/examen'
 import getExamBySubject from '../../actions/getExamBySubject'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
@@ -23,10 +23,10 @@ export default async function page({
   const data = await getData()
 
   const subject = data?.temas.find(
-    (p: ExamType) => p.id === parseInt(params.names),
+    (p: ExamTypeFromApi) => p.id === parseInt(params.names),
   )
   const exam = data?.examenes.find(
-    (p: ExamType) => p.id === parseInt(params.ids),
+    (p: ExamTypeFromApi) => p.id === parseInt(params.ids),
   )
   const questions = await getExamBySubject(exam.id, subject.id)
   const payload = await getInfoAuthCookie()

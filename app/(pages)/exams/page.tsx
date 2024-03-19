@@ -1,4 +1,3 @@
-import CardExam from '@/app/components/cards/cardExam'
 import CardExam2 from '@/app/components/cards/cardExam2'
 import CardSubject2 from '@/app/components/cards/cardSubject2'
 import Container from '@/app/components/container/container'
@@ -11,8 +10,8 @@ import executeQuery from '@/app/server-actions/helpers/mysqldb'
 const getData = async () => {
   'use server'
   const result1 = await executeQuery('select * from exams_types', [])
-  console.log(result1)
   const result2 = await executeQuery('select * from clasificaciones', [])
+  // await new Promise((res) => setTimeout(res, 2000))
   return { examenes: result1, temas: result2 } as {
     examenes: ExamTypeFromDB[]
     temas: SubjectType[]
