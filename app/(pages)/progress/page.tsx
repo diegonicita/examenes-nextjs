@@ -1,14 +1,27 @@
 import CardProgress from '@/app/components/cards/cardProgress'
 import CardStat from '@/app/components/cards/cardStat'
-import getQuestionsStatistics from '@/app/server-actions/questions/get-questions-statistics'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
-import type { ExamType } from '@/app/models/Exam'
+import type { ExamTypeFromDB } from '@/app/models/Exam'
 import type { UserType } from '@/app/models/User'
 import Container from '@/app/components/container/container'
+import { SubjectType } from '@/app/models/Subject'
+import executeQuery from '@/app/server-actions/helpers/mysqldb'
+// import getQuestionsStatistics from '@/app/server-actions/questions/get-questions-statistics'
+
+const getData = async () => {
+  'use server'
+  const result1 = await executeQuery('select * from exams_types', [])
+  console.log(result1)
+  const result2 = await executeQuery('select * from clasificaciones', [])
+  return { examenes: result1, temas: result2 } as {
+    examenes: ExamTypeFromDB[]
+    temas: SubjectType[]
+  }
+}
 
 const Page = async () => {
-  const data = await getQuestionsStatistics()
-  const exams = data.examenes as ExamType[]
+  const data = await getData()
+  const exams = data.examenes as ExamTypeFromDB[]
   const payload = (await getInfoAuthCookie()) as UserType
 
   return (

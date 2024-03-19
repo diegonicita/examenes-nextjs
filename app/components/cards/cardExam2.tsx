@@ -1,10 +1,9 @@
 'use client'
-import { ExamType } from '@/app/models/Exam'
+import { ExamTypeFromApi } from '@/app/models/Exam'
 import React from 'react'
 import Image from 'next/image'
 import { useSelector, selectAllQuestion } from '@/app/lib/redux'
 import { getStatistics } from './helper/getStatistic'
-import useHasMounted from '@/app/hooks/useHasMounted'
 import Link from 'next/link'
 
 const CardExam2 = ({
@@ -14,7 +13,7 @@ const CardExam2 = ({
   total,
   userId,
 }: {
-  item: ExamType
+  item: ExamTypeFromApi
   year: number | undefined
   link: string
   total: number
@@ -31,59 +30,50 @@ const CardExam2 = ({
 
   return (
     <div className="flex flex-col gap-2 bg-base-200 rounded-box p-8">
-      {useHasMounted() && (
-        <>
-          <div className="flex flex-col text-center">
-            <h2 className="text-xl ">
-              {item.titulo ? item.titulo : 'Sin título'}
-            </h2>
-            {!year && (
-              <figure className="flex justify-center">
-                {item.imagen ? (
-                  <Image
-                    src={
-                      'https://mercado.webapp.ar/images_medicina/' +
-                      item?.imagen
-                    }
-                    alt="imagen"
-                    width={0}
-                    height={0}
-                    sizes={'100vh'}
-                    className="h-auto w-full max-w-40"
-                  />
-                ) : (
-                  <Image
-                    src={
-                      'https://mercado.webapp.ar/images_medicina/medicina-1.png'
-                    }
-                    alt="imagen"
-                    width={0}
-                    height={0}
-                    sizes={'100vh'}
-                    className="h-auto w-full max-w-40"
-                  />
-                )}
-              </figure>
+      <div className="flex flex-col text-center">
+        <h2 className="text-xl ">{item.titulo ? item.titulo : 'Sin título'}</h2>
+        {!year && (
+          <figure className="flex justify-center">
+            {item.imagen ? (
+              <Image
+                src={
+                  'https://mercado.webapp.ar/images_medicina/' + item?.imagen
+                }
+                alt="imagen"
+                width={0}
+                height={0}
+                sizes={'100vh'}
+                className="h-auto w-full max-w-40"
+              />
+            ) : (
+              <Image
+                src={'https://mercado.webapp.ar/images_medicina/medicina-1.png'}
+                alt="imagen"
+                width={0}
+                height={0}
+                sizes={'100vh'}
+                className="h-auto w-full max-w-40"
+              />
             )}
-            {year && <h2 className="text-4xl font-bold p-4">{year}</h2>}
-            {!year && <span className="text-sm">{item.pais}</span>}
-          </div>
+          </figure>
+        )}
+        {year && <h2 className="text-4xl font-bold p-4">{year}</h2>}
+        {!year && <span className="text-sm">{item.pais}</span>}
+      </div>
 
-          <div className="flex flex-col justify-center items-center">
-            <div className="flex items-center">{total} preguntas</div>
-          </div>
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex items-center">{total} preguntas</div>
+      </div>
 
-          <Link
-            href={{
-              pathname: link,
-              query: { page: '1' },
-            }}
-            className="btn btn-neutral"
-          >
-            Seleccionar
-          </Link>
-        </>
-      )}
+      <Link
+        href={{
+          pathname: link,
+          query: { page: '1' },
+        }}
+        className="btn btn-neutral"
+      >
+        Seleccionar
+      </Link>
     </div>
   )
 }
