@@ -4,34 +4,16 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import IconArrowUpCircle from "./icons/iconArrow";
 import { Section } from "@/app/components/container/container";
-interface MedicineData {
-	id: number;
-	title: string;
-}
+import {
+	type MedicineData,
+	data,
+	randomData,
+} from "@/app/utils/randomData/randomData";
 
 export default function DisplayMedicineStudentMessage() {
 	const pathname = usePathname();
 	const [randomMedicine, setRandomMedicine] = useState<MedicineData[]>([]);
 
-	const randomData = (array: MedicineData[]) => {
-		for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]];
-		}
-		return array;
-	};
-
-	const data = [
-		{ id: 1, title: "Neumonia" },
-		{ id: 2, title: "Fiebre" },
-		{ id: 3, title: "Gripe" },
-		{ id: 4, title: "Cefalea" },
-		{ id: 5, title: "Fatiga" },
-		{ id: 6, title: "Mialgias" },
-		{ id: 7, title: "Disnea" },
-		{ id: 8, title: "vdrl" },
-	];
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		// Generate random medicine data on the client side
 		const randomizedData = randomData(data);
