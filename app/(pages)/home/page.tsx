@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <div className="mx-auto max-w-[55rem] mb-8">
+      <div className="mx-auto max-w-[55rem] mb-8 mt-8">
         <Prices />
         <Faq />
         <div className="flex flex-col items-center mt-14">

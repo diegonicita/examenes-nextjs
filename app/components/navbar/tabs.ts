@@ -12,6 +12,12 @@ export const tabs = [
     requireLogin: false,
   }, 
   {
+    name: 'Precios',
+    path: '/plans',
+    active: true,
+    requireLogin: false,
+  }, 
+  {
     name: 'Buscador',
     path: '/questions',
     active: true,
