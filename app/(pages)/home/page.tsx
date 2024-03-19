@@ -5,7 +5,6 @@ import LeftColumn from "./components/consults/leftColumn";
 import ConsultForm from "@/app/components/form/consult/container";
 import Prices from "./components/plans/plans";
 import Faq from "./components/faq/faq";
-import InputHome from "./components/inputHome/inputHome";
 
 const Home = () => {
 	return (
@@ -16,7 +15,6 @@ const Home = () => {
 				<Faq />
 				<div className="flex flex-col items-center mt-14">
 					<h2 className="text-3xl font-bold">
-						<InputHome />
 						<i className="fa-solid fa-circle-question text-primary"></i>
 						Envíanos una consulta
 					</h2>
