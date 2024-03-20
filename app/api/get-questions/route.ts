@@ -1,5 +1,5 @@
 /* Core */
-import { NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import getQuestions from '@/app/server-actions/questions/get-questions'
 import { unstable_noStore as noStore } from 'next/cache'
 
