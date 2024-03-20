@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import type React from 'react'
 import type { ExamTypeFromApi } from '@/app/models/Exam'
 import { getStatistics } from '@/app/components/cards/helper/getStatistic'
 import useHasMounted from '@/app/hooks/useHasMounted'
@@ -30,6 +30,7 @@ export default function Card({
   const { answered, corrects, percentCorrect, percentNotCorrect } =
     getStatistics({
       data: answeredArray.filter(
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         (item: { userId: any }) => item.userId === _userId,
       ),
       year: year,
@@ -60,6 +61,7 @@ export default function Card({
                 className="tooltip tooltip-close tooltip-right hover:tooltip-open"
                 data-tip="Borrar Progreso"
               >
+                {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
                 <div
                   id={item.id.toString()}
                   className="btn btn-sm btn-circle btn-error"

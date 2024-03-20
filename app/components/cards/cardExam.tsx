@@ -1,5 +1,5 @@
 'use server'
-import { ExamTypeFromApi } from '@/app/models/Exam'
+import type { ExamTypeFromApi } from '@/app/models/Exam'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -25,7 +25,7 @@ const CardExam = ({
             {item.imagen ? (
               <Image
                 src={
-                  'https://mercado.webapp.ar/images_medicina/' + item?.imagen
+                  `https://mercado.webapp.ar/images_medicina/${item?.imagen}`
                 }
                 alt="imagen"
                 width={160}

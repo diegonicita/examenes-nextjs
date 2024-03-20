@@ -14,7 +14,7 @@ function CardSubject({ item }: { item: SubjectType }) {
         <figure className="pt-0">
           {item.imagen ? (
             <Image
-              src={'https://mercado.webapp.ar/images_medicina/' + item?.imagen}
+              src={`https://mercado.webapp.ar/images_medicina/${item?.imagen}`}
               alt="imagen"
               width={0}
               height={0}
