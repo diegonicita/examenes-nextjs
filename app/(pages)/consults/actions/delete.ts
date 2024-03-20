@@ -2,8 +2,8 @@
 
 import { revalidatePath } from 'next/cache'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import { RowDataPacket } from 'mysql2'
-import { type ConsultType } from '@/app/models/Consult'
+import type { RowDataPacket } from 'mysql2'
+import type { ConsultType } from '@/app/models/Consult'
 
 export const deleteAction = async (
   prevState: ConsultType,

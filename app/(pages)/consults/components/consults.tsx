@@ -1,6 +1,6 @@
 import React from 'react'
 import DeleteButton from './deleteButton'
-import { RowDataPacket } from 'mysql2'
+import type { RowDataPacket } from 'mysql2'
 
 type Result = {
   id: number
@@ -12,8 +12,7 @@ type Result = {
 export default function Consults({ result }: { result: RowDataPacket | null }) {
   return (
     <div className="flex flex-wrap justify-center px-8 max-w-[90rem] mx-auto mt-8">
-      {result &&
-        result.map((p: Result) => (
+      {result?.map((p: Result) => (
           <div
             key={p.id}
             className="card max-w-[40rem] bg-base-100 shadow-xl m-2 border border-black px-4"

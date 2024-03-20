@@ -1,7 +1,7 @@
 'use server'
 
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import { RowDataPacket } from 'mysql2'
+import type { RowDataPacket } from 'mysql2'
 import { z } from 'zod'
 
 export const insertAction = async (formData: FormData) => {
@@ -32,7 +32,7 @@ export const insertAction = async (formData: FormData) => {
         [fullname, email, consult],
       )) as RowDataPacket
 
-      if (response && response?.affectedRows) {
+      if (response?.affectedRows) {
         return {
           message: 'success',
         }

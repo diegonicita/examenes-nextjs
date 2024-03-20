@@ -5,7 +5,5 @@ export default async function getClasificacion() {
   try {
     const examsTypes = await getClasificacionQuery()
     return examsTypes
-  } catch (e) {
-    throw e
-  }
+  } catch (e) { }
 }
