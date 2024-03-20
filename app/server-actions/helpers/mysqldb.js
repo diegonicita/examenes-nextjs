@@ -13,6 +13,7 @@ const executeQuery = async (query, data) => {
     await db.end()
     return result
   } catch (error) {
+    // biome-ignore lint/complexity/noUselessCatch: <explanation>
     throw error
   }
 }

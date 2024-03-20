@@ -1,4 +1,4 @@
-import { UserType } from '@/app/models/User'
+import type { UserType } from '@/app/models/User'
 import jwt from 'jsonwebtoken'
 import { cookies } from 'next/headers'
 import { getUserId } from './getUserId'
@@ -8,9 +8,9 @@ const getInfoAuthCookie = async () => {
   const token = cookies().get('token')
   const secret = process.env.JWT_SECRET
 
-  if (auth && auth?.value && secret) {
+  if (auth?.value && secret) {
     try {
-      const payload = jwt.verify(auth.value, secret) as any
+      const payload = jwt.verify(auth.value, secret) as string | jwt.JwtPayload
       return payload as UserType
     } catch (error) {
       console.log(error)
@@ -18,13 +18,21 @@ const getInfoAuthCookie = async () => {
     }
   }
 
-  if (token && token?.value && secret) {
+  if (token?.value && secret) {
     try {
-      const payload = jwt.verify(token.value, secret) as any
+      const payload = jwt.verify(token.value, secret) as
+        | {
+            clientId: number
+            clientEmail: string
+            displayName: string
+            iat: string
+            exp: string
+          }
+        | jwt.JwtPayload
       const pl = {
-        id: payload.clientId as number,
-        email: payload.clientEmail as string,
-        username: payload.displayName as string,
+        id: payload.clientId,
+        email: payload.clientEmail,
+        username: payload.displayName,
         role: 'client' as string,
         verify: 1 as number,
         iat: payload.iat,
@@ -32,7 +40,7 @@ const getInfoAuthCookie = async () => {
       }
       // Check if userId exists. If not create a new user.
       const respuesta = await getUserId(pl.email)
-      if (respuesta && respuesta.id) {
+      if (respuesta?.id) {
         return {
           ...pl,
           id: respuesta.id,

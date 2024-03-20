@@ -84,7 +84,7 @@ export default async function getQuestionsStatistics() {
       'select count(*) as total from preguntas where examen = ?',
       [i],
     )
-    if (result2 != undefined) respuesta.examenes[i].total = result2[0].total
+    if (result2 !== undefined) respuesta.examenes[i].total = result2[0].total
   }
 
   const result3 = await executeQuery('select * from clasificaciones', [])
@@ -94,8 +94,8 @@ export default async function getQuestionsStatistics() {
   )
 
   // Unir los arrays de objetos basándose en el ID
-  let arrayFinal = result3.map((obj1) => {
-    let obj2 = result4.find((obj2) => obj2.id === obj1.id)
+  const arrayFinal = result3.map((obj1) => {
+    const obj2 = result4.find((obj2) => obj2.id === obj1.id)
     return { ...obj1, ...obj2 }
   })
 
