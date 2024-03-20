@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import IconArrowUpCircle from "./icons/iconArrow";
 import { Section } from "@/app/components/container/container";
@@ -11,7 +10,6 @@ import {
 } from "@/app/utils/randomData/randomData";
 
 export default function DisplayMedicineStudentMessage() {
-	const pathname = usePathname();
 	const [randomMedicine, setRandomMedicine] = useState<MedicineData[]>([]);
 
 	useEffect(() => {
@@ -38,13 +36,7 @@ export default function DisplayMedicineStudentMessage() {
 							} " rounded-lg w-[318px] group/item "`}
 						>
 							<Link
-								href={{
-									pathname: pathname,
-									query: {
-										query: item.title,
-										page: 1,
-									},
-								}}
+								href={`/questions?query=${item.title}`}
 								className="flex flex-row items-center font-semibold active:bg-stone-500 hover:bg-stone-300  text-gray-800 justify-between p-3  bg-stone-200 w-full"
 							>
 								{item.title}
