@@ -20,7 +20,7 @@ const Home = () => {
 						<i className="fa-solid fa-circle-question text-primary"></i>
 						Envíanos una consulta
 					</h2>
-					<span className="mb-6 mt-2">
+					<span className="px-4 mt-1 text-center text-balance">
 						Cualquier problema o sugerencia, nos pondremos en contacto contigo
 					</span>
 				</div>
