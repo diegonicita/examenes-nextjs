@@ -4,7 +4,7 @@ export default function Faq() {
   return (
     <div className="flex flex-col items-center gap-10 p-6 mt-8">
       <h1 className="text-3xl font-bold">
-        <i className="text-primary"></i>
+        <i className="text-primary" />
         Preguntas frecuentes
       </h1>
 
