@@ -19,12 +19,13 @@ export default function Counter() {
   const [incrementAmount, setIncrementAmount] = useState(2)
 
   return (
-    <div className="flex mt-8 border p-2">      
+    <div className="flex mt-8 border p-2">
       <div className="flex flex-wrap gap-3 items-center justify-center">
         <button
           className="btn btn-accent btn-sm"
           aria-label="Decrement value"
           onClick={() => dispatch(counterSlice.actions.decrement())}
+          type="button"
         >
           ➖
         </button>
@@ -33,6 +34,7 @@ export default function Counter() {
           className="btn btn-accent btn-sm"
           aria-label="Increment value"
           onClick={() => dispatch(counterSlice.actions.increment())}
+          type="button"
         >
           ➕
         </button>
@@ -47,18 +49,21 @@ export default function Counter() {
           onClick={() =>
             dispatch(counterSlice.actions.incrementByAmount(incrementAmount))
           }
+          type="button"
         >
           Add Amount
         </button>
         <button
           className="btn btn-accent btn-sm"
           onClick={() => dispatch(incrementAsync(incrementAmount))}
+          type="button"
         >
           Add Async
         </button>
         <button
           className="btn btn-accent btn-sm"
           onClick={() => dispatch(incrementIfOddAsync(incrementAmount))}
+          type="button"
         >
           Add If Odd
         </button>

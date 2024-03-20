@@ -35,21 +35,17 @@ const Profile = async () => {
                 />
               </div>
               <div className="text-center mt-2">
-                <h2 className="font-semibold">
-                  {authData && authData.username}
-                </h2>
-                <p className="text-gray-500">
-                  nivel: {authData && authData.role}
-                </p>
-                <p className="text-gray-500">{authData && authData.email}</p>
+                <h2 className="font-semibold">{authData?.username}</h2>
+                <p className="text-gray-500">nivel: {authData?.role}</p>
+                <p className="text-gray-500">{authData?.email}</p>
                 <div>
-                  {authData && authData.verify
+                  {authData?.verify
                     ? 'Email verificado'
                     : 'Email sin verificar'}{' '}
                 </div>
               </div>
 
-              {authData && authData.verify ? (
+              {authData?.verify ? (
                 <div className="flex justify-center mt-4 btn btn-disabled max-w-40 m-auto">
                   Verificar tu Cuenta
                 </div>
@@ -65,9 +61,8 @@ const Profile = async () => {
           </Container>
         </div>
       )
-    } else {
-      return <MessageNotLogged />
     }
+    return <MessageNotLogged />
   } catch (error) {
     console.log('Error al requerir el Profile')
   }
