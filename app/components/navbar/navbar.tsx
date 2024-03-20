@@ -33,6 +33,14 @@ export const Nav = async () => {
         <div className="flex gap-8">
           <AuthMenu isLogged={isLogged} />
           <ThemeSelector />
+          <a href="https://ko-fi.com/E1E6DPG1I" target="_blank">
+            <img
+              height="36"
+              className="border-0 hidden sm:flex h-12"
+              src="https://storage.ko-fi.com/cdn/kofi2.png?v=3"
+              alt="Buy Me a Coffee at ko-fi.com"
+            />
+          </a>
         </div>
       </nav>
     </div>
