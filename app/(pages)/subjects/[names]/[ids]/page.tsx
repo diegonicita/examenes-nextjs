@@ -3,6 +3,7 @@ import Examen from '@/app/(pages)/questions/components/questions/examen'
 import getExamBySubject from '../../actions/getExamBySubject'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import Container from '@/app/components/container/container'
+import MessageNotLogged from '@/app/components/checkCookie/messageNotLogged'
 
 async function getData() {
   const url = process.env.URL_API
@@ -39,7 +40,8 @@ export default async function page({
       >
         <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
           <h1 className="text-center mt-2 font-bold text-xl"></h1>
-          <Examen data={questions} userId={payload?.id} />
+          {payload && <Examen data={questions} userId={payload?.id} />}
+          {!payload && <MessageNotLogged />}
         </div>
       </Container>
     </div>
