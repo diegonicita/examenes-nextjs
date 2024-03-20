@@ -1,12 +1,16 @@
 'use server'
-import getExamQuery from './queries/getExamQuery'
+import getExamQuery from '../queries/getExamQuery'
 
-export default async function getExam(examId: number, year: number, limit: number, page:number) {
+export default async function getExam(
+  examId: number,
+  year: number,
+  limit: number,
+  page: number,
+) {
   try {
     const questions = await getExamQuery(examId, year, limit, page)
     return questions
   } catch (e) {
-    console.log(e)
-    return null
+    throw e
   }
 }

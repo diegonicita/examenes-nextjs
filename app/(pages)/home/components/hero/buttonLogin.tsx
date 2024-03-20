@@ -7,10 +7,10 @@ const ButtonLogin = () => {
   return (
     <Link
       href="/login"
-      className="btn btn-accent text-accent-content w-[188px] h-[48px] flex-col justify-center 
-        items-center inline-flex px-[31px] py-[17px] text-md"
+      className="btn btn-neutral text-neutral-content w-48 justify-center 
+         text-lg rounded-3xl mb-8"
     >
-      Ingresa a tu cuenta
+      Ingresar
     </Link>
   )
 }

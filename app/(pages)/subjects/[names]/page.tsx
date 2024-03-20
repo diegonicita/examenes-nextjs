@@ -1,8 +1,10 @@
-import CardExam2 from '@/app/components/cards/cardExam2'
+import CardExam from '@/app/components/cards/cardExam'
 import Container from '@/app/components/container/container'
-import type { ExamType } from '@/app/models/Exam'
+import type { ExamTypeFromApi, ExamTypeFromDB } from '@/app/models/Exam'
+import { SubjectType } from '@/app/models/Subject'
 import { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import executeQuery from '@/app/server-actions/helpers/mysqldb'
 
 async function getData() {
   const url = process.env.URL_API
@@ -16,10 +18,27 @@ async function getData() {
   }
 }
 
+const getData2 = async () => {
+  'use server'
+  const result1 = await executeQuery(
+    'SELECT exams.id as exam_id, exams.year as exams_year, exams.questions as exams_questions,' +
+           'exams_types.* FROM exams JOIN exams_types ON exams.exam_type_id = exams_types.id WHERE exams.exam_type_id = 1',
+    [],
+  )
+  const result2 = await executeQuery('select * from clasificaciones', [])
+  // await new Promise((res) => setTimeout(res, 2000))
+  return { examenes: result1, temas: result2 } as {
+    examenes: ExamTypeFromDB[]
+    temas: SubjectType[]
+  }
+}
+
 export default async function page({ params }: { params: { names: string } }) {
   const data = await getData()
+  const data2 = await getData2()
+  console.log(data2)
   const subject = data?.temas.find(
-    (p: ExamType) => p.id === parseInt(params.names),
+    (p: ExamTypeFromApi) => p.id === parseInt(params.names),
   )
   const payload = (await getInfoAuthCookie()) as UserType
   return (
@@ -30,8 +49,8 @@ export default async function page({ params }: { params: { names: string } }) {
       >
         <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-4 mb-8 gap-4">
           {data &&
-            data.examenes.map((p: ExamType, index: number) => (
-              <CardExam2
+            data.examenes.map((p: ExamTypeFromApi, index: number) => (
+              <CardExam
                 item={p}
                 key={index}
                 year={undefined}

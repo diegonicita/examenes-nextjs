@@ -1,95 +1,69 @@
-'use client'
-import React from 'react'
+'use server'
+import { ExamTypeFromApi } from '@/app/models/Exam'
 import Image from 'next/image'
-import type { ExamType } from '@/app/models/Exam'
 import Link from 'next/link'
-import { useSelector, selectAllQuestion } from '@/app/lib/redux'
-import { getStatistics } from './helper/getStatistic'
-import useHasMounted from '@/app/hooks/useHasMounted'
 
-export default function CardExam({
+const CardExam = ({
   item,
   year,
   link,
   total,
   userId,
 }: {
-  item: ExamType
+  item: ExamTypeFromApi
   year: number | undefined
   link: string
   total: number
   userId: number | null
-}) {
-  const answeredArray = useSelector((state) => selectAllQuestion(state))
-  const _userId = userId ? userId : 0
-  const { answered, corrects, percentCorrect, percentNotCorrect } =
-    getStatistics({
-      data: answeredArray.filter((item) => item.userId === _userId),
-      year: year,
-      id: item.id,
-    })
-
+}) => {
   return (
-    <>
-      {useHasMounted() && (
-        <Link href={{
+    <div className="flex flex-col gap-2 bg-base-200 rounded-box p-8">
+      <div className="flex flex-col text-center">
+        <h2 className="text-xl ">{item.titulo ? item.titulo : 'Sin título'}</h2>
+        {!year && (
+          <figure className="flex justify-center">
+            {item.imagen ? (
+              <Image
+                src={
+                  'https://mercado.webapp.ar/images_medicina/' + item?.imagen
+                }
+                alt="imagen"
+                width={160}
+                height={160}
+                sizes={'100vh'}
+                className="h-auto w-full max-w-40"
+              />
+            ) : (
+              <Image
+                src={'https://mercado.webapp.ar/images_medicina/medicina-1.png'}
+                alt="imagen"
+                width={0}
+                height={0}
+                sizes={'100vh'}
+                className="h-auto w-full max-w-40"
+              />
+            )}
+          </figure>
+        )}
+        {year && <h2 className="text-4xl font-bold p-4">{year}</h2>}
+        {!year && <span className="text-sm">{item.pais}</span>}
+      </div>
+
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex items-center">{total} preguntas</div>
+      </div>
+
+      <Link
+        href={{
           pathname: link,
-          query:{page: "1"}
-        }}>
-          <div className="btn btn-ghost h-full p-0 border-0">
-            <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator hover:shadow-2xl h-auto pb-4">
-              <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">
-                {total}
-              </span>
-              <figure className="pt-2">
-                {item.imagen ? (
-                  <Image
-                    src={
-                      'https://mercado.webapp.ar/images_medicina/' +
-                      item?.imagen
-                    }
-                    alt="imagen"
-                    width={0}
-                    height={0}
-                    sizes={'100vh'}
-                    className="h-auto w-80 sm:w-60 lg:w-32"
-                  />
-                ) : (
-                  <Image
-                    src={
-                      'https://mercado.webapp.ar/images_medicina/medicina-1.png'
-                    }
-                    alt="imagen"
-                    width={0}
-                    height={0}
-                    sizes={'100vh'}
-                    className="h-auto w-80 sm:w-60 lg:w-28"
-                  />
-                )}
-              </figure>
-              <div className="text-lg text-center flex-1">
-                <div className="h-full flex flex-col items-center p-1">
-                  <div className="max-w-[10rem] mx-auto mb-2 text-sm text-pretty">
-                    {!year && (
-                      <>
-                        {item.titulo ? item.titulo : 'Sin título'} <br /> (
-                        {item.pais})
-                      </>
-                    )}
-                    {year && <>Año {year}</>}
-                  </div>
-                  <div className="text-xs text-success">
-                    Correctas: {corrects} ({percentCorrect}%)
-                  </div>
-                  <div className="text-xs text-error">
-                    Incorrectas: {answered - corrects} ({percentNotCorrect}%)
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Link>
-      )}
-    </>
+          query: { page: '1' },
+        }}
+        className="btn btn-neutral"
+      >
+        Seleccionar
+      </Link>
+    </div>
   )
 }
+
+export default CardExam

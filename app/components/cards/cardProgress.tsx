@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import type { ExamType } from '@/app/models/Exam'
+import type { ExamTypeFromApi } from '@/app/models/Exam'
 import { getStatistics } from '@/app/components/cards/helper/getStatistic'
 import useHasMounted from '@/app/hooks/useHasMounted'
 import TrashIcon from '@/app/assets/icons/trashIcon'
@@ -18,7 +18,7 @@ export default function Card({
   total,
   userId,
 }: {
-  item: ExamType
+  item: ExamTypeFromApi
   year: number | undefined
   link: string
   total: number

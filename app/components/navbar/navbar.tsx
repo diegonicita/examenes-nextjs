@@ -11,7 +11,7 @@ export const Nav = async () => {
 
   return (
     <div className="bg-base-200 text-base-content">
-      <nav className="px-4 flex gap-4 sm:w-full max-w-[45rem] mx-auto text-sm items-center justify-between">
+      <nav className="px-4 flex gap-4 sm:w-full max-w-[55rem] mx-auto text-sm items-center justify-between">
         <AuthBurger />
         <div role="tablist" className="hidden md:flex tabs tabs-lifted tabs-lg">
           {tabs.map((tab, index) => {
@@ -33,6 +33,14 @@ export const Nav = async () => {
         <div className="flex gap-8">
           <AuthMenu isLogged={isLogged} />
           <ThemeSelector />
+          <a href="https://ko-fi.com/E1E6DPG1I" target="_blank">
+            <img
+              height="36"
+              className="border-0 hidden sm:flex h-12"
+              src="https://storage.ko-fi.com/cdn/kofi2.png?v=3"
+              alt="Buy Me a Coffee at ko-fi.com"
+            />
+          </a>
         </div>
       </nav>
     </div>

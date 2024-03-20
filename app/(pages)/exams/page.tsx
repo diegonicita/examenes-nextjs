@@ -1,16 +1,27 @@
 import CardExam from '@/app/components/cards/cardExam'
-import CardExam2 from '@/app/components/cards/cardExam2'
-import CardSubject2 from '@/app/components/cards/cardSubject2'
+import CardSubject from '@/app/components/cards/cardSubject'
 import Container from '@/app/components/container/container'
-import type { ExamType } from '@/app/models/Exam'
+import type { ExamTypeFromDB, ExamTypeFromApi } from '@/app/models/Exam'
 import { SubjectType } from '@/app/models/Subject'
 import { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
-import getQuestionsStatistics from '@/app/server-actions/questions/get-questions-statistics'
+import getExamsTypes from '@/app/(pages)/exams/actions/getExamsTypes'
+import getClasificacion from '@/app/(pages)/exams/actions/getClasificacion'
+
+const getData = async () => {
+  'use server'
+  const examsTypes = await getExamsTypes()
+  const clasificacion = await getClasificacion()
+  // await new Promise((res) => setTimeout(res, 2000))
+  return { examenes: examsTypes, temas: clasificacion } as {
+    examenes: ExamTypeFromDB[]
+    temas: SubjectType[]
+  }
+}
 
 const Page = async () => {
-  const data = await getQuestionsStatistics()
-  const exams = data.examenes as ExamType[]
+  const data = await getData()
+  const exams = data.examenes
   const payload = (await getInfoAuthCookie()) as UserType
   const temas = data.temas as SubjectType[]
 
@@ -19,23 +30,30 @@ const Page = async () => {
       <Container title="Exámenes" subtitle="Selecciona un Examen">
         <div className="flex flex-wrap justify-center px-8 max-w-[75rem] mx-auto mb-8 gap-4 mt-4">
           {exams &&
-            exams.map((p: ExamType, index: number) => (
-              <CardExam2
-                item={p}
+            exams.map((p: ExamTypeFromDB, index: number) => (
+              <CardExam
+                item={
+                  {
+                    id: p.id,
+                    titulo: p.name,
+                    visible: true,
+                    imagen: p.image,
+                  } as ExamTypeFromApi
+                }
                 key={index}
                 year={undefined}
                 link={`/exams/${p.id}`}
-                total={p.total}
+                total={p.questions}
                 userId={payload?.id}
               />
             ))}
         </div>
-      </Container>     
+      </Container>
       <Container title="Temas" subtitle="Selecciona un tema">
         <div className="flex flex-wrap justify-center gap-4 px-8 max-w-[75rem] mx-auto mt-4 mb-8">
           {temas &&
             temas.map((p: SubjectType, index: number) => {
-              if (p.visible) return <CardSubject2 item={p} key={index} />
+              if (p.visible) return <CardSubject item={p} key={index} />
             })}
         </div>
       </Container>

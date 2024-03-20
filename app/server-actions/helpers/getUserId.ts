@@ -37,7 +37,7 @@ export const getUserId = async (email: string) => {
         return {
           message: 'success',
           id: createResponse.id,
-          role: 'user',
+          role: 'user-1',
         }
       }
     } catch (error) {
