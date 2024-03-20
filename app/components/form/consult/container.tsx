@@ -46,7 +46,7 @@ export const Container = () => {
   }
 
   return (
-    <div className="card w-full bg-base-300 mb-2 ml-8">
+    <div className="card bg-base-300 mb-2 w-full mx-4 max-w-xl">
       <Form
         handleSubmit={handleSubmit}
         formRef={formRef}

@@ -20,8 +20,8 @@ const Home = () => {
             <i className="fa-solid fa-circle-question text-primary"></i>
             Envíanos una consulta
           </h2>
-          <span className="mb-6 mt-2">
-            Whatever your status, our offers evolve according to your needs
+          <span className="p-2 text-center sm:text-left">
+            Cualquier sea tu problema o sugerencia, nos pondremos en contacto
           </span>
         </div>
         <div className="flex mt-4">

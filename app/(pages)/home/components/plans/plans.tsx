@@ -20,7 +20,7 @@ export default function Plans() {
 
             <div className="flex flex-col">
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>300 preguntas
+                <i className="text-accent"></i>400 preguntas
               </div>
 
               <div className="flex gap-2 items-center">
@@ -33,7 +33,7 @@ export default function Plans() {
               </div>
               <div className="flex gap-2 items-center">
                 <i className="text-accent"></i>
-                Buscador de preguntas Limitado
+                Incluye el Buscador de preguntas (limitado)
               </div>
             </div>
 
