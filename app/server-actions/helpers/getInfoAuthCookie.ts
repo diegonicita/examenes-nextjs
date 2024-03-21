@@ -33,7 +33,7 @@ const getInfoAuthCookie = async () => {
         id: payload.clientId,
         email: payload.clientEmail,
         username: payload.displayName,
-        role: 'client' as string,
+        role: 'user-1' as string,
         verify: 1 as number,
         iat: payload.iat,
         exp: payload.exp,

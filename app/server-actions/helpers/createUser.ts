@@ -16,7 +16,7 @@ export const createUser = async (email: string) => {
   if (result.success) {
     try {
       const response = (await executeQuery(
-        'insert into usuarios (email, role) values (?, "user")',
+        'insert into usuarios (email, role) values (?, "user-1")',
         [email],
       )) as RowDataPacket
       console.log(response)

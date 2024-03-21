@@ -27,7 +27,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
     return NextResponse.json(json)
   }
 
-  if (payload?.role === 'client' && process.env.URL_PROFILE && payload?.id) {
+  if (payload?.role === 'user-1' && process.env.URL_PROFILE && payload?.id) {
     const respuesta = await fetch(
       `${process.env.URL_PROFILE}/${payload.id}`,
       requestOptions,
