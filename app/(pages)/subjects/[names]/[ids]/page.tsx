@@ -4,6 +4,7 @@ import getExamBySubject from '../../actions/getExamBySubject'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import Container from '@/app/components/container/container'
 import MessageNotLogged from '@/app/components/checkCookie/messageNotLogged'
+import searchComments from '@/app/(pages)/questions/actions/searchComments'
 
 async function getData() {
   const url = process.env.URL_API
@@ -31,6 +32,15 @@ export default async function page({
   )
   const questions = await getExamBySubject(exam.id, subject.id)
   const payload = await getInfoAuthCookie()
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  let treeComments = {} as any
+
+  if (payload) {
+    const result = await searchComments(questions)
+    treeComments = {
+      ...(result?.tree ? result.tree : null),
+    }
+  }
 
   return (
     <div className="w-full mx-auto max-w-[85ch] px-1 mt-8">
@@ -39,7 +49,15 @@ export default async function page({
         subtitle={`${exam?.titulo} - ${exam?.pais}`}
       >
         <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-2 mb-8">
-          {payload && <Examen data={questions} userId={payload?.id} />}
+          {payload && (
+            <Examen
+              data={questions}
+              userId={payload?.id}
+              temas={data.temas}
+              currentUser={payload}
+              treeComments={treeComments}
+            />
+          )}
           {!payload && <MessageNotLogged />}
         </div>
       </Container>
