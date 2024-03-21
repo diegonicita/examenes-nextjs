@@ -18,6 +18,7 @@ export default function Hero() {
             height={0}
             sizes="100vw"
             className="w-[25rem] pt-8 lg:absolute -right-8 lg:w-[35rem]"
+            priority
           />
           {/* <div className="w-[25rem] pt-8 top-14 lg:absolute lg:right-16 lg:w-[45rem] xl:right-0">
 						<InputHome />
