@@ -4,7 +4,7 @@ import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import type { ExamTypeFromApi, ExamTypeFromDB } from '@/app/models/Exam'
 import type { UserType } from '@/app/models/User'
 import Container from '@/app/components/container/container'
-import { SubjectType } from '@/app/models/Subject'
+import type { SubjectType } from '@/app/models/Subject'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 // import getQuestionsStatistics from '@/app/server-actions/questions/get-questions-statistics'
 
@@ -33,27 +33,26 @@ const Page = async () => {
       </Container>
       <Container title="Resultados" subtitle="Exámenes donde practicaste">
         <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-4 mb-8 gap-4">
-          {exams &&
-            exams.map((p, index: number) => (
-              <CardProgress
-                item={
-                  {
-                    id: p.id,
-                    titulo: p.name,
-                    visible: true,
-                    imagen: p.image,
-                  } as ExamTypeFromApi
-                }
-                key={index}
-                year={undefined}
-                link={`/exams/${p.id}`}
-                total={p.total}
-                userId={payload?.id}
-              />
-            ))}
+          {exams?.map((p) => (
+            <CardProgress
+              item={
+                {
+                  id: p.id,
+                  titulo: p.name,
+                  visible: true,
+                  imagen: p.image,
+                } as ExamTypeFromApi
+              }
+              key={p.id}
+              year={undefined}
+              link={`/exams/${p.id}`}
+              total={p.total}
+              userId={payload?.id}
+            />
+          ))}
         </div>
       </Container>
-      <div className="divider divider-end"></div>
+      <div className="divider divider-end" />
     </div>
   )
 }

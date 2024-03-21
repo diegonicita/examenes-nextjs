@@ -10,7 +10,5 @@ export default async function getExam(
   try {
     const questions = await getExamQuery(examId, year, limit, page)
     return questions
-  } catch (e) {
-    throw e
-  }
+  } catch (e) {}
 }

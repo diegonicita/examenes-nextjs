@@ -1,15 +1,15 @@
 import CardExam from '@/app/components/cards/cardExam'
 import Container from '@/app/components/container/container'
 import type { ExamTypeFromApi, ExamTypeFromDB } from '@/app/models/Exam'
-import { SubjectType } from '@/app/models/Subject'
-import { UserType } from '@/app/models/User'
+import type { SubjectType } from '@/app/models/Subject'
+import type { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 
 async function getData() {
   const url = process.env.URL_API
   try {
-    const res = await fetch(url + '/api/get-questions-statistics')
+    const res = await fetch(`${url}/api/get-questions-statistics`)
     return res.json()
   } catch (error) {
     console.log(error)
@@ -38,21 +38,20 @@ export default async function page({ params }: { params: { names: string } }) {
   const data2 = await getData2()
   console.log(data2)
   const subject = data?.temas.find(
-    (p: ExamTypeFromApi) => p.id === parseInt(params.names),
+    (p: ExamTypeFromApi) => p.id === Number.parseInt(params.names),
   )
   const payload = (await getInfoAuthCookie()) as UserType
   return (
     <div className="mt-8">
       <Container
-        title={'Preguntas de ' + subject?.titulo}
+        title={`Preguntas de ${subject?.titulo}`}
         subtitle="Selecciona un examen"
       >
         <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-4 mb-8 gap-4">
-          {data &&
-            data.examenes.map((p: ExamTypeFromApi, index: number) => (
+          {data?.examenes.map((p: ExamTypeFromApi, index: number) => (
               <CardExam
                 item={p}
-                key={index}
+                key={p.id}
                 year={undefined}
                 link={`/subjects/${params.names}/${p.id}`}
                 total={p.total}

@@ -33,7 +33,7 @@ export const logoutAction = async () => {
     }
 
     if (process.env.NODE_ENV === 'development') {
-      delete config.domain
+      config.domain = undefined
     }
 
     cookies().set('token', '', config)

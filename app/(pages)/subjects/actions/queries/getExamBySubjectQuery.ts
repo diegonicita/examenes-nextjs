@@ -1,6 +1,6 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import { RowDataPacket } from 'mysql2'
+import type { RowDataPacket } from 'mysql2'
 
 export default async function getExamBySubjectQuery(
   examId: number,

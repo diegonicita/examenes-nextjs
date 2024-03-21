@@ -17,7 +17,7 @@ type YearData = {
 async function getData() {
   const url = process.env.URL_API
   try {
-    const res = await fetch(url + '/api/get-questions-statistics', {
+    const res = await fetch(`${url}/api/get-questions-statistics`, {
       cache: 'no-store',
     })
     return res.json()
@@ -49,6 +49,7 @@ export default async function ExamIdPage({
 
   const questions = await getExam(exam.id, year.ano, 5, searchParams.page)
   const totalQuestion = Math.ceil(year?.cantidad_preguntas / 5)
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   let treeComments = {} as any
 
   if (payload) {
@@ -66,7 +67,13 @@ export default async function ExamIdPage({
         <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto my-4">
           {!payload ||
             (payload && payload?.role !== 'admin' && (
-              <Examen data={questions} userId={payload?.id} />
+              <Examen
+                data={questions}
+                userId={payload?.id}
+                temas={data.temas}
+                currentUser={payload}
+                treeComments={treeComments}
+              />
             ))}
           {payload && payload.role === 'admin' && (
             <Editor

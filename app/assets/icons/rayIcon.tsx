@@ -6,12 +6,13 @@ const RayIcon = () => {
       viewBox="0 0 24 24"
       className="inline-block w-8 h-8 stroke-current"
     >
+      <title>Ray Icon</title>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
         d="M13 10V3L4 14h7v7l9-11h-7z"
-      ></path>
+      />
     </svg>
   )
 }

@@ -20,31 +20,30 @@ export default function Plans() {
 
             <div className="flex flex-col">
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>400 preguntas
+                <i className="text-accent" />
+                400 preguntas
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>
+                <i className="text-accent" />
                 10 preguntas por examen
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>1 pregunta por tema
+                <i className="text-accent" />1 pregunta por tema
               </div>
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>
+                <i className="text-accent" />
                 Incluye el Buscador de preguntas (limitado)
               </div>
             </div>
 
-            <Link href="/register" className="btn btn-neutral">Registrate</Link>
+            <Link href="/register" className="btn btn-neutral">
+              Registrate
+            </Link>
           </div>
 
           <div className="flex flex-col gap-6 bg-base-200 rounded-box p-8 border border-accent shadow">
-            {/* <div className="badge badge-accent self-center badge-lg">
-            Más Popular
-          </div> */}
-
             <div className="flex flex-col gap-4 text-center">
               <h2 className="text-xl">Básico</h2>
 
@@ -57,12 +56,12 @@ export default function Plans() {
 
             <div className="flex flex-col">
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>Más de 6000 preguntas
-                actualizadas
+                <i className="text-accent" />
+                Más de 6000 preguntas actualizadas
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>
+                <i className="text-accent" />
                 Incluye el Buscador de preguntas
               </div>
             </div>
@@ -81,17 +80,17 @@ export default function Plans() {
             </div>
             <div className="flex flex-col">
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>
+                <i className="text-accent" />
                 Más de 6000 preguntas actualizadas
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>
+                <i className="text-accent" />
                 Sin limite de tiempo
               </div>
 
               <div className="flex gap-2 items-center">
-                <i className="text-accent"></i>
+                <i className="text-accent" />
                 Incluye el Buscador de preguntas
               </div>
             </div>

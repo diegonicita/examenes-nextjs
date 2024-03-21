@@ -1,6 +1,6 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import { RowDataPacket } from 'mysql2'
+import type { RowDataPacket } from 'mysql2'
 import getInfoAuthCookie from '../helpers/getInfoAuthCookie'
 
 export default async function getQuestions(query: string | null) {
@@ -8,13 +8,14 @@ export default async function getQuestions(query: string | null) {
 
   console.log(query)
   if (auth && auth.role === 'admin') {
-    const querylike = '%' + query + '%'
+    const querylike = `%${query}%`
     let result = null
     result = (await executeQuery(
       'select * from preguntas where texto like ? limit 10',
       [querylike],
     )) as RowDataPacket
 
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const r = result.map((item: any) => {
       return {
         id: item.id,

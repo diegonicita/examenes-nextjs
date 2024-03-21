@@ -14,18 +14,18 @@ export const Nav = async () => {
       <nav className="px-4 flex gap-4 sm:w-full max-w-[55rem] mx-auto text-sm items-center justify-between">
         <AuthBurger />
         <div role="tablist" className="hidden md:flex tabs tabs-lifted tabs-lg">
-          {tabs.map((tab, index) => {
+          {tabs.map((tab) => {
             return (
               tab.requireLogin === false && (
-                <Tab name={tab.name} path={tab.path} key={index} />
+                <Tab name={tab.name} path={tab.path} key={tab.name} />
               )
             )
           })}
-          {tabs.map((tab, index) => {
+          {tabs.map((tab) => {
             return (
               isLogged &&
               tab.requireLogin === true && (
-                <Tab name={tab.name} path={tab.path} key={index} />
+                <Tab name={tab.name} path={tab.path} key={tab.name} />
               )
             )
           })}
@@ -33,7 +33,11 @@ export const Nav = async () => {
         <div className="flex gap-8">
           <AuthMenu isLogged={isLogged} />
           <ThemeSelector />
-          <a href="https://ko-fi.com/E1E6DPG1I" target="_blank">
+          <a
+            href="https://ko-fi.com/E1E6DPG1I"
+            target="_blank"
+            rel="noreferrer"
+          >
             <img
               height="36"
               className="border-0 hidden sm:flex h-12"

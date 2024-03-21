@@ -13,7 +13,7 @@ type YearData = {
 async function getData() {
   const url = process.env.URL_API
   try {
-    const res = await fetch(url + '/api/get-questions-statistics')
+    const res = await fetch(`${url}/api/get-questions-statistics`)
     return res.json()
   } catch (error) {
     console.log(error)
@@ -37,17 +37,16 @@ export default async function ExamIdPage({
     <div className="mt-8">
       <Container title="Exámenes" subtitle="Selecciona el año">
         <div className="flex flex-wrap justify-center px-8 max-w-[75rem] mx-auto mb-8 gap-4 mt-4">
-          {exam &&
-            exam.preguntas.map((e: YearData, index: number) => (
-              <CardExam
-                item={exam}
-                key={index}
-                year={e.ano}
-                link={`/exams/${exam.id}/${e.ano}`}
-                total={e.cantidad_preguntas}
-                userId={payload?.id}
-              />
-            ))}
+          {exam?.preguntas.map((e: YearData, index: number) => (
+            <CardExam
+              item={exam}
+              key={e.ano}
+              year={e.ano}
+              link={`/exams/${exam.id}/${e.ano}`}
+              total={e.cantidad_preguntas}
+              userId={payload?.id}
+            />
+          ))}
         </div>
       </Container>
     </div>

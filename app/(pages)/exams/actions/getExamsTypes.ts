@@ -5,7 +5,5 @@ export default async function getExamsTypes() {
   try {
     const examsTypes = await getExamsTypesQuery()
     return examsTypes
-  } catch (e) {
-    throw e    
-  }
+  } catch (e) {}
 }

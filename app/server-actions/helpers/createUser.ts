@@ -1,7 +1,7 @@
 'use server'
 
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import { RowDataPacket } from 'mysql2'
+import type { RowDataPacket } from 'mysql2'
 import { z } from 'zod'
 
 export const createUser = async (email: string) => {
@@ -16,11 +16,11 @@ export const createUser = async (email: string) => {
   if (result.success) {
     try {
       const response = (await executeQuery(
-        'insert into usuarios (email, role) values (?, "user")',
+        'insert into usuarios (email, role) values (?, "user-1")',
         [email],
       )) as RowDataPacket
       console.log(response)
-      if (response && response?.affectedRows) {
+      if (response?.affectedRows) {
         console.log(response?.affectedRows)
         return {
           message: 'success',

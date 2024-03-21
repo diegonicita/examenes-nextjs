@@ -15,7 +15,7 @@ const Plans = async () => {
         </span>
       </div>
       <div className="flex justify-center mt-4 mb-12">
-        <a href="https://ko-fi.com/E1E6DPG1I" target="_blank">
+        <a href="https://ko-fi.com/E1E6DPG1I" target="_blank" rel="noreferrer">
           <img
             height="36"
             className="border-0 h-9"
