@@ -67,7 +67,13 @@ export default async function ExamIdPage({
         <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto my-4">
           {!payload ||
             (payload && payload?.role !== 'admin' && (
-              <Examen data={questions} userId={payload?.id} />
+              <Examen
+                data={questions}
+                userId={payload?.id}
+                temas={data.temas}
+                currentUser={payload}
+                treeComments={treeComments}
+              />
             ))}
           {payload && payload.role === 'admin' && (
             <Editor
