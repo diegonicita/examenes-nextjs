@@ -15,13 +15,11 @@ const Home = () => {
         <InputHome />
         <Prices />
         <Faq />
-        <div className="flex flex-col items-center mt-14">
-          <h2 className="text-3xl font-bold">
-            <i className="text-primary" />
-            Envíanos una consulta
-          </h2>
+        <div id="consults" className="flex flex-col items-center mt-14">
+          <h2 className="text-3xl font-bold">Consultas y Códigos de Compra</h2>
           <span className="px-4 mt-1 text-center text-balance">
-            Cualquier problema o sugerencia, nos pondremos en contacto contigo
+            Si compraste un acceso rellena el formulario y envíanos el código de
+            compra
           </span>
         </div>
         <div className="flex mt-4">

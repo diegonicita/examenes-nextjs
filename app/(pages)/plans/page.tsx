@@ -1,13 +1,25 @@
 import Prices from '../home/components/plans/plans'
 import Faq from '../home/components/faq/faq'
-
+import ConsultForm from '@/app/components/form/consult/container'
 import React from 'react'
+import LeftColumn from '../home/components/consults/leftColumn'
 
 const Plans = async () => {
   return (
     <div className="mx-auto max-w-[55rem] mb-8 mt-8">
       <Prices />
       <Faq />
+      <div id="consults" className="flex flex-col items-center mt-14">
+        <h2 className="text-3xl font-bold">Consultas y Códigos de Compra</h2>
+        <span className="px-4 mt-1 text-center text-balance">
+          Si compraste un acceso rellena el formulario y envíanos el código de
+          compra
+        </span>
+      </div>
+      <div className="flex mt-4">
+        <LeftColumn />
+        <ConsultForm />
+      </div>
       <div className="flex flex-col gap-2 text-center mt-12 mb-0">
         <h1 className="font-bold text-3xl">Donaciones</h1>
         <span>

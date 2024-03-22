@@ -1,5 +1,6 @@
 'use client'
-import React, { startTransition, useRef, useState } from 'react'
+import type React from 'react'
+import { startTransition, useRef, useState } from 'react'
 import Form from '../components/form'
 import Button from '../components/button'
 import Input from '../components/input'
