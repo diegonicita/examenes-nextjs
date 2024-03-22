@@ -31,8 +31,13 @@ export const Nav = async () => {
           })}
         </div>
         <div className="flex gap-8">
-          <div className="flex items-center">
-            {auth && 'Role:'} {auth?.role}
+          <div className="leading-none flex flex-col text-[0.7rem] items-center justify-center gap-2">
+            <div>
+              {auth?.username}
+            </div>
+            <div>
+              {auth && 'Role:'} {auth?.role}
+            </div>
           </div>
           <AuthMenu isLogged={isLogged} />
           <ThemeSelector />
