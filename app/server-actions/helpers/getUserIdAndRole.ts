@@ -3,9 +3,8 @@
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import type { RowDataPacket } from 'mysql2'
 import { z } from 'zod'
-import { createUser } from './createUser'
 
-export const getUserId = async (email: string) => {
+export default async function getUserIdAndRole(email: string) {
   const validacion = z
     .object({
       email: z.string().email({ message: 'Correo Electronico Invalido' }),
@@ -25,19 +24,6 @@ export const getUserId = async (email: string) => {
           message: 'success',
           id: response[0].id,
           role: response[0].role,
-        }
-      }
-      console.log('no existe el usuario. A crearlo.')
-      // if email not founded create user
-      const createResponse: { message: string; id: number } = await createUser(
-        email,
-      )
-      if (createResponse.message === 'success') {
-        console.log('usuario creado')
-        return {
-          message: 'success',
-          id: createResponse.id,
-          role: 'user-1',
         }
       }
     } catch (error) {
