@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { notifyCorrect } from './notifyCorrect'
+import { Correct } from './notifyCorrect'
 import { notifyIncorrect } from './notifyIncorrect'
 import useHasMounted from '@/app/hooks/useHasMounted'
 
