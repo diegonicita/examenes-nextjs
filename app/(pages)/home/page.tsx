@@ -6,17 +6,21 @@ import Prices from './components/plans/plans'
 import Faq from './components/faq/faq'
 import InputHome from './components/inputHome/inputHome'
 import News from './components/news/news'
-import dataNews from '../news/action/createNew/data/dataNews'
+import dataNews from '../news/action/data/dataNews'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import type { UserType } from '@/app/models/User'
+import type { NewsItem } from '@/app/models/news/newData'
 
 export default async function Home() {
-  const data = await dataNews()
-  console.log(data)
+  const currentUser = (await getInfoAuthCookie()) as UserType
+  const data = (await dataNews()) as NewsItem[]
+
   return (
     <>
       <Hero />
       <div className='mx-auto max-w-[55rem] mb-8'>
         <InputHome />
-        <News data={data} />
+        <News data={data} currentUser={currentUser} />
         <Prices />
         <Faq />
         <div className='flex flex-col items-center mt-14'>

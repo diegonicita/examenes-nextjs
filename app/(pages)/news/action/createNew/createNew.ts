@@ -5,6 +5,7 @@ import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 import type { UserType } from '@/app/models/User'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
 import { z } from 'zod'
+import { redirect } from 'next/navigation'
 
 const schema = z.object({
   title: z
@@ -25,7 +26,6 @@ export default async function createNews(prevState: any, formData: FormData) {
 
   const validatedFields = schema.safeParse(newTodo)
   const authData = (await getInfoAuthCookie()) as UserType
-  console.log(authData)
 
   // Return early if the form data is invalid
   if (!validatedFields.success) {
@@ -37,7 +37,6 @@ export default async function createNews(prevState: any, formData: FormData) {
     if (authData.role === 'admin') {
       if (validatedFields.data) {
         // await new Promise((res) => setTimeout(res, 1000))
-        console.log(validatedFields.data)
         const result = (await executeQuery(
           'insert into news values (NULL,?,?,?,?,NOW())',
           [
@@ -52,6 +51,8 @@ export default async function createNews(prevState: any, formData: FormData) {
           return { message: 'success' }
         }
       }
+    } else {
+      redirect('/')
     }
   } catch (e) {
     return { message: 'error' }

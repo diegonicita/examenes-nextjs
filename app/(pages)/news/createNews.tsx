@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import createNews from './action/createNew/createNew'
 //@ts-ignore
-import { useFormStatus, useFormState } from 'react-dom'
+import { useFormState } from 'react-dom'
 import { notifySuccess } from '@/app/components/form/components/notifySuccess'
 import { notifyErrors } from '@/app/components/form/components/notifyErrors'
 const initialState = {
@@ -14,6 +14,8 @@ export default function CreatenewForm() {
   useEffect(() => {
     if (state?.message === 'success') {
       notifySuccess('Tu Noticia ha sido Creada exitosamente')
+    } else if (state?.message === 'fail') {
+      notifyErrors('No eres admin')
     } else {
       if (state?.message === 'error') {
         notifyErrors('No pudimos crear tu noticia, Inténtalo más tarde.')

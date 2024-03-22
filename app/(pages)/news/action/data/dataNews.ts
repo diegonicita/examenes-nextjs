@@ -6,7 +6,6 @@ export default async function dataNews() {
     const data = (await executeQuery(
       'SELECT id, title, description, url_news, url_image, created_at FROM news',
     )) as RowDataPacket
-    console.log(data)
     return data
   } catch (e) {
     console.log('error', e)
