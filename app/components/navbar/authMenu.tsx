@@ -11,6 +11,7 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
   return (
     <div>
       <div className="w-auto lg:w-full text-end dropdown dropdown-end">
+        {/* biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation> */}
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-10 rounded-full bg-base-300">
             <Image
@@ -20,6 +21,7 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
           </div>
         </label>
         <ul
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
           tabIndex={0}
           className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
         >
@@ -42,16 +44,19 @@ export default function AuthMenu({ isLogged }: { isLogged: boolean }) {
               </li>
               <li>
                 <Link href="/plans" className="justify-center">
-                  <div>Ver Planes</div>                 
+                  <div>Ver Planes</div>
                 </Link>
               </li>
               <li>
                 <Link href="/consults" className="justify-center">
-                  <div>Administrador</div>                 
+                  <div>Administrador</div>
                 </Link>
               </li>
               <li>
-                <div className="justify-center" onClick={() => handleLogout()}>Salir</div>
+                {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+                <div className="justify-center" onClick={() => handleLogout()}>
+                  Salir
+                </div>
               </li>
             </>
           )}

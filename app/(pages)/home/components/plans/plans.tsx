@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Plans() {
   return (
-    <div className="">
+    <div className="pt-0">
       <div className="flex flex-col gap-8 items-center">
         <div className="flex flex-col gap-2 text-center">
           <h1 className="font-bold text-3xl">Planes</h1>
