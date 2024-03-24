@@ -37,6 +37,7 @@ const Page = async () => {
                   titulo: p.name,
                   visible: true,
                   imagen: p.image,
+                  pais: p.country
                 } as ExamTypeFromApi
               }
               key={p.id}

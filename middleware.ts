@@ -4,10 +4,13 @@ import { jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 
 export async function middleware(request: NextRequest) {
-  let authCookieCredentials = request.cookies.get('auth')
+  const authCookieCredentials = request.cookies.get('auth')
   const authTokenGoogle = request.cookies.get('token')
   let authPayload = null
   const secret = process.env.JWT_SECRET
+  const LOGIN = `${process.env.URL_API}/login?redirect=${
+    request.nextUrl.pathname + request.nextUrl.search
+  }`
 
   if (authTokenGoogle) {
     try {
@@ -15,14 +18,16 @@ export async function middleware(request: NextRequest) {
         authTokenGoogle?.value,
         new TextEncoder().encode(secret),
       )
-      const currentTime = Date.now()
-      const currentTimeInSeconds = Math.floor(currentTime / 1000)
+      authPayload = payload
       console.log(
-        'Google Minutes Left: ',
-        Number(payload.exp) / 60 - currentTimeInSeconds / 60,
+        'Google Token Minutes Left: ',
+        getTimeLeftInMinutes(Number(payload.exp)),
       )
+      console.log('El token de Google está vigente.')
     } catch (error) {
-      console.log('Error al verificar el token:', error)
+      authPayload = null
+      console.log('Error al verificar el token de Google:', error)
+      return deleteCookie('token', LOGIN)
     }
   }
 
@@ -33,33 +38,24 @@ export async function middleware(request: NextRequest) {
         new TextEncoder().encode(secret),
       )
       authPayload = payload
-      const currentTime = Date.now()
-      const currentTimeInSeconds = Math.floor(currentTime / 1000)
-      // console.log(currentTimeInSeconds)
-      // console.log(authPayload.exp)
       console.log(
-        'AuthCredentials Minutes Left: ',
-        Number(payload.exp) / 60 - currentTimeInSeconds / 60,
+        'Credentials (auth) Minutes Left: ',
+        getTimeLeftInMinutes(Number(payload.exp)),
       )
-      if (authPayload.exp && currentTimeInSeconds >= authPayload?.exp) {
-        console.log('El token ha caducado.')
-        authPayload = null
-        authCookieCredentials = undefined
-        const response = NextResponse.next()
-        response.cookies.delete('auth')
-        return response
-      }
-      console.log('El token está vigente.')
-      const response = NextResponse.next()
-      response.cookies.delete('token')
-      return response
+      console.log('auth está vigente')
     } catch (error) {
-      authCookieCredentials = undefined
+      console.log('Error en cookie auth:', error)
       authPayload = null
-      console.log('Error al verificar el token:', error)
-      const response = NextResponse.next()
-      response.cookies.delete('auth')
-      return response
+      return deleteCookie('auth', LOGIN)
     }
   }
 }
+
+const deleteCookie = (name: string, loginURL: string) => {
+  const response = NextResponse.next()
+  response.cookies.delete(name)
+  return response
+}
+const getTimeInSeconds = () => Math.floor(Date.now() / 1000)
+const getTimeLeftInMinutes = (exp: number) => exp / 60 - getTimeInSeconds() / 60
+const tokenExpired = (exp: number) => getTimeInSeconds() >= exp

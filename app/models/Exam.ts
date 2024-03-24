@@ -20,4 +20,5 @@ export type ExamTypeFromDB = {
   name: string
   questions: number
   image: string
+  country: string
 }
