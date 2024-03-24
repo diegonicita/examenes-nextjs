@@ -2,6 +2,23 @@
 import type { ExamTypeFromApi } from '@/app/models/Exam'
 import Image from 'next/image'
 import Link from 'next/link'
+import flagImageAR from '@/app/assets/ar.gif'
+import flagImageES from '@/app/assets/es.gif'
+import flagImagePE from '@/app/assets/pe.gif'
+import flagImageMX from '@/app/assets/mx.gif'
+
+const countryFlag = (country: string) => {
+  switch (country) {
+    case 'Argentina':
+      return flagImageAR
+    case 'Perú':
+      return flagImagePE
+    case 'Mexico':
+      return flagImageMX
+    default:
+      return flagImageES
+  }
+}
 
 const CardExam = ({
   item,
@@ -24,9 +41,7 @@ const CardExam = ({
           <figure className="flex justify-center">
             {item.imagen ? (
               <Image
-                src={
-                  `https://mercado.webapp.ar/images_medicina/${item?.imagen}`
-                }
+                src={`https://mercado.webapp.ar/images_medicina/${item?.imagen}`}
                 alt="imagen"
                 width={160}
                 height={160}
@@ -46,7 +61,20 @@ const CardExam = ({
           </figure>
         )}
         {year && <h2 className="text-4xl font-bold p-4">{year}</h2>}
-        {!year && <span className="text-sm">{item.pais}</span>}
+        {!year && (
+          <div className="flex justify-center gap-2 items-center">
+            <Image
+              src={countryFlag(item.pais)}
+              alt="Pets Home"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-4 h-3"
+              priority
+            />
+            <span className="text-sm w-fit">{item.pais}</span>{' '}
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col justify-center items-center">
