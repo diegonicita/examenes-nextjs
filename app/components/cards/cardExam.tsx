@@ -1,5 +1,5 @@
 'use server'
-import type { ExamTypeFromApi } from '@/app/models/Exam'
+import type { ExamListItemType, ExamTypeFromApi } from '@/app/models/Exam'
 import Image from 'next/image'
 import Link from 'next/link'
 import flagImageAR from '@/app/assets/ar.gif'
