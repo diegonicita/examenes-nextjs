@@ -6,4 +6,6 @@ export default function IndexPage() {
 
 export const metadata = {
   title: 'ERM Residencias Médicas',
+  description:
+    'Examenes de Residencias Medicas. Practica con examenes de 4 paises: Mexico (ENARM), España (MIR), Argentina (Unico, CABA, Provincia de Buenos Aires), Peru (Unico)',
 }

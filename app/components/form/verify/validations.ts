@@ -32,10 +32,13 @@ export const checkPartialValidation = (
     })
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const getErrorsFromResult = (result: any) => {
   let newObject = { email: '', password: '' }
   if (!result.success) {
-    result.error.issues.forEach((issue: { path: any[]; message: any }) => {
+    // biome-ignore lint/complexity/noForEach: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        result.error.issues.forEach((issue: { path: any[]; message: any }) => {
       newObject = {
         ...newObject,
         [issue.path[0]]: issue.message,

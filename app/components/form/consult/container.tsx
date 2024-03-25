@@ -1,5 +1,6 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import type React from 'react'
+import { useRef, useState } from 'react'
 import Form from '../components/form'
 import Button from '../components/button'
 import Input from '../components/input'
@@ -50,7 +51,7 @@ export const Container = () => {
       <Form
         handleSubmit={handleSubmit}
         formRef={formRef}
-        title="Ingresa tu Consulta"
+        title="Ingresa tu Consulta o Código de Compra"
       >
         <Input
           data={{
@@ -76,8 +77,8 @@ export const Container = () => {
         />
         <TextArea
           data={{
-            text: 'Mensaje',
-            placeholder: 'Ingresa tu consulta',
+            text: 'Mensaje o Código de Compra',
+            placeholder: 'Ingresa tu consulta o código de compra',
             id: 'consult',
             name: 'consult',
             error: errors.consult,

@@ -7,7 +7,14 @@ export default function Plans() {
       <div className="flex flex-col gap-8 items-center">
         <div className="flex flex-col gap-2 text-center">
           <h1 className="font-bold text-3xl">Planes</h1>
-          <span>Estos son nuestros planes, elige el que prefieras</span>
+          <span>Estos son nuestros planes, elige el que prefieras.</span>
+          <span>
+            {' '}
+            Recuerda enviarnos luego el{' '}
+            <a className="underline" href="#consults">
+              Código de Compra
+            </a>
+          </span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 items-start px-2 gap-8">
           <div className="flex flex-col gap-6 bg-base-200 rounded-box p-8">

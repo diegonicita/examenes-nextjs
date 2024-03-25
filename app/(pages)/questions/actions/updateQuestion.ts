@@ -1,6 +1,6 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import { RowDataPacket } from 'mysql2'
+import type { RowDataPacket } from 'mysql2'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -45,9 +45,8 @@ export default async function updateQuestion(formData: FormData) {
 
     if (result && result.affectedRows > 0) {
       return { isError: false, message: 'success' }
-    } else {
-      return { isError: true, message: 'error updating question' }
     }
+      return { isError: true, message: 'error updating question' }
   } catch (e) {
     console.log('error', e)
     return { isError: true, message: 'error updating question' }
