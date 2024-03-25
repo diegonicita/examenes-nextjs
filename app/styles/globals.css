@@ -9,6 +9,9 @@ body {
 * {
   box-sizing: border-box;
 }
+.slick-slide > div {
+  margin: 0 10px
+}
 
 @tailwind base;
 @tailwind components;

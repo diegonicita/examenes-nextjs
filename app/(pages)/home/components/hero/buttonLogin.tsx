@@ -8,7 +8,7 @@ const ButtonLogin = () => {
     <Link
       href="/login"
       className="btn btn-neutral text-neutral-content w-48 justify-center 
-         text-lg rounded-3xl mb-8"
+         text-lg mb-8"
     >
       Ingresar
     </Link>
