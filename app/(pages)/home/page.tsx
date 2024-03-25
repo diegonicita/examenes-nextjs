@@ -13,28 +13,34 @@ import type { NewsItem } from '@/app/models/news/newData'
 
 export default async function Home() {
   const currentUser = (await getInfoAuthCookie()) as UserType
-  const data = (await dataNews()) as NewsItem[]
+  const data = await dataNews()
 
   return (
     <>
       <Hero />
-      <div className="mx-auto max-w-[55rem] mb-8">
+      <div className='mx-auto max-w-[55rem] mb-8'>
         <InputHome />
-        <News data={data} currentUser={currentUser} />
-        <div className="pt-8">
+        {data.message === 'error recovering data' ? (
+          <p className='text-center font-bold'>
+            Estamos trabajando en este feature vuelve mas tarde
+          </p>
+        ) : (
+          <News data={data as NewsItem[]} currentUser={currentUser} />
+        )}
+        <div className='pt-8'>
           <Prices />
         </div>
         <Faq />
-        <div className="flex flex-col items-center mt-14">
-          <h2 className="text-3xl font-bold">
-            <i className="text-primary" />
+        <div className='flex flex-col items-center mt-14'>
+          <h2 className='text-3xl font-bold'>
+            <i className='text-primary' />
             Envíanos una consulta
           </h2>
-          <span className="px-4 mt-1 text-center text-balance">
+          <span className='px-4 mt-1 text-center text-balance'>
             Cualquier problema o sugerencia, nos pondremos en contacto contigo
           </span>
         </div>
-        <div className="flex mt-4">
+        <div className='flex mt-4'>
           <LeftColumn />
           <ConsultForm />
         </div>

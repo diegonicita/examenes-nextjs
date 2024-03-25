@@ -1,4 +1,5 @@
 export interface NewsItem {
+  message: string | undefined
   id: number | string
   title: string
   description: string

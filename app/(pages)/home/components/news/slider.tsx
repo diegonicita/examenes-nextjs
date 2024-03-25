@@ -8,28 +8,57 @@ interface ArrowProps {
   onClick?: any
 }
 function SampleNextArrow(props: ArrowProps) {
-  const { className, style, onClick } = props
+  const { onClick } = props
   return (
     <div
       onKeyDown={onClick}
-      className={className}
-      style={{ ...style, display: 'block', background: 'gray' }}
+      className='block md:cursor-pointer  md:flex md:justify-end md:w-full '
       onClick={onClick}
-    />
+    >
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='16'
+        height='16'
+        fill='#50C4ED'
+        className='relative bottom-[292px] -right-5  '
+        viewBox='0 0 16 16'
+      >
+        <title>siguiente</title>
+        <path
+          fillRule='evenodd'
+          d='M5.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 1 1-.708-.708L11.793 8 5.646 1.854a.5.5 0 0 1 0-.708z'
+        />
+      </svg>
+    </div>
   )
 }
 
 function SamplePrevArrow(props: ArrowProps) {
-  const { className, style, onClick } = props
+  const { onClick } = props
   return (
     <div
-      onKeyDown={onClick}
-      className={className}
-      style={{ ...style, display: 'block', background: 'gray' }}
+      className='block md:cursor-pointer'
       onClick={onClick}
-    />
+      onKeyDown={onClick}
+    >
+      <svg
+        xmlns='http://www.w3.org/2000/svg '
+        width='16'
+        height='16'
+        fill='#50C4ED'
+        className='relative top-48 -left-5'
+        viewBox='0 0 16 16'
+      >
+        <title>anterior</title>
+        <path
+          fillRule='evenodd'
+          d='M10.354 1.646a.5.5 0 0 1 0 .708L4.707 8l5.647 5.646a.5.5 0 1 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'
+        />
+      </svg>
+    </div>
   )
 }
+
 export default function SliderResponsive({
   children,
 }: { children: React.ReactNode }) {
@@ -41,7 +70,7 @@ export default function SliderResponsive({
     slidesToScroll: 3,
 
     initialSlide: 0,
-    nextArrow: <SampleNextArrow />,
+    nextArrow: <SampleNextArrow className='fill-blue-500' />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
       {
