@@ -2,8 +2,11 @@
 import Image from 'next/image'
 import heroImage from '@/app/assets/OIG-3.webp'
 import ButtonLogin from './buttonLogin'
+import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
 
-export default function Hero() {
+export default async function Hero() {
+  const payload = await getInfoAuthCookie()
+
   return (
     <div className="relative flex items-center justify-center px-10 text-base-content">
       <div className="w-full max-w-[55rem] mx-auto">
@@ -33,17 +36,18 @@ export default function Hero() {
             className="text-wrap-balance max-w-[20rem] text-center
         text-sm -normal font-inter leading-relaxed mt-5 mb-2 md:text-left"
           >
-            Practica con nuestros exámenes de residencias médicas. Más de 5000
+            Practica con nuestros exámenes de residencias médicas. Más de 6000
             preguntas disponibles de exámenes de Argentina, España, México y
-            Perú. 
+            Perú.
           </p>
           <p
             className="text-wrap-balance max-w-[20rem] text-center 
         text-sm -normal font-inter leading-relaxed mb-6 md:text-left"
           >
-           Tambien puedes buscar preguntas por palabras claves (Ej: Neumonía). Es algo muy util para practicar mientras estudias un tema.
+            Tambien puedes buscar preguntas por palabras claves (Ej: Neumonía).
+            Es algo muy util para practicar mientras estudias un tema.
           </p>
-          <ButtonLogin />
+          <ButtonLogin isLogin={payload} />
         </section>
       </div>
     </div>
