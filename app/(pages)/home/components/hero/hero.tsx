@@ -47,7 +47,7 @@ export default async function Hero() {
             Tambien puedes buscar preguntas por palabras claves (Ej: Neumonía).
             Es algo muy util para practicar mientras estudias un tema.
           </p>
-          <ButtonLogin isLogin={payload} />
+          <ButtonLogin isLogin={payload ? true : false} />
         </section>
       </div>
     </div>

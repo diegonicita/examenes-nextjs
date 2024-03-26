@@ -1,9 +1,6 @@
 'use client'
-
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-
-const ButtonLogin = ({ isLogin }: { isLogin: boolean }) => {
+const ButtonLogin = ({ isLogin }: { isLogin: boolean | null }) => {
   return (
     <>
       {!isLogin && (
