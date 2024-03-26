@@ -1,24 +1,24 @@
 // import Card from './components/card'
 import CardExam from '@/app/components/cards/cardExam'
 import Container from '@/app/components/container/container'
-import type { ExamTypeFromApi } from '@/app/models/Exam'
+import type { ExamListItemType, ExamTypeFromDB } from '@/app/models/Exam'
 import type { UserType } from '@/app/models/User'
 import getInfoAuthCookie from '@/app/server-actions/helpers/getInfoAuthCookie'
+import getExamsList from '../actions/getExamList'
+import getExamsTypes from '../actions/getExamsTypes'
 
 type YearData = {
   ano: number
   cantidad_preguntas: number
 }
 
-async function getData() {
-  const url = process.env.URL_API
-  try {
-    const res = await fetch(`${url}/api/get-questions-statistics`)
-    return res.json()
-  } catch (error) {
-    console.log(error)
-
-    return null
+const getData = async (id: string) => {
+  'use server'
+  const examsTypes = await getExamsTypes()
+  const examsList = await getExamsList(id)
+  return { examsTypes: examsTypes, exams: examsList } as {
+    examsTypes: ExamTypeFromDB[]
+    exams: ExamListItemType[]
   }
 }
 
@@ -27,10 +27,22 @@ export default async function ExamIdPage({
 }: {
   params: { ids: string }
 }) {
-  const data = await getData()
-  const exam = data?.examenes.find(
-    (p: ExamTypeFromApi) => p.id === Number.parseInt(params.ids),
-  )
+  const data = await getData(params.ids)
+  const id = Number(params.ids)
+  const exam = {
+    descripcion: '',
+    visible: true,
+    name: data.examsTypes[id].name,
+    questions: data.examsTypes[id].questions,
+    id: data.examsTypes[id].id,
+    titulo: data.examsTypes[id].name,
+    imagen: data.examsTypes[id].image,
+    pais: data.examsTypes[id].country,
+    preguntas: data.exams.map((item) => {
+      return { ano: Number(item.year), cantidad_preguntas: item.questions }
+    }),
+    total: data.examsTypes[Number(id)].questions,
+  }
   const payload = (await getInfoAuthCookie()) as UserType
 
   return (

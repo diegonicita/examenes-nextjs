@@ -22,3 +22,13 @@ export type ExamTypeFromDB = {
   image: string
   country: string
 }
+
+export type ExamListItemType = {
+  id: number
+  year: string
+  examen_type_id: number
+  enabled: boolean
+  user_level: 'user-1' | 'user-2' | 'user-3' | 'admin'
+  isNew: boolean
+  questions: number
+}
