@@ -129,7 +129,10 @@ export const EditItem = ({
                   }
                 >
                   {temas.map((tema, temaIndex) => (
-                    <option key={`tema-${tema}`} value={temaIndex}>
+                    <option
+                      key={`tema-${tema}-${temaIndex.toString()}`}
+                      value={temaIndex}
+                    >
                       {tema.titulo}
                     </option>
                   ))}
