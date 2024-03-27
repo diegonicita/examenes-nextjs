@@ -43,7 +43,7 @@ export const Editor = ({
       {data?.map((item: QuestionType, index: number) => (
         <div
           key={item.id}
-          className=" border border-gray-400 rounded my-4 px-4 pb-4"
+          className="w-full border border-gray-400 rounded my-4 px-4 pb-4"
         >
           <Question item={item} userId={userId} />
           <EditItem item={item} temas={temas} />

@@ -67,7 +67,7 @@ const Question = ({
   }
 
   return (
-    <div className="my-4 text-md">
+    <div className="my-4 text-md min-w-full">
       <div className="card-body p-0">
         <h2 className="text-md font-bold">
           {data.title} - Año{' '}
@@ -80,7 +80,7 @@ const Question = ({
             <Image
               width={320}
               height={320}
-              className="w-full max-w-96 shadow-md m-4 rounded"
+              className="w-full max-w-lg shadow-md m-4 rounded mb-6"
               src={`https://mercado.webapp.ar/images_medicina/choices/image-${formatearNumero(
                 data.examen,
                 4,
