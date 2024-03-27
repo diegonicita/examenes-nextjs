@@ -48,7 +48,7 @@ export const Nav = async () => {
           >
             <img
               height="36"
-              className="border-0 hidden sm:flex h-12"
+              className="border-0 hidden sm:flex h-12 p-1.5"
               src="https://storage.ko-fi.com/cdn/kofi2.png?v=3"
               alt="Buy Me a Coffee at ko-fi.com"
             />

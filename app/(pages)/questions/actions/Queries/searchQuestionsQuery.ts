@@ -1,6 +1,6 @@
 'use server'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-import { RowDataPacket } from 'mysql2'
+import type { RowDataPacket } from 'mysql2'
 
 export default async function searchQuestionsQuery(
   queries: string[],
@@ -11,7 +11,9 @@ export default async function searchQuestionsQuery(
   const validQueries = queries.filter((q) => q.length > 2)
   const offset = (page - 1) * limit
 
+  // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
   let resultQueryLimit10
+  // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
   let resultLength
 
   if (validQueries.length > 0) {
