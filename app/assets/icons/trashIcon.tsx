@@ -1,7 +1,7 @@
 const TrashIcon = () => {
   return (
     <svg
-      fill="#000000"
+      className="fill-current"
       height="20px"
       width="20px"
       version="1.1"

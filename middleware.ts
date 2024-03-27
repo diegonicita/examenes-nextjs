@@ -19,14 +19,14 @@ export async function middleware(request: NextRequest) {
         new TextEncoder().encode(secret),
       )
       authPayload = payload
-      console.log(
-        'Google Token Minutes Left: ',
-        getTimeLeftInMinutes(Number(payload.exp)),
-      )
-      console.log('El token de Google está vigente.')
+      // console.log(
+      //   'Google Token Minutes Left: ',
+      //   getTimeLeftInMinutes(Number(payload.exp)),
+      // )
+      // console.log('El token de Google está vigente.')
     } catch (error) {
       authPayload = null
-      console.log('Error al verificar el token de Google:', error)
+      // console.log('Error al verificar el token de Google:', error)
       return deleteCookie('token', LOGIN)
     }
   }
@@ -38,13 +38,13 @@ export async function middleware(request: NextRequest) {
         new TextEncoder().encode(secret),
       )
       authPayload = payload
-      console.log(
-        'Credentials (auth) Minutes Left: ',
-        getTimeLeftInMinutes(Number(payload.exp)),
-      )
-      console.log('auth está vigente')
+      // console.log(
+      //   'Credentials (auth) Minutes Left: ',
+      //   getTimeLeftInMinutes(Number(payload.exp)),
+      // )
+      // console.log('auth está vigente')
     } catch (error) {
-      console.log('Error en cookie auth:', error)
+      // console.log('Error en cookie auth:', error)
       authPayload = null
       return deleteCookie('auth', LOGIN)
     }

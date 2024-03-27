@@ -22,7 +22,7 @@ export default function DeleteButton({ id }: { id: number }) {
       <button
         name="delete"
         type="submit"
-        className="btn btn-error btn-sm text-error-content"
+        className="btn btn-neutral btn-sm text-neutral-content"
       >
         X
       </button>

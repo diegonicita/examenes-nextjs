@@ -17,25 +17,22 @@ const CardStat = ({ userId }: { userId: number | null }) => {
   return (
     <>
       {useHasMounted() && (
-        <div className="stats shadow">
+        <div className="stats shadow bg-base-200 text-base-content stats-vertical sm:stats-horizontal">
           <div className="stat">
-            <div className="stat-figure text-primary">
-              <RayIcon />
-            </div>
+            <div className="stat-figure text-primary">{/* <RayIcon /> */}</div>
             <div className="stat-title">Respondidas</div>
-            <div className="stat-value text-primary">
+            <div className="stat-value text-primary  text-center">
               {corrects + incorrects}
             </div>
-            <div className="stat-desc">21% más que el mes pasado</div>
+            {/* <div className="stat-desc">21% más que el mes pasado</div> */}
           </div>
-
           <div className="stat">
-            <div className="stat-figure text-success">
-              <RayIcon />
-            </div>
+            <div className="stat-figure text-success">{/* <RayIcon /> */}</div>
             <div className="stat-title">Correctas</div>
-            <div className="stat-value text-success">{corrects}</div>
-            <div className="stat-desc">23% más que el mes pasado</div>
+            <div className="stat-value text-success text-center">
+              {corrects}
+            </div>
+            {/* <div className="stat-desc">23% más que el mes pasado</div> */}
           </div>
         </div>
       )}

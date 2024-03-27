@@ -29,9 +29,9 @@ export const getStatistics = ({
     )
   }).length
   const percentCorrect =
-    answered !== 0 ? ((corrects * 100) / answered).toFixed(1) : 0
+    answered !== 0 ? ((corrects * 100) / answered).toFixed(0) : 0
   const percentNotCorrect =
-    answered !== 0 ? (((answered - corrects) * 100) / answered).toFixed(1) : 0
+    answered !== 0 ? (((answered - corrects) * 100) / answered).toFixed(0) : 0
 
   return {
     total,

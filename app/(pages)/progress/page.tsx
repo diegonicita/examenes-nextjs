@@ -6,12 +6,10 @@ import type { UserType } from '@/app/models/User'
 import Container from '@/app/components/container/container'
 import type { SubjectType } from '@/app/models/Subject'
 import executeQuery from '@/app/server-actions/helpers/mysqldb'
-// import getQuestionsStatistics from '@/app/server-actions/questions/get-questions-statistics'
 
 const getData = async () => {
   'use server'
   const result1 = await executeQuery('select * from exams_types', [])
-  console.log(result1)
   const result2 = await executeQuery('select * from clasificaciones', [])
   return { examenes: result1, temas: result2 } as {
     examenes: ExamTypeFromDB[]
@@ -31,6 +29,7 @@ const Page = async () => {
           <CardStat userId={payload?.id} />
         </div>
       </Container>
+      <div className="py-4" />
       <Container title="Resultados" subtitle="Exámenes donde practicaste">
         <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto mt-4 mb-8 gap-4">
           {exams?.map((p) => (
@@ -41,18 +40,19 @@ const Page = async () => {
                   titulo: p.name,
                   visible: true,
                   imagen: p.image,
+                  pais: p.country,
                 } as ExamTypeFromApi
               }
               key={p.id}
               year={undefined}
               link={`/exams/${p.id}`}
-              total={p.total}
+              total={p.questions}
               userId={payload?.id}
             />
           ))}
         </div>
       </Container>
-      <div className="divider divider-end" />
+      <div className="py-4" />
     </div>
   )
 }
