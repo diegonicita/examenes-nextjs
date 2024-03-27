@@ -45,7 +45,7 @@ export default async function ExamIdPage({
   const payload = await getInfoAuthCookie()
 
   if (!exam || !year)
-    return <h1 className="p-4 text-center">¡Examen No Encontrado!</h1>
+    return <h1 className='p-4 text-center'>¡Examen No Encontrado!</h1>
 
   const questions = await getExam(exam.id, year.ano, 5, searchParams.page)
   const totalQuestion = Math.ceil(year?.cantidad_preguntas / 5)
@@ -59,12 +59,12 @@ export default async function ExamIdPage({
     }
   }
   return (
-    <div className="w-full mx-auto max-w-[85ch] px-1 mt-8">
+    <div className='w-full mx-auto max-w-[85ch] px-1 mt-8'>
       <Container
         title={`Preguntas Examen ${exam?.titulo}`}
         subtitle={`Año ${year?.ano} - ${year?.cantidad_preguntas} Preguntas`}
       >
-        <div className="flex flex-wrap justify-center px-8 max-w-[60rem] mx-auto my-4">
+        <div className='flex flex-wrap justify-center  max-w-[60rem] mx-auto my-4'>
           {!payload ||
             (payload && payload?.role !== 'admin' && (
               <Examen
