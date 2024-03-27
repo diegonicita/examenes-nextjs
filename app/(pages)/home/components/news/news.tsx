@@ -13,7 +13,6 @@ export default function News({
   data: NewsItem[]
   currentUser: UserType
 }) {
-  console.log(data)
   return (
     <section className='mb-8'>
       <div className='flex flex-col gap-2 text-center mt-12 mb-8'>
@@ -35,7 +34,7 @@ export default function News({
                 />
                 {currentUser?.role === 'admin' && <DeleteForm id={item.id} />}
               </div>
-              <div className='card-body justify-center items-center mt-0 pt-4 shadow-sm my-4 pt-2'>
+              <div className='card-body justify-center items-center mt-0 pt-4 shadow-sm my-4 '>
                 <h2 className='card-title'>{item.title}</h2>
                 <p className='text-balance text-center'>{item.description}</p>
                 <Link

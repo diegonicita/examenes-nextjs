@@ -12,7 +12,7 @@ function SampleNextArrow(props: ArrowProps) {
   return (
     <div
       onKeyDown={onClick}
-      className='block md:cursor-pointer  md:flex md:justify-end md:w-full '
+      className='hidden md:block md:cursor-pointer  md:flex md:justify-end md:w-full '
       onClick={onClick}
     >
       <svg
@@ -20,7 +20,7 @@ function SampleNextArrow(props: ArrowProps) {
         width='16'
         height='16'
         fill='#50C4ED'
-        className='relative bottom-[292px] -right-5  '
+        className='relative bottom-[292px] -right-5'
         viewBox='0 0 16 16'
       >
         <title>siguiente</title>
@@ -37,7 +37,7 @@ function SamplePrevArrow(props: ArrowProps) {
   const { onClick } = props
   return (
     <div
-      className='block md:cursor-pointer'
+      className='hidden md:block md:cursor-pointer'
       onClick={onClick}
       onKeyDown={onClick}
     >
