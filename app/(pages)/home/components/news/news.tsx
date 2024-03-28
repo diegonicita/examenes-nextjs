@@ -1,10 +1,11 @@
 'use client'
 import Link from 'next/link'
-import SliderResponsive from './slider'
+const SliderResponsive = dynamic(() => import('./slider'))
 import DeleteForm from '@/app/(pages)/news/deleteForm'
 import type { UserType } from '@/app/models/User'
 import type { NewsItem } from '@/app/models/news/newData'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 
 export default function News({
   data,

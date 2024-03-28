@@ -14,6 +14,8 @@ import Pagination from '@/app/components/pagination/pagination'
 import DisplayMedicineStudentMessage from './components/questions/displayMedicineStudentMessage/displayMedicineStudentMessage'
 import Container from '@/app/components/container/container'
 import AllTheCommentContent from './components/social/comments/allTheCommentContent/allthecommentContent'
+import dynamic from 'next/dynamic'
+
 export default async function QuestionPage({
   searchParams,
 }: {
@@ -57,16 +59,16 @@ export default async function QuestionPage({
   }
 
   return (
-    <div className="mt-8">
+    <div className='mt-8'>
       <Container
-        title="Buscador de Preguntas"
-        subtitle="Busca preguntas en nuestra base de datos"
+        title='Buscador de Preguntas'
+        subtitle='Busca preguntas en nuestra base de datos'
       >
         <span />
       </Container>
 
       <CheckServerCookie auth={authData}>
-        <div className="flex flex-col items-start max-w-[60rem] mx-auto mt-8">
+        <div className='flex flex-col items-start max-w-[60rem] mx-auto mt-8'>
           <SearchContainer
             query={query}
             currentPage={currentPage}
@@ -79,7 +81,7 @@ export default async function QuestionPage({
                 {questions?.map((item: QuestionSQL, index: number) => (
                   <div
                     key={index.toString()}
-                    className=" border border-gray-400 rounded my-4 px-4 pb-4"
+                    className=' border border-gray-400 rounded my-4 px-4 pb-4'
                   >
                     <Question item={item} userId={authData?.id} />
                     {valorations && (
@@ -88,7 +90,7 @@ export default async function QuestionPage({
                           id_question={item.id}
                           valorations={valorations}
                         />
-                        <div className="flex flex-wrap gap-4">
+                        <div className='flex flex-wrap gap-4'>
                           <ValorationButton id_question={item.id} />
                         </div>
                         <AllTheCommentContent
@@ -112,7 +114,7 @@ export default async function QuestionPage({
         )}
         {!searchParams.query && !questions && <DisplayMedicineStudentMessage />}
         {questions?.length === 0 && (
-          <h1 className="text-center font-bold mt-5">
+          <h1 className='text-center font-bold mt-5'>
             No encotramos coincidencia con tu busqueda
           </h1>
         )}
