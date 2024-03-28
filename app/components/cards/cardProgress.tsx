@@ -10,6 +10,8 @@ import {
   useDispatch,
   questionSlice,
 } from '@/app/lib/redux'
+import getCountryFlag from './helper/getCountryFlag'
+import Image from 'next/image'
 
 export default function Card({
   item,
@@ -51,8 +53,8 @@ export default function Card({
   return (
     <>
       {useHasMounted() && (
-        <div className="card w-80 sm:w-60 md:w-40 bg-base-100 shadow-xl m-2 border border-black indicator h-auto pb-4">
-          <span className="indicator-item badge badge-primary font-bold text-sm indicator-bottom indicator-end pr-2 mr-6 mb-1">
+        <div className="card w-80 rounded-lg sm:w-60 md:w-40 bg-base-200 shadow-xl indicator h-auto pb-4 m-4">
+          <span className="indicator-item badge badge-nuetral font-bold indicator-bottom indicator-end pr-2 mr-6 mb-21 py-3">
             {answered}/{total}
           </span>
           {answered > 0 && (
@@ -64,7 +66,7 @@ export default function Card({
                 {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
                 <div
                   id={item.id.toString()}
-                  className="btn btn-sm btn-circle btn-error"
+                  className="btn btn-sm btn-circle flex items-center"
                   onClick={handleDeleteExam}
                 >
                   <TrashIcon />
@@ -72,22 +74,34 @@ export default function Card({
               </div>
             </div>
           )}
-          <div className="text-lg text-center flex-1">
+          <div className="text-lg text-center flex-1 w-full max-w-x">
             <div className="h-full flex flex-col items-center p-1">
-              <div className="max-w-[10rem] mx-auto mb-2 text-sm text-pretty">
+              <div className="max-w-[10rem] mx-auto mb-2 text-lg text-pretty">
                 {!year && (
-                  <>
-                    {item.titulo ? item.titulo : 'Sin título'} <br /> (
-                    {item.pais})
-                  </>
+                  <div className="flex gap-2 items-center justify-center underline">
+                    <div>{item.titulo ? item.titulo : 'Sin título'}</div>
+                    <div className="flex justify-center items-center gap-1">
+                      <Image
+                        src={getCountryFlag(item.pais)}
+                        alt={item.pais}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
+                        className="w-4 h-3"
+                        priority
+                      />
+                    </div>
+                  </div>
                 )}
                 {year && <>Año {year}</>}
               </div>
-              <div className="text-xs text-success">
-                Correctas: {corrects} ({percentCorrect}%)
+              <div className="text-success flex flex-col">
+                <div>Correctas {corrects}</div>
+                <div>({percentCorrect}%)</div>
               </div>
-              <div className="text-xs text-error">
-                Incorrectas: {answered - corrects} ({percentNotCorrect}%)
+              <div className="text-error flex flex-col">
+                <div>Incorrectas {answered - corrects} </div>
+                <div>({percentNotCorrect}%)</div>
               </div>
             </div>
           </div>

@@ -2,23 +2,7 @@
 import type { ExamListItemType, ExamTypeFromApi } from '@/app/models/Exam'
 import Image from 'next/image'
 import Link from 'next/link'
-import flagImageAR from '@/app/assets/ar.gif'
-import flagImageES from '@/app/assets/es.gif'
-import flagImagePE from '@/app/assets/pe.gif'
-import flagImageMX from '@/app/assets/mx.gif'
-
-const countryFlag = (country: string) => {
-  switch (country) {
-    case 'Argentina':
-      return flagImageAR
-    case 'Perú':
-      return flagImagePE
-    case 'Mexico':
-      return flagImageMX
-    default:
-      return flagImageES
-  }
-}
+import getCountryFlag from './helper/getCountryFlag'
 
 const CardExam = ({
   item,
@@ -33,6 +17,7 @@ const CardExam = ({
   total: number
   userId: number | null
 }) => {
+  console.log(item.pais)
   return (
     <div className="flex flex-col gap-2 bg-base-200 rounded-box p-8">
       <div className="flex flex-col text-center">
@@ -64,7 +49,7 @@ const CardExam = ({
         {!year && (
           <div className="flex justify-center gap-2 items-center">
             <Image
-              src={countryFlag(item.pais)}
+              src={getCountryFlag(item.pais)}
               alt="Pets Home"
               width={0}
               height={0}
